@@ -1,10 +1,7 @@
 # Atsuki Yamaguchi
 
-<div id="webaddress">
-<a href="https://github.com/gucci-j">Github,</a>
+[Github](https://github.com/gucci-j), 
 Email: y-atsuki[at]st.go.tuat.ac.jp
-</div>
-
 
 ## Currently
 
@@ -16,9 +13,9 @@ Machine Learning, Generative Models, Natural Language Processing
 
 ### Recent Work
 
-1. Generating Emojis
-> `This research is still in progress.`  
+1. Generating Emojis with generative models and word embedding  
 This research aims at generating emojis based on input texts. 
+> `This research is still in progress.`  
 
 2. Generative model based frame generation of volcanic flow  
 This research aims at simulating lava flow by utilizing generative models.
@@ -31,13 +28,13 @@ __Tokyo University of Agriculture and Technology, *Tokyo, Japan*__
 
 - B.E. in Computer and Information Sciences
 - Degree expected in March 2019
-- GPA: 3.63 / 4.00 | Earned 160 credits (128 credits are required for graduation)
+- GPA: 3.63 / 4.00, Earned 160 credits (128 credits are required for graduation)
 
 `September 2017 - February 2018`
 __De La Salle University, *Manila, Philippines*__
 
 - Exchange Semester at Electrical and Computer Engineering
-- GPA: 2.82 / 4.00 | Earned 14 credits
+- GPA: 2.82 / 4.00, Earned 14 credits
 
 ## Awards & Scholarships
 
