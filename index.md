@@ -13,14 +13,14 @@ Machine Learning, Generative Models, Natural Language Processing
 
 ### Recent Work
 
-1. Generating Emojis with generative models and word embedding  
+1. __Generating Emojis with generative models and word embedding__  
 This research aims at generating emojis based on input texts. 
 
     ![emoji generated](images/emoji.png)
 
     > `This research is still in progress.`  
 
-2. Generative model based frame generation of volcanic flow video  
+2. __Generative model based frame generation of volcanic flow video__  
 This research aims at simulating lava flow by utilizing generative models.
 
     ![lava flow simulation](images/volcano.png)
