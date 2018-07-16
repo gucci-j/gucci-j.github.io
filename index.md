@@ -15,10 +15,15 @@ Machine Learning, Generative Models, Natural Language Processing
 
 1. Generating Emojis with generative models and word embedding  
 This research aims at generating emojis based on input texts. 
-> `This research is still in progress.`  
 
-2. Generative model based frame generation of volcanic flow  
+    ![emoji generated](images/emoji.png)
+
+    > `This research is still in progress.`  
+
+2. Generative model based frame generation of volcanic flow video  
 This research aims at simulating lava flow by utilizing generative models.
+
+    ![lava flow simulation](images/volcano.png)
 
 
 ## Education
