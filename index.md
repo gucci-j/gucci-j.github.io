@@ -5,7 +5,7 @@ Email: y-atsuki[at]st.go.tuat.ac.jp
 
 ## Currently
 
-I'm a bachelor student at [Tokyo University of Agriculture and Technology](http://www.tuat.ac.jp/en/), majoring in Computer and Information Sciences.
+I'm an undergraduate student at [Tokyo University of Agriculture and Technology](http://www.tuat.ac.jp/en/), majoring in Computer and Information Sciences.
 
 ## Research interests
 
@@ -16,9 +16,7 @@ Machine Learning, Generative Models, Natural Language Processing
 1. __Generating Emojis with generative models and word embedding__  
 This research aims at generating emojis based on input texts. 
 
-    ![emoji generated](images/emoji.png)
-
-    > `This research is still in progress.`  
+    ![emoji generated](images/emoji.png) 
 
 2. __Generative model based frame generation of volcanic flow video__  
 This research aims at simulating lava flow by utilizing generative models.
@@ -33,12 +31,12 @@ __Tokyo University of Agriculture and Technology, *Tokyo, Japan*__
 
 - B.E. in Computer and Information Sciences
 - Degree expected in March 2019
-- GPA: 3.63 / 4.00, Earned 160 credits (128 credits are required for graduation)
+- GPA: 3.63 / 4.00, Earned 162 credits (128 credits are required for graduation)
 
 `September 2017 - February 2018`
 __De La Salle University, *Manila, Philippines*__
 
-- Exchange Semester at Electrical and Computer Engineering
+- Exchange Semester at Electronics and Communications Engineering
 - GPA: 2.82 / 4.00, Earned 14 credits
 
 ## Awards & Scholarships
