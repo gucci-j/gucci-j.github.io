@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>論文メモ：Frustratingly Short Attention Spans in Neural Language Modeling – きままにNLP – A Technical Blog</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="
+  文献情報
+著者: M. Daniluk et al.
+所属: University College London
+出典: ICLR 2017 (https://arxiv.org/abs/1702.04521)
+
+
+" />
+    <meta property="og:description" content="
+  文献情報
+著者: M. Daniluk et al.
+所属: University College London
+出典: ICLR 2017 (https://arxiv.org/abs/1702.04521)
+
+
+" />
+    
+    <meta name="author" content="きままにNLP" />
+
+    
+    <meta property="og:title" content="論文メモ：Frustratingly Short Attention Spans in Neural Language Modeling" />
+    <meta property="twitter:title" content="論文メモ：Frustratingly Short Attention Spans in Neural Language Modeling" />
+    
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="きままにNLP - A Technical Blog" href="/feed.xml" />
+
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+    <!-- Favicon head tag -->
+    <link rel="icon" href="https://pbs.twimg.com/profile_images/1112635060480442368/Ou7bjYFs_400x400.png" type="image/x-icon">
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="https://pbs.twimg.com/profile_images/1112635060480442368/Ou7bjYFs_400x400.png" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">きままにNLP</a></h1>
+            <p class="site-description">A Technical Blog</p>
+          </div>
+
+          <nav>
+            <a href="/">Blog</a>
+            <a href="/about">About</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <article class="post">
+  <h1>論文メモ：Frustratingly Short Attention Spans in Neural Language Modeling</h1>
+
+  <div class="entry">
+    <ul>
+  <li>文献情報<br />
+著者: M. Daniluk et al.<br />
+所属: University College London<br />
+出典: ICLR 2017 <a href="https://arxiv.org/abs/1702.04521">(https://arxiv.org/abs/1702.04521)</a></li>
+</ul>
+
+<h2 id="この論文の主張">この論文の主張</h2>
+<ol>
+  <li>ニューラル言語モデルのためのkey-valueに基づくAttentionを提案</li>
+  <li>さらにそれを改良したkey-value-predictに基づくAttentionの提案</li>
+  <li>従来のMemory-augumented言語モデルよりも，パープレキシティが小さくなった</li>
+</ol>
+
+<h2 id="背景関連研究">背景・関連研究</h2>
+<p>言語モデルは次に出現する単語を予測する能力を持っている．古典的なNグラムに基づく言語モデルは短文内での単語間の依存関係を捉えることができる．一方で，ニューラル言語モデルは，より広範囲な単語間の依存関係を捉えることができる．</p>
+
+<p>近年のニューラル言語モデルはAttentionに基づくものが多く，より直接的に単語間の関係性を捉えられるようになってきている．</p>
+
+<p>Attentionを言語モデルに取り入れるには，モデル中の出力ベクトルが以下の複数の役割を同時にこなさなければならない．</p>
+<ol>
+  <li>次の単語を予測するためにある分布をエンコードする役割</li>
+  <li>attentionベクトルを計算するためのベクトルとして振る舞う役割</li>
+  <li>attentionにおいて文脈ベクトルを求めるために使われる役割-&gt;次のトークンを予測する際に文脈を考慮するのを助ける役割</li>
+</ol>
+
+<p><img src="../resources/2019-04-01/k-v-p_attention.png" alt="k-v-p attention" /></p>
+
+<p>一つの出力ベクトルに複数の役割を課すことは，モデルを複雑化させる要因となり，学習を難しくすると考えられる．したがって，本研究では，上記の三つの役割を別々のベクトルに割り当てることで，モデルを簡単化させることを目指す．具体的には，各時刻において出力されるベクトルを3つにするということである．論文内ではこれを，key-value-predictベクトルと名付けており，Attentionを含めて，key-value-predict Attentionと名付けている．</p>
+
+<h2 id="従来手法">従来手法</h2>
+<h3 id="attention-for-neural-language-modeling">Attention for Neural Language Modeling</h3>
+<h4 id="従来のattentionを用いた言語モデル">従来のAttentionを用いた言語モデル</h4>
+<p>(1) <strong>時刻: $t$において，$L$個の出力ベクトルを記憶領域として取る</strong></p>
+
+<script type="math/tex; mode=display">\begin{equation*}
+    Y_t = [{\bf h}_{t-L}, \dots, {\bf h}_{t-1}] \in \mathbb{R}^{k \times L}
+\end{equation*}</script>
+
+<p>ただし，<script type="math/tex">k</script>はLSTMの出力ベクトルの次元を指し，$h_t \in \mathbb{R}^k$は時刻: $t$における出力ベクトルを意味する．<br />
+→ L個に限るのは実用的な問題から: Lはハイパーパラメータ</p>
+
+<p>(2) <strong>Attentionの重み: $\alpha_t$を計算する</strong></p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{equation*}
+\begin{split}
+\alpha_t &= {\rm softmax}(w^TM_t) \\
+M_t &= {\rm tanh}(W^YY_t + (W^hh_t)1^T)
+\end{split}
+\end{equation*} %]]></script>
+
+<p>ただし， $W^Y, W^h \in \mathbb{R}^{k \times k}, w \in \mathbb{R}^k$は学習パラメータである．また，$1 \in \mathbb{R}^L$である．
+→ ここでは時刻: $t$の出力ベクトル: $h_t$とそれ以前のL個の出力ベクトル: $Y_t$がどの程度関係しあっているかを求めている．つまりL個のトークンの各重要度を算出している．</p>
+
+<p>(3) <strong>Attentionベクトルを生成する</strong><br />
+上記で算出したAttentionの重みを基に，Attentionベクトルを生成する．</p>
+
+<script type="math/tex; mode=display">r_t = Y_t\alpha^T</script>
+
+<p>(4) <strong>Attentionベクトルと元の出力ベクトルを結合する</strong><br />
+Concatではなく，以下の式に基づいて非線形に結合する．</p>
+
+<script type="math/tex; mode=display">h_t^* = {\rm tanh}(W^rr_t + W^xh_t)\\</script>
+
+<p>ただし，$W^r, W^x \in \mathbb{R}^{k \times k}$は学習パラメータである．</p>
+
+<p>(5) <strong>出力ベクトルを求める</strong></p>
+
+<script type="math/tex; mode=display">y_t = {\rm softmax}(W^*h_t^* + b)</script>
+
+<p>ただし，$W^* \in \mathbb{R}^{|V| \times k}$であり，$b \in \mathbb{R}^{|V|}$である．ともに学習パラメータである．</p>
+
+<p><img src="../resources/2019-04-01/attention.png" alt="ふつうのAttentionモデル" /></p>
+
+<h2 id="提案手法">提案手法</h2>
+<h3 id="key-value-attention">Key-value attention</h3>
+<p>key-value Attentionでは，出力ベクトルをkeyとvalueに分割する．<br />
+具体的には，時刻: $t$における出力ベクトルを以下のように定義し直す．</p>
+
+<script type="math/tex; mode=display">h_t = [k_t, v_t] \in \mathbb{R}^{2k}</script>
+
+<p>また，　$h_t$が関与する式を書き直すと，以下のようになる．</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{split}
+M_t &= {\rm tanh}(W^Y[k_{t-L}, \dots, k_{t-1}] + (W^hk_t)1^T) \\
+r_t &= [v_{t-L}, \dots, v_{t-1}]\alpha^T \\
+h_t^* &= {\rm tanh}(W^rr_t + W^xv_t)
+\end{split} %]]></script>
+
+<p>なお，上記以外の式は前章と同じである．<br />
+→ ここで，$k$は検索キーとしての役割を果たしており，$v$はその中身のデータを表していると考えるとわかりやすいかもしれない．</p>
+
+<p><img src="../resources/2019-04-01/k-v_attention.png" alt="key-value attention" /></p>
+
+<h3 id="key-value-predict-attention">Key-value-predict attention</h3>
+<p>key-value attentionにおいても，valueが複数回使われていることがわかる．そこで，valueをさらに分割し，key-value-predict型のAttentionを考案した．
+→ keyはattentionの重みを計算するのにのみ用いられ，valueは文脈表現をエンコードするのに使われ，predictは次のトークンの分布をエンコードするのに用いられる．
+→ 完全分業制が達成されていることがわかる．</p>
+
+<script type="math/tex; mode=display">h_t = [k_t, v_t, p_t] \in \mathbb{R}^{3k}　\\
+h_t^* = {\rm tanh}(W^rr_t + W^xp_t)</script>
+
+<p><img src="../resources/2019-04-01/k-v-p_attention.png" alt="k-v-p attention" /></p>
+
+<h2 id="実験結果">実験結果</h2>
+<h3 id="評価指標">評価指標</h3>
+<h4 id="パープレキシティ">パープレキシティ</h4>
+<p>参考: <a href="http://www.jnlp.org/lab/graduates/okada/nlp/term/entropy">http://www.jnlp.org/lab/graduates/okada/nlp/term/entropy</a></p>
+
+<p>パープレキシティ(perplexity)とは，言語モデルにおいてモデルの複雑性を評価するのに使われる指標である． パープレキシティは2のクロスエントロピー乗で定義され，一般に小さいほど良いモデルであるとされる．</p>
+
+<script type="math/tex; mode=display">Perplexity = 2^{-\frac{1}{N}\sum_i^{N}\log P(w_i)}</script>
+
+<p>→ ここでの$P(w_i)$は言語モデルの単語出現確率を表している．<br />
+→ パープレキシティは単語の分岐数を意味しており，ある単語に対してそれに続く単語の平均候補数も意味している． つまり，複雑なモデルであるほど，平均候補数が増加するため，パープレキシティは大きくなるといえる．</p>
+
+<h3 id="評価結果">評価結果</h3>
+<p>提案手法： key-Value-Predictのパープレキシティが有意に小さいことがわかる．</p>
+
+<p><img src="../resources/2019-04-01/result1.png" alt="実験結果1" />
+<img src="../resources/2019-04-01/result2.png" alt="実験結果2" /></p>
+
+<p>(a)の図から，提案手法: key-value-predict attentionのおかげで，広範囲な文脈を考慮出来るようになっていることがわかる．
+(b)の図から，より広範な文脈を考慮したとしても，パープレキシティが大幅に改善することは期待できないということが読み取れる．
+<img src="../resources/2019-04-01/weight.png" alt="重み" /></p>
+
+<h2 id="議論">議論</h2>
+<p>Attentionを用いた言語モデルによって，従来手法よりもパープレキシティを改善することができた．しかし，あまりにも長い文脈を考慮することは，パープレキシティの改善には得策ではないこともわかった．</p>
+
+<p>Future workとしては局所的な文脈の内容を考慮しないで，その背景にあるより大域的に関係する文脈を考慮できるような手法を考えることが挙げられる．</p>
+
+<h2 id="次に読むべき論文は">次に読むべき論文は？</h2>
+<p>Memory networksとか？<br />
+→ key-valueの概念を初めて導入したらしい．</p>
+
+  </div>
+
+  <div class="date">
+    Written on April  1, 2019
+  </div>
+
+  
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script
+  type="text/javascript"
+  charset="utf-8"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+>
+</script>
+<script
+  type="text/javascript"
+  charset="utf-8"
+  src="https://vincenttam.github.io/javascripts/MathJaxLocal.js"
+>
+</script>
+
+</article>
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          
+<a href="mailto:gucci.research@gmail.com"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/gucci-j"><i class="svg-icon github"></i></a>
+
+
+
+
+<a href="https://www.twitter.com/_gucciiiii"><i class="svg-icon twitter"></i></a>
+
+
+<br />
+          <a href="/privacy">Privacy Policy</a>
+        </footer>
+      </div>
+    </div>
+
+    
+
+  </body>
+</html>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-02T16:20:09+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog</subtitle><entry><title type="html">MatplotlibとseabornによるSelf Attentionの可視化</title><link href="http://localhost:4000/SA-Visualization/" rel="alternate" type="text/html" title="MatplotlibとseabornによるSelf Attentionの可視化" /><published>2019-04-02T00:00:00+09:00</published><updated>2019-04-02T00:00:00+09:00</updated><id>http://localhost:4000/SA-Visualization</id><content type="html" xml:base="http://localhost:4000/SA-Visualization/">&lt;p&gt;Pythonの可視化ライブラリであるseabornとグラフ描画ライブラリのMatplotlibを組み合わせることで，意外と簡単にSelf Attentionの重みを可視化することができる．&lt;/p&gt;
+
+&lt;p&gt;とあるデータセットを用いて実際に可視化した結果が以下の図です．&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../resources/2019-04-02/attention.png&quot; alt=&quot;attentionの可視化結果&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;それでは，順を追って簡単に見ていきましょう．
+なお，深層学習のフレームワークにはPyTorchを使用し，テキストデータの前処理にはtorchtextを使用しています．&lt;/p&gt;
+
+&lt;h2 id=&quot;1-ダウンロード--インストール&quot;&gt;1. ダウンロード &amp;amp; インストール&lt;/h2&gt;
+&lt;p&gt;Matplotlib，seabornをインストールしていない場合は，インストールしましょう．&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install matplotlib
+pip install seaborn
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;2-インポート&quot;&gt;2. インポート&lt;/h2&gt;
+&lt;p&gt;本稿ではサーバー上で動作させることを想定しているので，前もって&lt;code class=&quot;highlighter-rouge&quot;&gt;mpl.use('Agg')&lt;/code&gt;を指定することで，描画エラーを回避します．&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import matplotlib as mpl
+mpl.use('Agg')
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;3-self-attentionの実装&quot;&gt;3. Self Attentionの実装&lt;/h2&gt;
+&lt;p&gt;Self Attentionの実装については，&lt;a href=&quot;https://github.com/gucci-j/imdb-classification-gru&quot;&gt;GitHub&lt;/a&gt;にあげている，ソースコード: &lt;code class=&quot;highlighter-rouge&quot;&gt;model_with_self_attention.py&lt;/code&gt;を流用しました．クラス部分を以下に貼ります．&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Self_Attention(nn.Module):
+    def __init__(self, query_dim):
+        # assume: query_dim = key/value_dim
+        super(Self_Attention, self).__init__()
+        self.scale = 1. / math.sqrt(query_dim)
+
+    def forward(self, query, key, value):
+        # query == hidden: (batch_size, hidden_dim * 2)
+        # key/value == gru_output: (sentence_length, batch_size, hidden_dim * 2)
+        query = query.unsqueeze(1) # (batch_size, 1, hidden_dim * 2)
+        key = key.transpose(0, 1).transpose(1, 2) # (batch_size, hidden_dim * 2, sentence_length)
+
+        # bmm: batch matrix-matrix multiplication
+        attention_weight = torch.bmm(query, key) # (batch_size, 1, sentence_length)
+        attention_weight = F.softmax(attention_weight.mul_(self.scale), dim=2) # normalize sentence_length's dimension
+
+        value = value.transpose(0, 1) # (batch_size, sentence_length, hidden_dim * 2)
+        attention_output = torch.bmm(attention_weight, value) # (batch_size, 1, hidden_dim * 2)
+        attention_output = attention_output.squeeze(1) # (batch_size, hidden_dim * 2)
+
+        return attention_output, attention_weight.squeeze(1)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;ソースコード中において，&lt;code class=&quot;highlighter-rouge&quot;&gt;attention_weight&lt;/code&gt;は時系列方向に正規化された重みベクトルとなっています．そのため，このベクトルを可視化することで，各時刻における入力の単語の重要度を可視化できることになります．&lt;br /&gt;
+要するに，このソースコードにおいては，可視化には&lt;code class=&quot;highlighter-rouge&quot;&gt;attention_weight&lt;/code&gt;のみを用いれば良いことになります．&lt;/p&gt;
+
+&lt;h2 id=&quot;4-いざ描画&quot;&gt;4. いざ描画&lt;/h2&gt;
+
+&lt;p&gt;ヒートマップの描画には，&lt;code class=&quot;highlighter-rouge&quot;&gt;sns.heatmap()&lt;/code&gt;を使います．詳しい使い方は，&lt;a href=&quot;https://seaborn.pydata.org/generated/seaborn.heatmap.html&quot;&gt;ドキュメント&lt;/a&gt;をご覧ください．&lt;/p&gt;
+
+&lt;p&gt;重要な点としては，ヒートマップ中の各セル内に入力の単語を表示させたいときに，&lt;code class=&quot;highlighter-rouge&quot;&gt;annot&lt;/code&gt;に&lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt;型のリストを渡すことで，描画できてしまうということです！&lt;/p&gt;
+
+&lt;p&gt;ただし，必ず&lt;strong&gt;リストをNumPyに通すこと&lt;/strong&gt; + &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;fmt=''&lt;/code&gt;&lt;/strong&gt;を指定するのを忘れないでください！&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;plt.figure(figsize = (15, 7))
+sns.heatmap(attention_weight, annot=np.asarray(itos), fmt='', cmap='Blues')
+plt.savefig('./fig/attention_' + str(batch_count) + '.png')
+plt.close()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;ソースコード&quot;&gt;ソースコード&lt;/h2&gt;
+&lt;p&gt;ソースコードは後日: &lt;a href=&quot;https://github.com/gucci-j/imdb-classification-gru&quot;&gt;GitHub&lt;/a&gt;に追加して公開する予定です．&lt;/p&gt;</content><author><name></name></author><summary type="html">Pythonの可視化ライブラリであるseabornとグラフ描画ライブラリのMatplotlibを組み合わせることで，意外と簡単にSelf Attentionの重みを可視化することができる．</summary></entry><entry><title type="html">論文メモ：Frustratingly Short Attention Spans in Neural Language Modeling</title><link href="http://localhost:4000/Note-Frustratingly/" rel="alternate" type="text/html" title="論文メモ：Frustratingly Short Attention Spans in Neural Language Modeling" /><published>2019-04-01T00:00:00+09:00</published><updated>2019-04-01T00:00:00+09:00</updated><id>http://localhost:4000/Note-Frustratingly</id><content type="html" xml:base="http://localhost:4000/Note-Frustratingly/">&lt;ul&gt;
+  &lt;li&gt;文献情報&lt;br /&gt;
+著者: M. Daniluk et al.&lt;br /&gt;
+所属: University College London&lt;br /&gt;
+出典: ICLR 2017 &lt;a href=&quot;https://arxiv.org/abs/1702.04521&quot;&gt;(https://arxiv.org/abs/1702.04521)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;この論文の主張&quot;&gt;この論文の主張&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;ニューラル言語モデルのためのkey-valueに基づくAttentionを提案&lt;/li&gt;
+  &lt;li&gt;さらにそれを改良したkey-value-predictに基づくAttentionの提案&lt;/li&gt;
+  &lt;li&gt;従来のMemory-augumented言語モデルよりも，パープレキシティが小さくなった&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;背景関連研究&quot;&gt;背景・関連研究&lt;/h2&gt;
+&lt;p&gt;言語モデルは次に出現する単語を予測する能力を持っている．古典的なNグラムに基づく言語モデルは短文内での単語間の依存関係を捉えることができる．一方で，ニューラル言語モデルは，より広範囲な単語間の依存関係を捉えることができる．&lt;/p&gt;
+
+&lt;p&gt;近年のニューラル言語モデルはAttentionに基づくものが多く，より直接的に単語間の関係性を捉えられるようになってきている．&lt;/p&gt;
+
+&lt;p&gt;Attentionを言語モデルに取り入れるには，モデル中の出力ベクトルが以下の複数の役割を同時にこなさなければならない．&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;次の単語を予測するためにある分布をエンコードする役割&lt;/li&gt;
+  &lt;li&gt;attentionベクトルを計算するためのベクトルとして振る舞う役割&lt;/li&gt;
+  &lt;li&gt;attentionにおいて文脈ベクトルを求めるために使われる役割-&amp;gt;次のトークンを予測する際に文脈を考慮するのを助ける役割&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;../resources/2019-04-01/k-v-p_attention.png&quot; alt=&quot;k-v-p attention&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;一つの出力ベクトルに複数の役割を課すことは，モデルを複雑化させる要因となり，学習を難しくすると考えられる．したがって，本研究では，上記の三つの役割を別々のベクトルに割り当てることで，モデルを簡単化させることを目指す．具体的には，各時刻において出力されるベクトルを3つにするということである．論文内ではこれを，key-value-predictベクトルと名付けており，Attentionを含めて，key-value-predict Attentionと名付けている．&lt;/p&gt;
+
+&lt;h2 id=&quot;従来手法&quot;&gt;従来手法&lt;/h2&gt;
+&lt;h3 id=&quot;attention-for-neural-language-modeling&quot;&gt;Attention for Neural Language Modeling&lt;/h3&gt;
+&lt;h4 id=&quot;従来のattentionを用いた言語モデル&quot;&gt;従来のAttentionを用いた言語モデル&lt;/h4&gt;
+&lt;p&gt;(1) &lt;strong&gt;時刻: $t$において，$L$個の出力ベクトルを記憶領域として取る&lt;/strong&gt;&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\begin{equation*}
+    Y_t = [{\bf h}_{t-L}, \dots, {\bf h}_{t-1}] \in \mathbb{R}^{k \times L}
+\end{equation*}&lt;/script&gt;
+
+&lt;p&gt;ただし，&lt;script type=&quot;math/tex&quot;&gt;k&lt;/script&gt;はLSTMの出力ベクトルの次元を指し，$h_t \in \mathbb{R}^k$は時刻: $t$における出力ベクトルを意味する．&lt;br /&gt;
+→ L個に限るのは実用的な問題から: Lはハイパーパラメータ&lt;/p&gt;
+
+&lt;p&gt;(2) &lt;strong&gt;Attentionの重み: $\alpha_t$を計算する&lt;/strong&gt;&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{equation*}
+\begin{split}
+\alpha_t &amp;= {\rm softmax}(w^TM_t) \\
+M_t &amp;= {\rm tanh}(W^YY_t + (W^hh_t)1^T)
+\end{split}
+\end{equation*} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;ただし， $W^Y, W^h \in \mathbb{R}^{k \times k}, w \in \mathbb{R}^k$は学習パラメータである．また，$1 \in \mathbb{R}^L$である．
+→ ここでは時刻: $t$の出力ベクトル: $h_t$とそれ以前のL個の出力ベクトル: $Y_t$がどの程度関係しあっているかを求めている．つまりL個のトークンの各重要度を算出している．&lt;/p&gt;
+
+&lt;p&gt;(3) &lt;strong&gt;Attentionベクトルを生成する&lt;/strong&gt;&lt;br /&gt;
+上記で算出したAttentionの重みを基に，Attentionベクトルを生成する．&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;r_t = Y_t\alpha^T&lt;/script&gt;
+
+&lt;p&gt;(4) &lt;strong&gt;Attentionベクトルと元の出力ベクトルを結合する&lt;/strong&gt;&lt;br /&gt;
+Concatではなく，以下の式に基づいて非線形に結合する．&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;h_t^* = {\rm tanh}(W^rr_t + W^xh_t)\\&lt;/script&gt;
+
+&lt;p&gt;ただし，$W^r, W^x \in \mathbb{R}^{k \times k}$は学習パラメータである．&lt;/p&gt;
+
+&lt;p&gt;(5) &lt;strong&gt;出力ベクトルを求める&lt;/strong&gt;&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;y_t = {\rm softmax}(W^*h_t^* + b)&lt;/script&gt;
+
+&lt;p&gt;ただし，$W^* \in \mathbb{R}^{|V| \times k}$であり，$b \in \mathbb{R}^{|V|}$である．ともに学習パラメータである．&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../resources/2019-04-01/attention.png&quot; alt=&quot;ふつうのAttentionモデル&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;提案手法&quot;&gt;提案手法&lt;/h2&gt;
+&lt;h3 id=&quot;key-value-attention&quot;&gt;Key-value attention&lt;/h3&gt;
+&lt;p&gt;key-value Attentionでは，出力ベクトルをkeyとvalueに分割する．&lt;br /&gt;
+具体的には，時刻: $t$における出力ベクトルを以下のように定義し直す．&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;h_t = [k_t, v_t] \in \mathbb{R}^{2k}&lt;/script&gt;
+
+&lt;p&gt;また，　$h_t$が関与する式を書き直すと，以下のようになる．&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{split}
+M_t &amp;= {\rm tanh}(W^Y[k_{t-L}, \dots, k_{t-1}] + (W^hk_t)1^T) \\
+r_t &amp;= [v_{t-L}, \dots, v_{t-1}]\alpha^T \\
+h_t^* &amp;= {\rm tanh}(W^rr_t + W^xv_t)
+\end{split} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;なお，上記以外の式は前章と同じである．&lt;br /&gt;
+→ ここで，$k$は検索キーとしての役割を果たしており，$v$はその中身のデータを表していると考えるとわかりやすいかもしれない．&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../resources/2019-04-01/k-v_attention.png&quot; alt=&quot;key-value attention&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;key-value-predict-attention&quot;&gt;Key-value-predict attention&lt;/h3&gt;
+&lt;p&gt;key-value attentionにおいても，valueが複数回使われていることがわかる．そこで，valueをさらに分割し，key-value-predict型のAttentionを考案した．
+→ keyはattentionの重みを計算するのにのみ用いられ，valueは文脈表現をエンコードするのに使われ，predictは次のトークンの分布をエンコードするのに用いられる．
+→ 完全分業制が達成されていることがわかる．&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;h_t = [k_t, v_t, p_t] \in \mathbb{R}^{3k}　\\
+h_t^* = {\rm tanh}(W^rr_t + W^xp_t)&lt;/script&gt;
+
+&lt;p&gt;&lt;img src=&quot;../resources/2019-04-01/k-v-p_attention.png&quot; alt=&quot;k-v-p attention&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;実験結果&quot;&gt;実験結果&lt;/h2&gt;
+&lt;h3 id=&quot;評価指標&quot;&gt;評価指標&lt;/h3&gt;
+&lt;h4 id=&quot;パープレキシティ&quot;&gt;パープレキシティ&lt;/h4&gt;
+&lt;p&gt;参考: &lt;a href=&quot;http://www.jnlp.org/lab/graduates/okada/nlp/term/entropy&quot;&gt;http://www.jnlp.org/lab/graduates/okada/nlp/term/entropy&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;パープレキシティ(perplexity)とは，言語モデルにおいてモデルの複雑性を評価するのに使われる指標である． パープレキシティは2のクロスエントロピー乗で定義され，一般に小さいほど良いモデルであるとされる．&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;Perplexity = 2^{-\frac{1}{N}\sum_i^{N}\log P(w_i)}&lt;/script&gt;
+
+&lt;p&gt;→ ここでの$P(w_i)$は言語モデルの単語出現確率を表している．&lt;br /&gt;
+→ パープレキシティは単語の分岐数を意味しており，ある単語に対してそれに続く単語の平均候補数も意味している． つまり，複雑なモデルであるほど，平均候補数が増加するため，パープレキシティは大きくなるといえる．&lt;/p&gt;
+
+&lt;h3 id=&quot;評価結果&quot;&gt;評価結果&lt;/h3&gt;
+&lt;p&gt;提案手法： key-Value-Predictのパープレキシティが有意に小さいことがわかる．&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../resources/2019-04-01/result1.png&quot; alt=&quot;実験結果1&quot; /&gt;
+&lt;img src=&quot;../resources/2019-04-01/result2.png&quot; alt=&quot;実験結果2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;(a)の図から，提案手法: key-value-predict attentionのおかげで，広範囲な文脈を考慮出来るようになっていることがわかる．
+(b)の図から，より広範な文脈を考慮したとしても，パープレキシティが大幅に改善することは期待できないということが読み取れる．
+&lt;img src=&quot;../resources/2019-04-01/weight.png&quot; alt=&quot;重み&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;議論&quot;&gt;議論&lt;/h2&gt;
+&lt;p&gt;Attentionを用いた言語モデルによって，従来手法よりもパープレキシティを改善することができた．しかし，あまりにも長い文脈を考慮することは，パープレキシティの改善には得策ではないこともわかった．&lt;/p&gt;
+
+&lt;p&gt;Future workとしては局所的な文脈の内容を考慮しないで，その背景にあるより大域的に関係する文脈を考慮できるような手法を考えることが挙げられる．&lt;/p&gt;
+
+&lt;h2 id=&quot;次に読むべき論文は&quot;&gt;次に読むべき論文は？&lt;/h2&gt;
+&lt;p&gt;Memory networksとか？&lt;br /&gt;
+→ key-valueの概念を初めて導入したらしい．&lt;/p&gt;</content><author><name></name></author><summary type="html">文献情報 著者: M. Daniluk et al. 所属: University College London 出典: ICLR 2017 (https://arxiv.org/abs/1702.04521)</summary></entry><entry><title type="html">はじめに</title><link href="http://localhost:4000/Introduction/" rel="alternate" type="text/html" title="はじめに" /><published>2019-03-31T00:00:00+09:00</published><updated>2019-03-31T00:00:00+09:00</updated><id>http://localhost:4000/Introduction</id><content type="html" xml:base="http://localhost:4000/Introduction/">&lt;p&gt;本サイトでは，機械学習と自然言語処理に関するトピックをブログ形式で扱います．&lt;br /&gt;
+連絡等は，メールにてお願いいたします．&lt;/p&gt;
+
+&lt;p&gt;当サイトのプライバシーポリシーに関しては，&lt;a href=&quot;/privacy/&quot;&gt;こちら&lt;/a&gt;をご覧ください．&lt;/p&gt;</content><author><name></name></author><summary type="html">本サイトでは，機械学習と自然言語処理に関するトピックをブログ形式で扱います． 連絡等は，メールにてお願いいたします．</summary></entry></feed>
