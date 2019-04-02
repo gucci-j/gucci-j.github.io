@@ -1,7 +1,9 @@
 ---
 layout: post
 title: 論文メモ：Frustratingly Short Attention Spans in Neural Language Modeling
+description: Frustratingly Short Attention Spans in Neural Language Modelingの論文のまとめ
 mathjax: true
+lang: ja_JP
 ---
 
 * 文献情報  
