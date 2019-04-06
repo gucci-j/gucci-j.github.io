@@ -6,7 +6,7 @@ mathjax: true
 lang: ja_JP
 ---
 
-* 文献情報  
+## 文献情報  
 著者: M. Daniluk et al.  
 所属: University College London  
 出典: ICLR 2017 [(https://arxiv.org/abs/1702.04521)](https://arxiv.org/abs/1702.04521)  

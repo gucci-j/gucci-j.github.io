@@ -2,9 +2,32 @@
 layout: default
 ---
 
+<style type="text/css">
+  #toc ul, ol{
+  color: #1e366a;
+  padding: 0.1em 0 0.1em 1.0em;
+  font-size: 90%
+  }
+  
+  #toc ul li, ol li{
+    line-height: 1.5;
+    padding: 0.1em 0;
+  }
+
+  #box div{
+   border-top: solid #1e366a 1px;/*上のボーダー*/
+   border-bottom: solid #1e366a 1px; /* 下側の1本線 */
+   padding: 0.1em 0;
+  }
+</style>
+
 <article class="post">
   <h1>{{ page.title }}</h1>
-
+  <div id="box">
+    <div id="toc">
+      {% include toc.html html=content sanitize=true class="date"%}
+    </div>
+  </div> 
   <div class="entry">
     {{ content }}
   </div>

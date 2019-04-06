@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title: はじめに
 description: 当サイトについての説明とプライバシーポリシーに関して
 lang: ja_JP

@@ -1,4 +1,114 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-02T17:18:28+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog</subtitle><entry xml:lang="ja_JP"><title type="html">MatplotlibとseabornによるSelf Attentionの可視化</title><link href="http://localhost:4000/SA-Visualization/" rel="alternate" type="text/html" title="MatplotlibとseabornによるSelf Attentionの可視化" /><published>2019-04-02T00:00:00+09:00</published><updated>2019-04-02T00:00:00+09:00</updated><id>http://localhost:4000/SA-Visualization</id><content type="html" xml:base="http://localhost:4000/SA-Visualization/">&lt;p&gt;Pythonの可視化ライブラリであるseabornとグラフ描画ライブラリのMatplotlibを組み合わせることで，意外と簡単にSelf Attentionの重みを可視化することができる．&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-07T00:31:42+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog</subtitle><entry xml:lang="ja_JP"><title type="html">論文メモ：Deep contextualized word representations</title><link href="http://localhost:4000/Note-ELMo/" rel="alternate" type="text/html" title="論文メモ：Deep contextualized word representations" /><published>2019-04-06T00:00:00+09:00</published><updated>2019-04-06T00:00:00+09:00</updated><id>http://localhost:4000/Note-ELMo</id><content type="html" xml:base="http://localhost:4000/Note-ELMo/">&lt;h2 id=&quot;文献情報&quot;&gt;文献情報&lt;/h2&gt;
+&lt;p&gt;著者: M. Peters et al.&lt;br /&gt;
+所属: Allen Institute for Artificial Intelligence / Paul G. Allen School of Computer Science &amp;amp; Engineering, University of Washington&lt;br /&gt;
+出典: NAACL 2018 &lt;a href=&quot;https://aclweb.org/anthology/papers/N/N18/N18-1202/&quot;&gt;(https://aclweb.org/anthology/papers/N/N18/N18-1202/)&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;どんな論文か&quot;&gt;どんな論文か？&lt;/h2&gt;
+&lt;p&gt;ELMo = Embeddings from Language Modelsの略であり，言語モデルを活用した文脈に応じた単語分散表現: ELMoを提唱した論文．&lt;/p&gt;
+
+&lt;h2 id=&quot;先行研究と比べてどこが凄い&quot;&gt;先行研究と比べてどこが凄い？&lt;/h2&gt;
+&lt;p&gt;既存のNLPタスクのモデルの埋め込み層にELMoを追加するだけで，様々なタスクで当時のSoTAを達成した．&lt;/p&gt;
+
+&lt;h2 id=&quot;技術や手法のキモはどこ&quot;&gt;技術や手法のキモはどこ？&lt;/h2&gt;
+&lt;p&gt;双方向言語モデルを活用し，隠れ層の重みを重み付き線形和で圧縮する点．&lt;br /&gt;
+→ 従来手法では，単に双方向言語モデルの出力層だけを取ってきていた．&lt;/p&gt;
+
+&lt;h2 id=&quot;どうやって有効だと検証した&quot;&gt;どうやって有効だと検証した？&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;各種NLPタスクに適用して，そのスコアにより評価．&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;議論はある&quot;&gt;議論はある？&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;ELMoの中間層が捉えている特徴素について&lt;br /&gt;
+→ 著者らによると，ELMoの中間層は低層であればあるほど，&lt;strong&gt;文法的(syntactic)&lt;/strong&gt;な情報を含み，高層の方が，&lt;strong&gt;意味的(semantic)&lt;/strong&gt;な情報を含むとのこと．&lt;br /&gt;
+→ 基本的にどのタスクもsyntacticな情報を好む傾向にあるらしい．&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;論文の詳細メモ&quot;&gt;論文の詳細メモ&lt;/h2&gt;
+&lt;h3 id=&quot;1-順方向言語モデル&quot;&gt;1. 順方向言語モデル&lt;/h3&gt;
+&lt;p&gt;トークン数: $N$の単語列: $(t_1, t_2, \dots, t_N)$が与えられたとき，順方向の言語モデルは，単語: $t_k$と単語列: $(t_1, \dots, t_{k-1})$の条件付き確率をモデリングすることで，次のように表される.順方向の言語モデルでは，次の単語: $t_{k+1}$を予測することを目的とする．&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;p(t_1, t_2, ..., t_N) = \prod_{k=1}^N p(t_k | t_1, t_2, \dots, t_{k-1})&lt;/script&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;最近の言語モデルでは，文脈非依存な単語表現: $\mathbf{x}_k^{LM}$を単語埋め込みやcharacter-based CNNにより算出してから，L層のLSTMに入力することが多い．&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;単語列の位置: $k$において，各LSTM層は，文脈依存な単語表現: $\overrightarrow{\mathbf{h}}_{k, j}^{LM}$（ただし，$1 \leq j \leq L$）を出力する．&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\overrightarrow{\mathbf{h}}_{k, L}^{LM}&lt;/script&gt;は，次の単語: $t_{k+1}$をsoftmax層で予測するのに用いられる．&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;2-逆方向言語モデル&quot;&gt;2. 逆方向言語モデル&lt;/h3&gt;
+&lt;p&gt;逆方向言語モデルは順方向言語モデルと類似しているが，単語列を逆に処理していく点で異なる．なお，逆方向の言語モデルでは，未来の単語列から一つ前の単語: $t_{k-1}$を予測することを目的とする．つまり，逆方向の言語モデルは次のように定義される．&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;p(t_1, t_2, ..., t_N) = \prod_{k=1}^N p(t_k | t_{k+1}, t_{k+2}, \dots, t_N)&lt;/script&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;最終的には，&lt;script type=&quot;math/tex&quot;&gt;\overleftarrow{\mathbf{h}}_{k, L}^{LM}&lt;/script&gt; を求めることで，$t_{k-1}$ をsoftmax層で予測する．&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;3-双方向言語モデル&quot;&gt;3. 双方向言語モデル&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;通常言語モデルは対数尤度を最大化することで最適化を行う．&lt;br /&gt;
+→ 文脈中で出現してほしい単語の確率を最大化するため．&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;ELMoで使われる双方向言語モデルは次の式の対数尤度を最大化することで学習する．&lt;br /&gt;
+→ 文脈非依存な単語表現とソフトマックス層のパラメータ: $\Theta_{x}, \Theta_s$は共有．LSTMのパラメータについてのみ独立．&lt;br /&gt;
+→ 従来手法ではパラメータはすべて独立&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\sum_{k=1}^{N}(\log p(t_k | t_1, t_2, \dots, t_{k-1}; \Theta_x, \overrightarrow{\Theta}_{LSTM}, \Theta_s) \\+ \log p(t_k | t_{k+1}, t_{k+2}, \dots, t_N; \Theta_x, \overleftarrow{\Theta}_{LSTM}, \Theta_s))&lt;/script&gt;
+
+&lt;h3 id=&quot;4-elmoのパラメータ算出&quot;&gt;4. ELMoのパラメータ算出&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;全てのトークン: $t_k$はL層の双方向言語モデルに対し，2L+1個の特徴量を持つ．&lt;br /&gt;
+→ 文脈依存しない単語ベクトル: 1個&lt;br /&gt;
+→ 文脈依存のする順方向と逆方向のLSTM: 2L個&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{equation*}
+\begin{split}
+R_k &amp;= \{x_k^{LM}, \overrightarrow{\mathbf{h}}_{k, j}^{LM}, \overleftarrow{\mathbf{h}}_{k, j}^{LM} | j = 1, \dots, L \}\\
+    &amp;= \{\mathbf{h}_{k, j}^{LM} | j=0, \dots, L \}
+\end{split}
+\end{equation*} %]]&gt;&lt;/script&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;ELMoを他のタスクに応用するには，Rのすべての要素を一つのベクトル表現に変換する．&lt;br /&gt;
+→ 簡単な例だと，一番上の層だけを取ってくるものがある．CoVeやTagLMはこれを採用している．&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\mathbf{ELMo}_k^{task} = E(R_k; \Theta_e) = \mathbf{h}_{k, L}^{LM}&lt;/script&gt;
+
+&lt;div style=&quot;text-align: center&quot;&gt;ただし，$\mathbf{h}_{k, L}^{LM} = \left[\overrightarrow{\mathbf{h}}_{k, j}^{LM}; \overleftarrow{\mathbf{h}}_{k, j}^{LM}\right]$&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;ELMoではより便宜をはかり，重み付き線形和の形で変換する．&lt;br /&gt;
+→ $s_j^{task}$はsoftmaxで正規化された重み&lt;br /&gt;
+→ $\gamma^{task}$はELMoのベクトル全体をスケーリングするため．チューニングの最適化の観点から必要．&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\mathbf{ELMo}_k^{task} = \gamma^{task} \sum_{j=0}^L s_j^{task}\mathbf{h}_{k, j}^{LM}&lt;/script&gt;
+
+&lt;h3 id=&quot;5-elmoモデルのnlpタスクへの適用&quot;&gt;5. ELMoモデルのNLPタスクへの適用&lt;/h3&gt;
+&lt;p&gt;単に$\mathbf{ELMo}_k^{task}$を入力の埋め込みベクトルとconcatすれば良い．&lt;/p&gt;
+
+&lt;h2 id=&quot;まとめスライド&quot;&gt;まとめスライド&lt;/h2&gt;
+&lt;div style=&quot;text-align: center&quot;&gt;&lt;iframe src=&quot;//www.slideshare.net/slideshow/embed_code/key/hvw0gfJhsc8aWL&quot; width=&quot;510&quot; height=&quot;420&quot; frameborder=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; style=&quot;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&quot; allowfullscreen=&quot;&quot;&gt; &lt;/iframe&gt;&lt;/div&gt;
+&lt;div style=&quot;margin-bottom:5px&quot;&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;実装&quot;&gt;実装&lt;/h2&gt;
+&lt;p&gt;試しにKerasでELMo + BiLSTMを使ってIMDBの分類を行ったので，GitHubにあげました．&lt;br /&gt;
+→ &lt;a href=&quot;https://github.com/gucci-j/elmo-imdb&quot;&gt;https://github.com/gucci-j/elmo-imdb&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">文献情報 著者: M. Peters et al. 所属: Allen Institute for Artificial Intelligence / Paul G. Allen School of Computer Science &amp;amp; Engineering, University of Washington 出典: NAACL 2018 (https://aclweb.org/anthology/papers/N/N18/N18-1202/)</summary></entry><entry xml:lang="ja_JP"><title type="html">MatplotlibとseabornによるSelf Attentionの可視化</title><link href="http://localhost:4000/SA-Visualization/" rel="alternate" type="text/html" title="MatplotlibとseabornによるSelf Attentionの可視化" /><published>2019-04-02T00:00:00+09:00</published><updated>2019-04-02T00:00:00+09:00</updated><id>http://localhost:4000/SA-Visualization</id><content type="html" xml:base="http://localhost:4000/SA-Visualization/">&lt;p&gt;Pythonの可視化ライブラリであるseabornとグラフ描画ライブラリのMatplotlibを組み合わせることで，意外と簡単にSelf Attentionの重みを可視化することができる．&lt;/p&gt;
 
 &lt;p&gt;とあるデータセットを用いて実際に可視化した結果が以下の図です．&lt;/p&gt;
 
@@ -66,12 +176,10 @@ plt.close()
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;ソースコード&quot;&gt;ソースコード&lt;/h2&gt;
-&lt;p&gt;ソースコードは後日: &lt;a href=&quot;https://github.com/gucci-j/imdb-classification-gru&quot;&gt;GitHub&lt;/a&gt;に追加して公開する予定です．&lt;/p&gt;</content><author><name></name></author><summary type="html">Pythonの可視化ライブラリであるseabornとグラフ描画ライブラリのMatplotlibを組み合わせることで，意外と簡単にSelf Attentionの重みを可視化することができる．</summary></entry><entry xml:lang="ja_JP"><title type="html">論文メモ：Frustratingly Short Attention Spans in Neural Language Modeling</title><link href="http://localhost:4000/Note-Frustratingly/" rel="alternate" type="text/html" title="論文メモ：Frustratingly Short Attention Spans in Neural Language Modeling" /><published>2019-04-01T00:00:00+09:00</published><updated>2019-04-01T00:00:00+09:00</updated><id>http://localhost:4000/Note-Frustratingly</id><content type="html" xml:base="http://localhost:4000/Note-Frustratingly/">&lt;ul&gt;
-  &lt;li&gt;文献情報&lt;br /&gt;
-著者: M. Daniluk et al.&lt;br /&gt;
+&lt;p&gt;ソースコードは後日: &lt;a href=&quot;https://github.com/gucci-j/imdb-classification-gru&quot;&gt;GitHub&lt;/a&gt;に追加して公開する予定です．&lt;/p&gt;</content><author><name></name></author><summary type="html">Pythonの可視化ライブラリであるseabornとグラフ描画ライブラリのMatplotlibを組み合わせることで，意外と簡単にSelf Attentionの重みを可視化することができる．</summary></entry><entry xml:lang="ja_JP"><title type="html">論文メモ：Frustratingly Short Attention Spans in Neural Language Modeling</title><link href="http://localhost:4000/Note-Frustratingly/" rel="alternate" type="text/html" title="論文メモ：Frustratingly Short Attention Spans in Neural Language Modeling" /><published>2019-04-01T00:00:00+09:00</published><updated>2019-04-01T00:00:00+09:00</updated><id>http://localhost:4000/Note-Frustratingly</id><content type="html" xml:base="http://localhost:4000/Note-Frustratingly/">&lt;h2 id=&quot;文献情報&quot;&gt;文献情報&lt;/h2&gt;
+&lt;p&gt;著者: M. Daniluk et al.&lt;br /&gt;
 所属: University College London&lt;br /&gt;
-出典: ICLR 2017 &lt;a href=&quot;https://arxiv.org/abs/1702.04521&quot;&gt;(https://arxiv.org/abs/1702.04521)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+出典: ICLR 2017 &lt;a href=&quot;https://arxiv.org/abs/1702.04521&quot;&gt;(https://arxiv.org/abs/1702.04521)&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;この論文の主張&quot;&gt;この論文の主張&lt;/h2&gt;
 &lt;ol&gt;

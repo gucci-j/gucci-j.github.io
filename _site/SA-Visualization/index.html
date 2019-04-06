@@ -73,9 +73,38 @@
     </div>
 
     <div id="main" role="main" class="container">
-      <article class="post">
-  <h1>MatplotlibとseabornによるSelf Attentionの可視化</h1>
+      <style type="text/css">
+  #toc ul, ol{
+  color: #1e366a;
+  padding: 0.1em 0 0.1em 1.0em;
+  font-size: 90%
+  }
+  
+  #toc ul li, ol li{
+    line-height: 1.5;
+    padding: 0.1em 0;
+  }
 
+  #box div{
+   border-top: solid #1e366a 1px;/*上のボーダー*/
+   border-bottom: solid #1e366a 1px; /* 下側の1本線 */
+   padding: 0.1em 0;
+  }
+</style>
+
+<article class="post">
+  <h1>MatplotlibとseabornによるSelf Attentionの可視化</h1>
+  <div id="box">
+    <div id="toc">
+      <ul class="date">
+  <li><a href="#1-ダウンロード--インストール">1. ダウンロード &amp; インストール</a></li>
+  <li><a href="#2-インポート">2. インポート</a></li>
+  <li><a href="#3-self-attentionの実装">3. Self Attentionの実装</a></li>
+  <li><a href="#4-いざ描画">4. いざ描画</a></li>
+  <li><a href="#ソースコード">ソースコード</a></li>
+</ul>
+    </div>
+  </div> 
   <div class="entry">
     <p>Pythonの可視化ライブラリであるseabornとグラフ描画ライブラリのMatplotlibを組み合わせることで，意外と簡単にSelf Attentionの重みを可視化することができる．</p>
 
@@ -191,7 +220,7 @@ plt.close()
 
 
 
-
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
 <a href="https://www.twitter.com/_gucciiiii"><i class="svg-icon twitter"></i></a>
 
 

@@ -9,20 +9,16 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
 
     
-    <meta name="description" content="
-  文献情報
+    <meta name="description" content="文献情報
 著者: M. Daniluk et al.
 所属: University College London
 出典: ICLR 2017 (https://arxiv.org/abs/1702.04521)
-
 
 " />
-    <meta property="og:description" content="
-  文献情報
+    <meta property="og:description" content="文献情報
 著者: M. Daniluk et al.
 所属: University College London
 出典: ICLR 2017 (https://arxiv.org/abs/1702.04521)
-
 
 " />
     
@@ -83,16 +79,68 @@
     </div>
 
     <div id="main" role="main" class="container">
-      <article class="post">
-  <h1>論文メモ：Frustratingly Short Attention Spans in Neural Language Modeling</h1>
+      <style type="text/css">
+  #toc ul, ol{
+  color: #1e366a;
+  padding: 0.1em 0 0.1em 1.0em;
+  font-size: 90%
+  }
+  
+  #toc ul li, ol li{
+    line-height: 1.5;
+    padding: 0.1em 0;
+  }
 
-  <div class="entry">
+  #box div{
+   border-top: solid #1e366a 1px;/*上のボーダー*/
+   border-bottom: solid #1e366a 1px; /* 下側の1本線 */
+   padding: 0.1em 0;
+  }
+</style>
+
+<article class="post">
+  <h1>論文メモ：Frustratingly Short Attention Spans in Neural Language Modeling</h1>
+  <div id="box">
+    <div id="toc">
+      <ul class="date">
+  <li><a href="#文献情報">文献情報</a></li>
+  <li><a href="#この論文の主張">この論文の主張</a></li>
+  <li><a href="#背景関連研究">背景・関連研究</a></li>
+  <li><a href="#従来手法">従来手法</a>
     <ul>
-  <li>文献情報<br />
-著者: M. Daniluk et al.<br />
-所属: University College London<br />
-出典: ICLR 2017 <a href="https://arxiv.org/abs/1702.04521">(https://arxiv.org/abs/1702.04521)</a></li>
+      <li><a href="#attention-for-neural-language-modeling">Attention for Neural Language Modeling</a>
+        <ul>
+          <li><a href="#従来のattentionを用いた言語モデル">従来のAttentionを用いた言語モデル</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#提案手法">提案手法</a>
+    <ul>
+      <li><a href="#key-value-attention">Key-value attention</a></li>
+      <li><a href="#key-value-predict-attention">Key-value-predict attention</a></li>
+    </ul>
+  </li>
+  <li><a href="#実験結果">実験結果</a>
+    <ul>
+      <li><a href="#評価指標">評価指標</a>
+        <ul>
+          <li><a href="#パープレキシティ">パープレキシティ</a></li>
+        </ul>
+      </li>
+      <li><a href="#評価結果">評価結果</a></li>
+    </ul>
+  </li>
+  <li><a href="#議論">議論</a></li>
+  <li><a href="#次に読むべき論文は">次に読むべき論文は？</a></li>
 </ul>
+    </div>
+  </div> 
+  <div class="entry">
+    <h2 id="文献情報">文献情報</h2>
+<p>著者: M. Daniluk et al.<br />
+所属: University College London<br />
+出典: ICLR 2017 <a href="https://arxiv.org/abs/1702.04521">(https://arxiv.org/abs/1702.04521)</a></p>
 
 <h2 id="この論文の主張">この論文の主張</h2>
 <ol>
@@ -268,7 +316,7 @@ h_t^* = {\rm tanh}(W^rr_t + W^xp_t)</script>
 
 
 
-
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
 <a href="https://www.twitter.com/_gucciiiii"><i class="svg-icon twitter"></i></a>
 
 
