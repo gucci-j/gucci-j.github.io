@@ -85,3 +85,9 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+
+defaults:
+  - scope:
+      path: "resources/about/*.pdf"
+    values:
+      sitemap: false
