@@ -1,4 +1,174 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-07T22:51:54+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog</subtitle><entry xml:lang="ja_JP"><title type="html">論文メモ：Deep contextualized word representations</title><link href="http://localhost:4000/Note-ELMo/" rel="alternate" type="text/html" title="論文メモ：Deep contextualized word representations" /><published>2019-04-06T00:00:00+09:00</published><updated>2019-04-06T00:00:00+09:00</updated><id>http://localhost:4000/Note-ELMo</id><content type="html" xml:base="http://localhost:4000/Note-ELMo/">&lt;h2 id=&quot;文献情報&quot;&gt;文献情報&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-13T19:45:52+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog</subtitle><entry xml:lang="ja_JP"><title type="html">ゼロから作るDeep Learningとともに学ぶフレームワーク（パーセプトロン編）</title><link href="http://localhost:4000/DL-Intro-1/" rel="alternate" type="text/html" title="ゼロから作るDeep Learningとともに学ぶフレームワーク（パーセプトロン編）" /><published>2019-04-13T00:00:00+09:00</published><updated>2019-04-13T00:00:00+09:00</updated><id>http://localhost:4000/DL-Intro-1</id><content type="html" xml:base="http://localhost:4000/DL-Intro-1/">&lt;h1 id=&quot;はじめに&quot;&gt;はじめに&lt;/h1&gt;
+&lt;hr /&gt;
+&lt;p&gt;「ゼロから作るディープラーニング」は深層学習を学ぶ入門書として非常に人気があり，様々な場所で用いられています．&lt;/p&gt;
+
+&lt;p&gt;しかしながら，「フレームワークを用いないで深層学習の基礎を学ぶ」という本の目的により，深層学習フレームワークに関する内容は触れられていません．&lt;/p&gt;
+
+&lt;p&gt;したがって，読者の中には実際のフレームワークを用いた機械学習の勉強へと繋げる機会や気力を失ってしまった人も少なからずいると思います．&lt;/p&gt;
+
+&lt;p&gt;このプロジェクトでは，「ゼロから作るDeep Learning」（以下，ゼロから〜）を学習しつつ，深層学習フレームワークの一つである，Kerasについて学んでいきます．&lt;br /&gt;
+これにより，深層学習の基礎を理解しつつ，フレームワークを活用した実装方法について学ぶことができます！&lt;/p&gt;
+
+&lt;p&gt;それでは，まずはKerasのインストールから始めていきましょう．&lt;/p&gt;
+
+&lt;h1 id=&quot;1-kerasのインストール&quot;&gt;1. Kerasのインストール&lt;/h1&gt;
+&lt;hr /&gt;
+&lt;p&gt;(&lt;strong&gt;注意&lt;/strong&gt;) 本プロジェクトでは，すでにPythonやNumPy等のインストールは終えているものとしてスタートします．&lt;br /&gt;
+環境整備がお済みでない方は，先にゼロから〜の一章を参考に済ませてください．&lt;/p&gt;
+
+&lt;p&gt;・コマンドライン上で，以下のコマンドを入力してKerasをインストールします．&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install keras
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;参考: &lt;a href=&quot;https://keras.io/ja/&quot;&gt;https://keras.io/ja/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;2-プロジェクトの作成&quot;&gt;2. プロジェクトの作成&lt;/h1&gt;
+&lt;hr /&gt;
+&lt;p&gt;お好きな環境でゼロから〜二章用のプロジェクトを作成してください．&lt;/p&gt;
+
+&lt;p&gt;ただし，ここでは，&lt;code class=&quot;highlighter-rouge&quot;&gt;sequential.py&lt;/code&gt;と&lt;code class=&quot;highlighter-rouge&quot;&gt;functional.py&lt;/code&gt;の二つのファイルを作成することとします．&lt;/p&gt;
+
+&lt;h1 id=&quot;3-モデルの作成--テスト&quot;&gt;3. モデルの作成 &amp;amp; テスト&lt;/h1&gt;
+&lt;hr /&gt;
+&lt;ul&gt;
+  &lt;li&gt;KerasにはSepuentialモデルとFunctional APIの2種類のモデルの定義方法があります．
+    &lt;ul&gt;
+      &lt;li&gt;Sepuentialモデル：様々な層を積み木のように積み重ねていくイメージ．線形スタック．&lt;/li&gt;
+      &lt;li&gt;Functionalモデル：層をインスタンスとして扱う．複雑なモデルを定義するときに便利．&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;それぞれのモデルの定義方法の違いを以下で見ていきましょう．&lt;/p&gt;
+
+&lt;h2 id=&quot;31-sequential-モデル&quot;&gt;3.1 Sequential モデル&lt;/h2&gt;
+&lt;hr /&gt;
+&lt;ul&gt;
+  &lt;li&gt;SequentialモデルでANDゲートのパーセプトロンを実装します．&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;sequential.py&lt;/code&gt;に以下のソースを順に書いていきましょう．&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;1-レイヤー--numpyを読み込む&quot;&gt;1. レイヤー + NumPyを読み込む&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from keras.models import Sequential
+from keras.layers import Dense
+
+import numpy as np
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;2-modelにsepuentialモデルを定義する&quot;&gt;2. &lt;code class=&quot;highlighter-rouge&quot;&gt;model&lt;/code&gt;にSepuentialモデルを定義する&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sequential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-modelにdense層全結合層を追加する&quot;&gt;3. &lt;code class=&quot;highlighter-rouge&quot;&gt;model&lt;/code&gt;にDense層（全結合層）を追加する&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;初めてレイヤーを追加するときには，&lt;code class=&quot;highlighter-rouge&quot;&gt;input_shape&lt;/code&gt;を指定する必要があります
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;model.add(Dense(input_dim=2, units=1))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;全結合層という用語はゼロから〜の二章には登場していませんが，ここではパーセプトロンと同じと思ってください．&lt;br /&gt;
+参考程度に，&lt;code class=&quot;highlighter-rouge&quot;&gt;input_dim=2, units=1&lt;/code&gt;のときのDense層の様子を概念図にしたものを以下に示します．&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;../resources/2019-04-13/example_dense.png&quot; alt=&quot;Dense層の様子の概念図&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;4-modelに重みを与える&quot;&gt;4. &lt;code class=&quot;highlighter-rouge&quot;&gt;model&lt;/code&gt;に重みを与える&lt;/h3&gt;
+&lt;p&gt;ゼロから〜の二章では予め重みとバイアスが与えられているので，この実装でも与えます．&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;model.set_weights([np.array([[0.5], [0.5]]), np.array([-0.7])])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;参照: ゼロから〜のP27&lt;/p&gt;
+
+&lt;h3 id=&quot;5-テストする&quot;&gt;5. テストする&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;モデルのテストは&lt;code class=&quot;highlighter-rouge&quot;&gt;predict&lt;/code&gt;メソッドで行えます．&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;predict&lt;/code&gt;の返り値は，入力データの予測結果のリストになっています．&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;X = np.array([[0,0], [0,1], [1,0], [1,1]])
+Y = np.array([[0], [0], [0], [1]])
+
+Y_ = model.predict(X)
+
+print(Y_)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;この結果は以下のようになるはずです．&lt;br /&gt;
+Output:
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[[-0.7       ]
+ [-0.19999999]
+ [-0.19999999]
+ [ 0.3       ]]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;これではわかりにくいので，マイナスのものは&lt;code class=&quot;highlighter-rouge&quot;&gt;False&lt;/code&gt;で，プラスのものは&lt;code class=&quot;highlighter-rouge&quot;&gt;True&lt;/code&gt;に置き換えます．
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Y_[Y_ &amp;lt;= 0] = False
+Y_[Y_ &amp;gt; 0] = True
+print(Y_)
+print(f'Results: {Y == Y_}')
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;以下のような結果が得られたと思います．&lt;br /&gt;
+見事ANDゲートが実装できていることが確認できますね．&lt;br /&gt;
+Output:
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[[0.]
+ [0.]
+ [0.]
+ [1.]]
+Results: [[ True]
+ [ True]
+ [ True]
+ [ True]]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;32-fucntional-api&quot;&gt;3.2 Fucntional API&lt;/h2&gt;
+&lt;hr /&gt;
+&lt;ul&gt;
+  &lt;li&gt;Functional APIでANDゲートのパーセプトロンを実装します．&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;functional.py&lt;/code&gt;に以下のソースを順に書いていきましょう．&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;1-レイヤー--numpyを読み込む-1&quot;&gt;1. レイヤー + NumPyを読み込む&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from keras import Model
+from keras.layers import Input, Dense
+
+import numpy as np
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;2-各種レイヤーを定義する&quot;&gt;2. 各種レイヤーを定義する&lt;/h3&gt;
+&lt;p&gt;Functional APIでは，入力層を追加で定義する必要があります．&lt;/p&gt;
+
+&lt;p&gt;Dense部分のイメージとしては，Denseレイヤーのインスタンスを生成し，その入力として，テンソル：_inputを与えるという感じです．出力のテンソルは_outputとなります．&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;_input = Input(shape=(2, ))
+_output = Dense(units=1)(_input)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-モデルを定義する&quot;&gt;3. モデルを定義する&lt;/h3&gt;
+&lt;p&gt;以下のように，Functional APIでは，モデルを定義する際に入力と出力のテンソルを別々に保持しておく必要があります！&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;outputs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;参考: &lt;a href=&quot;https://keras.io/ja/getting-started/functional-api-guide/&quot;&gt;https://keras.io/ja/getting-started/functional-api-guide/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;4-重みを与える--テストする&quot;&gt;4. 重みを与える &amp;amp; テストする&lt;/h3&gt;
+&lt;p&gt;Sequentialモデルと同じなので割愛します．&lt;br /&gt;
+結果が同一になることを確認するとよいです．&lt;/p&gt;
+
+&lt;h1 id=&quot;まとめ&quot;&gt;まとめ&lt;/h1&gt;
+&lt;hr /&gt;
+&lt;p&gt;今回は，パーセプトロンによるANDゲートの実装をKerasにより行いました．&lt;/p&gt;
+
+&lt;p&gt;Kerasを用いることで，より「簡単に&amp;amp;抽象的に」パーセプトロンを実装することが確認できたと思います．&lt;/p&gt;
+
+&lt;p&gt;次回は，3層ニューラルネットワークの実装を行います．&lt;/p&gt;
+
+&lt;h1 id=&quot;発展課題&quot;&gt;発展課題&lt;/h1&gt;
+&lt;hr /&gt;
+&lt;p&gt;NAND, ORゲートも実装してみると良いでしょう．&lt;br /&gt;
+重みとバイアスは，ゼロから〜のP27,28を参照してください．&lt;/p&gt;
+
+&lt;h1 id=&quot;ソースコード&quot;&gt;ソースコード&lt;/h1&gt;
+&lt;hr /&gt;
+&lt;p&gt;ソースコードは，&lt;strong&gt;GitHub&lt;/strong&gt;で5月中に入手できるようにする予定です．&lt;/p&gt;</content><author><name></name></author><summary type="html">はじめに 「ゼロから作るディープラーニング」は深層学習を学ぶ入門書として非常に人気があり，様々な場所で用いられています．</summary></entry><entry xml:lang="ja_JP"><title type="html">論文メモ：Deep contextualized word representations</title><link href="http://localhost:4000/Note-ELMo/" rel="alternate" type="text/html" title="論文メモ：Deep contextualized word representations" /><published>2019-04-06T00:00:00+09:00</published><updated>2019-04-06T00:00:00+09:00</updated><id>http://localhost:4000/Note-ELMo</id><content type="html" xml:base="http://localhost:4000/Note-ELMo/">&lt;h2 id=&quot;文献情報&quot;&gt;文献情報&lt;/h2&gt;
 &lt;p&gt;著者: M. Peters et al.&lt;br /&gt;
 所属: Allen Institute for Artificial Intelligence / Paul G. Allen School of Computer Science &amp;amp; Engineering, University of Washington&lt;br /&gt;
 出典: NAACL 2018 &lt;a href=&quot;https://aclweb.org/anthology/papers/N/N18/N18-1202/&quot;&gt;(https://aclweb.org/anthology/papers/N/N18/N18-1202/)&lt;/a&gt;&lt;/p&gt;
