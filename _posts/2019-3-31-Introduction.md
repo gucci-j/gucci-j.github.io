@@ -1,7 +1,7 @@
 ---
 layout: page
 title: はじめに
-description: 当サイトについての説明とプライバシーポリシーに関して
+description: 当サイトについての説明とプライバシーポリシーに関して紹介いたします．
 lang: ja_JP
 ---
 

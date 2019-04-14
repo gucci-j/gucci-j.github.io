@@ -193,22 +193,29 @@ import numpy as np
 </code></pre></div></div>
 
 <h3 id="3-modelにdense層全結合層を追加する">3. <code class="highlighter-rouge">model</code>にDense層（全結合層）を追加する</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>model.add(Dense(input_dim=2, units=1))
+</code></pre></div></div>
+
 <ul>
-  <li>初めてレイヤーを追加するときには，<code class="highlighter-rouge">input_shape</code>を指定する必要があります
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>model.add(Dense(input_dim=2, units=1))
-</code></pre></div>    </div>
-  </li>
-  <li>全結合層という用語はゼロから〜の二章には登場していませんが，ここではパーセプトロンと同じと思ってください．<br />
+  <li>全結合層という用語はゼロから〜の二章には登場していませんが，ここでは単純パーセプトロンと同じと思ってください．<br />
 参考程度に，<code class="highlighter-rouge">input_dim=2, units=1</code>のときのDense層の様子を概念図にしたものを以下に示します．</li>
 </ul>
 
 <p><img src="../resources/2019-04-13/example_dense.png" alt="Dense層の様子の概念図" /></p>
 
 <h3 id="4-modelに重みを与える">4. <code class="highlighter-rouge">model</code>に重みを与える</h3>
-<p>ゼロから〜の二章では予め重みとバイアスが与えられているので，この実装でも与えます．</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>model.set_weights([np.array([[0.5], [0.5]]), np.array([-0.7])])
-</code></pre></div></div>
-<p>参照: ゼロから〜のP27</p>
+<ul>
+  <li>
+    <p>ゼロから〜の二章では予め重みとバイアスが与えられているので，この実装でも与えます．</p>
+  </li>
+  <li>
+    <p>重みとバイアスの初期設定には，<code class="highlighter-rouge">model.set_weights()</code>を使用します．<br />
+引数は重みの入ったリストです．</p>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>model.set_weights([np.array([[0.5], [0.5]]), np.array([-0.7])])
+</code></pre></div>    </div>
+    <p>参照: ゼロから〜のP27</p>
+  </li>
+</ul>
 
 <h3 id="5-テストする">5. テストする</h3>
 <ul>

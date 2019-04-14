@@ -1,7 +1,7 @@
 ---
 layout: post
 title: MatplotlibとseabornによるSelf Attentionの可視化
-description: PyTorchを用いたときのSelf Attentionの重みを，Matplotlibとseabornを活用して可視化する方法について
+description: Self Attentionの重みを，Pythonのライブラリである「Matplotlibとseaborn」を活用して可視化する方法について紹介します．モデルの実装は，PyTorchに基づきます．
 mathjax: true
 lang: ja_JP
 ---

@@ -10,12 +10,14 @@
 
     
     <meta name="description" content="文献情報
+
 著者: M. Daniluk et al.
 所属: University College London
 出典: ICLR 2017 (https://arxiv.org/abs/1702.04521)
 
 " />
     <meta property="og:description" content="文献情報
+
 著者: M. Daniluk et al.
 所属: University College London
 出典: ICLR 2017 (https://arxiv.org/abs/1702.04521)
@@ -46,15 +48,15 @@
 <meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="論文メモ：Frustratingly Short Attention Spans in Neural Language Modeling" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Frustratingly Short Attention Spans in Neural Language Modelingの論文のまとめ" />
-<meta property="og:description" content="Frustratingly Short Attention Spans in Neural Language Modelingの論文のまとめ" />
+<meta name="description" content="Key-Value型のAttentionを活用した言語モデルに関する論文：「Frustratingly Short Attention Spans in Neural Language Modeling」の論文のメモ書きを共有・紹介します．" />
+<meta property="og:description" content="Key-Value型のAttentionを活用した言語モデルに関する論文：「Frustratingly Short Attention Spans in Neural Language Modeling」の論文のメモ書きを共有・紹介します．" />
 <link rel="canonical" href="http://localhost:4000/Note-Frustratingly/" />
 <meta property="og:url" content="http://localhost:4000/Note-Frustratingly/" />
 <meta property="og:site_name" content="きままにNLP" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-04-01T00:00:00+09:00" />
 <script type="application/ld+json">
-{"description":"Frustratingly Short Attention Spans in Neural Language Modelingの論文のまとめ","@type":"BlogPosting","url":"http://localhost:4000/Note-Frustratingly/","headline":"論文メモ：Frustratingly Short Attention Spans in Neural Language Modeling","dateModified":"2019-04-01T00:00:00+09:00","datePublished":"2019-04-01T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/Note-Frustratingly/"},"@context":"https://schema.org"}</script>
+{"description":"Key-Value型のAttentionを活用した言語モデルに関する論文：「Frustratingly Short Attention Spans in Neural Language Modeling」の論文のメモ書きを共有・紹介します．","@type":"BlogPosting","url":"http://localhost:4000/Note-Frustratingly/","headline":"論文メモ：Frustratingly Short Attention Spans in Neural Language Modeling","dateModified":"2019-04-01T00:00:00+09:00","datePublished":"2019-04-01T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/Note-Frustratingly/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   </head>
@@ -106,15 +108,7 @@
   <li><a href="#文献情報">文献情報</a></li>
   <li><a href="#この論文の主張">この論文の主張</a></li>
   <li><a href="#背景関連研究">背景・関連研究</a></li>
-  <li><a href="#従来手法">従来手法</a>
-    <ul>
-      <li><a href="#attention-for-neural-language-modeling">Attention for Neural Language Modeling</a>
-        <ul>
-          <li><a href="#従来のattentionを用いた言語モデル">従来のAttentionを用いた言語モデル</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
+  <li><a href="#従来手法-attention-for-neural-language-modeling">従来手法 (Attention for Neural Language Modeling)</a></li>
   <li><a href="#提案手法">提案手法</a>
     <ul>
       <li><a href="#key-value-attention">Key-value attention</a></li>
@@ -138,11 +132,13 @@
   </div> 
   <div class="entry">
     <h2 id="文献情報">文献情報</h2>
+<hr />
 <p>著者: M. Daniluk et al.<br />
 所属: University College London<br />
 出典: ICLR 2017 <a href="https://arxiv.org/abs/1702.04521">(https://arxiv.org/abs/1702.04521)</a></p>
 
 <h2 id="この論文の主張">この論文の主張</h2>
+<hr />
 <ol>
   <li>ニューラル言語モデルのためのkey-valueに基づくAttentionを提案</li>
   <li>さらにそれを改良したkey-value-predictに基づくAttentionの提案</li>
@@ -150,7 +146,9 @@
 </ol>
 
 <h2 id="背景関連研究">背景・関連研究</h2>
-<p>言語モデルは次に出現する単語を予測する能力を持っている．古典的なNグラムに基づく言語モデルは短文内での単語間の依存関係を捉えることができる．一方で，ニューラル言語モデルは，より広範囲な単語間の依存関係を捉えることができる．</p>
+<hr />
+<p>言語モデルは次に出現する単語を予測する能力を持っている．古典的なNグラムに基づく言語モデルは短文内での単語間の依存関係を捉えることができる．<br />
+一方で，ニューラル言語モデルは，より広範囲な単語間の依存関係を捉えることができる．</p>
 
 <p>近年のニューラル言語モデルはAttentionに基づくものが多く，より直接的に単語間の関係性を捉えられるようになってきている．</p>
 
@@ -163,19 +161,23 @@
 
 <p><img src="../resources/2019-04-01/k-v-p_attention.png" alt="k-v-p attention" /></p>
 
-<p>一つの出力ベクトルに複数の役割を課すことは，モデルを複雑化させる要因となり，学習を難しくすると考えられる．したがって，本研究では，上記の三つの役割を別々のベクトルに割り当てることで，モデルを簡単化させることを目指す．具体的には，各時刻において出力されるベクトルを3つにするということである．論文内ではこれを，key-value-predictベクトルと名付けており，Attentionを含めて，key-value-predict Attentionと名付けている．</p>
+<p>一つの出力ベクトルに複数の役割を課すことは，モデルを複雑化させる要因となり，学習を難しくすると考えられる．<br />
+したがって，本研究では，上記の三つの役割を別々のベクトルに割り当てることで，モデルを簡単化させることを目指す．<br />
+具体的には，各時刻において出力されるベクトルを3つにするということである．<br />
+論文内ではこれを，key-value-predictベクトルと名付けており，Attentionを含めて，key-value-predict Attentionと名付けている．</p>
 
-<h2 id="従来手法">従来手法</h2>
-<h3 id="attention-for-neural-language-modeling">Attention for Neural Language Modeling</h3>
-<h4 id="従来のattentionを用いた言語モデル">従来のAttentionを用いた言語モデル</h4>
+<h2 id="従来手法-attention-for-neural-language-modeling">従来手法 (Attention for Neural Language Modeling)</h2>
+<hr />
+
 <p>(1) <strong>時刻: $t$において，$L$個の出力ベクトルを記憶領域として取る</strong></p>
 
 <script type="math/tex; mode=display">\begin{equation*}
     Y_t = [{\bf h}_{t-L}, \dots, {\bf h}_{t-1}] \in \mathbb{R}^{k \times L}
 \end{equation*}</script>
 
-<p>ただし，<script type="math/tex">k</script>はLSTMの出力ベクトルの次元を指し，$h_t \in \mathbb{R}^k$は時刻: $t$における出力ベクトルを意味する．<br />
-→ L個に限るのは実用的な問題から: Lはハイパーパラメータ</p>
+<p>ただし，<script type="math/tex">k</script>はLSTMの出力ベクトルの次元を指し，$h_t \in \mathbb{R}^k$は時刻: $t$における出力ベクトルを意味する．</p>
+
+<p>→ L個に限るのは実用的な問題から: Lはハイパーパラメータ</p>
 
 <p>(2) <strong>Attentionの重み: $\alpha_t$を計算する</strong></p>
 
@@ -187,8 +189,10 @@ M_t &= {\rm tanh}(W^YY_t + (W^hh_t)1^T)
 \end{split}
 \end{equation*} %]]></script>
 
-<p>ただし， $W^Y, W^h \in \mathbb{R}^{k \times k}, w \in \mathbb{R}^k$は学習パラメータである．また，$1 \in \mathbb{R}^L$である．
-→ ここでは時刻: $t$の出力ベクトル: $h_t$とそれ以前のL個の出力ベクトル: $Y_t$がどの程度関係しあっているかを求めている．つまりL個のトークンの各重要度を算出している．</p>
+<p>ただし， $W^Y, W^h \in \mathbb{R}^{k \times k}, w \in \mathbb{R}^k$は学習パラメータである．また，$1 \in \mathbb{R}^L$である．</p>
+
+<p>→ ここでは時刻: $t$の出力ベクトル: $h_t$とそれ以前のL個の出力ベクトル: $Y_t$がどの程度関係しあっているかを求めている．<br />
+つまりL個のトークンの各重要度を算出している．</p>
 
 <p>(3) <strong>Attentionベクトルを生成する</strong><br />
 上記で算出したAttentionの重みを基に，Attentionベクトルを生成する．</p>
@@ -206,11 +210,13 @@ Concatではなく，以下の式に基づいて非線形に結合する．</p>
 
 <script type="math/tex; mode=display">y_t = {\rm softmax}(W^*h_t^* + b)</script>
 
-<p>ただし，$W^* \in \mathbb{R}^{|V| \times k}$であり，$b \in \mathbb{R}^{|V|}$である．ともに学習パラメータである．</p>
+<p>ただし，$W^* \in \mathbb{R}^{|V| \times k}$であり，$b \in \mathbb{R}^{|V|}$である．<br />
+ともに学習パラメータである．</p>
 
 <p><img src="../resources/2019-04-01/attention.png" alt="ふつうのAttentionモデル" /></p>
 
 <h2 id="提案手法">提案手法</h2>
+<hr />
 <h3 id="key-value-attention">Key-value attention</h3>
 <p>key-value Attentionでは，出力ベクトルをkeyとvalueに分割する．<br />
 具体的には，時刻: $t$における出力ベクトルを以下のように定義し直す．</p>
@@ -226,14 +232,17 @@ r_t &= [v_{t-L}, \dots, v_{t-1}]\alpha^T \\
 h_t^* &= {\rm tanh}(W^rr_t + W^xv_t)
 \end{split} %]]></script>
 
-<p>なお，上記以外の式は前章と同じである．<br />
-→ ここで，$k$は検索キーとしての役割を果たしており，$v$はその中身のデータを表していると考えるとわかりやすいかもしれない．</p>
+<p>なお，上記以外の式は前章と同じである．</p>
+
+<p>→ ここで，$k$は検索キーとしての役割を果たしており，$v$はその中身のデータを表していると考えるとわかりやすいかもしれない．</p>
 
 <p><img src="../resources/2019-04-01/k-v_attention.png" alt="key-value attention" /></p>
 
 <h3 id="key-value-predict-attention">Key-value-predict attention</h3>
-<p>key-value attentionにおいても，valueが複数回使われていることがわかる．そこで，valueをさらに分割し，key-value-predict型のAttentionを考案した．
-→ keyはattentionの重みを計算するのにのみ用いられ，valueは文脈表現をエンコードするのに使われ，predictは次のトークンの分布をエンコードするのに用いられる．
+<p>key-value attentionにおいても，valueが複数回使われていることがわかる．<br />
+そこで，valueをさらに分割し，key-value-predict型のAttentionを考案した．</p>
+
+<p>→ keyはattentionの重みを計算するのにのみ用いられ，valueは文脈表現をエンコードするのに使われ，predictは次のトークンの分布をエンコードするのに用いられる．<br />
 → 完全分業制が達成されていることがわかる．</p>
 
 <script type="math/tex; mode=display">h_t = [k_t, v_t, p_t] \in \mathbb{R}^{3k}　\\
@@ -242,16 +251,20 @@ h_t^* = {\rm tanh}(W^rr_t + W^xp_t)</script>
 <p><img src="../resources/2019-04-01/k-v-p_attention.png" alt="k-v-p attention" /></p>
 
 <h2 id="実験結果">実験結果</h2>
+<hr />
 <h3 id="評価指標">評価指標</h3>
 <h4 id="パープレキシティ">パープレキシティ</h4>
 <p>参考: <a href="http://www.jnlp.org/lab/graduates/okada/nlp/term/entropy">http://www.jnlp.org/lab/graduates/okada/nlp/term/entropy</a></p>
 
-<p>パープレキシティ(perplexity)とは，言語モデルにおいてモデルの複雑性を評価するのに使われる指標である． パープレキシティは2のクロスエントロピー乗で定義され，一般に小さいほど良いモデルであるとされる．</p>
+<p>パープレキシティ(perplexity)とは，言語モデルにおいてモデルの複雑性を評価するのに使われる指標である． <br />
+パープレキシティは2のクロスエントロピー乗で定義され，一般に小さいほど良いモデルであるとされる．</p>
 
 <script type="math/tex; mode=display">Perplexity = 2^{-\frac{1}{N}\sum_i^{N}\log P(w_i)}</script>
 
 <p>→ ここでの$P(w_i)$は言語モデルの単語出現確率を表している．<br />
-→ パープレキシティは単語の分岐数を意味しており，ある単語に対してそれに続く単語の平均候補数も意味している． つまり，複雑なモデルであるほど，平均候補数が増加するため，パープレキシティは大きくなるといえる．</p>
+→ パープレキシティは単語の分岐数を意味しており，ある単語に対してそれに続く単語の平均候補数も意味している．</p>
+
+<p>つまり，複雑なモデルであるほど，平均候補数が増加するため，パープレキシティは大きくなるといえる．</p>
 
 <h3 id="評価結果">評価結果</h3>
 <p>提案手法： key-Value-Predictのパープレキシティが有意に小さいことがわかる．</p>
@@ -259,16 +272,19 @@ h_t^* = {\rm tanh}(W^rr_t + W^xp_t)</script>
 <p><img src="../resources/2019-04-01/result1.png" alt="実験結果1" />
 <img src="../resources/2019-04-01/result2.png" alt="実験結果2" /></p>
 
-<p>(a)の図から，提案手法: key-value-predict attentionのおかげで，広範囲な文脈を考慮出来るようになっていることがわかる．
+<p>(a)の図から，提案手法: key-value-predict attentionのおかげで，広範囲な文脈を考慮出来るようになっていることがわかる．<br />
 (b)の図から，より広範な文脈を考慮したとしても，パープレキシティが大幅に改善することは期待できないということが読み取れる．
 <img src="../resources/2019-04-01/weight.png" alt="重み" /></p>
 
 <h2 id="議論">議論</h2>
-<p>Attentionを用いた言語モデルによって，従来手法よりもパープレキシティを改善することができた．しかし，あまりにも長い文脈を考慮することは，パープレキシティの改善には得策ではないこともわかった．</p>
+<hr />
+<p>Attentionを用いた言語モデルによって，従来手法よりもパープレキシティを改善することができた．<br />
+しかし，あまりにも長い文脈を考慮することは，パープレキシティの改善には得策ではないこともわかった．</p>
 
 <p>Future workとしては局所的な文脈の内容を考慮しないで，その背景にあるより大域的に関係する文脈を考慮できるような手法を考えることが挙げられる．</p>
 
 <h2 id="次に読むべき論文は">次に読むべき論文は？</h2>
+<hr />
 <p>Memory networksとか？<br />
 → key-valueの概念を初めて導入したらしい．</p>
 
