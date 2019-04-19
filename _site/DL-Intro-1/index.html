@@ -153,7 +153,7 @@
 <p>・コマンドライン上で，以下のコマンドを入力してKerasをインストールします．</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install keras
 </code></pre></div></div>
-<p>参考: <a href="https://keras.io/ja/">https://keras.io/ja/</a></p>
+<p><em>参考: <a href="https://keras.io/ja/">https://keras.io/ja/</a></em></p>
 
 <h1 id="2-プロジェクトの作成">2. プロジェクトの作成</h1>
 <hr />
@@ -213,7 +213,7 @@ import numpy as np
 引数は重みの入ったリストです．</p>
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>model.set_weights([np.array([[0.5], [0.5]]), np.array([-0.7])])
 </code></pre></div>    </div>
-    <p>参照: ゼロから〜のP27</p>
+    <p><em>参照: ゼロから〜のP27</em></p>
   </li>
 </ul>
 
@@ -288,7 +288,7 @@ _output = Dense(units=1)(_input)
 <p>以下のように，Functional APIでは，モデルを定義する際に入力と出力のテンソルを別々に保持しておく必要があります！</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">model</span> <span class="p">=</span> <span class="k">Model</span><span class="p">(</span><span class="n">inputs</span><span class="p">=</span><span class="n">_input</span><span class="p">,</span> <span class="n">outputs</span><span class="p">=</span><span class="n">_output</span><span class="p">)</span>
 </code></pre></div></div>
-<p>参考: <a href="https://keras.io/ja/getting-started/functional-api-guide/">https://keras.io/ja/getting-started/functional-api-guide/</a></p>
+<p><em>参考: <a href="https://keras.io/ja/getting-started/functional-api-guide/">https://keras.io/ja/getting-started/functional-api-guide/</a></em></p>
 
 <h3 id="4-重みを与える--テストする">4. 重みを与える &amp; テストする</h3>
 <p>Sequentialモデルと同じなので割愛します．<br />
