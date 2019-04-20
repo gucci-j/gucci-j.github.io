@@ -1,7 +1,8 @@
 ---
-layout: page
+layout: page_en
 title: Atsuki Yamaguchi
 permalink: /about/
+lang: en_US
 ---
 
 ## Currently

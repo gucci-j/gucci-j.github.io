@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /***************/
 /* MEYER RESET */
 /***************/
@@ -65,7 +66,7 @@ html {
 
 body {
   background: #fff;
-  font: 18px/1.4 Helvetica, Arial, sans-serif;
+  font: 17px/1.4 "游ゴシック", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ ゴシック", sans-serif;
   color: #333;
 }
 
@@ -91,14 +92,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 26px;
 }
 h1 a {
   color: inherit;
 }
 
 h2 {
-  font-size: 24px;
+  font-size: 22px;
 }
 
 h3 {
@@ -236,13 +237,14 @@ img {
   cursor: pointer;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
-  font-size: 28px;
+  font-size: 26px;
   letter-spacing: 1px;
 }
 
 .site-description {
   margin: -5px 0 0 0;
   color: #666;
+  font-family: Helvetica, Arial, sans-serif;
   font-size: 16px;
 }
 @media screen and (max-width: 640px) {
@@ -302,7 +304,12 @@ nav a {
 }
 .post .read-more {
   text-transform: uppercase;
+  font-family: Helvetica, Arial, sans-serif;
   font-size: 15px;
+}
+
+.page_en {
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 .wrapper-footer {
@@ -315,6 +322,7 @@ nav a {
 footer {
   padding: 20px 0;
   text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 .highlight {
