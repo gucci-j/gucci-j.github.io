@@ -68,6 +68,8 @@ body {
   background: #fff;
   font: 17px/1.4 "游ゴシック", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ ゴシック", sans-serif;
   color: #333;
+  letter-spacing: .5px;
+  line-height: 1.5;
 }
 
 .container {
@@ -145,6 +147,27 @@ ul ul, ol ul {
   list-style-type: circle;
 }
 
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+table tr {
+  border-bottom: solid 1px #eee;
+}
+
+table th, table td {
+  text-align: center;
+  width: auto;
+  padding: 5px 0;
+  border: 1px #222 solid;
+}
+
+table tr:nth-child(even) {
+  background-color: #eee;
+}
+
 em, i {
   font-style: italic;
 }
@@ -155,6 +178,10 @@ strong, b {
 
 img {
   max-width: 100%;
+}
+
+.highlight {
+  font-size: 15px;
 }
 
 .gmnoprint img {
@@ -327,12 +354,12 @@ footer {
 
 .highlight {
   background-color: #efefef;
-  padding: 7px 7px 7px 10px;
+  padding: 8px 8px 8px 10px;
   border: 1px solid #ddd;
   -moz-box-shadow: 3px 3px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 3px 3px rgba(0, 0, 0, 0.1);
   box-shadow: 3px 3px rgba(0, 0, 0, 0.1);
-  margin: 20px 0 20px 0;
+  margin: 10px 0 10px 0;
   overflow: scroll;
 }
 

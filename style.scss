@@ -21,6 +21,10 @@ body {
   background: $white;
   font: 17px/1.4 $yugothic;
   color: $darkGray;
+  // 文字間隔の調整の設定
+  letter-spacing: .5px;
+  // 行間の設定
+  line-height: 1.5;
 }
 
 .container {
@@ -98,6 +102,27 @@ ul ul, ol ul {
   list-style-type: circle;
 }
 
+table{
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+table tr{
+  border-bottom: solid 1px #eee;
+}
+
+table th,table td{
+  text-align: center;
+  width: auto;
+  padding: 5px 0;
+  border: 1px $darkerGray solid;
+}
+
+table tr:nth-child(even){
+  background-color: #eee
+}
+
 em, i {
   font-style: italic;
 }
@@ -108,6 +133,10 @@ strong, b {
 
 img {
   max-width: 100%;
+}
+
+.highlight {
+  font-size: 15px;
 }
 
 // Fixes images in popup boxes from Google Translate

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編） – きままにNLP – A Technical Blog</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="はじめに
+
+このシリーズでは，深層学習の入門書として有名な，「ゼロから作るDeep Learning」（以下，ゼロから〜）と同時並行で，フレームワークを学習し，その定着を目指します．
+
+" />
+    <meta property="og:description" content="はじめに
+
+このシリーズでは，深層学習の入門書として有名な，「ゼロから作るDeep Learning」（以下，ゼロから〜）と同時並行で，フレームワークを学習し，その定着を目指します．
+
+" />
+    
+    <meta name="author" content="きままにNLP" />
+
+    
+    <meta property="og:title" content="ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）" />
+    <meta property="twitter:title" content="ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）" />
+    
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="きままにNLP - A Technical Blog" href="/feed.xml" />
+
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+    <!-- Favicon head tag -->
+    <link rel="icon" href="https://pbs.twimg.com/profile_images/1112635060480442368/Ou7bjYFs_400x400.png" type="image/x-icon">
+
+    <!-- Begin Jekyll SEO tag v2.6.0 -->
+<title>ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編） | きままにNLP</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）" />
+<meta property="og:locale" content="ja_JP" />
+<meta name="description" content="「ゼロから作るDeep Learning」とともに深層学習フレームワークを学ぶプロジェクト第三弾として，Kerasで2層ニューラルネットワークを実装し，データセットを活用したモデルの学習と分類実験を行います．" />
+<meta property="og:description" content="「ゼロから作るDeep Learning」とともに深層学習フレームワークを学ぶプロジェクト第三弾として，Kerasで2層ニューラルネットワークを実装し，データセットを活用したモデルの学習と分類実験を行います．" />
+<link rel="canonical" href="http://localhost:4000/DL-Intro-3/" />
+<meta property="og:url" content="http://localhost:4000/DL-Intro-3/" />
+<meta property="og:site_name" content="きままにNLP" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-04-26T00:00:00+09:00" />
+<script type="application/ld+json">
+{"description":"「ゼロから作るDeep Learning」とともに深層学習フレームワークを学ぶプロジェクト第三弾として，Kerasで2層ニューラルネットワークを実装し，データセットを活用したモデルの学習と分類実験を行います．","@type":"BlogPosting","url":"http://localhost:4000/DL-Intro-3/","headline":"ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）","dateModified":"2019-04-26T00:00:00+09:00","datePublished":"2019-04-26T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/DL-Intro-3/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- Google Adsense-->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-1838422896597988",
+        enable_page_level_ads: true
+      });
+    </script>
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="https://pbs.twimg.com/profile_images/1112635060480442368/Ou7bjYFs_400x400.png" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">きままにNLP</a></h1>
+            <p class="site-description">A Technical Blog</p>
+          </div>
+
+          <nav>
+            <a href="/">Blog</a>
+            <a href="/about">About</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <style type="text/css">
+  #toc ul, ol{
+  color: #1e366a;
+  padding: 0.1em 0 0.1em 1.0em;
+  font-size: 90%
+  }
+  
+  #toc ul li, ol li{
+    line-height: 1.5;
+    padding: 0.1em 0;
+  }
+
+  #box div{
+   border-top: solid #1e366a 1px;/*上のボーダー*/
+   border-bottom: solid #1e366a 1px; /* 下側の1本線 */
+   padding: 0.1em 0;
+  }
+</style>
+
+<article class="post">
+  <h1>ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）</h1>
+  <div id="box">
+    <div id="toc">
+      <ul class="date">
+  <li><a href="#はじめに">はじめに</a></li>
+  <li><a href="#1-プロジェクトの作成">1. プロジェクトの作成</a></li>
+  <li><a href="#2-実装">2. 実装</a>
+    <ul>
+      <li><a href="#21-モデルの概要">2.1 モデルの概要</a></li>
+      <li><a href="#22-モデルの実装">2.2 モデルの実装</a></li>
+      <li><a href="#23-データの読み込み">2.3 データの読み込み</a></li>
+      <li><a href="#24-学習の設定">2.4 学習の設定</a></li>
+    </ul>
+  </li>
+  <li><a href="#3-モデルの学習">3. モデルの学習</a></li>
+  <li><a href="#4-学習結果の表示">4. 学習結果の表示</a>
+    <ul>
+      <li><a href="#41-損失関数の値の推移">4.1 損失関数の値の推移</a>
+        <ul>
+          <li><a href="#411-matplotlibのインストール">4.1.1 Matplotlibのインストール</a></li>
+          <li><a href="#412-historyオブジェクトの中身">4.1.2 Historyオブジェクトの中身</a></li>
+          <li><a href="#413-プロットしてみる">4.1.3 プロットしてみる</a></li>
+        </ul>
+      </li>
+      <li><a href="#42-認識精度の推移">4.2 認識精度の推移</a></li>
+    </ul>
+  </li>
+  <li><a href="#まとめ">まとめ</a></li>
+  <li><a href="#ソースコード">ソースコード</a></li>
+</ul>
+    </div>
+  </div> 
+  <div class="entry">
+    <h1 id="はじめに">はじめに</h1>
+<hr />
+<p>このシリーズでは，深層学習の入門書として有名な，「ゼロから作るDeep Learning」（以下，ゼロから〜）と同時並行で，フレームワークを学習し，その定着を目指します．</p>
+
+<p>前回までは，3層のニューラルネットワークをKerasで実装し，推論処理のみを扱ってきました．今回からは，ゼロから〜の4章と5章に対応する，ニューラルネットワークの学習にとりかかります．また，同時に実験結果の簡単な可視化方法についても触れていきます．</p>
+
+<p>では，２層のニューラルネットワークを題材にMNISTの分類モデルをKerasで実装し，学習させてみましょう！</p>
+
+<ul>
+  <li>前回までのリンク<br />
+<a href="https://gucci-j.github.io/DL-Intro-1/">第一弾：パーセプトロン編</a><br />
+<a href="https://gucci-j.github.io/DL-Intro-2/">第二弾：3層ニューラルネットワーク &amp; 手書き数字認識編</a></li>
+</ul>
+
+<h1 id="1-プロジェクトの作成">1. プロジェクトの作成</h1>
+<hr />
+<p>はじめに，２層ニューラルネットワーク用のプロジェクトを作成してください．</p>
+
+<p>以下，本投稿では<code class="highlighter-rouge">two_nn.py</code>を作成するものとして進めます．</p>
+
+<h1 id="2-実装">2. 実装</h1>
+<hr />
+<h2 id="21-モデルの概要">2.1 モデルの概要</h2>
+<ul>
+  <li>
+    <p>今回実装するモデルの概要図を以下に示します．実装の参考にしてください．</p>
+  </li>
+  <li>
+    <p>MNISTデータセットの分類を行うモデルを学習させるので，出力はクラスの数に合わせて10次元のベクトルとなっています．</p>
+  </li>
+</ul>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-04-26/two_layer_nn.png" alt="2層ニューラルネットワークの概念図" style="width: 450px;" />
+</div>
+
+<h2 id="22-モデルの実装">2.2 モデルの実装</h2>
+<ul>
+  <li>
+    <p>ゼロから〜の第4章に対応する2層ニューラルネットワークをKerasで実装していきます．</p>
+  </li>
+  <li>
+    <p>モデルの実装は前回とあまり変わらないので，以下に一気に進めてしまいます．<br />
+復習として，ソースコードを読んで理解できるかを確認すると良いと思います．</p>
+  </li>
+  <li>
+    <p>モデルのパラメータ等は全てゼロから〜のP117〜122に基づいています．</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">from</span> <span class="n">keras</span> <span class="n">import</span> <span class="k">Model</span>
+<span class="k">from</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span> <span class="n">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Dense</span>
+
+<span class="p">#</span> <span class="err">パラメータ</span>
+<span class="n">img_shape</span> <span class="p">=</span> <span class="p">(</span><span class="m">28</span> <span class="p">*</span> <span class="m">28</span><span class="p">,</span> <span class="p">)</span>
+<span class="n">hidden_dim</span> <span class="p">=</span> <span class="m">100</span>
+<span class="n">output_dim</span> <span class="p">=</span> <span class="m">10</span>
+
+<span class="p">#</span> <span class="err">モデルを定義する</span>
+<span class="n">_input</span> <span class="p">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="p">=</span><span class="n">img_shape</span><span class="p">)</span>
+<span class="n">_hidden</span> <span class="p">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">activation</span><span class="p">=</span><span class="s1">'sigmoid'</span><span class="p">)(</span><span class="n">_input</span><span class="p">)</span>
+<span class="n">_output</span> <span class="p">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">output_dim</span><span class="p">,</span> <span class="n">activation</span><span class="p">=</span><span class="s1">'softmax'</span><span class="p">)(</span><span class="n">_hidden</span><span class="p">)</span>
+
+<span class="k">model</span> <span class="p">=</span> <span class="k">Model</span><span class="p">(</span><span class="n">inputs</span><span class="p">=</span><span class="n">_input</span><span class="p">,</span> <span class="n">outputs</span><span class="p">=</span><span class="n">_output</span><span class="p">)</span>
+<span class="k">model</span><span class="p">.</span><span class="n">summary</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Output:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_________________________________________________________________
+Layer (type)                 Output Shape              Param #
+=================================================================
+input_1 (InputLayer)         (None, 784)               0
+_________________________________________________________________
+dense_1 (Dense)              (None, 100)               78500
+_________________________________________________________________
+dense_2 (Dense)              (None, 10)                1010
+=================================================================
+Total params: 79,510
+Trainable params: 79,510
+Non-trainable params: 0
+_________________________________________________________________
+</code></pre></div></div>
+
+<h2 id="23-データの読み込み">2.3 データの読み込み</h2>
+<ul>
+  <li>
+    <p>前回と同様にMNISTデータセットを読み込み，前処理（正規化，データの整形）を行います．</p>
+  </li>
+  <li>
+    <p>前回との相違点としては，ラベルデータを学習のためにone-hotベクトルに変換させる点です．</p>
+    <ul>
+      <li>one-hotベクトル化は，<code class="highlighter-rouge">to_categorical</code>を用いることで行えます． <br />
+  引数は変換元リストとクラス数です．戻り値は変換後のリストです．</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># データを読み込む
+from keras.datasets import mnist
+from keras.utils import to_categorical
+
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+x_train = x_train.reshape(60000, 784)
+x_test = x_test.reshape(10000, 784)
+x_train = x_train.astype('float') / 255.
+x_test = x_test.astype('float') / 255.
+
+print(f'Before: {y_train.shape}')
+y_train = to_categorical(y_train, num_classes=output_dim)
+print(f'After: {y_train.shape}')
+print(f'y_train[0]: {y_train[0]}')
+y_test = to_categorical(y_test, num_classes=output_dim)
+</code></pre></div></div>
+
+<p>Output:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Before: (60000,)
+y_train[0]: 5
+After: (60000, 10)
+y_train[0]: [0. 0. 0. 0. 0. 1. 0. 0. 0. 0.]
+</code></pre></div></div>
+
+<p>しっかりと，ラベルがone-hotベクトルに変換されていることが確認できます．</p>
+
+<h2 id="24-学習の設定">2.4 学習の設定</h2>
+<p>ここからが本格的に新しい部分になります．</p>
+<ul>
+  <li>
+    <p>設計したモデルで学習を実行できるようにするために，「<strong>損失関数</strong>」と「<strong>最適化アルゴリズム</strong>」を設定します．</p>
+  </li>
+  <li>損失関数と最適化アルゴリズムの設定は，<code class="highlighter-rouge">compile</code>メソッドで行えます．
+    <ul>
+      <li>
+        <p>ゼロから〜の4章の実装では，損失関数にクロスエントロピー，最適化アルゴリズムに確率的勾配降下法が用いられています．<br />
+したがって，本実装でも<code class="highlighter-rouge">loss</code>に<code class="highlighter-rouge">'categorical_crossentropy'</code>を指定し，<code class="highlighter-rouge">optimizer</code>に<code class="highlighter-rouge">SGD(lr=learning_rate)</code>を指定します．</p>
+      </li>
+      <li>
+        <p>ゼロから〜で使われている学習率は<code class="highlighter-rouge">0.1</code>であるため，Kerasのデフォルト値0.01と異なります．そのため，<code class="highlighter-rouge">SGD</code>に学習率を渡す必要があります．</p>
+      </li>
+    </ul>
+  </li>
+  <li><strong>評価関数</strong>の設定も行います．<br />
+ゼロから〜のP121では，認識精度を評価関数としているので，<code class="highlighter-rouge">compile</code>メソッドの引数: <code class="highlighter-rouge">metrics</code>に<code class="highlighter-rouge">['accuracy']</code>を指定します．</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from keras.optimizers import SGD
+model.compile(optimizer=SGD(lr=0.1), loss='categorical_crossentropy', metrics=['accuracy'])
+</code></pre></div></div>
+<p><em>参照: <a href="https://keras.io/ja/losses/">（Kerasで利用可能な損失関数について）</a></em><br />
+<em>参照: <a href="https://keras.io/ja/optimizers/">（Kerasで利用可能な最適化アルゴリズムについて）</a></em><br />
+<em>参照: <a href="https://keras.io/ja/metrics/">（Kerasにおける評価関数について）</a></em></p>
+
+<p>(<strong>注意</strong>) Kerasをはじめとする深層学習フレームワークでは，ユーザが順伝播の計算グラフを構築すると，フレームワークが自動的に逆伝播用の処理をブラックボックス的に行ってくれます．
+したがって，ゼロから〜の5章の部分は，フレームワーク使用時には実装する必要がありません．（自分でレイヤーを設計することがない限り．）</p>
+
+<h1 id="3-モデルの学習">3. モデルの学習</h1>
+<hr />
+<p>それでは，モデルの学習を進めていきましょう．</p>
+<ul>
+  <li>モデルの学習は，<code class="highlighter-rouge">fit</code>メソッドで行います．<br />
+以下に各引数について簡単に対応表を示します．</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>引数</strong></th>
+      <th style="text-align: center"><strong>説明</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">x</code></td>
+      <td style="text-align: center">訓練データを指定します</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">y</code></td>
+      <td style="text-align: center">訓練データに対応するラベルデータ（正解ラベル）を指定します</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">batch_size</code></td>
+      <td style="text-align: center">ミニバッチのサイズを指定します</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">epochs</code></td>
+      <td style="text-align: center">エポック数（学習回数）を指定します</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">verbose</code></td>
+      <td style="text-align: center">学習進捗をどのように表示するか設定します</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">validation_data</code></td>
+      <td style="text-align: center">テストデータを指定します</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">fit</code>メソッドの戻り値は，<code class="highlighter-rouge">History</code>オブジェクトになっています．<br />
+この戻り値を活用することで，損失関数や認識精度のプロットができます．</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">validation_data</code>にテストデータを与えることで，エポックごとにモデルのテスト精度を測ることができます．</p>
+  </li>
+</ul>
+
+<p><em>参照: <a href="https://keras.io/ja/models/model/#fit">（Kerasのfitメソッドにおける引数と戻り値の説明）</a></em></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>epochs = 17
+_results = model.fit(x=x_train, y=y_train, batch_size=100, epochs=epochs, verbose=1, validation_data=(x_test, y_test))
+</code></pre></div></div>
+
+<p>Output:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Epoch 1/17
+60000/60000 [==============================] - 2s 31us/step - loss: 0.8805 - acc: 0.7994
+Epoch 2/17
+60000/60000 [==============================] - 2s 27us/step - loss: 0.4102 - acc: 0.8907
+~~~
+~~~
+Epoch 17/17
+60000/60000 [==============================] - 2s 27us/step - loss: 0.1771 - acc: 0.9497
+</code></pre></div></div>
+
+<h1 id="4-学習結果の表示">4. 学習結果の表示</h1>
+<hr />
+<p>ゼロから〜のP119とP121では，それぞれ損失関数の値と認識精度の推移を図にしているので，ここでも実際に図にしてみましょう！</p>
+
+<h2 id="41-損失関数の値の推移">4.1 損失関数の値の推移</h2>
+<p>Pythonの図表描画ライブラリである，Matplotlibを活用して，損失関数の値の推移を図にします．</p>
+
+<h3 id="411-matplotlibのインストール">4.1.1 Matplotlibのインストール</h3>
+<hr />
+<p>Matplotlibをインストールしていない方は，インストールしましょう．</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install matplotlib
+</code></pre></div></div>
+
+<p>（<strong>注意</strong>）macOSでMatplotlibをインポートすると，バックエンドの問題でエラーが発生することがあります．その場合は，下記を参照してバックエンドを書き換えてください．</p>
+
+<p><em>参照: <a href="https://qiita.com/Gen6/items/78d83d117ef67e0d53c2">（Matplotlibでインポートエラーが出るときの対処法）</a></em></p>
+
+<h3 id="412-historyオブジェクトの中身">4.1.2 Historyオブジェクトの中身</h3>
+<hr />
+<p><code class="highlighter-rouge">fit</code>メソッドの戻り値は，<code class="highlighter-rouge">History</code>オブジェクトであると前章で紹介しました．<br />
+実験結果を可視化するためにも，<code class="highlighter-rouge">History</code>オブジェクトの中身を確認しておきましょう．</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print(f'Keys: {_results.history.keys()}')
+</code></pre></div></div>
+
+<p>Output:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Keys: dict_keys(['val_loss', 'val_acc', 'loss', 'acc'])
+</code></pre></div></div>
+
+<p>このように，損失関数の値と認識精度の結果が訓練・テストデータともに格納されていることがわかります．</p>
+
+<h3 id="413-プロットしてみる">4.1.3 プロットしてみる</h3>
+<hr />
+<p><code class="highlighter-rouge">History</code>オブジェクトから訓練時とテスト時の損失関数の値のリスト受け取り，それらをプロットします．</p>
+
+<p>一連のソースコードを下記に示します．<br />
+なお，Matplotlibの詳しい使い方については，<a href="https://matplotlib.org/tutorials/index.html">公式チュートリアル</a>をご覧ください．</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import matplotlib.pyplot as plt
+
+loss = _results.history['loss']
+val_loss = _results.history['val_loss']
+
+plt.figure()
+plt.plot(range(1, epochs+1), loss, marker='.', label='train')
+plt.plot(range(1, epochs+1), val_loss, marker='.', label='test')
+plt.legend(loc='best', fontsize=10)
+plt.grid()
+plt.xlabel('Epochs')
+plt.ylabel('Loss')
+plt.savefig('loss.png')
+</code></pre></div></div>
+
+<p>Output:</p>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-04-26/loss.png" alt="損失関数の値の推移" style="width: 500px;" />
+</div>
+
+<p>きちんと損失関数がプロットされていることが確認できました！</p>
+
+<h2 id="42-認識精度の推移">4.2 認識精度の推移</h2>
+<p>モデルが<strong>過学習</strong>していないかを認識精度の推移を図にして確認してみましょう!</p>
+
+<p>プロットの流れは，損失関数の時とほとんど同一のため，説明は割愛します．<br />
+以下にソースコードを貼るので，各自試してみてください．</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plt.clf()
+acc = _results.history['acc']
+val_acc = _results.history['val_acc']
+
+plt.plot(range(1, epochs+1), acc, marker='.', label='train')
+plt.plot(range(1, epochs+1), val_acc, marker='.', label='test')
+plt.legend(loc='best', fontsize=10)
+plt.grid()
+plt.xlabel('Epochs')
+plt.ylabel('Accuracy')
+plt.savefig('acc.png')
+plt.close()
+</code></pre></div></div>
+
+<p>Output:</p>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-04-26/acc.png" alt="認識精度の推移" style="width: 500px;" />
+</div>
+
+<p>図から，テストデータの認識精度を訓練データの認識精度が大幅に上回る現象は確認できないので，モデルの過学習は起きていないことがわかります．</p>
+
+<p><em>参考: <a href="https://codeday.me/jp/qa/20181207/13787.html">（Matplotlibでプロットを一旦クリアする）</a></em></p>
+
+<h1 id="まとめ">まとめ</h1>
+<hr />
+<p>今回はニューラルネットワークの学習について扱いました．<br />
+フレームワークを活用することで，誤差逆伝播が自動で実行されるため，順伝播の処理だけ記述すればよいという大きなメリットを体感できたと思います．</p>
+
+<p>次回は，ゼロから〜の第6章に対応する，「学習に関するテクニック」をKerasを用いて実証していきたいと思います．また，ハイパーパラメータの探索や交差検証等についても扱う予定です．</p>
+
+<h1 id="ソースコード">ソースコード</h1>
+<hr />
+<p>ソースコードは，<strong>GitHub</strong>で5月上旬に入手できるようにする予定です．</p>
+
+  </div>
+
+  <div class="date">
+    Written on April 26, 2019
+  </div>
+
+  
+  
+</article>
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          
+<a href="mailto:gucci.research@gmail.com"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/gucci-j"><i class="svg-icon github"></i></a>
+
+
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/_gucciiiii"><i class="svg-icon twitter"></i></a>
+
+
+<br />
+          <a href="/privacy">Privacy Policy</a>
+        </footer>
+      </div>
+    </div>
+
+    
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-137498199-1', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/DL-Intro-3/',
+		  'title': 'ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  </body>
+</html>
