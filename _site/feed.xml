@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-26T09:17:16+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog</subtitle><entry xml:lang="ja_JP"><title type="html">ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）</title><link href="http://localhost:4000/DL-Intro-3/" rel="alternate" type="text/html" title="ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）" /><published>2019-04-26T00:00:00+09:00</published><updated>2019-04-26T00:00:00+09:00</updated><id>http://localhost:4000/DL-Intro-3</id><content type="html" xml:base="http://localhost:4000/DL-Intro-3/">&lt;h1 id=&quot;はじめに&quot;&gt;はじめに&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-04-27T22:54:44+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog</subtitle><entry xml:lang="ja_JP"><title type="html">ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）</title><link href="http://localhost:4000/DL-Intro-3/" rel="alternate" type="text/html" title="ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）" /><published>2019-04-26T00:00:00+09:00</published><updated>2019-04-26T00:00:00+09:00</updated><id>http://localhost:4000/DL-Intro-3</id><content type="html" xml:base="http://localhost:4000/DL-Intro-3/">&lt;h1 id=&quot;はじめに&quot;&gt;はじめに&lt;/h1&gt;
 &lt;hr /&gt;
 &lt;p&gt;このシリーズでは，深層学習の入門書として有名な，「ゼロから作るDeep Learning」（以下，ゼロから〜）と同時並行で，フレームワークを学習し，その定着を目指します．&lt;/p&gt;
 
@@ -11,6 +11,13 @@
 &lt;a href=&quot;https://gucci-j.github.io/DL-Intro-1/&quot;&gt;第一弾：パーセプトロン編&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://gucci-j.github.io/DL-Intro-2/&quot;&gt;第二弾：3層ニューラルネットワーク &amp;amp; 手書き数字認識編&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;script async=&quot;&quot; src=&quot;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:block; text-align:center;&quot; data-ad-layout=&quot;in-article&quot; data-ad-format=&quot;fluid&quot; data-ad-client=&quot;ca-pub-1838422896597988&quot; data-ad-slot=&quot;7676908062&quot;&gt;&lt;/ins&gt;
+&lt;script&gt;
+     (adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;1-プロジェクトの作成&quot;&gt;1. プロジェクトの作成&lt;/h1&gt;
 &lt;hr /&gt;
