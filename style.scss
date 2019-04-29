@@ -267,6 +267,30 @@ nav {
   }
 }
 
+
+.link_box {
+  position: relative;
+  margin: 2em 0;
+  padding: 0.5em 1em;
+  border: solid 3px #eee;
+  border-radius: 8px;
+}
+.link_box .box-title {
+  position: absolute;
+  display: inline-block;
+  top: -13px;
+  left: 10px;
+  padding: 0 9px;
+  line-height: 1;
+  font-size: 19px;
+  background: #fff;
+  font-weight: bold;
+}
+.link_box p {
+  margin: 0; 
+  padding: 0;
+}
+
 //
 // .main
 //
