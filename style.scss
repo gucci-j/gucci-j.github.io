@@ -120,7 +120,7 @@ table th,table td{
 }
 
 table tr:nth-child(even){
-  background-color: #eee
+  background-color: rgb(245, 245, 245)
 }
 
 em, i {
@@ -137,6 +137,11 @@ img {
 
 .highlight {
   font-size: 15px;
+}
+
+code.highlighter-rouge{
+  background-color: #e0e0e0;
+  padding: 0 5px 0 5px;
 }
 
 // Fixes images in popup boxes from Google Translate
@@ -169,6 +174,59 @@ img {
 
 .clearfix:after {
     clear: both;
+}
+
+/* プルダウン目次 */
+/*
+#toc ul, ol{
+  color: #1e366a;
+  padding: 0.1em 0 0.1em 1.0em;
+  font-size: 90%
+}
+  
+#toc ul li, ol li{
+  
+  
+}
+*/
+
+label {
+  background: $lightGray;
+  color: $gray;
+  padding: 10px;
+  display: block;
+  margin: 0;
+  border: 1px solid #fff;
+}
+
+input[type="checkbox"].on-off{
+  display: none;
+}
+
+.toc ul {
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+  margin: 0;
+  list-style: none;
+  font-size: 90%;
+  color: #1e366a;
+  padding: 0.1em 0 0.1em 1.0em;
+}
+
+.toc li {
+  padding: 0.1em 0;
+}
+
+input[type="checkbox"].on-off + ul{
+  height: 0;
+  overflow: hidden;
+}
+
+input[type="checkbox"].on-off:checked + ul{
+  height: auto;
 }
 
 /*********************/
@@ -272,7 +330,7 @@ nav {
   position: relative;
   margin: 2em 0;
   padding: 0.5em 1em;
-  border: solid 3px #eee;
+  border: solid 3px $gray;
   border-radius: 8px;
 }
 .link_box .box-title {
