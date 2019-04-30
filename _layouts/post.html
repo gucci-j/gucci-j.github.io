@@ -5,9 +5,9 @@ layout: default
 <article class="post">
   <h1>{{ page.title }}</h1>
   <div class="toc">
-    <label for="toc">目次</label>
-    <input type="checkbox" id="toc" class="on-off" />
-    {% include toc.html html=content sanitize=true class="date"%}
+    <input type="checkbox" id="toc_lb" class="on-off" />
+    <label for="toc_lb">目次</label>
+    {% include toc.html html=content sanitize=true %}
   </div> 
   <div class="entry">
     {{ content }}

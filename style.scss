@@ -176,31 +176,15 @@ code.highlighter-rouge{
     clear: both;
 }
 
-/* プルダウン目次 */
-/*
-#toc ul, ol{
-  color: #1e366a;
-  padding: 0.1em 0 0.1em 1.0em;
-  font-size: 90%
-}
-  
-#toc ul li, ol li{
-  
-  
-}
-*/
+/* 目次 */
 
-label {
+.toc label {
   background: $lightGray;
   color: $gray;
   padding: 10px;
   display: block;
   margin: 0;
-  border: 1px solid #fff;
-}
-
-input[type="checkbox"].on-off{
-  display: none;
+  border-bottom: 2px solid #fff;
 }
 
 .toc ul {
@@ -220,13 +204,31 @@ input[type="checkbox"].on-off{
   padding: 0.1em 0;
 }
 
-input[type="checkbox"].on-off + ul{
+.toc input[type="checkbox"].on-off{
+  display: none;
+}
+
+.toc input[type="checkbox"].on-off + label + ul{
   height: 0;
   overflow: hidden;
 }
 
-input[type="checkbox"].on-off:checked + ul{
+.toc input[type="checkbox"].on-off:checked + label + ul{
   height: auto;
+  background: $lightGray;
+}
+
+.toc label::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: '\f054';
+  padding-right: 8px;
+}
+
+.toc input[type="checkbox"].on-off:checked + label::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: '\f078';
 }
 
 /*********************/
