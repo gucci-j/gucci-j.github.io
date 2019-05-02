@@ -4,6 +4,8 @@ title: 論文メモ：Frustratingly Short Attention Spans in Neural Language Mod
 description: Key-Value型のAttentionを活用した言語モデルに関する論文：「Frustratingly Short Attention Spans in Neural Language Modeling」の論文のメモ書きを共有・紹介します．
 mathjax: true
 lang: ja_JP
+tags:
+- 論文メモ
 ---
 
 ## 文献情報  

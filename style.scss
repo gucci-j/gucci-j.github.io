@@ -231,6 +231,42 @@ code.highlighter-rouge{
   content: '\f078';
 }
 
+
+/* タグ関連 */
+.post-tag ul {
+  margin: 0 0 5px 0;
+  padding: 0;
+  list-style: none;
+}
+.post-tag ul li {
+  display: inline-block;
+  margin: 0 .3em .3em 0;
+  padding: 0;
+}
+.post-tag ul li a {
+  display: inline-block;
+  // max-width: 100px;
+  height: 28px;
+  line-height: 28px;
+  padding: 0 1em;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  white-space: nowrap;
+  // text-overflow: ellipsis;
+  // overflow: hidden;
+  color: #333;
+  font-size: 13px;
+  text-decoration: none;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+.post-tag ul li a:hover {
+  background-color: #3498db;
+  border: 1px solid #3498db;
+  color: #fff;
+}
+
 /*********************/
 /* LAYOUT / SECTIONS */
 /*********************/
