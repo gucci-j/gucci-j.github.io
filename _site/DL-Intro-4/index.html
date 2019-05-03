@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編） – きままにNLP – A Technical Blog about NLP and ML</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="はじめに
+
+このシリーズでは，深層学習の入門書として有名な，「ゼロから作るDeep Learning」（以下，ゼロから〜）と同時並行で，フレームワークを学習し，その定着を目指します．
+
+" />
+    <meta property="og:description" content="はじめに
+
+このシリーズでは，深層学習の入門書として有名な，「ゼロから作るDeep Learning」（以下，ゼロから〜）と同時並行で，フレームワークを学習し，その定着を目指します．
+
+" />
+    
+    <meta name="author" content="きままにNLP" />
+
+    
+    <meta property="og:title" content="ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編）" />
+    <meta property="twitter:title" content="ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編）" />
+    
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="きままにNLP - A Technical Blog about NLP and ML" href="/feed.xml" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+    <!-- Favicon head tag -->
+    <link rel="icon" href="https://pbs.twimg.com/profile_images/1112635060480442368/Ou7bjYFs_400x400.png" type="image/x-icon">
+
+    <!-- Begin Jekyll SEO tag v2.6.0 -->
+<title>ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編） | きままにNLP</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編）" />
+<meta property="og:locale" content="ja_JP" />
+<meta name="description" content="「ゼロから作るDeep Learning」とともに深層学習フレームワークを学ぶプロジェクト第四弾として，深層学習において重要な学習テクニックをKerasで実際に使ってみることで，それらの効果を体験します．" />
+<meta property="og:description" content="「ゼロから作るDeep Learning」とともに深層学習フレームワークを学ぶプロジェクト第四弾として，深層学習において重要な学習テクニックをKerasで実際に使ってみることで，それらの効果を体験します．" />
+<link rel="canonical" href="http://localhost:4000/DL-Intro-4/" />
+<meta property="og:url" content="http://localhost:4000/DL-Intro-4/" />
+<meta property="og:site_name" content="きままにNLP" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-05-03T00:00:00+09:00" />
+<script type="application/ld+json">
+{"description":"「ゼロから作るDeep Learning」とともに深層学習フレームワークを学ぶプロジェクト第四弾として，深層学習において重要な学習テクニックをKerasで実際に使ってみることで，それらの効果を体験します．","@type":"BlogPosting","url":"http://localhost:4000/DL-Intro-4/","headline":"ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編）","dateModified":"2019-05-03T00:00:00+09:00","datePublished":"2019-05-03T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/DL-Intro-4/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- Google Adsense-->
+    <!--
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-1838422896597988",
+        enable_page_level_ads: true
+      });
+    </script>
+    -->
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="https://pbs.twimg.com/profile_images/1112635060480442368/Ou7bjYFs_400x400.png" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">きままにNLP</a></h1>
+            <p class="site-description">A Technical Blog about NLP and ML</p>
+          </div>
+
+          <nav>
+            <a href="/">Blog</a>
+            <a href="/about">About</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <article class="post">
+  <h1>ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編）</h1>
+  <div class="post-tag">
+    
+
+
+
+
+<ul>
+  <i class="fas fa-tag" style="padding: 0 2px 0 0;"></i>
+  
+    <li>
+      <a href="/sitemap#「ゼロからKeras」シリーズ">
+        「ゼロからKeras」シリーズ
+      </a>
+    </li>
+  
+</ul>
+  </div>
+
+  <div class="toc">
+    <input type="checkbox" id="toc_lb" class="on-off" />
+    <label for="toc_lb">目次</label>
+    <ul>
+  <li><a href="#はじめに">はじめに</a></li>
+  <li><a href="#1-最適化アルゴリズム">1. 最適化アルゴリズム</a>
+    <ul>
+      <li><a href="#11-fashion-mnistデータセット">1.1 Fashion-MNISTデータセット</a></li>
+      <li><a href="#12-モデルの実装">1.2 モデルの実装</a></li>
+      <li><a href="#13-モデルの比較">1.3 モデルの比較</a></li>
+    </ul>
+  </li>
+  <li><a href="#2-重みの初期化">2. 重みの初期化</a>
+    <ul>
+      <li><a href="#21-公式ドキュメントを見てみる">2.1 公式ドキュメントを見てみる</a></li>
+      <li><a href="#22-初期化手法による収束速度の違い">2.2 初期化手法による収束速度の違い</a></li>
+    </ul>
+  </li>
+  <li><a href="#3-正規化正則化">3. 正規化・正則化</a>
+    <ul>
+      <li><a href="#31-正規化">3.1 正規化</a></li>
+      <li><a href="#32-正則化">3.2 正則化</a></li>
+    </ul>
+  </li>
+  <li><a href="#4-バッチ正規化">4. バッチ正規化</a>
+    <ul>
+      <li><a href="#41-モデルの実装">4.1 モデルの実装</a></li>
+      <li><a href="#42-バッチ正規化の有無による分類精度の比較">4.2 バッチ正規化の有無による分類精度の比較</a></li>
+    </ul>
+  </li>
+  <li><a href="#5-過学習を防ぐためのテクニック">5. 過学習を防ぐためのテクニック</a>
+    <ul>
+      <li><a href="#51-weight-decay">5.1 Weight decay</a>
+        <ul>
+          <li><a href="#511-kerasにおけるweight-decayの適用方法">5.1.1 KerasにおけるWeight decayの適用方法</a></li>
+          <li><a href="#512-weight-decayの適用結果">5.1.2 Weight decayの適用結果</a></li>
+        </ul>
+      </li>
+      <li><a href="#52-ドロップアウト">5.2 ドロップアウト</a>
+        <ul>
+          <li><a href="#521-ドロップアウトの実装">5.2.1 ドロップアウトの実装</a></li>
+          <li><a href="#522-ドロップアウトの適用結果">5.2.2 ドロップアウトの適用結果</a></li>
+        </ul>
+      </li>
+      <li><a href="#53-early-stopping">5.3 Early Stopping</a>
+        <ul>
+          <li><a href="#531-kerasにおけるearly-stoppingの適用方法">5.3.1 KerasにおけるEarly Stoppingの適用方法</a></li>
+          <li><a href="#532-early-stoppingの適用結果">5.3.2 Early Stoppingの適用結果</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#まとめ">まとめ</a></li>
+  <li><a href="#ソースコード">ソースコード</a></li>
+</ul>
+  </div> 
+  <div class="entry">
+    <h1 id="はじめに">はじめに</h1>
+<hr />
+<p>このシリーズでは，深層学習の入門書として有名な，「ゼロから作るDeep Learning」（以下，ゼロから〜）と同時並行で，フレームワークを学習し，その定着を目指します．</p>
+
+<p>前回までは，Kerasを活用して実際にニューラルネットワークを学習させて，そのモデルを活用して推論までできるようになりました．今回は，ゼロから〜の6章に対応する種々の学習テクニックについて扱います．幅広いトピックを扱うので，理解するのに時間がかかるかと思いますが，どれもモデルの性能と安定性を向上させるために，重要なものばかりです．したがって，一つ一つ理解できるまでじっくりと取り組むことをオススメします．</p>
+
+<p>それでは，まずはパラメータの最適化アルゴリズムについての話題から入っていきましょう！</p>
+
+<div class="link_box">
+    <span class="box-title">「ゼロからKeras」シリーズリンク</span>
+    <p>第一弾：<i class="fas fa-link" style="padding: 0 2px 0 0;"></i><a href="https://gucci-j.github.io/DL-Intro-1/">パーセプトロン編</a></p>
+    <p>第二弾：<i class="fas fa-link" style="padding: 0 2px 0 0;"></i><a href="https://gucci-j.github.io/DL-Intro-2/">3層ニューラルネットワーク &amp; 手書き数字認識編</a></p>  
+    <p>第三弾：<i class="fas fa-link" style="padding: 0 2px 0 0;"></i><a href="https://gucci-j.github.io/DL-Intro-3/">ニューラルネットワークの学習編</a></p>
+    <p>第四弾：<i class="fas fa-link" style="padding: 0 2px 0 0;"></i><a href="https://gucci-j.github.io/DL-Intro-4/">学習テクニック編</a></p>
+    <p>第五弾：畳み込みニューラルネットワーク編</p>
+</div>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<p><ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1838422896597988" data-ad-slot="7676908062"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<h1 id="1-最適化アルゴリズム">1. 最適化アルゴリズム</h1>
+<hr />
+<p>ゼロから〜で紹介があったように，ニューラルネットワークに対して適用される最適化アルゴリズムはたくさん存在し，モデルに応じて使い分けることが，その性能を引き出すために非常に重要となります．</p>
+
+<p>ここでは，ゼロから〜のP177に登場した，「SGD，AdaGrad，Adam」に加え，Adadelta，Nadam，の5つの最適化アルゴリズムを，Fashion-MNISTデータセットの分類実験を通して，比較してみようと思います．</p>
+
+<h2 id="11-fashion-mnistデータセット">1.1 Fashion-MNISTデータセット</h2>
+<p>本稿で用いるFashion-MNISTデータセットは，MNISTデータセットと互換性のあるデータセットです．データセットの内容は手書き数字ではなく，靴やズボン，カバン，服などファッションに関係のあるものとなっています．</p>
+
+<p>Fashion-MNISTは，MNISTの分類タスクが「簡単過ぎること」などを理由に，それを置き換える目的で作成されたデータセットです．</p>
+
+<p>試しに1枚データセットの画像を表示させてみましょう．下記のソースコードを動作させてみてください．画像の表示は，<code class="highlighter-rouge">imshow</code>メソッドを使えば簡単にできます．</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from keras.datasets import fashion_mnist
+import matplotlib.pyplot as plt
+
+(x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
+
+plt.figure()
+plt.imshow(x_train[0], cmap='gray')
+plt.show()
+</code></pre></div></div>
+
+<p>Output:</p>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-05-03/fm_example.png" alt="Fashion-MNISTの内容の一例" style="width: 300px;" />
+</div>
+
+<p>靴らしき画像が表示されているのが確認できますね．</p>
+
+<p><em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考: <a href="https://github.com/zalandoresearch/fashion-mnist">（Fashion-MNISTのGitHubレポジトリ ）</a></em><br />
+<em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考: <a href="https://keras.io/ja/datasets/">（KerasにおけるFashion-MNISTデータセットの説明）</a></em></p>
+
+<h2 id="12-モデルの実装">1.2 モデルの実装</h2>
+<p>本実験に用いるモデルの構造とハイパーパラメータは，ゼロから〜の公式レポジトリにある<a href="https://github.com/oreilly-japan/deep-learning-from-scratch/blob/master/ch06/optimizer_compare_mnist.py">ソースコード</a>に基づきます．実装自体は前回までのソースコードをほぼ流用して実現できるので，ここでは説明を省略します．ソースコード自体は，<a href="https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6">GitHub</a>の<code class="highlighter-rouge">compare_optimizer.py</code>にて公開してあります．</p>
+
+<p>なお，自力で実装をしてみたい方は，公式レポジトリを見つつ，<a href="https://github.com/gucci-j/intro-deep-learning-keras/blob/master/chapter4%265/two_nn.py">前回のソースコード</a>を参考にすることをおすすめします．</p>
+
+<p><em><i class="fas fa-book-open" style="padding: 0 2px 0 0;"></i>参照: ゼロから〜のP176〜P178</em><br />
+<em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6">（GitHub: compare_optimizer.py）</a></em><br />
+<em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://keras.io/ja/optimizers/#keras">（Kerasで利用可能な最適化アルゴリズムについて）</a></em></p>
+
+<h2 id="13-モデルの比較">1.3 モデルの比較</h2>
+<p>1.2で実装した5層ニューラルネットワークを実行させると，以下のような結果が得られました．</p>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-05-03/loss.png" alt="最適化アルゴリズム別の損失関数の値の推移" style="width: 500px;" />
+</div>
+
+<p>図から，SGDとAdadeltaを用いたモデルは，Adam/Nadam/Adagradを用いたモデルよりも収束が遅いことがわかります．また，この実験においては，Nadamが5つの最適化アルゴリズムの中で，最も収束の速いアルゴリズムであることがわかりました．</p>
+
+<h1 id="2-重みの初期化">2. 重みの初期化</h1>
+<hr />
+<p>Kerasにおける重みの初期化は特に指定しない限り，ブラックボックス的に処理されます．つまり，レイヤー定義時に重みの初期化方法を指定しなければ，各層の所定の初期化方法が自動的に適用されます．</p>
+
+<p>ここでは，重みの初期化をこちらから事前に指定することで，フレームワーク（Keras）を活用したときの，初期化手法による収束速度の違いを検証していきます．</p>
+
+<h2 id="21-公式ドキュメントを見てみる">2.1 公式ドキュメントを見てみる</h2>
+<p>ここで，全結合層: <code class="highlighter-rouge">Dense</code>レイヤーの公式ドキュメントを確認してみましょう．下記がドキュメントの一部抜粋になります．</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>keras.layers.Dense(units, activation=None, use_bias=True, kernel_initializer='glorot_uniform',
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">kernel_initializer</code>を見ると，初期化の手法として，Glorotの一様分布（Xavierの一様分布）が用いられていることがわかります．</p>
+
+<p>初期化手法を変更したい場合には，すでに定義されている手法を<code class="highlighter-rouge">kernel_initializer</code>に引数として与えるか，新たに手法自体を定義することもできます．新たに定義する方法については，公式ドキュメントをご覧ください．</p>
+
+<p><em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://keras.io/ja/layers/core/#dense">（KerasにおけるDenseレイヤーのドキュメント）</a></em><br />
+<em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://keras.io/ja/initializers/">（Kerasにおける初期化手法についてのドキュメント）</a></em></p>
+
+<h2 id="22-初期化手法による収束速度の違い">2.2 初期化手法による収束速度の違い</h2>
+<p>では，前章で実装した5層ニューラルネットワークを活用して，初期化手法による収束速度の違いをKerasでも検証していきましょう．</p>
+
+<p>初期化手法には，デフォルトのXaiverの初期値とHeの初期値，標準偏差が0.01の正規分布の3つをそれぞれ用います．また，ゼロから〜のP184〜P186の実験設定と合わせるため，中間層の活性化関数を<code class="highlighter-rouge">sigmoid</code>から<code class="highlighter-rouge">relu</code>に変更します．ソースコードは，<a href="https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6">GitHub</a>の<code class="highlighter-rouge">compare_initializer.py</code>より入手できます．</p>
+
+<p><code class="highlighter-rouge">compare_initializer.py</code>を動作させた結果，以下の図のような結果が得られました．</p>
+
+<p>Output:</p>
+<div style="text-align: center;">
+    <img src="/resources/2019-05-03/loss_init.png" alt="初期化手法別の損失関数の値の推移" style="width: 500px;" />
+</div>
+
+<p>図より，やはり活性化関数にReLUを用いる場合には，Heの一様分布による初期化が最も適していることがわかりました．</p>
+
+<p><em><i class="fas fa-book-open" style="padding: 0 2px 0 0;"></i>参考: ゼロから〜のP184〜P186</em><br />
+<em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6">（GitHub: compare_initializer.py）</a></em></p>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- 記事内広告2 -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1838422896597988" data-ad-slot="1400355899" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
+<h1 id="3-正規化正則化">3. 正規化・正則化</h1>
+<hr />
+<p>以下，4章と5章では，それぞれ正規化と正則化について扱います．その前に，巷で誤用しがちな，機械学習における正規化と正則化の意味について確認しておきましょう．</p>
+
+<h2 id="31-正規化">3.1 正規化</h2>
+<p>機械学習における正規化は，「<strong>データをある範囲内にスケールすること</strong>」を意味します．標準化とも呼ばれることがありますが，標準化と正規化では厳密には意味合いが異なります．標準化: standardization は，「平均が0，分散が1」になるようにデータをスケールすることを指します．なお，この用語は統計学で用いられることが多いようです．</p>
+
+<p>したがって，正規化は標準化を抽象化したような意味合いを持ちます．</p>
+
+<h2 id="32-正則化">3.2 正則化</h2>
+<p>正則化は過学習（過適応）を防ぐためにある種のペナルティを課すことを意味します．Weight Decayがその一例となります．</p>
+
+<p><em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考: <a href="https://keras.io/ja/regularizers/">（Kerasにおける正則化の利用方法について）</a></em></p>
+
+<h1 id="4-バッチ正規化">4. バッチ正規化</h1>
+<hr />
+<p>バッチ正規化は，入力データを平均値が0で分散が1となる分布に変換する手法のことを指します．バッチ正規化を適用することで，モデルの収束を高速化できるほか，重みの初期化手法に対してかなり頑健になります．</p>
+
+<p>では，Kerasでバッチ正規化の実験をしてみましょう．</p>
+
+<h2 id="41-モデルの実装">4.1 モデルの実装</h2>
+<p>Kerasにおいて，バッチ正規化は<code class="highlighter-rouge">BatchNormalization</code>レイヤーを活用することで実装できます．</p>
+
+<p>ここでは，2章のモデルの「全結合層と活性化層の間」にバッチ正規化層を追加する形で実装します．また，重みの初期化は「標準偏差が0.01の正規分布」により行います．</p>
+
+<p>なお，2章で確認したように，この重み初期化では通常学習は全く進行しません．つまり，バッチ正規化を適用することで，どの程度初期化手法に対して頑健になるかを見てみます．</p>
+
+<p>Kerasにおけるバッチ正規化の適用例は以下のようになります．</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_hidden = Dense(hidden_dim, kernel_initializer=_init)(_hidden)
+_hidden = BatchNormalization()(_hidden)
+_hidden = Activation('relu')(_hidden)
+</code></pre></div></div>
+
+<p>ソースコードは，<a href="https://github.com/gucci-j/intro-deep-learning-keras/">GitHub</a>より入手できます．</p>
+
+<p><em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://keras.io/ja/layers/normalization/">（KerasにおけるBatch Normalizationについて）</a></em><br />
+<em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6">（GitHub: compare_batch_norm.py）</a></em></p>
+
+<h2 id="42-バッチ正規化の有無による分類精度の比較">4.2 バッチ正規化の有無による分類精度の比較</h2>
+<p><code class="highlighter-rouge">compare_batch_norm.py</code>を動作させた結果，以下の図のような結果が得られました．</p>
+
+<p>Output:</p>
+<div style="text-align: center;">
+    <img src="/resources/2019-05-03/acc_bn.png" alt="バッチ正規化の有無による分類精度の推移" style="width: 500px;" />
+</div>
+
+<p>図より，バッチ正規化をモデルに適用することで，かなり適当な重みの初期化を行っても，きちんと学習してくれることがわかります！</p>
+
+<p><em><i class="fas fa-book-open" style="padding: 0 2px 0 0;"></i>参考: ゼロから〜のP186〜P189</em></p>
+
+<h1 id="5-過学習を防ぐためのテクニック">5. 過学習を防ぐためのテクニック</h1>
+<hr />
+<p>ここでは，過学習を防ぐための手法の一例として，ゼロから〜でも扱われていた，Weight decayとドロップアウトに加え，Early Stoppingついても扱います．前章までと同様にKerasでテストモデルを実装し，それぞれの手法の効果を検証します．</p>
+
+<h2 id="51-weight-decay">5.1 Weight decay</h2>
+<h3 id="511-kerasにおけるweight-decayの適用方法">5.1.1 KerasにおけるWeight decayの適用方法</h3>
+<hr />
+<p>KerasにおけるWeight decayは，各レイヤーの引数に存在する，<code class="highlighter-rouge">kernel_regularizer</code>に対して利用したい正則化手法を与えることで利用できます．</p>
+
+<p>ここでは，4章で実装したバッチ正規化ありのモデルにweight decayを適用することで，過学習が軽減するか検証していきます．</p>
+
+<p>Weight decayの簡単な適用例は以下のようになります．</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from keras import regularizers
+_wd = regularizers.l2(0.1)
+
+_hidden = Dense(hidden_dim, kernel_initializer=_init, kernel_regularizer=_wd)(_hidden)
+</code></pre></div></div>
+
+<p>ソースコードは，<a href="https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6">GitHub</a>にある，<code class="highlighter-rouge">compare_weight_decay.py</code>となります．</p>
+
+<p><em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考: <a href="https://keras.io/ja/regularizers/">（Kerasにおける正則化の利用方法について）</a></em><br />
+<em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6">（GitHub: compare_weight_decay.py）</a></em></p>
+
+<h3 id="512-weight-decayの適用結果">5.1.2 Weight decayの適用結果</h3>
+<hr />
+<p><code class="highlighter-rouge">compare_weight_decay.py</code>を動作させた結果，以下のような図が得られました．</p>
+
+<p>Output:</p>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-05-03/acc_wd.png" alt="Weight decayありのときの分類精度の推移" style="width: 400px;" /><br />
+    ＜Weight decayありのときの分類精度の推移＞
+</div>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-05-03/acc_wo_wd.png" alt="Weight decay無しのときの分類精度の推移" style="width: 400px;" /><br />
+    ＜Weight decayなしのときの分類精度の推移＞
+</div>
+
+<p>図より，Weigth decayの有無を問わず，テスト精度はかなり乱高下していることがわかります．一方で，訓練精度については，Weight decayを用いることで，過学習が抑制されていることがわかります．</p>
+
+<h2 id="52-ドロップアウト">5.2 ドロップアウト</h2>
+<h3 id="521-ドロップアウトの実装">5.2.1 ドロップアウトの実装</h3>
+<hr />
+<p>Kerasにおいて，ドロップアウトは<code class="highlighter-rouge">Dropout</code>レイヤーを活用することで実装できます．</p>
+
+<p>ドロップアウトの適用例は以下のようになります．<br />
+下記の例では，ドロップアウト率（入力のユニットを消去する割合）を，引数: <code class="highlighter-rouge">rate</code>に渡しています．</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_hidden = Dense(hidden_dim, activation='relu')(_hidden)
+_hidden = Dropout(rate=dpout_rate)(_hidden)
+</code></pre></div></div>
+
+<p>5層ニューラルネットワークでドロップアウトの効果を検証したソースコードは，<code class="highlighter-rouge">compare_dropout.py</code>として，GitHubに置いてあります．では，この実験結果について次項で見ていきます．</p>
+
+<p><em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://keras.io/ja/layers/core/#dropout">（KerasにおけるDropoutの説明）</a></em><br />
+<em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6">（GitHub: compare_dropout.py）</a></em></p>
+
+<h3 id="522-ドロップアウトの適用結果">5.2.2 ドロップアウトの適用結果</h3>
+<hr />
+<p><code class="highlighter-rouge">compare_dropout.py</code>を動作させた結果，以下のような図が得られました．</p>
+
+<p>Output:</p>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-05-03/acc_dpout.png" alt="ドロップアウトありのときの分類精度の推移" style="width: 400px;" /><br />
+    ＜ドロップアウトありのときの分類精度の推移＞
+</div>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-05-03/acc_wo_dpout.png" alt="ドロップアウト無しのときの分類精度の推移" style="width: 400px;" /><br />
+    ＜ドロップアウトなしのときの分類精度の推移＞
+</div>
+
+<p>図から，ドロップアウトを適用したモデルは，ドロップアウトを適用しないモデルよりも，過学習を抑えられていることがわかります．</p>
+
+<h2 id="53-early-stopping">5.3 Early Stopping</h2>
+<p>Early Stoppingとは，その名の通り学習を早期に終了させてしまうというものです．つまり，過学習が起きる寸前 or 発生したらすぐに学習を終了させることで，ベストなモデルを手に入れようという試みになります．これにより，無駄な計算機リソースの消費防止にも繋がります．</p>
+
+<h3 id="531-kerasにおけるearly-stoppingの適用方法">5.3.1 KerasにおけるEarly Stoppingの適用方法</h3>
+<hr />
+<p>KerasにおいてEarly Stoppingは，<code class="highlighter-rouge">keras.callbacks.EarlyStopping</code>により定義されています．使い方は，<code class="highlighter-rouge">fit</code>メソッド内で，引数: <code class="highlighter-rouge">callbacks</code>に，<code class="highlighter-rouge">EarlyStopping</code>を渡せばよいです．<code class="highlighter-rouge">EarlyStopping</code>関数の主な引数の説明は以下の表の通りです．</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>引数</strong></th>
+      <th style="text-align: left"><strong>説明</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">monitor</code></td>
+      <td style="text-align: left">何を基準に学習を早期終了させるかを指定します．<br />デフォルトは<code class="highlighter-rouge">val_loss</code>になっています．</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">patience</code></td>
+      <td style="text-align: left">何エポックの間，監視値: <code class="highlighter-rouge">monitor</code>に変化がないことを許容するかを指定します．</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><code class="highlighter-rouge">verbose</code></td>
+      <td style="text-align: left">学習中にEarlyStoppingが適用されたことを明示的に表示するかしないかを指定します．<br />デフォルトは0（表示しない）です．</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Early Stoppingの簡単な適用例は以下のようになります．この例では，2エポックの間，テストデータに対する損失関数の値に改善が見られないと，学習が停止するように設定されています．</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>early_stopping = EarlyStopping(patience=2, verbose=1)
+
+model.fit(x=x_train, y=y_train, batch_size=batch_size, epochs=epochs, verbose=1, validation_data=(x_test, y_test), callbacks=[early_stopping])
+</code></pre></div></div>
+
+<p><em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://keras.io/ja/callbacks/#earlystopping">（KerasにおけるEarly Stoppingについて）</a></em></p>
+
+<h3 id="532-early-stoppingの適用結果">5.3.2 Early Stoppingの適用結果</h3>
+<hr />
+<p>5層ニューラルネットワークでEarly Stoppingの効果を検証したソースコードは，GitHubに<code class="highlighter-rouge">compare_early_stopping.py</code>として置いてあります．</p>
+
+<p><code class="highlighter-rouge">compare_early_stopping.py</code>を動作させた結果，以下のような図が得られました．</p>
+
+<p>Output:</p>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-05-03/acc_es.png" alt="Early Stoppingありのときの分類精度の推移" style="width: 400px;" /><br />
+    ＜Early Stoppingありのときの分類精度の推移＞
+</div>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-05-03/acc_wo_es.png" alt="Early Stopping無しのときの分類精度の推移" style="width: 400px;" /><br />
+    ＜Early Stopping無しのときの分類精度の推移＞
+</div>
+
+<p>図より，Early Stoppingを適用したときには，40エポックで学習が停止し，過学習している様子は読み取れません．一方で，Early Stoppingを適用しなかったときには，60エポックあたりから過学習の傾向が読み取れます．</p>
+
+<p><em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6">（GitHub: compare_early_stopping.py）</a></em></p>
+
+<h1 id="まとめ">まとめ</h1>
+<hr />
+
+<p>今回は様々な学習のテクニックについて，実際にKerasでモデルを実装し，その効果を検証してきました．次回は，畳み込みニューラルネットワークについて扱います．</p>
+
+<p>なお，このシリーズは次回で完結予定です．</p>
+
+<p>本稿で扱わなかったものの，ゼロから〜で紹介されている，「ハイパーパラメータの検証」については，今後「ハイパーパラメータの最適化 &amp; 交差分割検証」をテーマに別の投稿で詳しく紹介する予定です！</p>
+
+<h1 id="ソースコード">ソースコード</h1>
+<hr />
+<p>ソースコードは，<a href="https://github.com/gucci-j/intro-deep-learning-keras/">GitHub</a>より入手できます．</p>
+
+  </div>
+
+  <div class="date">
+    Written on May  3, 2019
+  </div>
+  <br />
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- フッター1 -->
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-1838422896597988"
+      data-ad-slot="4583840862"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+  
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script
+  type="text/javascript"
+  charset="utf-8"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+>
+</script>
+<script
+  type="text/javascript"
+  charset="utf-8"
+  src="https://vincenttam.github.io/javascripts/MathJaxLocal.js"
+>
+</script>
+
+</article>
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          
+<a href="/contact/"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/gucci-j"><i class="svg-icon github"></i></a>
+
+
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/_gucciiiii"><i class="svg-icon twitter"></i></a>
+
+
+<br />
+          <a href="/">Home</a> 
+          | <a href="/sitemap">Sitemap</a> 
+          | <a href="/privacy">Privacy Policy</a><br />
+          <div style="font-size: 8pt">© 2019 Atsuki Yamaguchi.</div>
+        </footer>
+      </div>
+    </div>
+
+    
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-137498199-1', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/DL-Intro-4/',
+		  'title': 'ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編）'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  </body>
+</html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ゼロから作るDeep Learningとともに学ぶフレームワーク（3層ニューラルネットワーク ＆ 手書き数字認識編） – きままにNLP – A Technical Blog</title>
+    <title>ゼロから作るDeep Learningとともに学ぶフレームワーク（3層ニューラルネットワーク ＆ 手書き数字認識編） – きままにNLP – A Technical Blog about NLP and ML</title>
 
         <meta charset="utf-8" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
@@ -32,8 +32,9 @@
     <![endif]-->
 
     <link rel="stylesheet" type="text/css" href="/style.css" />
-    <link rel="alternate" type="application/rss+xml" title="きままにNLP - A Technical Blog" href="/feed.xml" />
-
+    <link rel="alternate" type="application/rss+xml" title="きままにNLP - A Technical Blog about NLP and ML" href="/feed.xml" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    
     <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
 
     <!-- Favicon head tag -->
@@ -75,7 +76,7 @@
 
           <div class="site-info">
             <h1 class="site-name"><a href="/">きままにNLP</a></h1>
-            <p class="site-description">A Technical Blog</p>
+            <p class="site-description">A Technical Blog about NLP and ML</p>
           </div>
 
           <nav>
@@ -87,30 +88,30 @@
     </div>
 
     <div id="main" role="main" class="container">
-      <style type="text/css">
-  #toc ul, ol{
-  color: #1e366a;
-  padding: 0.1em 0 0.1em 1.0em;
-  font-size: 90%
-  }
-  
-  #toc ul li, ol li{
-    line-height: 1.5;
-    padding: 0.1em 0;
-  }
-
-  #box div{
-   border-top: solid #1e366a 1px;/*上のボーダー*/
-   border-bottom: solid #1e366a 1px; /* 下側の1本線 */
-   padding: 0.1em 0;
-  }
-</style>
-
-<article class="post">
+      <article class="post">
   <h1>ゼロから作るDeep Learningとともに学ぶフレームワーク（3層ニューラルネットワーク ＆ 手書き数字認識編）</h1>
-  <div id="box">
-    <div id="toc">
-      <ul class="date">
+  <div class="post-tag">
+    
+
+
+
+
+<ul>
+  <i class="fas fa-tag" style="padding: 0 2px 0 0;"></i>
+  
+    <li>
+      <a href="/sitemap#「ゼロからKeras」シリーズ">
+        「ゼロからKeras」シリーズ
+      </a>
+    </li>
+  
+</ul>
+  </div>
+
+  <div class="toc">
+    <input type="checkbox" id="toc_lb" class="on-off" />
+    <label for="toc_lb">目次</label>
+    <ul>
   <li><a href="#はじめに">はじめに</a></li>
   <li><a href="#1-3層ニューラルネットワークの実装">1. 3層ニューラルネットワークの実装</a>
     <ul>
@@ -138,7 +139,6 @@
   <li><a href="#まとめ">まとめ</a></li>
   <li><a href="#ソースコード">ソースコード</a></li>
 </ul>
-    </div>
   </div> 
   <div class="entry">
     <h1 id="はじめに">はじめに</h1>
@@ -149,8 +149,24 @@
 
 <p>それでは，今回は3層ニューラルネットワークをKerasで実装し，実際に手書き数字認識（MNISTデータセットの分類）をしていきましょう！</p>
 
-<p><em>（3層ニューラルネットワーク）参考: ゼロから〜のP58〜65</em><br />
-<em>（MNIST）参考: ゼロから〜のP72〜81</em></p>
+<p><em>（3層ニューラルネットワーク）<i class="fas fa-book-open" style="padding: 0 2px 0 0;"></i>参考: ゼロから〜のP58〜65</em><br />
+<em>（MNIST）<i class="fas fa-book-open" style="padding: 0 2px 0 0;"></i>参考: ゼロから〜のP72〜81</em></p>
+
+<div class="link_box">
+    <span class="box-title">「ゼロからKeras」シリーズリンク</span>
+    <p>第一弾：<i class="fas fa-link" style="padding: 0 2px 0 0;"></i><a href="https://gucci-j.github.io/DL-Intro-1/">パーセプトロン編</a></p>
+    <p>第二弾：<i class="fas fa-link" style="padding: 0 2px 0 0;"></i><a href="https://gucci-j.github.io/DL-Intro-2/">3層ニューラルネットワーク &amp; 手書き数字認識編</a></p>  
+    <p>第三弾：<i class="fas fa-link" style="padding: 0 2px 0 0;"></i><a href="https://gucci-j.github.io/DL-Intro-3/">ニューラルネットワークの学習編</a></p>
+    <p>第四弾：<i class="fas fa-link" style="padding: 0 2px 0 0;"></i><a href="https://gucci-j.github.io/DL-Intro-4/">学習テクニック編</a></p>
+    <p>第五弾：畳み込みニューラルネットワーク編</p>
+</div>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<p><ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1838422896597988" data-ad-slot="7676908062"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
 
 <h1 id="1-3層ニューラルネットワークの実装">1. 3層ニューラルネットワークの実装</h1>
 <hr />
@@ -202,6 +218,7 @@ import numpy as np
 </ul>
 
 <div style="text-align: center">＜活性化関数を入れ子式に定義する例＞</div>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_input = Input(shape=(2, ))
 _layer1 = Dense(units=3, activation='sigmoid')(_input)
 _layer2 = Dense(units=2, activation='sigmoid')(_layer1)
@@ -209,6 +226,7 @@ _output = Dense(units=2)(_layer2)
 </code></pre></div></div>
 
 <div style="text-align: center">＜活性化関数をインスタンスとして定義する例＞</div>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from keras.layers import Activation
 _input = Input(shape=(2, ))
 _layer1 = Dense(units=3)(_input)
@@ -217,7 +235,7 @@ _layer2 = Dense(units=2)(_activ1)
 _activ2 = Activation('sigmoid')(_layer2)
 _output = Dense(units=2)(_activ2)
 </code></pre></div></div>
-<p><em>参考: <a href="https://keras.io/ja/activations/">https://keras.io/ja/activations/</a></em></p>
+<p><em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考: <a href="https://keras.io/ja/activations/">https://keras.io/ja/activations/</a></em></p>
 
 <h3 id="123-モデルを定義する">1.2.3 モデルを定義する</h3>
 <hr />
@@ -279,7 +297,7 @@ weight_array = [w1, b1, w2, b2, w3, b3]
 model.set_weights(weight_array)
 print(model.get_weights())
 </code></pre></div></div>
-<p><em>参照: ゼロから〜 P65</em></p>
+<p><em><i class="fas fa-book-open" style="padding: 0 2px 0 0;"></i>参照: ゼロから〜 P65</em></p>
 
 <p>Output:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[array([[0.1, 0.3, 0.5], [0.2, 0.4, 0.6]], dtype=float32), 
@@ -307,11 +325,19 @@ print(Y)
 
 <p>見事，ゼロから〜 P65に示されている出力値と同一の値を得ることができました！</p>
 
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- 記事内広告2 -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1838422896597988" data-ad-slot="1400355899" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+
 <h1 id="2-手書き数字認識mnist">2. 手書き数字認識（MNIST）</h1>
 <hr />
 <p>ここからは，今実装した3層ニューラルネットワークを活用して，手書き数字を実際に分類していきます．</p>
 
-<p><em>参考: ゼロから〜のP72〜81</em></p>
+<p><em><i class="fas fa-book-open" style="padding: 0 2px 0 0;"></i>参考: ゼロから〜のP72〜81</em></p>
 <h2 id="21-mnistデータセットの読み込み">2.1 MNISTデータセットの読み込み</h2>
 <p>Kerasでは，MNISTデータセットは簡単にダウンロード&amp;呼び出しできるようになっています．</p>
 
@@ -323,7 +349,7 @@ print(Y)
 print(x_train.shape)
 print(y_train.shape)
 </code></pre></div></div>
-<p><em>参照: <a href="https://keras.io/ja/datasets/#mnist">https://keras.io/ja/datasets/#mnist</a></em></p>
+<p><em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://keras.io/ja/datasets/#mnist">https://keras.io/ja/datasets/#mnist</a></em></p>
 
 <p>Output:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(60000, 28, 28)
@@ -449,7 +475,7 @@ def load_weight():
 model.set_weights(load_weight())
 </code></pre></div></div>
 
-<p><em>参考: <a href="https://keras.io/ja/getting-started/faq/#keras-model">Kerasでモデルの保存/ロードを行う</a></em></p>
+<p><em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考: <a href="https://keras.io/ja/getting-started/faq/#keras-model">Kerasでモデルの保存/ロードを行う</a></em></p>
 
 <h2 id="24-テストする">2.4 テストする</h2>
 <p>それでは，ゼロから〜のP77と同様に実装したモデルをテストしていきましょう．</p>
@@ -480,13 +506,14 @@ print(f'Accuracy: {np.sum(y_test == _y_test) / len(y_test)}')
 
 <h1 id="ソースコード">ソースコード</h1>
 <hr />
-<p>ソースコードは，<strong>GitHub</strong>で5月中に入手できるようにする予定です．</p>
+<p>ソースコードは，<a href="https://github.com/gucci-j/intro-deep-learning-keras">GitHub</a>にて公開しています．</p>
 
   </div>
 
   <div class="date">
     Written on April 19, 2019
   </div>
+  <br />
 
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <!-- フッター1 -->
@@ -531,7 +558,7 @@ print(f'Accuracy: {np.sum(y_test == _y_test) / len(y_test)}')
       <div class="container">
         <footer class="footer">
           
-<a href="mailto:gucci.research@gmail.com"><i class="svg-icon email"></i></a>
+<a href="/contact/"><i class="svg-icon email"></i></a>
 
 
 <a href="https://github.com/gucci-j"><i class="svg-icon github"></i></a>
@@ -543,7 +570,9 @@ print(f'Accuracy: {np.sum(y_test == _y_test) / len(y_test)}')
 
 
 <br />
-          <a href="/">Home</a> | <a href="/privacy">Privacy Policy</a><br />
+          <a href="/">Home</a> 
+          | <a href="/sitemap">Sitemap</a> 
+          | <a href="/privacy">Privacy Policy</a><br />
           <div style="font-size: 8pt">© 2019 Atsuki Yamaguchi.</div>
         </footer>
       </div>

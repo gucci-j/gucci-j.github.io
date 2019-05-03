@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編） – きままにNLP – A Technical Blog</title>
+    <title>ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編） – きままにNLP – A Technical Blog about NLP and ML</title>
 
         <meta charset="utf-8" />
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
@@ -32,8 +32,9 @@
     <![endif]-->
 
     <link rel="stylesheet" type="text/css" href="/style.css" />
-    <link rel="alternate" type="application/rss+xml" title="きままにNLP - A Technical Blog" href="/feed.xml" />
-
+    <link rel="alternate" type="application/rss+xml" title="きままにNLP - A Technical Blog about NLP and ML" href="/feed.xml" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    
     <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
 
     <!-- Favicon head tag -->
@@ -75,7 +76,7 @@
 
           <div class="site-info">
             <h1 class="site-name"><a href="/">きままにNLP</a></h1>
-            <p class="site-description">A Technical Blog</p>
+            <p class="site-description">A Technical Blog about NLP and ML</p>
           </div>
 
           <nav>
@@ -87,30 +88,30 @@
     </div>
 
     <div id="main" role="main" class="container">
-      <style type="text/css">
-  #toc ul, ol{
-  color: #1e366a;
-  padding: 0.1em 0 0.1em 1.0em;
-  font-size: 90%
-  }
-  
-  #toc ul li, ol li{
-    line-height: 1.5;
-    padding: 0.1em 0;
-  }
-
-  #box div{
-   border-top: solid #1e366a 1px;/*上のボーダー*/
-   border-bottom: solid #1e366a 1px; /* 下側の1本線 */
-   padding: 0.1em 0;
-  }
-</style>
-
-<article class="post">
+      <article class="post">
   <h1>ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）</h1>
-  <div id="box">
-    <div id="toc">
-      <ul class="date">
+  <div class="post-tag">
+    
+
+
+
+
+<ul>
+  <i class="fas fa-tag" style="padding: 0 2px 0 0;"></i>
+  
+    <li>
+      <a href="/sitemap#「ゼロからKeras」シリーズ">
+        「ゼロからKeras」シリーズ
+      </a>
+    </li>
+  
+</ul>
+  </div>
+
+  <div class="toc">
+    <input type="checkbox" id="toc_lb" class="on-off" />
+    <label for="toc_lb">目次</label>
+    <ul>
   <li><a href="#はじめに">はじめに</a></li>
   <li><a href="#1-プロジェクトの作成">1. プロジェクトの作成</a></li>
   <li><a href="#2-実装">2. 実装</a>
@@ -137,7 +138,6 @@
   <li><a href="#まとめ">まとめ</a></li>
   <li><a href="#ソースコード">ソースコード</a></li>
 </ul>
-    </div>
   </div> 
   <div class="entry">
     <h1 id="はじめに">はじめに</h1>
@@ -148,11 +148,14 @@
 
 <p>では，２層のニューラルネットワークを題材にMNISTの分類モデルをKerasで実装し，学習させてみましょう！</p>
 
-<ul>
-  <li>前回までのリンク<br />
-<a href="https://gucci-j.github.io/DL-Intro-1/">第一弾：パーセプトロン編</a><br />
-<a href="https://gucci-j.github.io/DL-Intro-2/">第二弾：3層ニューラルネットワーク &amp; 手書き数字認識編</a></li>
-</ul>
+<div class="link_box">
+    <span class="box-title">「ゼロからKeras」シリーズリンク</span>
+    <p>第一弾：<i class="fas fa-link" style="padding: 0 2px 0 0;"></i><a href="https://gucci-j.github.io/DL-Intro-1/">パーセプトロン編</a></p>
+    <p>第二弾：<i class="fas fa-link" style="padding: 0 2px 0 0;"></i><a href="https://gucci-j.github.io/DL-Intro-2/">3層ニューラルネットワーク &amp; 手書き数字認識編</a></p>  
+    <p>第三弾：<i class="fas fa-link" style="padding: 0 2px 0 0;"></i><a href="https://gucci-j.github.io/DL-Intro-3/">ニューラルネットワークの学習編</a></p>
+    <p>第四弾：<i class="fas fa-link" style="padding: 0 2px 0 0;"></i><a href="https://gucci-j.github.io/DL-Intro-4/">学習テクニック編</a></p>
+    <p>第五弾：畳み込みニューラルネットワーク編</p>
+</div>
 
 <script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
@@ -295,9 +298,9 @@ y_train[0]: [0. 0. 0. 0. 0. 1. 0. 0. 0. 0.]
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from keras.optimizers import SGD
 model.compile(optimizer=SGD(lr=0.1), loss='categorical_crossentropy', metrics=['accuracy'])
 </code></pre></div></div>
-<p><em>参照: <a href="https://keras.io/ja/losses/">（Kerasで利用可能な損失関数について）</a></em><br />
-<em>参照: <a href="https://keras.io/ja/optimizers/">（Kerasで利用可能な最適化アルゴリズムについて）</a></em><br />
-<em>参照: <a href="https://keras.io/ja/metrics/">（Kerasにおける評価関数について）</a></em></p>
+<p><em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://keras.io/ja/losses/">（Kerasで利用可能な損失関数について）</a></em><br />
+<em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://keras.io/ja/optimizers/">（Kerasで利用可能な最適化アルゴリズムについて）</a></em><br />
+<em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://keras.io/ja/metrics/">（Kerasにおける評価関数について）</a></em></p>
 
 <p>(<strong>注意</strong>) Kerasをはじめとする深層学習フレームワークでは，ユーザが順伝播の計算グラフを構築すると，フレームワークが自動的に逆伝播用の処理をブラックボックス的に行ってくれます．
 したがって，ゼロから〜の5章の部分は，フレームワーク使用時には実装する必要がありません．（自分でレイヤーを設計することがない限り．）</p>
@@ -355,7 +358,7 @@ model.compile(optimizer=SGD(lr=0.1), loss='categorical_crossentropy', metrics=['
   </li>
 </ul>
 
-<p><em>参照: <a href="https://keras.io/ja/models/model/#fit">（Kerasのfitメソッドにおける引数と戻り値の説明）</a></em></p>
+<p><em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://keras.io/ja/models/model/#fit">（Kerasのfitメソッドにおける引数と戻り値の説明）</a></em></p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>epochs = 17
 _results = model.fit(x=x_train, y=y_train, batch_size=100, epochs=epochs, verbose=1, validation_data=(x_test, y_test))
@@ -371,6 +374,14 @@ Epoch 2/17
 Epoch 17/17
 60000/60000 [==============================] - 2s 27us/step - loss: 0.1771 - acc: 0.9497
 </code></pre></div></div>
+
+<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- 記事内広告2 -->
+<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1838422896597988" data-ad-slot="1400355899" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
 
 <h1 id="4-学習結果の表示">4. 学習結果の表示</h1>
 <hr />
@@ -388,7 +399,7 @@ Epoch 17/17
 
 <p>（<strong>注意</strong>）macOSでMatplotlibをインポートすると，バックエンドの問題でエラーが発生することがあります．その場合は，下記を参照してバックエンドを書き換えてください．</p>
 
-<p><em>参照: <a href="https://qiita.com/Gen6/items/78d83d117ef67e0d53c2">（Matplotlibでインポートエラーが出るときの対処法）</a></em></p>
+<p><em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://qiita.com/Gen6/items/78d83d117ef67e0d53c2">（Matplotlibでインポートエラーが出るときの対処法）</a></em></p>
 
 <h3 id="412-historyオブジェクトの中身">4.1.2 Historyオブジェクトの中身</h3>
 <hr />
@@ -462,7 +473,7 @@ plt.close()
 
 <p>図から，テストデータの認識精度を訓練データの認識精度が大幅に上回る現象は確認できないので，モデルの過学習は起きていないことがわかります．</p>
 
-<p><em>参考: <a href="https://codeday.me/jp/qa/20181207/13787.html">（Matplotlibでプロットを一旦クリアする）</a></em></p>
+<p><em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考: <a href="https://codeday.me/jp/qa/20181207/13787.html">（Matplotlibでプロットを一旦クリアする）</a></em></p>
 
 <h1 id="まとめ">まとめ</h1>
 <hr />
@@ -473,13 +484,14 @@ plt.close()
 
 <h1 id="ソースコード">ソースコード</h1>
 <hr />
-<p>ソースコードは，<strong>GitHub</strong>で5月上旬に入手できるようにする予定です．</p>
+<p>ソースコードは，<a href="https://github.com/gucci-j/intro-deep-learning-keras">GitHub</a>にて公開しています．</p>
 
   </div>
 
   <div class="date">
     Written on April 26, 2019
   </div>
+  <br />
 
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <!-- フッター1 -->
@@ -503,7 +515,7 @@ plt.close()
       <div class="container">
         <footer class="footer">
           
-<a href="mailto:gucci.research@gmail.com"><i class="svg-icon email"></i></a>
+<a href="/contact/"><i class="svg-icon email"></i></a>
 
 
 <a href="https://github.com/gucci-j"><i class="svg-icon github"></i></a>
@@ -515,7 +527,9 @@ plt.close()
 
 
 <br />
-          <a href="/">Home</a> | <a href="/privacy">Privacy Policy</a><br />
+          <a href="/">Home</a> 
+          | <a href="/sitemap">Sitemap</a> 
+          | <a href="/privacy">Privacy Policy</a><br />
           <div style="font-size: 8pt">© 2019 Atsuki Yamaguchi.</div>
         </footer>
       </div>

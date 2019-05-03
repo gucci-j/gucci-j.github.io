@@ -18,6 +18,7 @@ Obtain time and tags that are associated with current page/post.
 -->
 {% endcomment %}
 <ul>
+  <i class="fas fa-tag" style="padding: 0 2px 0 0;"></i>
   {% for tag in tags %}
     <li>
       <a href="{{ site.baseurl }}/sitemap#{{ tag | slugize }}">
