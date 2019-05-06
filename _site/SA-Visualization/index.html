@@ -30,6 +30,7 @@
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <link rel="alternate" type="application/rss+xml" title="きままにNLP - A Technical Blog about NLP and ML" href="/feed.xml" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet">
     
     <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
 
@@ -86,6 +87,7 @@
     <div id="main" role="main" class="container">
       <article class="post">
   <h1>MatplotlibとseabornによるSelf Attentionの可視化</h1>
+
   <div class="post-tag">
     
 
@@ -114,7 +116,8 @@
   <li><a href="#4-いざ描画">4. いざ描画</a></li>
   <li><a href="#ソースコード">ソースコード</a></li>
 </ul>
-  </div> 
+  </div>
+
   <div class="entry">
     <p>Pythonの可視化ライブラリであるseabornとグラフ描画ライブラリのMatplotlibを組み合わせることで，意外と簡単にSelf Attentionの重みを可視化することができる．</p>
 
@@ -191,6 +194,98 @@ plt.close()
   <div class="date">
     Written on April  2, 2019
   </div>
+
+  <style type="text/css">
+    @font-face {
+	font-family: 'icomoon';
+	src:url('/resources/fonts/icomoon.eot?ookgoz');
+	src:url('/resources/fonts/icomoon.eot?ookgoz#iefix') format('embedded-opentype'),
+		url('/resources/fonts/icomoon.ttf?ookgoz') format('truetype'),
+		url('/resources/fonts/icomoon.woff?ookgoz') format('woff'),
+		url('/resources/fonts/icomoon.svg?ookgoz#icomoon') format('svg');
+		font-weight: normal;
+		font-style: normal;
+    }
+
+    [class^="icon-"], [class*=" icon-"] {
+        /* use !important to prevent issues with browser extensions that change fonts */
+        font-family: 'icomoon' !important;
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: inherit;
+        
+        /* Better Font Rendering =========== */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .icon-line:before        {content: "\e90a";}
+    .icon-pocket:before      {content: "\e902";}
+    .icon-twitter:before     {content: "\ea96";}
+    .icon-facebook:before    {content: "\ea90";}
+    .icon-hatebu:before      {content: "\e903";}
+
+    /*ソーシャルリストデザイン2*/
+    .shareList2 {
+        list-style:none;
+        display: flex;
+        flex-wrap:wrap;
+        width:100%;
+        margin:-5px 0 0 -5px;
+        padding:0;
+    }
+    .shareList2__item {
+        height:30px;
+        line-height:30px;
+        width:30px;
+        margin:5px 0 0 5px;
+        text-align:center;
+    }
+    .shareList2__link {
+        display:block;
+        color:#ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .shareList2__link::before{
+        font-size:16px;
+        display:block;
+        transition: ease-in-out .2s;
+        border-radius: 5px;
+    }
+    .shareList2__link:hover::before{
+        background:#ffffff;
+        transform: scale(1.2);
+        box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
+    }
+
+    .shareList2__link.icon-twitter{background:#55acee;}
+    .shareList2__link.icon-twitter:hover::before{color:#55acee;}
+
+    .shareList2__link.icon-facebook{background:#3B5998;}
+    .shareList2__link.icon-facebook:hover::before{color:#3B5998;}
+
+    .shareList2__link.icon-hatebu{background:#008FDE;}
+    .shareList2__link.icon-hatebu:hover::before{color:#008FDE;}
+
+    .shareList2__link.icon-pocket{background:#EB4654;}
+    .shareList2__link.icon-pocket:hover::before{color:#EB4654;}
+
+    .shareList2__link.icon-line{background:#1dcd00;}
+    .shareList2__link.icon-line:hover::before{color:#1dcd00;}
+</style>
+
+<ul class="shareList2" style="margin-top: 5px;">
+    <li class="shareList2__item"><a class="shareList2__link icon-twitter" href="https://twitter.com/intent/tweet?text=Matplotlib%E3%81%A8seaborn%E3%81%AB%E3%82%88%E3%82%8BSelf%20Attention%E3%81%AE%E5%8F%AF%E8%A6%96%E5%8C%96+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP&amp;url=http%3A%2F%2Flocalhost%3A4000%2FSA-Visualization%2F" target="_blank" title="Twitter"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-facebook" href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FSA-Visualization%2F" target="_blank" title="Facebook"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-hatebu" href="https://b.hatena.ne.jp/add?mode=confirm&amp;url=http%3A%2F%2Flocalhost%3A4000%2FSA-Visualization%2F" target="_blank" title="はてなブックマーク"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-pocket" href="//getpocket.com/edit?url=http%3A%2F%2Flocalhost%3A4000&title=Matplotlib%E3%81%A8seaborn%E3%81%AB%E3%82%88%E3%82%8BSelf%20Attention%E3%81%AE%E5%8F%AF%E8%A6%96%E5%8C%96+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP" target="_blank" title="Pocket"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-line" href="http://line.me/R/msg/text/?Matplotlib%E3%81%A8seaborn%E3%81%AB%E3%82%88%E3%82%8BSelf%20Attention%E3%81%AE%E5%8F%AF%E8%A6%96%E5%8C%96+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP%0Ahttp%3A%2F%2Flocalhost%3A4000%2FSA-Visualization%2F" target="_blank" title="LINE"></a></li>
+</ul>
+
   <br />
 
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

@@ -9,7 +9,7 @@ name: きままにNLP
 description: A Technical Blog about NLP and ML
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://pbs.twimg.com/profile_images/1112635060480442368/Ou7bjYFs_400x400.png
+avatar: {{ site.baseurl }}/resources/logo/logo.png
 
 #
 # Flags below are optional
@@ -85,6 +85,9 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+
+twitter:
+  username: _gucciiiii
 
 defaults:
   - scope:

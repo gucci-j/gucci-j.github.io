@@ -18,8 +18,9 @@ html {
 }
 
 body {
-  background: $white;
   font: 17px/1.4 $yugothic;
+  background: $white;
+  font-weight: 300;
   color: $darkGray;
   // 文字間隔の調整の設定
   letter-spacing: .5px;
@@ -59,13 +60,23 @@ h2 {
   font-size: 22px;
 }
 
+.post h2 {
+  border-left: 6px solid $darkerGray;
+  border-bottom: 1px solid $darkerGray;
+  padding: 4px 16px;
+}
+
 h3 {
   font-size: 20px;
 }
 
+.post h3 {
+  border-bottom: 1px solid $darkerGray;
+  padding: 4px 10px;
+}
+
 h4 {
   font-size: 18px;
-  color: $gray;
 }
 
 p {
@@ -135,6 +146,13 @@ img {
   max-width: 100%;
 }
 
+.post, .page_en {
+  img {
+    border: 1px $lightGray solid;
+    padding:4px;
+  }
+}
+
 .highlight {
   font-size: 15px;
 }
@@ -176,7 +194,32 @@ code.highlighter-rouge{
     clear: both;
 }
 
-/* 目次 */
+/* ページごとの指定 */
+
+.page_en {
+  h2 {
+    // Added
+    background-color: #f6f6f6;
+    border-left: 6px solid $darkerGray;
+    padding: 4px 16px;
+  }
+
+  h3 {
+    // Added
+    border-bottom: 1px solid #ddd;
+  }
+}
+
+.sitemap {
+  h3 {
+    // Added
+    background-color: #f6f6f6;
+    border-left: 6px solid $darkerGray;
+    padding: 4px 16px;
+  }
+}
+
+/* 目次関連 */
 
 .toc label {
   background: $lightGray;
@@ -403,11 +446,11 @@ nav {
 
 .post {
   blockquote {
-    margin: 1.8em .8em;
+    //margin: 1.8em .8em;
     border-left: 2px solid $gray;
-    padding: 0.1em 1em;
+    padding: 0 1em;
     color: $gray;
-    font-size: 22px;
+    font-size: 15px;
     font-style: italic;
   }
 
@@ -420,10 +463,6 @@ nav {
     font-family: $helvetica;
     font-size: 15px;
   }
-}
-
-.page_en {
-  font-family: $helvetica;
 }
 
 .wrapper-footer {

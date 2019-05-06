@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-05-03T11:57:47+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog about NLP and ML</subtitle><entry xml:lang="ja_JP"><title type="html">ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編）</title><link href="http://localhost:4000/DL-Intro-4/" rel="alternate" type="text/html" title="ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編）" /><published>2019-05-03T00:00:00+09:00</published><updated>2019-05-03T00:00:00+09:00</updated><id>http://localhost:4000/DL-Intro-4</id><content type="html" xml:base="http://localhost:4000/DL-Intro-4/">&lt;h1 id=&quot;はじめに&quot;&gt;はじめに&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;このシリーズでは，深層学習の入門書として有名な，「ゼロから作るDeep Learning」（以下，ゼロから〜）と同時並行で，フレームワークを学習し，その定着を目指します．&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-05-06T22:56:16+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog about NLP and ML</subtitle><entry xml:lang="ja_JP"><title type="html">ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編）</title><link href="http://localhost:4000/DL-Intro-4/" rel="alternate" type="text/html" title="ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編）" /><published>2019-05-03T00:00:00+09:00</published><updated>2019-05-03T00:00:00+09:00</updated><id>http://localhost:4000/DL-Intro-4</id><content type="html" xml:base="http://localhost:4000/DL-Intro-4/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
 
-&lt;p&gt;前回までは，Kerasを活用して実際にニューラルネットワークを学習させて，そのモデルを活用して推論までできるようになりました．今回は，ゼロから〜の6章に対応する種々の学習テクニックについて扱います．幅広いトピックを扱うので，理解するのに時間がかかるかと思いますが，どれもモデルの性能と安定性を向上させるために，重要なものばかりです．したがって，一つ一つ理解できるまでじっくりと取り組むことをオススメします．&lt;/p&gt;
+&lt;p&gt;このシリーズでは、深層学習の入門書として有名な、「ゼロから作るDeep Learning」（以下、ゼロから〜）と同時並行で、フレームワークを学習し、その定着を目指します。&lt;/p&gt;
 
-&lt;p&gt;それでは，まずはパラメータの最適化アルゴリズムについての話題から入っていきましょう！&lt;/p&gt;
+&lt;p&gt;前回までは、Kerasを活用して実際にニューラルネットワークを学習させて、そのモデルを活用して推論までできるようになりました。今回は、ゼロから〜の6章に対応する種々の学習テクニックについて扱います。幅広いトピックを扱うので、理解するのに時間がかかるかと思いますが、どれもモデルの性能と安定性を向上させるために、重要なものばかりです。したがって、一つ一つ理解できるまでじっくりと取り組むことをオススメします。&lt;/p&gt;
+
+&lt;p&gt;それでは、まずはパラメータの最適化アルゴリズムについての話題から入っていきましょう！&lt;/p&gt;
 
 &lt;div class=&quot;link_box&quot;&gt;
     &lt;span class=&quot;box-title&quot;&gt;「ゼロからKeras」シリーズリンク&lt;/span&gt;
@@ -22,18 +22,18 @@
      (adsbygoogle = window.adsbygoogle || []).push({});
 &lt;/script&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;1-最適化アルゴリズム&quot;&gt;1. 最適化アルゴリズム&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;ゼロから〜で紹介があったように，ニューラルネットワークに対して適用される最適化アルゴリズムはたくさん存在し，モデルに応じて使い分けることが，その性能を引き出すために非常に重要となります．&lt;/p&gt;
+&lt;h2 id=&quot;1-最適化アルゴリズム&quot;&gt;1. 最適化アルゴリズム&lt;/h2&gt;
 
-&lt;p&gt;ここでは，ゼロから〜のP177に登場した，「SGD，AdaGrad，Adam」に加え，Adadelta，Nadam，の5つの最適化アルゴリズムを，Fashion-MNISTデータセットの分類実験を通して，比較してみようと思います．&lt;/p&gt;
+&lt;p&gt;ゼロから〜で紹介があったように、ニューラルネットワークに対して適用される最適化アルゴリズムはたくさん存在し、モデルに応じて使い分けることが、その性能を引き出すために非常に重要となります。&lt;/p&gt;
 
-&lt;h2 id=&quot;11-fashion-mnistデータセット&quot;&gt;1.1 Fashion-MNISTデータセット&lt;/h2&gt;
-&lt;p&gt;本稿で用いるFashion-MNISTデータセットは，MNISTデータセットと互換性のあるデータセットです．データセットの内容は手書き数字ではなく，靴やズボン，カバン，服などファッションに関係のあるものとなっています．&lt;/p&gt;
+&lt;p&gt;ここでは、ゼロから〜のP177に登場した、「SGD、AdaGrad、Adam」に加え、Adadelta、Nadam、の5つの最適化アルゴリズムを、Fashion-MNISTデータセットの分類実験を通して、比較してみようと思います。&lt;/p&gt;
 
-&lt;p&gt;Fashion-MNISTは，MNISTの分類タスクが「簡単過ぎること」などを理由に，それを置き換える目的で作成されたデータセットです．&lt;/p&gt;
+&lt;h3 id=&quot;11-fashion-mnistデータセット&quot;&gt;1.1 Fashion-MNISTデータセット&lt;/h3&gt;
+&lt;p&gt;本稿で用いるFashion-MNISTデータセットは、MNISTデータセットと互換性のあるデータセットです。データセットの内容は手書き数字ではなく、靴やズボン、カバン、服などファッションに関係のあるものとなっています。&lt;/p&gt;
 
-&lt;p&gt;試しに1枚データセットの画像を表示させてみましょう．下記のソースコードを動作させてみてください．画像の表示は，&lt;code class=&quot;highlighter-rouge&quot;&gt;imshow&lt;/code&gt;メソッドを使えば簡単にできます．&lt;/p&gt;
+&lt;p&gt;Fashion-MNISTは、MNISTの分類タスクが「簡単過ぎること」などを理由に、それを置き換える目的で作成されたデータセットです。&lt;/p&gt;
+
+&lt;p&gt;試しに1枚データセットの画像を表示させてみましょう。下記のソースコードを動作させてみてください。画像の表示は、&lt;code class=&quot;highlighter-rouge&quot;&gt;imshow&lt;/code&gt;メソッドを使えば簡単にできます。&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from keras.datasets import fashion_mnist
 import matplotlib.pyplot as plt
@@ -51,64 +51,72 @@ plt.show()
     &lt;img src=&quot;/resources/2019-05-03/fm_example.png&quot; alt=&quot;Fashion-MNISTの内容の一例&quot; style=&quot;width: 300px;&quot; /&gt;
 &lt;/div&gt;
 
-&lt;p&gt;靴らしき画像が表示されているのが確認できますね．&lt;/p&gt;
+&lt;p&gt;靴らしき画像が表示されているのが確認できますね。&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://github.com/zalandoresearch/fashion-mnist&quot;&gt;（Fashion-MNISTのGitHubレポジトリ ）&lt;/a&gt;&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://keras.io/ja/datasets/&quot;&gt;（KerasにおけるFashion-MNISTデータセットの説明）&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://github.com/zalandoresearch/fashion-mnist&quot;&gt;（Fashion-MNISTのGitHubレポジトリ ）&lt;/a&gt;&lt;br /&gt;
+&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://keras.io/ja/datasets/&quot;&gt;（KerasにおけるFashion-MNISTデータセットの説明）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h2 id=&quot;12-モデルの実装&quot;&gt;1.2 モデルの実装&lt;/h2&gt;
-&lt;p&gt;本実験に用いるモデルの構造とハイパーパラメータは，ゼロから〜の公式レポジトリにある&lt;a href=&quot;https://github.com/oreilly-japan/deep-learning-from-scratch/blob/master/ch06/optimizer_compare_mnist.py&quot;&gt;ソースコード&lt;/a&gt;に基づきます．実装自体は前回までのソースコードをほぼ流用して実現できるので，ここでは説明を省略します．ソースコード自体は，&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6&quot;&gt;GitHub&lt;/a&gt;の&lt;code class=&quot;highlighter-rouge&quot;&gt;compare_optimizer.py&lt;/code&gt;にて公開してあります．&lt;/p&gt;
+&lt;h3 id=&quot;12-モデルの実装&quot;&gt;1.2 モデルの実装&lt;/h3&gt;
+&lt;p&gt;本実験に用いるモデルの構造とハイパーパラメータは、ゼロから〜の公式レポジトリにある&lt;a href=&quot;https://github.com/oreilly-japan/deep-learning-from-scratch/blob/master/ch06/optimizer_compare_mnist.py&quot;&gt;ソースコード&lt;/a&gt;に基づきます。実装自体は前回までのソースコードをほぼ流用して実現できるので、ここでは説明を省略します。ソースコード自体は、&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6&quot;&gt;GitHub&lt;/a&gt;の&lt;code class=&quot;highlighter-rouge&quot;&gt;compare_optimizer.py&lt;/code&gt;にて公開してあります。&lt;/p&gt;
 
-&lt;p&gt;なお，自力で実装をしてみたい方は，公式レポジトリを見つつ，&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/blob/master/chapter4%265/two_nn.py&quot;&gt;前回のソースコード&lt;/a&gt;を参考にすることをおすすめします．&lt;/p&gt;
+&lt;p&gt;なお、自力で実装をしてみたい方は、公式レポジトリを見つつ、&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/blob/master/chapter4%265/two_nn.py&quot;&gt;前回のソースコード&lt;/a&gt;をベースにすることをおすすめします。&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: ゼロから〜のP176〜P178&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6&quot;&gt;（GitHub: compare_optimizer.py）&lt;/a&gt;&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/optimizers/#keras&quot;&gt;（Kerasで利用可能な最適化アルゴリズムについて）&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: ゼロから〜のP176〜P178&lt;br /&gt;
+&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6&quot;&gt;（GitHub: compare_optimizer.py）&lt;/a&gt;&lt;br /&gt;
+&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/optimizers/#keras&quot;&gt;（Kerasで利用可能な最適化アルゴリズムについて）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h2 id=&quot;13-モデルの比較&quot;&gt;1.3 モデルの比較&lt;/h2&gt;
-&lt;p&gt;1.2で実装した5層ニューラルネットワークを実行させると，以下のような結果が得られました．&lt;/p&gt;
+&lt;h3 id=&quot;13-モデルの比較&quot;&gt;1.3 モデルの比較&lt;/h3&gt;
+&lt;p&gt;1.2で実装した5層ニューラルネットワークを実行させると、以下のような結果が得られました。&lt;/p&gt;
 
 &lt;div style=&quot;text-align: center;&quot;&gt;
     &lt;img src=&quot;/resources/2019-05-03/loss.png&quot; alt=&quot;最適化アルゴリズム別の損失関数の値の推移&quot; style=&quot;width: 500px;&quot; /&gt;
 &lt;/div&gt;
 
-&lt;p&gt;図から，SGDとAdadeltaを用いたモデルは，Adam/Nadam/Adagradを用いたモデルよりも収束が遅いことがわかります．また，この実験においては，Nadamが5つの最適化アルゴリズムの中で，最も収束の速いアルゴリズムであることがわかりました．&lt;/p&gt;
+&lt;p&gt;図から、SGDとAdadeltaを用いたモデルは、Adam/Nadam/Adagradを用いたモデルよりも収束が遅いことがわかります。また、この実験においては、Nadamが5つの最適化アルゴリズムの中で、最も収束の速いアルゴリズムであることがわかりました。&lt;/p&gt;
 
-&lt;h1 id=&quot;2-重みの初期化&quot;&gt;2. 重みの初期化&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;Kerasにおける重みの初期化は特に指定しない限り，ブラックボックス的に処理されます．つまり，レイヤー定義時に重みの初期化方法を指定しなければ，各層の所定の初期化方法が自動的に適用されます．&lt;/p&gt;
+&lt;h2 id=&quot;2-重みの初期化&quot;&gt;2. 重みの初期化&lt;/h2&gt;
 
-&lt;p&gt;ここでは，重みの初期化をこちらから事前に指定することで，フレームワーク（Keras）を活用したときの，初期化手法による収束速度の違いを検証していきます．&lt;/p&gt;
+&lt;p&gt;Kerasにおける重みの初期化は特に指定しない限り、ブラックボックス的に処理されます。つまり、レイヤー定義時に重みの初期化方法を指定しなければ、各層の所定の初期化方法が自動的に適用されます。&lt;/p&gt;
 
-&lt;h2 id=&quot;21-公式ドキュメントを見てみる&quot;&gt;2.1 公式ドキュメントを見てみる&lt;/h2&gt;
-&lt;p&gt;ここで，全結合層: &lt;code class=&quot;highlighter-rouge&quot;&gt;Dense&lt;/code&gt;レイヤーの公式ドキュメントを確認してみましょう．下記がドキュメントの一部抜粋になります．&lt;/p&gt;
+&lt;p&gt;ここでは、重みの初期化をこちらから事前に指定することで、フレームワーク（Keras）を活用したときの、初期化手法による収束速度の違いを検証していきます。&lt;/p&gt;
+
+&lt;h3 id=&quot;21-公式ドキュメントを見てみる&quot;&gt;2.1 公式ドキュメントを見てみる&lt;/h3&gt;
+&lt;p&gt;ここで、全結合層: &lt;code class=&quot;highlighter-rouge&quot;&gt;Dense&lt;/code&gt;レイヤーの公式ドキュメントを確認してみましょう。下記がドキュメントの一部抜粋になります。&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;keras.layers.Dense(units, activation=None, use_bias=True, kernel_initializer='glorot_uniform',
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;kernel_initializer&lt;/code&gt;を見ると，初期化の手法として，Glorotの一様分布（Xavierの一様分布）が用いられていることがわかります．&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;kernel_initializer&lt;/code&gt;を見ると、初期化の手法として、Glorotの一様分布（Xavierの一様分布）が用いられていることがわかります。&lt;/p&gt;
 
-&lt;p&gt;初期化手法を変更したい場合には，すでに定義されている手法を&lt;code class=&quot;highlighter-rouge&quot;&gt;kernel_initializer&lt;/code&gt;に引数として与えるか，新たに手法自体を定義することもできます．新たに定義する方法については，公式ドキュメントをご覧ください．&lt;/p&gt;
+&lt;p&gt;初期化手法を変更したい場合には、すでに定義されている手法を&lt;code class=&quot;highlighter-rouge&quot;&gt;kernel_initializer&lt;/code&gt;に引数として与えるか、新たに手法自体を定義することもできます。新たに定義する方法については、公式ドキュメントをご覧ください。&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/layers/core/#dense&quot;&gt;（KerasにおけるDenseレイヤーのドキュメント）&lt;/a&gt;&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/initializers/&quot;&gt;（Kerasにおける初期化手法についてのドキュメント）&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/layers/core/#dense&quot;&gt;（KerasにおけるDenseレイヤーのドキュメント）&lt;/a&gt;&lt;br /&gt;
+&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/initializers/&quot;&gt;（Kerasにおける初期化手法についてのドキュメント）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h2 id=&quot;22-初期化手法による収束速度の違い&quot;&gt;2.2 初期化手法による収束速度の違い&lt;/h2&gt;
-&lt;p&gt;では，前章で実装した5層ニューラルネットワークを活用して，初期化手法による収束速度の違いをKerasでも検証していきましょう．&lt;/p&gt;
+&lt;h3 id=&quot;22-初期化手法による収束速度の違い&quot;&gt;2.2 初期化手法による収束速度の違い&lt;/h3&gt;
+&lt;p&gt;では、前章で実装した5層ニューラルネットワークを活用して、初期化手法による収束速度の違いをKerasでも検証していきましょう。&lt;/p&gt;
 
-&lt;p&gt;初期化手法には，デフォルトのXaiverの初期値とHeの初期値，標準偏差が0.01の正規分布の3つをそれぞれ用います．また，ゼロから〜のP184〜P186の実験設定と合わせるため，中間層の活性化関数を&lt;code class=&quot;highlighter-rouge&quot;&gt;sigmoid&lt;/code&gt;から&lt;code class=&quot;highlighter-rouge&quot;&gt;relu&lt;/code&gt;に変更します．ソースコードは，&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6&quot;&gt;GitHub&lt;/a&gt;の&lt;code class=&quot;highlighter-rouge&quot;&gt;compare_initializer.py&lt;/code&gt;より入手できます．&lt;/p&gt;
+&lt;p&gt;初期化手法には、デフォルトのXaiverの初期値とHeの初期値、標準偏差が0.01の正規分布の3つをそれぞれ用います。また、ゼロから〜のP184〜P186の実験設定と合わせるため、中間層の活性化関数を&lt;code class=&quot;highlighter-rouge&quot;&gt;sigmoid&lt;/code&gt;から&lt;code class=&quot;highlighter-rouge&quot;&gt;relu&lt;/code&gt;に変更します。ソースコードは、&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6&quot;&gt;GitHub&lt;/a&gt;の&lt;code class=&quot;highlighter-rouge&quot;&gt;compare_initializer.py&lt;/code&gt;より入手できます。&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;compare_initializer.py&lt;/code&gt;を動作させた結果，以下の図のような結果が得られました．&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;compare_initializer.py&lt;/code&gt;を動作させた結果、以下の図のような結果が得られました。&lt;/p&gt;
 
 &lt;p&gt;Output:&lt;/p&gt;
 &lt;div style=&quot;text-align: center;&quot;&gt;
     &lt;img src=&quot;/resources/2019-05-03/loss_init.png&quot; alt=&quot;初期化手法別の損失関数の値の推移&quot; style=&quot;width: 500px;&quot; /&gt;
 &lt;/div&gt;
 
-&lt;p&gt;図より，やはり活性化関数にReLUを用いる場合には，Heの一様分布による初期化が最も適していることがわかりました．&lt;/p&gt;
+&lt;p&gt;図より、やはり活性化関数にReLUを用いる場合には、Heの一様分布による初期化が最も適していることがわかりました。&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: ゼロから〜のP184〜P186&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6&quot;&gt;（GitHub: compare_initializer.py）&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: ゼロから〜のP184〜P186&lt;br /&gt;
+&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6&quot;&gt;（GitHub: compare_initializer.py）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;script async=&quot;&quot; src=&quot;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
 
@@ -118,86 +126,94 @@ plt.show()
      (adsbygoogle = window.adsbygoogle || []).push({});
 &lt;/script&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;3-正規化正則化&quot;&gt;3. 正規化・正則化&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;以下，4章と5章では，それぞれ正規化と正則化について扱います．その前に，巷で誤用しがちな，機械学習における正規化と正則化の意味について確認しておきましょう．&lt;/p&gt;
+&lt;h2 id=&quot;3-正規化正則化&quot;&gt;3. 正規化・正則化&lt;/h2&gt;
 
-&lt;h2 id=&quot;31-正規化&quot;&gt;3.1 正規化&lt;/h2&gt;
-&lt;p&gt;機械学習における正規化は，「&lt;strong&gt;データをある範囲内にスケールすること&lt;/strong&gt;」を意味します．標準化とも呼ばれることがありますが，標準化と正規化では厳密には意味合いが異なります．標準化: standardization は，「平均が0，分散が1」になるようにデータをスケールすることを指します．なお，この用語は統計学で用いられることが多いようです．&lt;/p&gt;
+&lt;p&gt;以下、4章と5章では、それぞれ正規化と正則化について扱います。その前に、巷で誤用しがちな、機械学習における正規化と正則化の意味について確認しておきましょう。&lt;/p&gt;
 
-&lt;p&gt;したがって，正規化は標準化を抽象化したような意味合いを持ちます．&lt;/p&gt;
+&lt;h3 id=&quot;31-正規化&quot;&gt;3.1 正規化&lt;/h3&gt;
+&lt;p&gt;機械学習における正規化は、「&lt;strong&gt;データをある範囲内にスケールすること&lt;/strong&gt;」を意味します。標準化とも呼ばれることがありますが、標準化と正規化では厳密には意味合いが異なります。標準化: standardization は、「平均が0、分散が1」になるようにデータをスケールすることを指します。なお、この用語は統計学で用いられることが多いようです。&lt;/p&gt;
 
-&lt;h2 id=&quot;32-正則化&quot;&gt;3.2 正則化&lt;/h2&gt;
-&lt;p&gt;正則化は過学習（過適応）を防ぐためにある種のペナルティを課すことを意味します．Weight Decayがその一例となります．&lt;/p&gt;
+&lt;p&gt;したがって、正規化は標準化を抽象化したような意味合いを持ちます。&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://keras.io/ja/regularizers/&quot;&gt;（Kerasにおける正則化の利用方法について）&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&quot;32-正則化&quot;&gt;3.2 正則化&lt;/h3&gt;
+&lt;p&gt;正則化は過学習（過適応）を防ぐためにある種のペナルティを課すことを意味します。Weight Decayがその一例となります。&lt;/p&gt;
 
-&lt;h1 id=&quot;4-バッチ正規化&quot;&gt;4. バッチ正規化&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;バッチ正規化は，入力データを平均値が0で分散が1となる分布に変換する手法のことを指します．バッチ正規化を適用することで，モデルの収束を高速化できるほか，重みの初期化手法に対してかなり頑健になります．&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://keras.io/ja/regularizers/&quot;&gt;（Kerasにおける正則化の利用方法について）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;では，Kerasでバッチ正規化の実験をしてみましょう．&lt;/p&gt;
+&lt;h2 id=&quot;4-バッチ正規化&quot;&gt;4. バッチ正規化&lt;/h2&gt;
 
-&lt;h2 id=&quot;41-モデルの実装&quot;&gt;4.1 モデルの実装&lt;/h2&gt;
-&lt;p&gt;Kerasにおいて，バッチ正規化は&lt;code class=&quot;highlighter-rouge&quot;&gt;BatchNormalization&lt;/code&gt;レイヤーを活用することで実装できます．&lt;/p&gt;
+&lt;p&gt;バッチ正規化は、入力データを平均値が0で分散が1となる分布に変換する手法のことを指します。バッチ正規化を適用することで、モデルの収束を高速化できるほか、重みの初期化手法に対してかなり頑健になります。&lt;/p&gt;
 
-&lt;p&gt;ここでは，2章のモデルの「全結合層と活性化層の間」にバッチ正規化層を追加する形で実装します．また，重みの初期化は「標準偏差が0.01の正規分布」により行います．&lt;/p&gt;
+&lt;p&gt;では、Kerasでバッチ正規化の実験をしてみましょう。&lt;/p&gt;
 
-&lt;p&gt;なお，2章で確認したように，この重み初期化では通常学習は全く進行しません．つまり，バッチ正規化を適用することで，どの程度初期化手法に対して頑健になるかを見てみます．&lt;/p&gt;
+&lt;h3 id=&quot;41-モデルの実装&quot;&gt;4.1 モデルの実装&lt;/h3&gt;
+&lt;p&gt;Kerasにおいて、バッチ正規化は&lt;code class=&quot;highlighter-rouge&quot;&gt;BatchNormalization&lt;/code&gt;レイヤーを活用することで実装できます。&lt;/p&gt;
 
-&lt;p&gt;Kerasにおけるバッチ正規化の適用例は以下のようになります．&lt;/p&gt;
+&lt;p&gt;ここでは、2章のモデルの「全結合層と活性化層の間」にバッチ正規化層を追加する形で実装します。また、重みの初期化は「標準偏差が0.01の正規分布」により行います。&lt;/p&gt;
+
+&lt;p&gt;なお、2章で確認したように、この重み初期化では通常学習は全く進行しません。つまり、バッチ正規化を適用することで、どの程度初期化手法に対して頑健になるかを見てみます。&lt;/p&gt;
+
+&lt;p&gt;Kerasにおけるバッチ正規化の適用例は以下のようになります。&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;_hidden = Dense(hidden_dim, kernel_initializer=_init)(_hidden)
 _hidden = BatchNormalization()(_hidden)
 _hidden = Activation('relu')(_hidden)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;ソースコードは，&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/&quot;&gt;GitHub&lt;/a&gt;より入手できます．&lt;/p&gt;
+&lt;p&gt;ソースコードは、&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/&quot;&gt;GitHub&lt;/a&gt;より入手できます。&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/layers/normalization/&quot;&gt;（KerasにおけるBatch Normalizationについて）&lt;/a&gt;&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6&quot;&gt;（GitHub: compare_batch_norm.py）&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/layers/normalization/&quot;&gt;（KerasにおけるBatch Normalizationについて）&lt;/a&gt;&lt;br /&gt;
+&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6&quot;&gt;（GitHub: compare_batch_norm.py）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h2 id=&quot;42-バッチ正規化の有無による分類精度の比較&quot;&gt;4.2 バッチ正規化の有無による分類精度の比較&lt;/h2&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;compare_batch_norm.py&lt;/code&gt;を動作させた結果，以下の図のような結果が得られました．&lt;/p&gt;
+&lt;h3 id=&quot;42-バッチ正規化の有無による分類精度の比較&quot;&gt;4.2 バッチ正規化の有無による分類精度の比較&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;compare_batch_norm.py&lt;/code&gt;を動作させた結果、以下の図のような結果が得られました。&lt;/p&gt;
 
 &lt;p&gt;Output:&lt;/p&gt;
 &lt;div style=&quot;text-align: center;&quot;&gt;
     &lt;img src=&quot;/resources/2019-05-03/acc_bn.png&quot; alt=&quot;バッチ正規化の有無による分類精度の推移&quot; style=&quot;width: 500px;&quot; /&gt;
 &lt;/div&gt;
 
-&lt;p&gt;図より，バッチ正規化をモデルに適用することで，かなり適当な重みの初期化を行っても，きちんと学習してくれることがわかります！&lt;/p&gt;
+&lt;p&gt;図より、バッチ正規化をモデルに適用することで、かなり適当な重みの初期化を行っても、きちんと学習してくれることがわかります！&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: ゼロから〜のP186〜P189&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: ゼロから〜のP186〜P189&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h1 id=&quot;5-過学習を防ぐためのテクニック&quot;&gt;5. 過学習を防ぐためのテクニック&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;ここでは，過学習を防ぐための手法の一例として，ゼロから〜でも扱われていた，Weight decayとドロップアウトに加え，Early Stoppingついても扱います．前章までと同様にKerasでテストモデルを実装し，それぞれの手法の効果を検証します．&lt;/p&gt;
+&lt;h2 id=&quot;5-過学習を防ぐためのテクニック&quot;&gt;5. 過学習を防ぐためのテクニック&lt;/h2&gt;
 
-&lt;h2 id=&quot;51-weight-decay&quot;&gt;5.1 Weight decay&lt;/h2&gt;
-&lt;h3 id=&quot;511-kerasにおけるweight-decayの適用方法&quot;&gt;5.1.1 KerasにおけるWeight decayの適用方法&lt;/h3&gt;
-&lt;hr /&gt;
-&lt;p&gt;KerasにおけるWeight decayは，各レイヤーの引数に存在する，&lt;code class=&quot;highlighter-rouge&quot;&gt;kernel_regularizer&lt;/code&gt;に対して利用したい正則化手法を与えることで利用できます．&lt;/p&gt;
+&lt;p&gt;ここでは、過学習を防ぐための手法の一例として、ゼロから〜でも扱われていた、Weight decayとドロップアウトに加え、Early Stoppingついても扱います。前章までと同様にKerasでテストモデルを実装し、それぞれの手法の効果を検証します。&lt;/p&gt;
 
-&lt;p&gt;ここでは，4章で実装したバッチ正規化ありのモデルにweight decayを適用することで，過学習が軽減するか検証していきます．&lt;/p&gt;
+&lt;h3 id=&quot;51-weight-decay&quot;&gt;5.1 Weight decay&lt;/h3&gt;
+&lt;h4 id=&quot;511-kerasにおけるweight-decayの適用方法&quot;&gt;5.1.1 KerasにおけるWeight decayの適用方法&lt;/h4&gt;
 
-&lt;p&gt;Weight decayの簡単な適用例は以下のようになります．&lt;/p&gt;
+&lt;p&gt;KerasにおけるWeight decayは、各レイヤーの引数に存在する、&lt;code class=&quot;highlighter-rouge&quot;&gt;kernel_regularizer&lt;/code&gt;に対して利用したい正則化手法を与えることで利用できます。&lt;/p&gt;
+
+&lt;p&gt;ここでは、4章で実装したバッチ正規化ありのモデルにweight decayを適用することで、過学習が軽減するか検証していきます。&lt;/p&gt;
+
+&lt;p&gt;Weight decayの簡単な適用例は以下のようになります。&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from keras import regularizers
 _wd = regularizers.l2(0.1)
 
 _hidden = Dense(hidden_dim, kernel_initializer=_init, kernel_regularizer=_wd)(_hidden)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;ソースコードは，&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6&quot;&gt;GitHub&lt;/a&gt;にある，&lt;code class=&quot;highlighter-rouge&quot;&gt;compare_weight_decay.py&lt;/code&gt;となります．&lt;/p&gt;
+&lt;p&gt;ソースコードは、&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6&quot;&gt;GitHub&lt;/a&gt;にある、&lt;code class=&quot;highlighter-rouge&quot;&gt;compare_weight_decay.py&lt;/code&gt;となります。&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://keras.io/ja/regularizers/&quot;&gt;（Kerasにおける正則化の利用方法について）&lt;/a&gt;&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6&quot;&gt;（GitHub: compare_weight_decay.py）&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://keras.io/ja/regularizers/&quot;&gt;（Kerasにおける正則化の利用方法について）&lt;/a&gt;&lt;br /&gt;
+&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6&quot;&gt;（GitHub: compare_weight_decay.py）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h3 id=&quot;512-weight-decayの適用結果&quot;&gt;5.1.2 Weight decayの適用結果&lt;/h3&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;compare_weight_decay.py&lt;/code&gt;を動作させた結果，以下のような図が得られました．&lt;/p&gt;
+&lt;h4 id=&quot;512-weight-decayの適用結果&quot;&gt;5.1.2 Weight decayの適用結果&lt;/h4&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;compare_weight_decay.py&lt;/code&gt;を動作させた結果、以下のような図が得られました。&lt;/p&gt;
 
 &lt;p&gt;Output:&lt;/p&gt;
 
-&lt;div style=&quot;text-align: center;&quot;&gt;
+&lt;div style=&quot;text-align: center; margin: 0 0 10px 0;&quot;&gt;
     &lt;img src=&quot;/resources/2019-05-03/acc_wd.png&quot; alt=&quot;Weight decayありのときの分類精度の推移&quot; style=&quot;width: 400px;&quot; /&gt;&lt;br /&gt;
     ＜Weight decayありのときの分類精度の推移＞
 &lt;/div&gt;
@@ -207,31 +223,33 @@ _hidden = Dense(hidden_dim, kernel_initializer=_init, kernel_regularizer=_wd)(_h
     ＜Weight decayなしのときの分類精度の推移＞
 &lt;/div&gt;
 
-&lt;p&gt;図より，Weigth decayの有無を問わず，テスト精度はかなり乱高下していることがわかります．一方で，訓練精度については，Weight decayを用いることで，過学習が抑制されていることがわかります．&lt;/p&gt;
+&lt;p&gt;図より、Weigth decayの有無を問わず、テスト精度はかなり乱高下していることがわかります。一方で、訓練精度については、Weight decayを用いることで、過学習が抑制されていることがわかります。&lt;/p&gt;
 
-&lt;h2 id=&quot;52-ドロップアウト&quot;&gt;5.2 ドロップアウト&lt;/h2&gt;
-&lt;h3 id=&quot;521-ドロップアウトの実装&quot;&gt;5.2.1 ドロップアウトの実装&lt;/h3&gt;
-&lt;hr /&gt;
-&lt;p&gt;Kerasにおいて，ドロップアウトは&lt;code class=&quot;highlighter-rouge&quot;&gt;Dropout&lt;/code&gt;レイヤーを活用することで実装できます．&lt;/p&gt;
+&lt;h3 id=&quot;52-ドロップアウト&quot;&gt;5.2 ドロップアウト&lt;/h3&gt;
+&lt;h4 id=&quot;521-ドロップアウトの実装&quot;&gt;5.2.1 ドロップアウトの実装&lt;/h4&gt;
 
-&lt;p&gt;ドロップアウトの適用例は以下のようになります．&lt;br /&gt;
-下記の例では，ドロップアウト率（入力のユニットを消去する割合）を，引数: &lt;code class=&quot;highlighter-rouge&quot;&gt;rate&lt;/code&gt;に渡しています．&lt;/p&gt;
+&lt;p&gt;Kerasにおいて、ドロップアウトは&lt;code class=&quot;highlighter-rouge&quot;&gt;Dropout&lt;/code&gt;レイヤーを活用することで実装できます。&lt;/p&gt;
+
+&lt;p&gt;ドロップアウトの適用例は以下のようになります。&lt;br /&gt;
+下記の例では、ドロップアウト率（入力のユニットを消去する割合）を、引数: &lt;code class=&quot;highlighter-rouge&quot;&gt;rate&lt;/code&gt;に渡しています。&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;_hidden = Dense(hidden_dim, activation='relu')(_hidden)
 _hidden = Dropout(rate=dpout_rate)(_hidden)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;5層ニューラルネットワークでドロップアウトの効果を検証したソースコードは，&lt;code class=&quot;highlighter-rouge&quot;&gt;compare_dropout.py&lt;/code&gt;として，GitHubに置いてあります．では，この実験結果について次項で見ていきます．&lt;/p&gt;
+&lt;p&gt;5層ニューラルネットワークでドロップアウトの効果を検証したソースコードは、&lt;code class=&quot;highlighter-rouge&quot;&gt;compare_dropout.py&lt;/code&gt;として、GitHubに置いてあります。では、この実験結果について次項で見ていきます。&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/layers/core/#dropout&quot;&gt;（KerasにおけるDropoutの説明）&lt;/a&gt;&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6&quot;&gt;（GitHub: compare_dropout.py）&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/layers/core/#dropout&quot;&gt;（KerasにおけるDropoutの説明）&lt;/a&gt;&lt;br /&gt;
+&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6&quot;&gt;（GitHub: compare_dropout.py）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h3 id=&quot;522-ドロップアウトの適用結果&quot;&gt;5.2.2 ドロップアウトの適用結果&lt;/h3&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;compare_dropout.py&lt;/code&gt;を動作させた結果，以下のような図が得られました．&lt;/p&gt;
+&lt;h4 id=&quot;522-ドロップアウトの適用結果&quot;&gt;5.2.2 ドロップアウトの適用結果&lt;/h4&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;compare_dropout.py&lt;/code&gt;を動作させた結果、以下のような図が得られました。&lt;/p&gt;
 
 &lt;p&gt;Output:&lt;/p&gt;
 
-&lt;div style=&quot;text-align: center;&quot;&gt;
+&lt;div style=&quot;text-align: center; margin: 0 0 10px 0;&quot;&gt;
     &lt;img src=&quot;/resources/2019-05-03/acc_dpout.png&quot; alt=&quot;ドロップアウトありのときの分類精度の推移&quot; style=&quot;width: 400px;&quot; /&gt;&lt;br /&gt;
     ＜ドロップアウトありのときの分類精度の推移＞
 &lt;/div&gt;
@@ -241,14 +259,14 @@ _hidden = Dropout(rate=dpout_rate)(_hidden)
     ＜ドロップアウトなしのときの分類精度の推移＞
 &lt;/div&gt;
 
-&lt;p&gt;図から，ドロップアウトを適用したモデルは，ドロップアウトを適用しないモデルよりも，過学習を抑えられていることがわかります．&lt;/p&gt;
+&lt;p&gt;図から、ドロップアウトを適用したモデルは、ドロップアウトを適用しないモデルよりも、過学習を抑えられていることがわかります。&lt;/p&gt;
 
-&lt;h2 id=&quot;53-early-stopping&quot;&gt;5.3 Early Stopping&lt;/h2&gt;
-&lt;p&gt;Early Stoppingとは，その名の通り学習を早期に終了させてしまうというものです．つまり，過学習が起きる寸前 or 発生したらすぐに学習を終了させることで，ベストなモデルを手に入れようという試みになります．これにより，無駄な計算機リソースの消費防止にも繋がります．&lt;/p&gt;
+&lt;h3 id=&quot;53-early-stopping&quot;&gt;5.3 Early Stopping&lt;/h3&gt;
+&lt;p&gt;Early Stoppingとは、その名の通り学習を早期に終了させてしまうというものです。つまり、過学習が起きる寸前 or 発生したらすぐに学習を終了させることで、ベストなモデルを手に入れようという試みになります。これにより、無駄な計算機リソースの消費防止にも繋がります。&lt;/p&gt;
 
-&lt;h3 id=&quot;531-kerasにおけるearly-stoppingの適用方法&quot;&gt;5.3.1 KerasにおけるEarly Stoppingの適用方法&lt;/h3&gt;
-&lt;hr /&gt;
-&lt;p&gt;KerasにおいてEarly Stoppingは，&lt;code class=&quot;highlighter-rouge&quot;&gt;keras.callbacks.EarlyStopping&lt;/code&gt;により定義されています．使い方は，&lt;code class=&quot;highlighter-rouge&quot;&gt;fit&lt;/code&gt;メソッド内で，引数: &lt;code class=&quot;highlighter-rouge&quot;&gt;callbacks&lt;/code&gt;に，&lt;code class=&quot;highlighter-rouge&quot;&gt;EarlyStopping&lt;/code&gt;を渡せばよいです．&lt;code class=&quot;highlighter-rouge&quot;&gt;EarlyStopping&lt;/code&gt;関数の主な引数の説明は以下の表の通りです．&lt;/p&gt;
+&lt;h4 id=&quot;531-kerasにおけるearly-stoppingの適用方法&quot;&gt;5.3.1 KerasにおけるEarly Stoppingの適用方法&lt;/h4&gt;
+
+&lt;p&gt;KerasにおいてEarly Stoppingは、&lt;code class=&quot;highlighter-rouge&quot;&gt;keras.callbacks.EarlyStopping&lt;/code&gt;により定義されています。使い方は、&lt;code class=&quot;highlighter-rouge&quot;&gt;fit&lt;/code&gt;メソッド内で、引数: &lt;code class=&quot;highlighter-rouge&quot;&gt;callbacks&lt;/code&gt;に、&lt;code class=&quot;highlighter-rouge&quot;&gt;EarlyStopping&lt;/code&gt;を渡せばよいです。&lt;code class=&quot;highlighter-rouge&quot;&gt;EarlyStopping&lt;/code&gt;関数の主な引数の説明は以下の表の通りです。&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -260,36 +278,38 @@ _hidden = Dropout(rate=dpout_rate)(_hidden)
   &lt;tbody&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;monitor&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;何を基準に学習を早期終了させるかを指定します．&lt;br /&gt;デフォルトは&lt;code class=&quot;highlighter-rouge&quot;&gt;val_loss&lt;/code&gt;になっています．&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;何を基準に学習を早期終了させるかを指定します。&lt;br /&gt;デフォルトは&lt;code class=&quot;highlighter-rouge&quot;&gt;val_loss&lt;/code&gt;になっています。&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;patience&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;何エポックの間，監視値: &lt;code class=&quot;highlighter-rouge&quot;&gt;monitor&lt;/code&gt;に変化がないことを許容するかを指定します．&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;何エポックの間、監視値: &lt;code class=&quot;highlighter-rouge&quot;&gt;monitor&lt;/code&gt;に変化がないことを許容するかを指定します。&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;verbose&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;学習中にEarlyStoppingが適用されたことを明示的に表示するかしないかを指定します．&lt;br /&gt;デフォルトは0（表示しない）です．&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;学習中にEarlyStoppingが適用されたことを明示的に表示するかしないかを指定します。&lt;br /&gt;デフォルトは0（表示しない）です。&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;Early Stoppingの簡単な適用例は以下のようになります．この例では，2エポックの間，テストデータに対する損失関数の値に改善が見られないと，学習が停止するように設定されています．&lt;/p&gt;
+&lt;p&gt;Early Stoppingの簡単な適用例は以下のようになります。この例では、2エポックの間、テストデータに対する損失関数の値に改善が見られないと、学習が停止するように設定されています。&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;early_stopping = EarlyStopping(patience=2, verbose=1)
 
 model.fit(x=x_train, y=y_train, batch_size=batch_size, epochs=epochs, verbose=1, validation_data=(x_test, y_test), callbacks=[early_stopping])
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/callbacks/#earlystopping&quot;&gt;（KerasにおけるEarly Stoppingについて）&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/callbacks/#earlystopping&quot;&gt;（KerasにおけるEarly Stoppingについて）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h3 id=&quot;532-early-stoppingの適用結果&quot;&gt;5.3.2 Early Stoppingの適用結果&lt;/h3&gt;
-&lt;hr /&gt;
-&lt;p&gt;5層ニューラルネットワークでEarly Stoppingの効果を検証したソースコードは，GitHubに&lt;code class=&quot;highlighter-rouge&quot;&gt;compare_early_stopping.py&lt;/code&gt;として置いてあります．&lt;/p&gt;
+&lt;h4 id=&quot;532-early-stoppingの適用結果&quot;&gt;5.3.2 Early Stoppingの適用結果&lt;/h4&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;compare_early_stopping.py&lt;/code&gt;を動作させた結果，以下のような図が得られました．&lt;/p&gt;
+&lt;p&gt;5層ニューラルネットワークでEarly Stoppingの効果を検証したソースコードは、GitHubに&lt;code class=&quot;highlighter-rouge&quot;&gt;compare_early_stopping.py&lt;/code&gt;として置いてあります。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;compare_early_stopping.py&lt;/code&gt;を動作させた結果、以下のような図が得られました。&lt;/p&gt;
 
 &lt;p&gt;Output:&lt;/p&gt;
 
-&lt;div style=&quot;text-align: center;&quot;&gt;
+&lt;div style=&quot;text-align: center; margin: 0 0 10px 0;&quot;&gt;
     &lt;img src=&quot;/resources/2019-05-03/acc_es.png&quot; alt=&quot;Early Stoppingありのときの分類精度の推移&quot; style=&quot;width: 400px;&quot; /&gt;&lt;br /&gt;
     ＜Early Stoppingありのときの分類精度の推移＞
 &lt;/div&gt;
@@ -299,28 +319,29 @@ model.fit(x=x_train, y=y_train, batch_size=batch_size, epochs=epochs, verbose=1,
     ＜Early Stopping無しのときの分類精度の推移＞
 &lt;/div&gt;
 
-&lt;p&gt;図より，Early Stoppingを適用したときには，40エポックで学習が停止し，過学習している様子は読み取れません．一方で，Early Stoppingを適用しなかったときには，60エポックあたりから過学習の傾向が読み取れます．&lt;/p&gt;
+&lt;p&gt;図より、Early Stoppingを適用したときには、40エポックで学習が停止し、過学習している様子は読み取れません。一方で、Early Stoppingを適用しなかったときには、60エポックあたりから過学習の傾向が読み取れます。&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6&quot;&gt;（GitHub: compare_early_stopping.py）&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6&quot;&gt;（GitHub: compare_early_stopping.py）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h1 id=&quot;まとめ&quot;&gt;まとめ&lt;/h1&gt;
-&lt;hr /&gt;
+&lt;h2 id=&quot;まとめ&quot;&gt;まとめ&lt;/h2&gt;
 
-&lt;p&gt;今回は様々な学習のテクニックについて，実際にKerasでモデルを実装し，その効果を検証してきました．次回は，畳み込みニューラルネットワークについて扱います．&lt;/p&gt;
+&lt;p&gt;今回は様々な学習のテクニックについて、実際にKerasでモデルを実装し、その効果を検証してきました。次回は、畳み込みニューラルネットワークについて扱います。&lt;/p&gt;
 
-&lt;p&gt;なお，このシリーズは次回で完結予定です．&lt;/p&gt;
+&lt;p&gt;なお、このシリーズは次回で完結予定です。&lt;/p&gt;
 
-&lt;p&gt;本稿で扱わなかったものの，ゼロから〜で紹介されている，「ハイパーパラメータの検証」については，今後「ハイパーパラメータの最適化 &amp;amp; 交差分割検証」をテーマに別の投稿で詳しく紹介する予定です！&lt;/p&gt;
+&lt;p&gt;本稿で扱わなかったものの、ゼロから〜で紹介されている、「ハイパーパラメータの検証」については、今後「ハイパーパラメータの最適化 &amp;amp; 交差分割検証」をテーマに別の投稿で詳しく紹介する予定です！&lt;/p&gt;
 
-&lt;h1 id=&quot;ソースコード&quot;&gt;ソースコード&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;ソースコードは，&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/&quot;&gt;GitHub&lt;/a&gt;より入手できます．&lt;/p&gt;</content><author><name></name></author><category term="「ゼロからKeras」シリーズ" /><summary type="html">はじめに このシリーズでは，深層学習の入門書として有名な，「ゼロから作るDeep Learning」（以下，ゼロから〜）と同時並行で，フレームワークを学習し，その定着を目指します．</summary></entry><entry xml:lang="ja_JP"><title type="html">ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）</title><link href="http://localhost:4000/DL-Intro-3/" rel="alternate" type="text/html" title="ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）" /><published>2019-04-26T00:00:00+09:00</published><updated>2019-04-26T00:00:00+09:00</updated><id>http://localhost:4000/DL-Intro-3</id><content type="html" xml:base="http://localhost:4000/DL-Intro-3/">&lt;h1 id=&quot;はじめに&quot;&gt;はじめに&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;このシリーズでは，深層学習の入門書として有名な，「ゼロから作るDeep Learning」（以下，ゼロから〜）と同時並行で，フレームワークを学習し，その定着を目指します．&lt;/p&gt;
+&lt;h2 id=&quot;ソースコード&quot;&gt;ソースコード&lt;/h2&gt;
 
-&lt;p&gt;前回までは，3層のニューラルネットワークをKerasで実装し，推論処理のみを扱ってきました．今回からは，ゼロから〜の4章と5章に対応する，ニューラルネットワークの学習にとりかかります．また，同時に実験結果の簡単な可視化方法についても触れていきます．&lt;/p&gt;
+&lt;p&gt;ソースコードは、&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/&quot;&gt;GitHub&lt;/a&gt;より入手できます。&lt;/p&gt;</content><author><name></name></author><category term="「ゼロからKeras」シリーズ" /><summary type="html">はじめに</summary></entry><entry xml:lang="ja_JP"><title type="html">ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）</title><link href="http://localhost:4000/DL-Intro-3/" rel="alternate" type="text/html" title="ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）" /><published>2019-04-26T00:00:00+09:00</published><updated>2019-04-26T00:00:00+09:00</updated><id>http://localhost:4000/DL-Intro-3</id><content type="html" xml:base="http://localhost:4000/DL-Intro-3/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
 
-&lt;p&gt;では，２層のニューラルネットワークを題材にMNISTの分類モデルをKerasで実装し，学習させてみましょう！&lt;/p&gt;
+&lt;p&gt;このシリーズでは、深層学習の入門書として有名な、「ゼロから作るDeep Learning」（以下、ゼロから〜）と同時並行で、フレームワークを学習し、その定着を目指します。&lt;/p&gt;
+
+&lt;p&gt;前回までは、3層のニューラルネットワークをKerasで実装し、推論処理のみを扱ってきました。今回からは、ゼロから〜の4章と5章に対応する、ニューラルネットワークの学習にとりかかります。また、同時に実験結果の簡単な可視化方法についても触れていきます。&lt;/p&gt;
+
+&lt;p&gt;では、２層のニューラルネットワークを題材にMNISTの分類モデルをKerasで実装し、学習させてみましょう！&lt;/p&gt;
 
 &lt;div class=&quot;link_box&quot;&gt;
     &lt;span class=&quot;box-title&quot;&gt;「ゼロからKeras」シリーズリンク&lt;/span&gt;
@@ -338,21 +359,21 @@ model.fit(x=x_train, y=y_train, batch_size=batch_size, epochs=epochs, verbose=1,
      (adsbygoogle = window.adsbygoogle || []).push({});
 &lt;/script&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;1-プロジェクトの作成&quot;&gt;1. プロジェクトの作成&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;はじめに，２層ニューラルネットワーク用のプロジェクトを作成してください．&lt;/p&gt;
+&lt;h2 id=&quot;1-プロジェクトの作成&quot;&gt;1. プロジェクトの作成&lt;/h2&gt;
 
-&lt;p&gt;以下，本投稿では&lt;code class=&quot;highlighter-rouge&quot;&gt;two_nn.py&lt;/code&gt;を作成するものとして進めます．&lt;/p&gt;
+&lt;p&gt;はじめに、２層ニューラルネットワーク用のプロジェクトを作成してください。&lt;/p&gt;
 
-&lt;h1 id=&quot;2-実装&quot;&gt;2. 実装&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;h2 id=&quot;21-モデルの概要&quot;&gt;2.1 モデルの概要&lt;/h2&gt;
+&lt;p&gt;以下、本投稿では&lt;code class=&quot;highlighter-rouge&quot;&gt;two_nn.py&lt;/code&gt;を作成するものとして進めます。&lt;/p&gt;
+
+&lt;h2 id=&quot;2-実装&quot;&gt;2. 実装&lt;/h2&gt;
+
+&lt;h3 id=&quot;21-モデルの概要&quot;&gt;2.1 モデルの概要&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;今回実装するモデルの概要図を以下に示します．実装の参考にしてください．&lt;/p&gt;
+    &lt;p&gt;今回実装するモデルの概要図を以下に示します。実装の参考にしてください。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;MNISTデータセットの分類を行うモデルを学習させるので，出力はクラスの数に合わせて10次元のベクトルとなっています．&lt;/p&gt;
+    &lt;p&gt;MNISTデータセットの分類を行うモデルを学習させるので、出力はクラスの数に合わせて10次元のベクトルとなっています。&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -360,17 +381,17 @@ model.fit(x=x_train, y=y_train, batch_size=batch_size, epochs=epochs, verbose=1,
     &lt;img src=&quot;/resources/2019-04-26/two_layer_nn.png&quot; alt=&quot;2層ニューラルネットワークの概念図&quot; style=&quot;width: 450px;&quot; /&gt;
 &lt;/div&gt;
 
-&lt;h2 id=&quot;22-モデルの実装&quot;&gt;2.2 モデルの実装&lt;/h2&gt;
+&lt;h3 id=&quot;22-モデルの実装&quot;&gt;2.2 モデルの実装&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;ゼロから〜の第4章に対応する2層ニューラルネットワークをKerasで実装していきます．&lt;/p&gt;
+    &lt;p&gt;ゼロから〜の第4章に対応する2層ニューラルネットワークをKerasで実装していきます。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;モデルの実装は前回とあまり変わらないので，以下に一気に進めてしまいます．&lt;br /&gt;
-復習として，ソースコードを読んで理解できるかを確認すると良いと思います．&lt;/p&gt;
+    &lt;p&gt;モデルの実装は前回とあまり変わらないので、以下に一気に進めてしまいます。&lt;br /&gt;
+復習として、ソースコードを読んで理解できるかを確認すると良いと思います。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;モデルのパラメータ等は全てゼロから〜のP117〜122に基づいています．&lt;/p&gt;
+    &lt;p&gt;モデルのパラメータ等は全てゼロから〜のP117〜122に基づいています。&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -407,16 +428,16 @@ Non-trainable params: 0
 _________________________________________________________________
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;23-データの読み込み&quot;&gt;2.3 データの読み込み&lt;/h2&gt;
+&lt;h3 id=&quot;23-データの読み込み&quot;&gt;2.3 データの読み込み&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;前回と同様にMNISTデータセットを読み込み，前処理（正規化，データの整形）を行います．&lt;/p&gt;
+    &lt;p&gt;前回と同様にMNISTデータセットを読み込み、前処理（正規化、データの整形）を行います。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;前回との相違点としては，ラベルデータを学習のためにone-hotベクトルに変換させる点です．&lt;/p&gt;
+    &lt;p&gt;前回との相違点としては、ラベルデータを学習のためにone-hotベクトルに変換させる点です。&lt;/p&gt;
     &lt;ul&gt;
-      &lt;li&gt;one-hotベクトル化は，&lt;code class=&quot;highlighter-rouge&quot;&gt;to_categorical&lt;/code&gt;を用いることで行えます． &lt;br /&gt;
-  引数は変換元リストとクラス数です．戻り値は変換後のリストです．&lt;/li&gt;
+      &lt;li&gt;one-hotベクトル化は、&lt;code class=&quot;highlighter-rouge&quot;&gt;to_categorical&lt;/code&gt;を用いることで行えます。 &lt;br /&gt;
+  引数は変換元リストとクラス数です。戻り値は変換後のリストです。&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -446,45 +467,47 @@ After: (60000, 10)
 y_train[0]: [0. 0. 0. 0. 0. 1. 0. 0. 0. 0.]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;しっかりと，ラベルがone-hotベクトルに変換されていることが確認できます．&lt;/p&gt;
+&lt;p&gt;しっかりと、ラベルがone-hotベクトルに変換されていることが確認できます。&lt;/p&gt;
 
-&lt;h2 id=&quot;24-学習の設定&quot;&gt;2.4 学習の設定&lt;/h2&gt;
-&lt;p&gt;ここからが本格的に新しい部分になります．&lt;/p&gt;
+&lt;h3 id=&quot;24-学習の設定&quot;&gt;2.4 学習の設定&lt;/h3&gt;
+&lt;p&gt;ここからが本格的に新しい部分になります。&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;設計したモデルで学習を実行できるようにするために，「&lt;strong&gt;損失関数&lt;/strong&gt;」と「&lt;strong&gt;最適化アルゴリズム&lt;/strong&gt;」を設定します．&lt;/p&gt;
+    &lt;p&gt;設計したモデルで学習を実行できるようにするために、「&lt;strong&gt;損失関数&lt;/strong&gt;」と「&lt;strong&gt;最適化アルゴリズム&lt;/strong&gt;」を設定します。&lt;/p&gt;
   &lt;/li&gt;
-  &lt;li&gt;損失関数と最適化アルゴリズムの設定は，&lt;code class=&quot;highlighter-rouge&quot;&gt;compile&lt;/code&gt;メソッドで行えます．
+  &lt;li&gt;損失関数と最適化アルゴリズムの設定は、&lt;code class=&quot;highlighter-rouge&quot;&gt;compile&lt;/code&gt;メソッドで行えます。
     &lt;ul&gt;
       &lt;li&gt;
-        &lt;p&gt;ゼロから〜の4章の実装では，損失関数にクロスエントロピー，最適化アルゴリズムに確率的勾配降下法が用いられています．&lt;br /&gt;
-したがって，本実装でも&lt;code class=&quot;highlighter-rouge&quot;&gt;loss&lt;/code&gt;に&lt;code class=&quot;highlighter-rouge&quot;&gt;'categorical_crossentropy'&lt;/code&gt;を指定し，&lt;code class=&quot;highlighter-rouge&quot;&gt;optimizer&lt;/code&gt;に&lt;code class=&quot;highlighter-rouge&quot;&gt;SGD(lr=learning_rate)&lt;/code&gt;を指定します．&lt;/p&gt;
+        &lt;p&gt;ゼロから〜の4章の実装では、損失関数にクロスエントロピー、最適化アルゴリズムに確率的勾配降下法が用いられています。&lt;br /&gt;
+したがって、本実装でも&lt;code class=&quot;highlighter-rouge&quot;&gt;loss&lt;/code&gt;に&lt;code class=&quot;highlighter-rouge&quot;&gt;'categorical_crossentropy'&lt;/code&gt;を指定し、&lt;code class=&quot;highlighter-rouge&quot;&gt;optimizer&lt;/code&gt;に&lt;code class=&quot;highlighter-rouge&quot;&gt;SGD(lr=learning_rate)&lt;/code&gt;を指定します。&lt;/p&gt;
       &lt;/li&gt;
       &lt;li&gt;
-        &lt;p&gt;ゼロから〜で使われている学習率は&lt;code class=&quot;highlighter-rouge&quot;&gt;0.1&lt;/code&gt;であるため，Kerasのデフォルト値0.01と異なります．そのため，&lt;code class=&quot;highlighter-rouge&quot;&gt;SGD&lt;/code&gt;に学習率を渡す必要があります．&lt;/p&gt;
+        &lt;p&gt;ゼロから〜で使われている学習率は&lt;code class=&quot;highlighter-rouge&quot;&gt;0.1&lt;/code&gt;であるため、Kerasのデフォルト値0.01と異なります。そのため、&lt;code class=&quot;highlighter-rouge&quot;&gt;SGD&lt;/code&gt;に学習率を渡す必要があります。&lt;/p&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;評価関数&lt;/strong&gt;の設定も行います．&lt;br /&gt;
-ゼロから〜のP121では，認識精度を評価関数としているので，&lt;code class=&quot;highlighter-rouge&quot;&gt;compile&lt;/code&gt;メソッドの引数: &lt;code class=&quot;highlighter-rouge&quot;&gt;metrics&lt;/code&gt;に&lt;code class=&quot;highlighter-rouge&quot;&gt;['accuracy']&lt;/code&gt;を指定します．&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;評価関数&lt;/strong&gt;の設定も行います。&lt;br /&gt;
+ゼロから〜のP121では、認識精度を評価関数としているので、&lt;code class=&quot;highlighter-rouge&quot;&gt;compile&lt;/code&gt;メソッドの引数: &lt;code class=&quot;highlighter-rouge&quot;&gt;metrics&lt;/code&gt;に&lt;code class=&quot;highlighter-rouge&quot;&gt;['accuracy']&lt;/code&gt;を指定します。&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from keras.optimizers import SGD
 model.compile(optimizer=SGD(lr=0.1), loss='categorical_crossentropy', metrics=['accuracy'])
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/losses/&quot;&gt;（Kerasで利用可能な損失関数について）&lt;/a&gt;&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/optimizers/&quot;&gt;（Kerasで利用可能な最適化アルゴリズムについて）&lt;/a&gt;&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/metrics/&quot;&gt;（Kerasにおける評価関数について）&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/losses/&quot;&gt;（Kerasで利用可能な損失関数について）&lt;/a&gt;&lt;br /&gt;
+&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/optimizers/&quot;&gt;（Kerasで利用可能な最適化アルゴリズムについて）&lt;/a&gt;&lt;br /&gt;
+&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/metrics/&quot;&gt;（Kerasにおける評価関数について）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;(&lt;strong&gt;注意&lt;/strong&gt;) Kerasをはじめとする深層学習フレームワークでは，ユーザが順伝播の計算グラフを構築すると，フレームワークが自動的に逆伝播用の処理をブラックボックス的に行ってくれます．
-したがって，ゼロから〜の5章の部分は，フレームワーク使用時には実装する必要がありません．（自分でレイヤーを設計することがない限り．）&lt;/p&gt;
+&lt;p&gt;(&lt;strong&gt;注意&lt;/strong&gt;) Kerasをはじめとする深層学習フレームワークでは、ユーザが順伝播の計算グラフを構築すると、フレームワークが自動的に逆伝播用の処理をブラックボックス的に行ってくれます。
+したがって、ゼロから〜の5章の部分は、フレームワーク使用時には実装する必要がありません。（自分でレイヤーを設計することがない限り。）&lt;/p&gt;
 
-&lt;h1 id=&quot;3-モデルの学習&quot;&gt;3. モデルの学習&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;それでは，モデルの学習を進めていきましょう．&lt;/p&gt;
+&lt;h2 id=&quot;3-モデルの学習&quot;&gt;3. モデルの学習&lt;/h2&gt;
+
+&lt;p&gt;それでは、モデルの学習を進めていきましょう。&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;モデルの学習は，&lt;code class=&quot;highlighter-rouge&quot;&gt;fit&lt;/code&gt;メソッドで行います．&lt;br /&gt;
-以下に各引数について簡単に対応表を示します．&lt;/li&gt;
+  &lt;li&gt;モデルの学習は、&lt;code class=&quot;highlighter-rouge&quot;&gt;fit&lt;/code&gt;メソッドで行います。&lt;br /&gt;
+以下に各引数について簡単に対応表を示します。&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;table&gt;
@@ -524,15 +547,17 @@ model.compile(optimizer=SGD(lr=0.1), loss='categorical_crossentropy', metrics=['
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;fit&lt;/code&gt;メソッドの戻り値は，&lt;code class=&quot;highlighter-rouge&quot;&gt;History&lt;/code&gt;オブジェクトになっています．&lt;br /&gt;
-この戻り値を活用することで，損失関数や認識精度のプロットができます．&lt;/p&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;fit&lt;/code&gt;メソッドの戻り値は、&lt;code class=&quot;highlighter-rouge&quot;&gt;History&lt;/code&gt;オブジェクトになっています。&lt;br /&gt;
+この戻り値を活用することで、損失関数や認識精度のプロットができます。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;validation_data&lt;/code&gt;にテストデータを与えることで，エポックごとにモデルのテスト精度を測ることができます．&lt;/p&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;validation_data&lt;/code&gt;にテストデータを与えることで、エポックごとにモデルのテスト精度を測ることができます。&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/models/model/#fit&quot;&gt;（Kerasのfitメソッドにおける引数と戻り値の説明）&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/models/model/#fit&quot;&gt;（Kerasのfitメソッドにおける引数と戻り値の説明）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;epochs = 17
 _results = model.fit(x=x_train, y=y_train, batch_size=100, epochs=epochs, verbose=1, validation_data=(x_test, y_test))
@@ -557,28 +582,30 @@ Epoch 17/17
      (adsbygoogle = window.adsbygoogle || []).push({});
 &lt;/script&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;4-学習結果の表示&quot;&gt;4. 学習結果の表示&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;ゼロから〜のP119とP121では，それぞれ損失関数の値と認識精度の推移を図にしているので，ここでも実際に図にしてみましょう！&lt;/p&gt;
+&lt;h2 id=&quot;4-学習結果の表示&quot;&gt;4. 学習結果の表示&lt;/h2&gt;
 
-&lt;h2 id=&quot;41-損失関数の値の推移&quot;&gt;4.1 損失関数の値の推移&lt;/h2&gt;
-&lt;p&gt;Pythonの図表描画ライブラリである，Matplotlibを活用して，損失関数の値の推移を図にします．&lt;/p&gt;
+&lt;p&gt;ゼロから〜のP119とP121では、それぞれ損失関数の値と認識精度の推移を図にしているので、ここでも実際に図にしてみましょう！&lt;/p&gt;
 
-&lt;h3 id=&quot;411-matplotlibのインストール&quot;&gt;4.1.1 Matplotlibのインストール&lt;/h3&gt;
-&lt;hr /&gt;
-&lt;p&gt;Matplotlibをインストールしていない方は，インストールしましょう．&lt;/p&gt;
+&lt;h3 id=&quot;41-損失関数の値の推移&quot;&gt;4.1 損失関数の値の推移&lt;/h3&gt;
+&lt;p&gt;Pythonの図表描画ライブラリである、Matplotlibを活用して、損失関数の値の推移を図にします。&lt;/p&gt;
+
+&lt;h4 id=&quot;411-matplotlibのインストール&quot;&gt;4.1.1 Matplotlibのインストール&lt;/h4&gt;
+
+&lt;p&gt;Matplotlibをインストールしていない方は、インストールしましょう。&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install matplotlib
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;（&lt;strong&gt;注意&lt;/strong&gt;）macOSでMatplotlibをインポートすると，バックエンドの問題でエラーが発生することがあります．その場合は，下記を参照してバックエンドを書き換えてください．&lt;/p&gt;
+&lt;p&gt;（&lt;strong&gt;注意&lt;/strong&gt;）macOSでMatplotlibをインポートすると、バックエンドの問題でエラーが発生することがあります。その場合は、下記を参照してバックエンドを書き換えてください。&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://qiita.com/Gen6/items/78d83d117ef67e0d53c2&quot;&gt;（Matplotlibでインポートエラーが出るときの対処法）&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://qiita.com/Gen6/items/78d83d117ef67e0d53c2&quot;&gt;（Matplotlibでインポートエラーが出るときの対処法）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h3 id=&quot;412-historyオブジェクトの中身&quot;&gt;4.1.2 Historyオブジェクトの中身&lt;/h3&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;fit&lt;/code&gt;メソッドの戻り値は，&lt;code class=&quot;highlighter-rouge&quot;&gt;History&lt;/code&gt;オブジェクトであると前章で紹介しました．&lt;br /&gt;
-実験結果を可視化するためにも，&lt;code class=&quot;highlighter-rouge&quot;&gt;History&lt;/code&gt;オブジェクトの中身を確認しておきましょう．&lt;/p&gt;
+&lt;h4 id=&quot;412-historyオブジェクトの中身&quot;&gt;4.1.2 Historyオブジェクトの中身&lt;/h4&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;fit&lt;/code&gt;メソッドの戻り値は、&lt;code class=&quot;highlighter-rouge&quot;&gt;History&lt;/code&gt;オブジェクトであると前章で紹介しました。&lt;br /&gt;
+実験結果を可視化するためにも、&lt;code class=&quot;highlighter-rouge&quot;&gt;History&lt;/code&gt;オブジェクトの中身を確認しておきましょう。&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;print(f'Keys: {_results.history.keys()}')
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -587,14 +614,14 @@ Epoch 17/17
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Keys: dict_keys(['val_loss', 'val_acc', 'loss', 'acc'])
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;このように，損失関数の値と認識精度の結果が訓練・テストデータともに格納されていることがわかります．&lt;/p&gt;
+&lt;p&gt;このように、損失関数の値と認識精度の結果が訓練・テストデータともに格納されていることがわかります。&lt;/p&gt;
 
-&lt;h3 id=&quot;413-プロットしてみる&quot;&gt;4.1.3 プロットしてみる&lt;/h3&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;History&lt;/code&gt;オブジェクトから訓練時とテスト時の損失関数の値のリスト受け取り，それらをプロットします．&lt;/p&gt;
+&lt;h4 id=&quot;413-プロットしてみる&quot;&gt;4.1.3 プロットしてみる&lt;/h4&gt;
 
-&lt;p&gt;一連のソースコードを下記に示します．&lt;br /&gt;
-なお，Matplotlibの詳しい使い方については，&lt;a href=&quot;https://matplotlib.org/tutorials/index.html&quot;&gt;公式チュートリアル&lt;/a&gt;をご覧ください．&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;History&lt;/code&gt;オブジェクトから訓練時とテスト時の損失関数の値のリスト受け取り、それらをプロットします。&lt;/p&gt;
+
+&lt;p&gt;一連のソースコードを下記に示します。&lt;br /&gt;
+なお、Matplotlibの詳しい使い方については、&lt;a href=&quot;https://matplotlib.org/tutorials/index.html&quot;&gt;公式チュートリアル&lt;/a&gt;をご覧ください。&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import matplotlib.pyplot as plt
 
@@ -619,11 +646,11 @@ plt.savefig('loss.png')
 
 &lt;p&gt;きちんと損失関数がプロットされていることが確認できました！&lt;/p&gt;
 
-&lt;h2 id=&quot;42-認識精度の推移&quot;&gt;4.2 認識精度の推移&lt;/h2&gt;
+&lt;h3 id=&quot;42-認識精度の推移&quot;&gt;4.2 認識精度の推移&lt;/h3&gt;
 &lt;p&gt;モデルが&lt;strong&gt;過学習&lt;/strong&gt;していないかを認識精度の推移を図にして確認してみましょう!&lt;/p&gt;
 
-&lt;p&gt;プロットの流れは，損失関数の時とほとんど同一のため，説明は割愛します．&lt;br /&gt;
-以下にソースコードを貼るので，各自試してみてください．&lt;/p&gt;
+&lt;p&gt;プロットの流れは、損失関数の時とほとんど同一のため、説明は割愛します。&lt;br /&gt;
+以下にソースコードを貼るので、各自試してみてください。&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;plt.clf()
 acc = _results.history['acc']
@@ -645,29 +672,33 @@ plt.close()
     &lt;img src=&quot;/resources/2019-04-26/acc.png&quot; alt=&quot;認識精度の推移&quot; style=&quot;width: 500px;&quot; /&gt;
 &lt;/div&gt;
 
-&lt;p&gt;図から，テストデータの認識精度を訓練データの認識精度が大幅に上回る現象は確認できないので，モデルの過学習は起きていないことがわかります．&lt;/p&gt;
+&lt;p&gt;図から、テストデータの認識精度を訓練データの認識精度が大幅に上回る現象は確認できないので、モデルの過学習は起きていないことがわかります。&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://codeday.me/jp/qa/20181207/13787.html&quot;&gt;（Matplotlibでプロットを一旦クリアする）&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://codeday.me/jp/qa/20181207/13787.html&quot;&gt;（Matplotlibでプロットを一旦クリアする）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h1 id=&quot;まとめ&quot;&gt;まとめ&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;今回はニューラルネットワークの学習について扱いました．&lt;br /&gt;
-フレームワークを活用することで，誤差逆伝播が自動で実行されるため，順伝播の処理だけ記述すればよいという大きなメリットを体感できたと思います．&lt;/p&gt;
+&lt;h2 id=&quot;まとめ&quot;&gt;まとめ&lt;/h2&gt;
 
-&lt;p&gt;次回は，ゼロから〜の第6章に対応する，「学習に関するテクニック」をKerasを用いて実証していきたいと思います．また，ハイパーパラメータの探索や交差検証等についても扱う予定です．&lt;/p&gt;
+&lt;p&gt;今回はニューラルネットワークの学習について扱いました。&lt;br /&gt;
+フレームワークを活用することで、誤差逆伝播が自動で実行されるため、順伝播の処理だけ記述すればよいという大きなメリットを体感できたと思います。&lt;/p&gt;
 
-&lt;h1 id=&quot;ソースコード&quot;&gt;ソースコード&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;ソースコードは，&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras&quot;&gt;GitHub&lt;/a&gt;にて公開しています．&lt;/p&gt;</content><author><name></name></author><category term="「ゼロからKeras」シリーズ" /><summary type="html">はじめに このシリーズでは，深層学習の入門書として有名な，「ゼロから作るDeep Learning」（以下，ゼロから〜）と同時並行で，フレームワークを学習し，その定着を目指します．</summary></entry><entry xml:lang="ja_JP"><title type="html">ゼロから作るDeep Learningとともに学ぶフレームワーク（3層ニューラルネットワーク ＆ 手書き数字認識編）</title><link href="http://localhost:4000/DL-Intro-2/" rel="alternate" type="text/html" title="ゼロから作るDeep Learningとともに学ぶフレームワーク（3層ニューラルネットワーク ＆ 手書き数字認識編）" /><published>2019-04-19T00:00:00+09:00</published><updated>2019-04-19T00:00:00+09:00</updated><id>http://localhost:4000/DL-Intro-2</id><content type="html" xml:base="http://localhost:4000/DL-Intro-2/">&lt;h1 id=&quot;はじめに&quot;&gt;はじめに&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;このシリーズでは，深層学習の入門書として有名な，「ゼロから作るDeep Learning」（以下，ゼロから〜）と同時並行で，フレームワークを学習し，その定着を目指します．&lt;/p&gt;
+&lt;p&gt;次回は、ゼロから〜の第6章に対応する、「学習に関するテクニック」をKerasを用いて実証していきたいと思います。また、ハイパーパラメータの探索や交差検証等についても扱う予定です。&lt;/p&gt;
 
-&lt;p&gt;前回の&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-1/&quot;&gt;第一弾: パーセプトロン編&lt;/a&gt;に目を通していない方は，先に目を通しておくことをおすすめします．&lt;/p&gt;
+&lt;h2 id=&quot;ソースコード&quot;&gt;ソースコード&lt;/h2&gt;
 
-&lt;p&gt;それでは，今回は3層ニューラルネットワークをKerasで実装し，実際に手書き数字認識（MNISTデータセットの分類）をしていきましょう！&lt;/p&gt;
+&lt;p&gt;ソースコードは、&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras&quot;&gt;GitHub&lt;/a&gt;にて公開しています。&lt;/p&gt;</content><author><name></name></author><category term="「ゼロからKeras」シリーズ" /><summary type="html">はじめに</summary></entry><entry xml:lang="ja_JP"><title type="html">ゼロから作るDeep Learningとともに学ぶフレームワーク（3層ニューラルネットワーク ＆ 手書き数字認識編）</title><link href="http://localhost:4000/DL-Intro-2/" rel="alternate" type="text/html" title="ゼロから作るDeep Learningとともに学ぶフレームワーク（3層ニューラルネットワーク ＆ 手書き数字認識編）" /><published>2019-04-19T00:00:00+09:00</published><updated>2019-04-19T00:00:00+09:00</updated><id>http://localhost:4000/DL-Intro-2</id><content type="html" xml:base="http://localhost:4000/DL-Intro-2/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
 
-&lt;p&gt;&lt;em&gt;（3層ニューラルネットワーク）&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: ゼロから〜のP58〜65&lt;/em&gt;&lt;br /&gt;
-&lt;em&gt;（MNIST）&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: ゼロから〜のP72〜81&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;このシリーズでは、深層学習の入門書として有名な、「ゼロから作るDeep Learning」（以下、ゼロから〜）と同時並行で、フレームワークを学習し、その定着を目指します。&lt;/p&gt;
+
+&lt;p&gt;前回の&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-1/&quot;&gt;第一弾: パーセプトロン編&lt;/a&gt;に目を通していない方は、先に目を通しておくことをおすすめします。&lt;/p&gt;
+
+&lt;p&gt;それでは、今回は3層ニューラルネットワークをKerasで実装し、実際に手書き数字認識（MNISTデータセットの分類）をしていきましょう！&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;（3層ニューラルネットワーク）&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: ゼロから〜のP58〜65&lt;br /&gt;
+（MNIST）&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: ゼロから〜のP72〜81&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;div class=&quot;link_box&quot;&gt;
     &lt;span class=&quot;box-title&quot;&gt;「ゼロからKeras」シリーズリンク&lt;/span&gt;
@@ -685,21 +716,21 @@ plt.close()
      (adsbygoogle = window.adsbygoogle || []).push({});
 &lt;/script&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;1-3層ニューラルネットワークの実装&quot;&gt;1. 3層ニューラルネットワークの実装&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;h2 id=&quot;11-プロジェクトの作成&quot;&gt;1.1 プロジェクトの作成&lt;/h2&gt;
-&lt;p&gt;まず，3層ニューラルネットワーク実装用のプロジェクトを作成してください．&lt;br /&gt;
-以下本章では，&lt;code class=&quot;highlighter-rouge&quot;&gt;three_nn.py&lt;/code&gt;を作成するものとして進めていきます．&lt;/p&gt;
+&lt;h2 id=&quot;1-3層ニューラルネットワークの実装&quot;&gt;1. 3層ニューラルネットワークの実装&lt;/h2&gt;
 
-&lt;h2 id=&quot;12-モデルの作成&quot;&gt;1.2 モデルの作成&lt;/h2&gt;
+&lt;h3 id=&quot;11-プロジェクトの作成&quot;&gt;1.1 プロジェクトの作成&lt;/h3&gt;
+&lt;p&gt;まず、3層ニューラルネットワーク実装用のプロジェクトを作成してください。&lt;br /&gt;
+以下本章では、&lt;code class=&quot;highlighter-rouge&quot;&gt;three_nn.py&lt;/code&gt;を作成するものとして進めていきます。&lt;/p&gt;
+
+&lt;h3 id=&quot;12-モデルの作成&quot;&gt;1.2 モデルの作成&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;今回の実装からは全てFunctional APIを用いたモデル実装を行います．&lt;br /&gt;
-Sequentialモデルによる実装は行いませんので，あらかじめご了承ください．&lt;/p&gt;
+    &lt;p&gt;今回の実装からは全てFunctional APIを用いたモデル実装を行います。&lt;br /&gt;
+Sequentialモデルによる実装は行いませんので、あらかじめご了承ください。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;これから実装する3層ニューラルネットワークの概念図を以下に示します．&lt;br /&gt;
-実装の際の参考にしてください．&lt;/p&gt;
+    &lt;p&gt;これから実装する3層ニューラルネットワークの概念図を以下に示します。&lt;br /&gt;
+実装の際の参考にしてください。&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -707,9 +738,9 @@ Sequentialモデルによる実装は行いませんので，あらかじめご�
     &lt;img src=&quot;/resources/2019-04-19/three_layer_nn.png&quot; alt=&quot;3層ニューラルネットワークの概念図&quot; style=&quot;width: 500px;&quot; /&gt;
 &lt;/div&gt;
 
-&lt;h3 id=&quot;121-レイヤー--numpyを読み込む&quot;&gt;1.2.1 レイヤー &amp;amp; NumPyを読み込む&lt;/h3&gt;
-&lt;hr /&gt;
-&lt;p&gt;まず，前回と同じように，実装に必要なレイヤーとNumPyを読み込みます．&lt;/p&gt;
+&lt;h4 id=&quot;121-レイヤー--numpyを読み込む&quot;&gt;1.2.1 レイヤー &amp;amp; NumPyを読み込む&lt;/h4&gt;
+
+&lt;p&gt;まず、前回と同じように、実装に必要なレイヤーとNumPyを読み込みます。&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from keras import Model
 from keras.layers import Input, Dense
@@ -717,20 +748,20 @@ from keras.layers import Input, Dense
 import numpy as np
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;122-各種レイヤーを定義する&quot;&gt;1.2.2 各種レイヤーを定義する&lt;/h3&gt;
-&lt;hr /&gt;
+&lt;h4 id=&quot;122-各種レイヤーを定義する&quot;&gt;1.2.2 各種レイヤーを定義する&lt;/h4&gt;
+
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;3層のニューラルネットワークなので，それと同数の3つのDenseレイヤーのインスタンスを生成します．&lt;/p&gt;
+    &lt;p&gt;3層のニューラルネットワークなので、それと同数の3つのDenseレイヤーのインスタンスを生成します。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;units&lt;/code&gt;は各層におけるニューロンの数を表しています．&lt;/p&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;units&lt;/code&gt;は各層におけるニューロンの数を表しています。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;活性化関数については，ゼロから〜では&lt;code class=&quot;highlighter-rouge&quot;&gt;sigmoid&lt;/code&gt;関数が使用されているので，ここでも&lt;code class=&quot;highlighter-rouge&quot;&gt;sigmoid&lt;/code&gt;を活用します．&lt;/p&gt;
+    &lt;p&gt;活性化関数については、ゼロから〜では&lt;code class=&quot;highlighter-rouge&quot;&gt;sigmoid&lt;/code&gt;関数が使用されているので、ここでも&lt;code class=&quot;highlighter-rouge&quot;&gt;sigmoid&lt;/code&gt;を活用します。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;下の例では，簡単のため入れ子式に活性化関数を定義しましたが，活性化関数をレイヤーインスタンスとして定義することもできます．&lt;/p&gt;
+    &lt;p&gt;下の例では、簡単のため入れ子式に活性化関数を定義しましたが、活性化関数をレイヤーインスタンスとして定義することもできます。&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -752,16 +783,18 @@ _layer2 = Dense(units=2)(_activ1)
 _activ2 = Activation('sigmoid')(_layer2)
 _output = Dense(units=2)(_activ2)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://keras.io/ja/activations/&quot;&gt;https://keras.io/ja/activations/&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://keras.io/ja/activations/&quot;&gt;https://keras.io/ja/activations/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h3 id=&quot;123-モデルを定義する&quot;&gt;1.2.3 モデルを定義する&lt;/h3&gt;
-&lt;hr /&gt;
+&lt;h4 id=&quot;123-モデルを定義する&quot;&gt;1.2.3 モデルを定義する&lt;/h4&gt;
+
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;前回と同様に，入力のテンソルと出力のテンソルを&lt;code class=&quot;highlighter-rouge&quot;&gt;Model&lt;/code&gt;に渡すことで，モデルを定義します．&lt;/p&gt;
+    &lt;p&gt;前回と同様に、入力のテンソルと出力のテンソルを&lt;code class=&quot;highlighter-rouge&quot;&gt;Model&lt;/code&gt;に渡すことで、モデルを定義します。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;model.summary()&lt;/code&gt;でモデルの状態を確認することができます．&lt;/p&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;model.summary()&lt;/code&gt;でモデルの状態を確認することができます。&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -787,19 +820,19 @@ Non-trainable params: 0
 _________________________________________________________________
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;124-重みを設定する&quot;&gt;1.2.4 重みを設定する&lt;/h3&gt;
-&lt;hr /&gt;
+&lt;h4 id=&quot;124-重みを設定する&quot;&gt;1.2.4 重みを設定する&lt;/h4&gt;
+
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;ゼロから〜では重みの初期化を定義しているので，本実装でも事前に重みを設定します．&lt;/p&gt;
+    &lt;p&gt;ゼロから〜では重みの初期化を定義しているので、本実装でも事前に重みを設定します。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Kerasでは，重みは入力層から順にNumPyの配列で保持されています．&lt;br /&gt;
-したがって，重みを設定する際には，順当に重みの配列をNumPy配列で定義して，そのリストを渡せばよいです．&lt;/p&gt;
+    &lt;p&gt;Kerasでは、重みは入力層から順にNumPyの配列で保持されています。&lt;br /&gt;
+したがって、重みを設定する際には、順当に重みの配列をNumPy配列で定義して、そのリストを渡せばよいです。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;重みの設定には，&lt;code class=&quot;highlighter-rouge&quot;&gt;model.set_weights()&lt;/code&gt;を使用します．&lt;br /&gt;
-引数は重みの入ったリストです．&lt;/p&gt;
+    &lt;p&gt;重みの設定には、&lt;code class=&quot;highlighter-rouge&quot;&gt;model.set_weights()&lt;/code&gt;を使用します。&lt;br /&gt;
+引数は重みの入ったリストです。&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -814,7 +847,9 @@ weight_array = [w1, b1, w2, b2, w3, b3]
 model.set_weights(weight_array)
 print(model.get_weights())
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: ゼロから〜 P65&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: ゼロから〜 P65&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;Output:&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[array([[0.1, 0.3, 0.5], [0.2, 0.4, 0.6]], dtype=float32), 
@@ -825,11 +860,11 @@ print(model.get_weights())
     array([0.1, 0.2], dtype=float32)]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;13-テストする&quot;&gt;1.3 テストする&lt;/h2&gt;
-&lt;p&gt;それでは，作成したモデルをテストしましょう．&lt;br /&gt;
-作成したモデルのテストには，前回と同様に，&lt;code class=&quot;highlighter-rouge&quot;&gt;model.predict()&lt;/code&gt;を使用します．&lt;/p&gt;
+&lt;h3 id=&quot;13-テストする&quot;&gt;1.3 テストする&lt;/h3&gt;
+&lt;p&gt;それでは、作成したモデルをテストしましょう。&lt;br /&gt;
+作成したモデルのテストには、前回と同様に、&lt;code class=&quot;highlighter-rouge&quot;&gt;model.predict()&lt;/code&gt;を使用します。&lt;/p&gt;
 
-&lt;p&gt;テストデータは，ゼロから〜 P65に示されているものと同一のものを使用します．&lt;/p&gt;
+&lt;p&gt;テストデータは、ゼロから〜 P65に示されているものと同一のものを使用します。&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;X = np.array([[1.0, 0.5]])
 Y = model.predict(X)
 
@@ -840,7 +875,7 @@ print(Y)
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[[0.3168271 0.6962791]]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;見事，ゼロから〜 P65に示されている出力値と同一の値を得ることができました！&lt;/p&gt;
+&lt;p&gt;見事、ゼロから〜 P65に示されている出力値と同一の値を得ることができました！&lt;/p&gt;
 
 &lt;script async=&quot;&quot; src=&quot;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
 
@@ -850,15 +885,18 @@ print(Y)
      (adsbygoogle = window.adsbygoogle || []).push({});
 &lt;/script&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;2-手書き数字認識mnist&quot;&gt;2. 手書き数字認識（MNIST）&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;ここからは，今実装した3層ニューラルネットワークを活用して，手書き数字を実際に分類していきます．&lt;/p&gt;
+&lt;h2 id=&quot;2-手書き数字認識mnist&quot;&gt;2. 手書き数字認識（MNIST）&lt;/h2&gt;
 
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: ゼロから〜のP72〜81&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;ここからは、今実装した3層ニューラルネットワークを活用して、手書き数字を実際に分類していきます。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: ゼロから〜のP72〜81&lt;/p&gt;
+&lt;/blockquote&gt;
+
 &lt;h2 id=&quot;21-mnistデータセットの読み込み&quot;&gt;2.1 MNISTデータセットの読み込み&lt;/h2&gt;
-&lt;p&gt;Kerasでは，MNISTデータセットは簡単にダウンロード&amp;amp;呼び出しできるようになっています．&lt;/p&gt;
+&lt;p&gt;Kerasでは、MNISTデータセットは簡単にダウンロード&amp;amp;呼び出しできるようになっています。&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mnist_nn.py&lt;/code&gt;を作成して，以下を入力し動作させてみてください．&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mnist_nn.py&lt;/code&gt;を作成して、以下を入力し動作させてみてください。&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from keras.datasets import mnist
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
@@ -866,28 +904,30 @@ print(Y)
 print(x_train.shape)
 print(y_train.shape)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/datasets/#mnist&quot;&gt;https://keras.io/ja/datasets/#mnist&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/datasets/#mnist&quot;&gt;https://keras.io/ja/datasets/#mnist&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;Output:&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(60000, 28, 28)
 (60000,)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;(&lt;strong&gt;注意&lt;/strong&gt;) Kerasの&lt;code class=&quot;highlighter-rouge&quot;&gt;mnist.load_data()&lt;/code&gt;は，「正規化されていない &amp;amp; 2次元配列」の状態のリストが返ってきます．ゼロから〜のP73の挙動とは異なるので，注意してください．&lt;/p&gt;
+&lt;p&gt;(&lt;strong&gt;注意&lt;/strong&gt;) Kerasの&lt;code class=&quot;highlighter-rouge&quot;&gt;mnist.load_data()&lt;/code&gt;は、「正規化されていない &amp;amp; 2次元配列」の状態のリストが返ってきます。ゼロから〜のP73の挙動とは異なるので、注意してください。&lt;/p&gt;
 
-&lt;p&gt;ここで，データセットが&lt;code class=&quot;highlighter-rouge&quot;&gt;train&lt;/code&gt;と&lt;code class=&quot;highlighter-rouge&quot;&gt;test&lt;/code&gt;の二つに分割されていることに気がつくと思います．これは，機械学習においてはモデルの汎化性能を測定するために，通常データセットを訓練データとテストデータの二つ（もしくはそれ以上）に分割するためです．詳しくは，ゼロから〜の第4章を見てください．&lt;/p&gt;
+&lt;p&gt;ここで、データセットが&lt;code class=&quot;highlighter-rouge&quot;&gt;train&lt;/code&gt;と&lt;code class=&quot;highlighter-rouge&quot;&gt;test&lt;/code&gt;の二つに分割されていることに気がつくと思います。これは、機械学習においてはモデルの汎化性能を測定するために、通常データセットを訓練データとテストデータの二つ（もしくはそれ以上）に分割するためです。詳しくは、ゼロから〜の第4章を見てください。&lt;/p&gt;
 
-&lt;h2 id=&quot;22-データセットの前処理&quot;&gt;2.2 データセットの前処理&lt;/h2&gt;
-&lt;p&gt;モデルの推論処理においてMNISTデータセットを活用するので，「正規化 &amp;amp; 一次元配列化」の処理を行っておきます．&lt;/p&gt;
+&lt;h3 id=&quot;22-データセットの前処理&quot;&gt;2.2 データセットの前処理&lt;/h3&gt;
+&lt;p&gt;モデルの推論処理においてMNISTデータセットを活用するので、「正規化 &amp;amp; 一次元配列化」の処理を行っておきます。&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;配列の形状変換は&lt;code class=&quot;highlighter-rouge&quot;&gt;.reshape&lt;/code&gt;メソッドで行えます．&lt;br /&gt;
-引数は変換後の配列形状です．&lt;/p&gt;
+    &lt;p&gt;配列の形状変換は&lt;code class=&quot;highlighter-rouge&quot;&gt;.reshape&lt;/code&gt;メソッドで行えます。&lt;br /&gt;
+引数は変換後の配列形状です。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;正規化処理のために，リストをfloat型に変換します．&lt;br /&gt;
-型変換は，&lt;code class=&quot;highlighter-rouge&quot;&gt;.astype&lt;/code&gt;メソッドで行えます．&lt;/p&gt;
+    &lt;p&gt;正規化処理のために、リストをfloat型に変換します。&lt;br /&gt;
+型変換は、&lt;code class=&quot;highlighter-rouge&quot;&gt;.astype&lt;/code&gt;メソッドで行えます。&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -907,19 +947,19 @@ print(x_train.shape)
 &lt;p&gt;Output:&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(60000, 784)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;きちんと一次元配列に変換されていることが確認できました．&lt;br /&gt;
-正規化されているかどうかは，配列の要素のうち一つを表示させて確認してみてください．&lt;/p&gt;
+&lt;p&gt;きちんと一次元配列に変換されていることが確認できました。&lt;br /&gt;
+正規化されているかどうかは、配列の要素のうち一つを表示させて確認してみてください。&lt;/p&gt;
 
-&lt;h2 id=&quot;22-モデルの改良&quot;&gt;2.2 モデルの改良&lt;/h2&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;three_nn.py&lt;/code&gt;でMNISTを分類できるように，以下の2点を改良します． &lt;br /&gt;
-改良したものは，&lt;code class=&quot;highlighter-rouge&quot;&gt;mnist_nn.py&lt;/code&gt;に追記してください．&lt;/p&gt;
+&lt;h3 id=&quot;22-モデルの改良&quot;&gt;2.2 モデルの改良&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;three_nn.py&lt;/code&gt;でMNISTを分類できるように、以下の2点を改良します。 &lt;br /&gt;
+改良したものは、&lt;code class=&quot;highlighter-rouge&quot;&gt;mnist_nn.py&lt;/code&gt;に追記してください。&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;ゼロから〜のP76と合わせて，一層目の全結合層のunit数を50，二層目を100とし，出力層は10とします．&lt;/p&gt;
+    &lt;p&gt;ゼロから〜のP76と合わせて、一層目の全結合層のunit数を50、二層目を100とし、出力層は10とします。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;MNISTデータセットの分類は「&lt;strong&gt;分類問題&lt;/strong&gt;」であるため，出力層にsoftmax層を追加します．&lt;/p&gt;
+    &lt;p&gt;MNISTデータセットの分類は「&lt;strong&gt;分類問題&lt;/strong&gt;」であるため、出力層にsoftmax層を追加します。&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -956,26 +996,26 @@ Trainable params: 45,360
 Non-trainable params: 0
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;きちんと望みのモデルが実装されていることが確認できました．&lt;/p&gt;
+&lt;p&gt;きちんと望みのモデルが実装されていることが確認できました。&lt;/p&gt;
 
-&lt;p&gt;ここで，中間層の定義方法について，&lt;code class=&quot;highlighter-rouge&quot;&gt;three_nn.py&lt;/code&gt;と書き方が変わっていると気づいた方もいるでしょう．&lt;/p&gt;
+&lt;p&gt;ここで、中間層の定義方法について、&lt;code class=&quot;highlighter-rouge&quot;&gt;three_nn.py&lt;/code&gt;と書き方が変わっていると気づいた方もいるでしょう。&lt;/p&gt;
 
-&lt;p&gt;Functional APIを用いたモデル定義では，前回紹介したように，入力と出力のテンソルを個別に保持しておけば良いルールになっています．&lt;/p&gt;
+&lt;p&gt;Functional APIを用いたモデル定義では、前回紹介したように、入力と出力のテンソルを個別に保持しておけば良いルールになっています。&lt;/p&gt;
 
-&lt;p&gt;したがって，中間のベクトルに関しては特段利用したいケースがない限りは，同一の変数を利用した方が，コードが煩雑にならないのでおすすめです．&lt;/p&gt;
+&lt;p&gt;したがって、中間のベクトルに関しては特段利用したいケースがない限りは、同一の変数を利用した方が、コードが煩雑にならないのでおすすめです。&lt;/p&gt;
 
-&lt;h2 id=&quot;23-重みファイルの読み込み&quot;&gt;2.3 重みファイルの読み込み&lt;/h2&gt;
-&lt;p&gt;重みファイルは，ゼロから〜のものと同一のファイルを使用します．&lt;/p&gt;
+&lt;h3 id=&quot;23-重みファイルの読み込み&quot;&gt;2.3 重みファイルの読み込み&lt;/h3&gt;
+&lt;p&gt;重みファイルは、ゼロから〜のものと同一のファイルを使用します。&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://github.com/oreilly-japan/deep-learning-from-scratch/tree/master/ch03&quot;&gt;公式レポジトリ&lt;/a&gt;から，&lt;code class=&quot;highlighter-rouge&quot;&gt;sample_weight.pkl&lt;/code&gt;をダウンロードしてください．&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/oreilly-japan/deep-learning-from-scratch/tree/master/ch03&quot;&gt;公式レポジトリ&lt;/a&gt;から、&lt;code class=&quot;highlighter-rouge&quot;&gt;sample_weight.pkl&lt;/code&gt;をダウンロードしてください。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mnist_nn.py&lt;/code&gt;と同一ディレクトリ内に&lt;code class=&quot;highlighter-rouge&quot;&gt;sample_weight.pkl&lt;/code&gt;を配置してください．&lt;/p&gt;
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mnist_nn.py&lt;/code&gt;と同一ディレクトリ内に&lt;code class=&quot;highlighter-rouge&quot;&gt;sample_weight.pkl&lt;/code&gt;を配置してください。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;以下が，重みファイルを読み込むためのスクリプトになります．&lt;br /&gt;
-なお，今回は「推論処理のみ行う &amp;amp; できる限りゼロから〜に即したものにする」ために，このスクリプトを使用しますが，このような手間のかかる初期化処理は通常行いません．&lt;/p&gt;
+    &lt;p&gt;以下が、重みファイルを読み込むためのスクリプトになります。&lt;br /&gt;
+なお、今回は「推論処理のみ行う &amp;amp; できる限りゼロから〜に即したものにする」ために、このスクリプトを使用しますが、このような手間のかかる初期化処理は通常行いません。&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -992,14 +1032,16 @@ def load_weight():
 model.set_weights(load_weight())
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://keras.io/ja/getting-started/faq/#keras-model&quot;&gt;Kerasでモデルの保存/ロードを行う&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://keras.io/ja/getting-started/faq/#keras-model&quot;&gt;Kerasでモデルの保存/ロードを行う&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h2 id=&quot;24-テストする&quot;&gt;2.4 テストする&lt;/h2&gt;
-&lt;p&gt;それでは，ゼロから〜のP77と同様に実装したモデルをテストしていきましょう．&lt;/p&gt;
+&lt;h3 id=&quot;24-テストする&quot;&gt;2.4 テストする&lt;/h3&gt;
+&lt;p&gt;それでは、ゼロから〜のP77と同様に実装したモデルをテストしていきましょう。&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;np.argmax&lt;/code&gt;で軸(axis)指定をしていますが，これはリストが2次元配列以上のときに，「どの軸方向に対して演算を行うか」を指定するために活用します．&lt;br /&gt;
-軸指定の詳細については，&lt;a href=&quot;https://deepage.net/features/numpy-axis.html&quot;&gt;このページ&lt;/a&gt;を参照するとわかりやすいです．&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;np.argmax&lt;/code&gt;で軸(axis)指定をしていますが、これはリストが2次元配列以上のときに、「どの軸方向に対して演算を行うか」を指定するために活用します。&lt;br /&gt;
+軸指定の詳細については、&lt;a href=&quot;https://deepage.net/features/numpy-axis.html&quot;&gt;このページ&lt;/a&gt;を参照するとわかりやすいです。&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;_y_test = model.predict(x_test)
@@ -1012,29 +1054,29 @@ print(f'Accuracy: {np.sum(y_test == _y_test) / len(y_test)}')
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Accuracy: 0.9352
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;めでたく，ゼロから〜のP77に示されている分類精度: 0.9352を得ることができました！&lt;/p&gt;
+&lt;p&gt;めでたく、ゼロから〜のP77に示されている分類精度: 0.9352を得ることができました！&lt;/p&gt;
 
-&lt;h1 id=&quot;まとめ&quot;&gt;まとめ&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;今回はゼロから〜の3章に対応する部分である，3層ニューラルネットとMNISTデータセットの分類をKerasで実装しました． 
-深層学習フレームワークを活用することで，たった数行でゼロから〜にあるものと同一のモデルを実装できることを実感したと思います．&lt;/p&gt;
+&lt;h2 id=&quot;まとめ&quot;&gt;まとめ&lt;/h2&gt;
 
-&lt;p&gt;次回からはゼロから〜の4章以降に対応する，ニューラルネットワークの学習に入ります！&lt;/p&gt;
+&lt;p&gt;今回はゼロから〜の3章に対応する部分である、3層ニューラルネットとMNISTデータセットの分類をKerasで実装しました。 
+深層学習フレームワークを活用することで、たった数行でゼロから〜にあるものと同一のモデルを実装できることを実感したと思います。&lt;/p&gt;
 
-&lt;h1 id=&quot;ソースコード&quot;&gt;ソースコード&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;ソースコードは，&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras&quot;&gt;GitHub&lt;/a&gt;にて公開しています．&lt;/p&gt;</content><author><name></name></author><category term="「ゼロからKeras」シリーズ" /><summary type="html">はじめに このシリーズでは，深層学習の入門書として有名な，「ゼロから作るDeep Learning」（以下，ゼロから〜）と同時並行で，フレームワークを学習し，その定着を目指します．</summary></entry><entry xml:lang="ja_JP"><title type="html">ゼロから作るDeep Learningとともに学ぶフレームワーク（パーセプトロン編）</title><link href="http://localhost:4000/DL-Intro-1/" rel="alternate" type="text/html" title="ゼロから作るDeep Learningとともに学ぶフレームワーク（パーセプトロン編）" /><published>2019-04-13T00:00:00+09:00</published><updated>2019-04-13T00:00:00+09:00</updated><id>http://localhost:4000/DL-Intro-1</id><content type="html" xml:base="http://localhost:4000/DL-Intro-1/">&lt;h1 id=&quot;はじめに&quot;&gt;はじめに&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;「ゼロから作るディープラーニング」は深層学習を学ぶ入門書として非常に人気があり，様々な場所で用いられています．&lt;/p&gt;
+&lt;p&gt;次回からはゼロから〜の4章以降に対応する、ニューラルネットワークの学習に入ります！&lt;/p&gt;
 
-&lt;p&gt;しかしながら，「フレームワークを用いないで深層学習の基礎を学ぶ」という本の目的により，深層学習フレームワークに関する内容は触れられていません．&lt;/p&gt;
+&lt;h2 id=&quot;ソースコード&quot;&gt;ソースコード&lt;/h2&gt;
 
-&lt;p&gt;したがって，読者の中には実際のフレームワークを用いた機械学習の勉強へと繋げる機会や気力を失ってしまった人も少なからずいると思います．&lt;/p&gt;
+&lt;p&gt;ソースコードは、&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras&quot;&gt;GitHub&lt;/a&gt;にて公開しています。&lt;/p&gt;</content><author><name></name></author><category term="「ゼロからKeras」シリーズ" /><summary type="html">はじめに</summary></entry><entry xml:lang="ja_JP"><title type="html">ゼロから作るDeep Learningとともに学ぶフレームワーク（パーセプトロン編）</title><link href="http://localhost:4000/DL-Intro-1/" rel="alternate" type="text/html" title="ゼロから作るDeep Learningとともに学ぶフレームワーク（パーセプトロン編）" /><published>2019-04-13T00:00:00+09:00</published><updated>2019-04-13T00:00:00+09:00</updated><id>http://localhost:4000/DL-Intro-1</id><content type="html" xml:base="http://localhost:4000/DL-Intro-1/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
 
-&lt;p&gt;このプロジェクトでは，「ゼロから作るDeep Learning」（以下，ゼロから〜）を学習しつつ，深層学習フレームワークの一つである，Kerasについて学んでいきます．&lt;br /&gt;
-これにより，深層学習の基礎を理解しつつ，フレームワークを活用した実装方法について学ぶことができます！&lt;/p&gt;
+&lt;p&gt;「ゼロから作るディープラーニング」は深層学習を学ぶ入門書として非常に人気があり、様々な場所で用いられています。&lt;/p&gt;
 
-&lt;p&gt;それでは，まずはKerasのインストールから始めていきましょう．&lt;/p&gt;
+&lt;p&gt;しかしながら、「フレームワークを用いないで深層学習の基礎を学ぶ」という本の目的により、深層学習フレームワークに関する内容は触れられていません。&lt;/p&gt;
+
+&lt;p&gt;そのため、読者の中には実際のフレームワークを用いた機械学習の勉強へと繋げる機会や気力を失ってしまった人も少なからずいると思います。&lt;/p&gt;
+
+&lt;p&gt;このプロジェクトでは、「ゼロから作るDeep Learning」（以下、ゼロから〜）を学習しつつ、深層学習フレームワークの一つである、Kerasについて学んでいきます。&lt;br /&gt;
+これにより、深層学習の基礎を理解しつつ、フレームワークを活用した実装方法について学ぶことができます！&lt;/p&gt;
+
+&lt;p&gt;それでは、まずはKerasのインストールから始めていきましょう。&lt;/p&gt;
 
 &lt;div class=&quot;link_box&quot;&gt;
     &lt;span class=&quot;box-title&quot;&gt;「ゼロからKeras」シリーズリンク&lt;/span&gt;
@@ -1058,84 +1100,87 @@ msmaflink({&quot;n&quot;:&quot;ゼロから作るDeep Learning ―Pythonで学�
 
 &lt;!-- MoshimoAffiliateEasyLink END --&gt;
 
-&lt;h1 id=&quot;1-kerasのインストール&quot;&gt;1. Kerasのインストール&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;(&lt;strong&gt;注意&lt;/strong&gt;) 本プロジェクトでは，すでにPythonやNumPy等のインストールは終えているものとしてスタートします．&lt;br /&gt;
-環境整備がお済みでない方は，先にゼロから〜の一章を参考に済ませてください．&lt;/p&gt;
+&lt;h2 id=&quot;1-kerasのインストール&quot;&gt;1. Kerasのインストール&lt;/h2&gt;
+&lt;p&gt;(&lt;strong&gt;注意&lt;/strong&gt;) 本プロジェクトでは、すでにPythonやNumPy等のインストールは終えているものとしてスタートします。&lt;br /&gt;
+環境整備がお済みでない方は、先にゼロから〜の一章を参考に済ませてください。&lt;/p&gt;
 
-&lt;p&gt;・コマンドライン上で，以下のコマンドを入力してKerasをインストールします．&lt;/p&gt;
+&lt;p&gt;・コマンドライン上で、以下のコマンドを入力してKerasをインストールします。&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install keras
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://keras.io/ja/&quot;&gt;https://keras.io/ja/&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://keras.io/ja/&quot;&gt;https://keras.io/ja/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h1 id=&quot;2-プロジェクトの作成&quot;&gt;2. プロジェクトの作成&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;お好きな環境でゼロから〜二章用のプロジェクトを作成してください．&lt;/p&gt;
+&lt;h2 id=&quot;2-プロジェクトの作成&quot;&gt;2. プロジェクトの作成&lt;/h2&gt;
 
-&lt;p&gt;ただし，ここでは，&lt;code class=&quot;highlighter-rouge&quot;&gt;sequential.py&lt;/code&gt;と&lt;code class=&quot;highlighter-rouge&quot;&gt;functional.py&lt;/code&gt;の二つのファイルを作成することとします．&lt;/p&gt;
+&lt;p&gt;お好きな環境でゼロから〜二章用のプロジェクトを作成してください。&lt;/p&gt;
 
-&lt;h1 id=&quot;3-モデルの作成--テスト&quot;&gt;3. モデルの作成 &amp;amp; テスト&lt;/h1&gt;
-&lt;hr /&gt;
+&lt;p&gt;ただし、ここでは、&lt;code class=&quot;highlighter-rouge&quot;&gt;sequential.py&lt;/code&gt;と&lt;code class=&quot;highlighter-rouge&quot;&gt;functional.py&lt;/code&gt;の二つのファイルを作成することとします。&lt;/p&gt;
+
+&lt;h2 id=&quot;3-モデルの作成--テスト&quot;&gt;3. モデルの作成 &amp;amp; テスト&lt;/h2&gt;
+
 &lt;ul&gt;
-  &lt;li&gt;KerasにはSepuentialモデルとFunctional APIの2種類のモデルの定義方法があります．
+  &lt;li&gt;KerasにはSepuentialモデルとFunctional APIの2種類のモデルの定義方法があります。
     &lt;ul&gt;
-      &lt;li&gt;Sepuentialモデル：様々な層を積み木のように積み重ねていくイメージ．線形スタック．&lt;/li&gt;
-      &lt;li&gt;Functionalモデル：層をインスタンスとして扱う．複雑なモデルを定義するときに便利．&lt;/li&gt;
+      &lt;li&gt;Sepuentialモデル：様々な層を積み木のように積み重ねていくイメージ。線形スタック。&lt;/li&gt;
+      &lt;li&gt;Functionalモデル：層をインスタンスとして扱う。複雑なモデルを定義するときに便利。&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;それぞれのモデルの定義方法の違いを以下で見ていきましょう．&lt;/p&gt;
+&lt;p&gt;それぞれのモデルの定義方法の違いを以下で見ていきましょう。&lt;/p&gt;
 
-&lt;h2 id=&quot;31-sequential-モデル&quot;&gt;3.1 Sequential モデル&lt;/h2&gt;
-&lt;hr /&gt;
+&lt;h3 id=&quot;31-sequential-モデル&quot;&gt;3.1 Sequential モデル&lt;/h3&gt;
+
 &lt;ul&gt;
-  &lt;li&gt;SequentialモデルでANDゲートのパーセプトロンを実装します．&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;sequential.py&lt;/code&gt;に以下のソースを順に書いていきましょう．&lt;/li&gt;
+  &lt;li&gt;SequentialモデルでANDゲートのパーセプトロンを実装します。&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;sequential.py&lt;/code&gt;に以下のソースを順に書いていきましょう。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;1-レイヤー--numpyを読み込む&quot;&gt;1. レイヤー + NumPyを読み込む&lt;/h3&gt;
+&lt;h4 id=&quot;311-レイヤー--numpyを読み込む&quot;&gt;3.1.1 レイヤー + NumPyを読み込む&lt;/h4&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from keras.models import Sequential
 from keras.layers import Dense
 
 import numpy as np
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;2-modelにsepuentialモデルを定義する&quot;&gt;2. &lt;code class=&quot;highlighter-rouge&quot;&gt;model&lt;/code&gt;にSepuentialモデルを定義する&lt;/h3&gt;
+&lt;h4 id=&quot;312-modelにsepuentialモデルを定義する&quot;&gt;3.1.2 &lt;code class=&quot;highlighter-rouge&quot;&gt;model&lt;/code&gt;にSepuentialモデルを定義する&lt;/h4&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sequential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;3-modelにdense層全結合層を追加する&quot;&gt;3. &lt;code class=&quot;highlighter-rouge&quot;&gt;model&lt;/code&gt;にDense層（全結合層）を追加する&lt;/h3&gt;
+&lt;h4 id=&quot;313-modelにdense層全結合層を追加する&quot;&gt;3.1.3 &lt;code class=&quot;highlighter-rouge&quot;&gt;model&lt;/code&gt;にDense層（全結合層）を追加する&lt;/h4&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;model.add(Dense(input_dim=2, units=1))
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;全結合層という用語はゼロから〜の二章には登場していませんが，ここでは単純パーセプトロンと同じと思ってください．&lt;br /&gt;
-参考程度に，&lt;code class=&quot;highlighter-rouge&quot;&gt;input_dim=2, units=1&lt;/code&gt;のときのDense層の様子を概念図にしたものを以下に示します．&lt;/li&gt;
+  &lt;li&gt;全結合層という用語はゼロから〜の二章には登場していませんが、ここでは単純パーセプトロンと同じと思ってください。&lt;br /&gt;
+参考程度に、&lt;code class=&quot;highlighter-rouge&quot;&gt;input_dim=2, units=1&lt;/code&gt;のときのDense層の様子を概念図にしたものを以下に示します。&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;div style=&quot;text-align: center;&quot;&gt;
     &lt;img src=&quot;/resources/2019-04-13/example_dense.png&quot; alt=&quot;Dense層の様子の概念図&quot; style=&quot;width: 450px;&quot; /&gt;
 &lt;/div&gt;
 
-&lt;h3 id=&quot;4-modelに重みを与える&quot;&gt;4. &lt;code class=&quot;highlighter-rouge&quot;&gt;model&lt;/code&gt;に重みを与える&lt;/h3&gt;
+&lt;h4 id=&quot;314-modelに重みを与える&quot;&gt;3.1.4 &lt;code class=&quot;highlighter-rouge&quot;&gt;model&lt;/code&gt;に重みを与える&lt;/h4&gt;
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;ゼロから〜の二章では予め重みとバイアスが与えられているので，この実装でも与えます．&lt;/p&gt;
+    &lt;p&gt;ゼロから〜の二章では予め重みとバイアスが与えられているので、この実装でも与えます。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;重みとバイアスの初期設定には，&lt;code class=&quot;highlighter-rouge&quot;&gt;model.set_weights()&lt;/code&gt;を使用します．&lt;br /&gt;
-引数は重みの入ったリストです．&lt;/p&gt;
+    &lt;p&gt;重みとバイアスの初期設定には、&lt;code class=&quot;highlighter-rouge&quot;&gt;model.set_weights()&lt;/code&gt;を使用します。&lt;br /&gt;
+引数は重みの入ったリストです。&lt;/p&gt;
     &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;model.set_weights([np.array([[0.5], [0.5]]), np.array([-0.7])])
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: ゼロから〜のP27&lt;/em&gt;&lt;/p&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: ゼロから〜のP27&lt;/p&gt;
+    &lt;/blockquote&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;5-テストする&quot;&gt;5. テストする&lt;/h3&gt;
+&lt;h4 id=&quot;315-テストする&quot;&gt;3.1.5 テストする&lt;/h4&gt;
 &lt;ul&gt;
-  &lt;li&gt;モデルのテストは&lt;code class=&quot;highlighter-rouge&quot;&gt;predict&lt;/code&gt;メソッドで行えます．&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;predict&lt;/code&gt;の返り値は，入力データの予測結果のリストになっています．&lt;/li&gt;
+  &lt;li&gt;モデルのテストは&lt;code class=&quot;highlighter-rouge&quot;&gt;predict&lt;/code&gt;メソッドで行えます。&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;predict&lt;/code&gt;の返り値は、入力データの予測結果のリストになっています。&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;X = np.array([[0,0], [0,1], [1,0], [1,1]])
@@ -1147,7 +1192,7 @@ print(Y_)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;この結果は以下のようになるはずです．&lt;br /&gt;
+  &lt;li&gt;この結果は以下のようになるはずです。&lt;br /&gt;
 Output:
     &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[[-0.7       ]
  [-0.19999999]
@@ -1155,15 +1200,15 @@ Output:
  [ 0.3       ]]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-  &lt;li&gt;これではわかりにくいので，マイナスのものは&lt;code class=&quot;highlighter-rouge&quot;&gt;False&lt;/code&gt;で，プラスのものは&lt;code class=&quot;highlighter-rouge&quot;&gt;True&lt;/code&gt;に置き換えます．
+  &lt;li&gt;これではわかりにくいので、マイナスのものは&lt;code class=&quot;highlighter-rouge&quot;&gt;False&lt;/code&gt;で、プラスのものは&lt;code class=&quot;highlighter-rouge&quot;&gt;True&lt;/code&gt;に置き換えます。
     &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Y_[Y_ &amp;lt;= 0] = False
 Y_[Y_ &amp;gt; 0] = True
 print(Y_)
 print(f'Results: {Y == Y_}')
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-  &lt;li&gt;以下のような結果が得られたと思います．&lt;br /&gt;
-見事ANDゲートが実装できていることが確認できますね．&lt;br /&gt;
+  &lt;li&gt;以下のような結果が得られたと思います。&lt;br /&gt;
+見事ANDゲートが実装できていることが確認できますね。&lt;br /&gt;
 Output:
     &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[[0.]
  [0.]
@@ -1177,54 +1222,56 @@ Results: [[ True]
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;32-fucntional-api&quot;&gt;3.2 Fucntional API&lt;/h2&gt;
-&lt;hr /&gt;
+&lt;h3 id=&quot;32-fucntional-api&quot;&gt;3.2 Fucntional API&lt;/h3&gt;
+
 &lt;ul&gt;
-  &lt;li&gt;Functional APIでANDゲートのパーセプトロンを実装します．&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;functional.py&lt;/code&gt;に以下のソースを順に書いていきましょう．&lt;/li&gt;
+  &lt;li&gt;Functional APIでANDゲートのパーセプトロンを実装します。&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;functional.py&lt;/code&gt;に以下のソースを順に書いていきましょう。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;1-レイヤー--numpyを読み込む-1&quot;&gt;1. レイヤー + NumPyを読み込む&lt;/h3&gt;
+&lt;h4 id=&quot;321-レイヤー--numpyを読み込む&quot;&gt;3.2.1 レイヤー + NumPyを読み込む&lt;/h4&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from keras import Model
 from keras.layers import Input, Dense
 
 import numpy as np
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;2-各種レイヤーを定義する&quot;&gt;2. 各種レイヤーを定義する&lt;/h3&gt;
-&lt;p&gt;Functional APIでは，入力層を追加で定義する必要があります．&lt;/p&gt;
+&lt;h4 id=&quot;322-各種レイヤーを定義する&quot;&gt;3.2.2 各種レイヤーを定義する&lt;/h4&gt;
+&lt;p&gt;Functional APIでは、入力層を追加で定義する必要があります。&lt;/p&gt;
 
-&lt;p&gt;Dense部分のイメージとしては，Denseレイヤーのインスタンスを生成し，その入力として，テンソル：_inputを与えるという感じです．出力のテンソルは_outputとなります．&lt;/p&gt;
+&lt;p&gt;Dense部分のイメージとしては、Denseレイヤーのインスタンスを生成し、その入力として、テンソル：_inputを与えるという感じです。出力のテンソルは_outputとなります。&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;_input = Input(shape=(2, ))
 _output = Dense(units=1)(_input)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;3-モデルを定義する&quot;&gt;3. モデルを定義する&lt;/h3&gt;
-&lt;p&gt;以下のように，Functional APIでは，モデルを定義する際に入力と出力のテンソルを別々に保持しておく必要があります！&lt;/p&gt;
+&lt;h4 id=&quot;323-モデルを定義する&quot;&gt;3.2.3 モデルを定義する&lt;/h4&gt;
+&lt;p&gt;以下のように、Functional APIでは、モデルを定義する際に入力と出力のテンソルを別々に保持しておく必要があります！&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;outputs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;em&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://keras.io/ja/getting-started/functional-api-guide/&quot;&gt;https://keras.io/ja/getting-started/functional-api-guide/&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://keras.io/ja/getting-started/functional-api-guide/&quot;&gt;https://keras.io/ja/getting-started/functional-api-guide/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h3 id=&quot;4-重みを与える--テストする&quot;&gt;4. 重みを与える &amp;amp; テストする&lt;/h3&gt;
-&lt;p&gt;Sequentialモデルと同じなので割愛します．&lt;br /&gt;
-結果が同一になることを確認するとよいです．&lt;/p&gt;
+&lt;h4 id=&quot;324-重みを与える--テストする&quot;&gt;3.2.4 重みを与える &amp;amp; テストする&lt;/h4&gt;
+&lt;p&gt;Sequentialモデルと同じなので割愛します。&lt;br /&gt;
+結果が同一になることを確認するとよいです。&lt;/p&gt;
 
-&lt;h1 id=&quot;まとめ&quot;&gt;まとめ&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;今回は，パーセプトロンによるANDゲートの実装をKerasにより行いました．&lt;/p&gt;
+&lt;h2 id=&quot;まとめ&quot;&gt;まとめ&lt;/h2&gt;
 
-&lt;p&gt;Kerasを用いることで，より「簡単に&amp;amp;抽象的に」パーセプトロンを実装することが確認できたと思います．&lt;/p&gt;
+&lt;p&gt;今回は、パーセプトロンによるANDゲートの実装をKerasにより行いました。&lt;/p&gt;
 
-&lt;p&gt;次回は，3層ニューラルネットワークの実装を行います．&lt;/p&gt;
+&lt;p&gt;Kerasを用いることで、より「簡単に&amp;amp;抽象的に」パーセプトロンを実装することが確認できたと思います。&lt;/p&gt;
 
-&lt;h1 id=&quot;発展課題&quot;&gt;発展課題&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;NAND, ORゲートも実装してみると良いでしょう．&lt;br /&gt;
-重みとバイアスは，ゼロから〜のP27,28を参照してください．&lt;/p&gt;
+&lt;p&gt;次回は、3層ニューラルネットワークの実装を行います。&lt;/p&gt;
 
-&lt;h1 id=&quot;ソースコード&quot;&gt;ソースコード&lt;/h1&gt;
-&lt;hr /&gt;
-&lt;p&gt;ソースコードは，&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras&quot;&gt;GitHub&lt;/a&gt;にて公開しています．&lt;/p&gt;</content><author><name></name></author><category term="「ゼロからKeras」シリーズ" /><summary type="html">はじめに 「ゼロから作るディープラーニング」は深層学習を学ぶ入門書として非常に人気があり，様々な場所で用いられています．</summary></entry><entry xml:lang="ja_JP"><title type="html">論文メモ：Deep contextualized word representations</title><link href="http://localhost:4000/Note-ELMo/" rel="alternate" type="text/html" title="論文メモ：Deep contextualized word representations" /><published>2019-04-06T00:00:00+09:00</published><updated>2019-04-06T00:00:00+09:00</updated><id>http://localhost:4000/Note-ELMo</id><content type="html" xml:base="http://localhost:4000/Note-ELMo/">&lt;h2 id=&quot;文献情報&quot;&gt;文献情報&lt;/h2&gt;
+&lt;h2 id=&quot;発展課題&quot;&gt;発展課題&lt;/h2&gt;
+
+&lt;p&gt;NAND, ORゲートも実装してみると良いでしょう。&lt;br /&gt;
+重みとバイアスは、ゼロから〜のP27,28を参照してください。&lt;/p&gt;
+
+&lt;h2 id=&quot;ソースコード&quot;&gt;ソースコード&lt;/h2&gt;
+
+&lt;p&gt;ソースコードは、&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras&quot;&gt;GitHub&lt;/a&gt;にて公開しています。&lt;/p&gt;</content><author><name></name></author><category term="「ゼロからKeras」シリーズ" /><summary type="html">はじめに</summary></entry><entry xml:lang="ja_JP"><title type="html">論文メモ：Deep contextualized word representations</title><link href="http://localhost:4000/Note-ELMo/" rel="alternate" type="text/html" title="論文メモ：Deep contextualized word representations" /><published>2019-04-06T00:00:00+09:00</published><updated>2019-04-06T00:00:00+09:00</updated><id>http://localhost:4000/Note-ELMo</id><content type="html" xml:base="http://localhost:4000/Note-ELMo/">&lt;h2 id=&quot;文献情報&quot;&gt;文献情報&lt;/h2&gt;
 &lt;p&gt;著者: M. Peters et al.&lt;br /&gt;
 所属: Allen Institute for Artificial Intelligence / Paul G. Allen School of Computer Science &amp;amp; Engineering, University of Washington&lt;br /&gt;
 出典: NAACL 2018 &lt;a href=&quot;https://aclweb.org/anthology/papers/N/N18/N18-1202/&quot;&gt;(https://aclweb.org/anthology/papers/N/N18/N18-1202/)&lt;/a&gt;&lt;/p&gt;
@@ -1403,13 +1450,13 @@ plt.close()
 
 &lt;h2 id=&quot;ソースコード&quot;&gt;ソースコード&lt;/h2&gt;
 &lt;p&gt;ソースコードは後日: &lt;a href=&quot;https://github.com/gucci-j/imdb-classification-gru&quot;&gt;GitHub&lt;/a&gt;に追加して公開する予定です．&lt;/p&gt;</content><author><name></name></author><category term="Tips" /><summary type="html">Pythonの可視化ライブラリであるseabornとグラフ描画ライブラリのMatplotlibを組み合わせることで，意外と簡単にSelf Attentionの重みを可視化することができる．</summary></entry><entry xml:lang="ja_JP"><title type="html">論文メモ：Frustratingly Short Attention Spans in Neural Language Modeling</title><link href="http://localhost:4000/Note-Frustratingly/" rel="alternate" type="text/html" title="論文メモ：Frustratingly Short Attention Spans in Neural Language Modeling" /><published>2019-04-01T00:00:00+09:00</published><updated>2019-04-01T00:00:00+09:00</updated><id>http://localhost:4000/Note-Frustratingly</id><content type="html" xml:base="http://localhost:4000/Note-Frustratingly/">&lt;h2 id=&quot;文献情報&quot;&gt;文献情報&lt;/h2&gt;
-&lt;hr /&gt;
+
 &lt;p&gt;著者: M. Daniluk et al.&lt;br /&gt;
 所属: University College London&lt;br /&gt;
 出典: ICLR 2017 &lt;a href=&quot;https://arxiv.org/abs/1702.04521&quot;&gt;(https://arxiv.org/abs/1702.04521)&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;この論文の主張&quot;&gt;この論文の主張&lt;/h2&gt;
-&lt;hr /&gt;
+
 &lt;ol&gt;
   &lt;li&gt;ニューラル言語モデルのためのkey-valueに基づくAttentionを提案&lt;/li&gt;
   &lt;li&gt;さらにそれを改良したkey-value-predictに基づくAttentionの提案&lt;/li&gt;
@@ -1417,7 +1464,7 @@ plt.close()
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;背景関連研究&quot;&gt;背景・関連研究&lt;/h2&gt;
-&lt;hr /&gt;
+
 &lt;p&gt;言語モデルは次に出現する単語を予測する能力を持っている．古典的なNグラムに基づく言語モデルは短文内での単語間の依存関係を捉えることができる．&lt;br /&gt;
 一方で，ニューラル言語モデルは，より広範囲な単語間の依存関係を捉えることができる．&lt;/p&gt;
 
@@ -1430,7 +1477,9 @@ plt.close()
   &lt;li&gt;attentionにおいて文脈ベクトルを求めるために使われる役割-&amp;gt;次のトークンを予測する際に文脈を考慮するのを助ける役割&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;img src=&quot;../resources/2019-04-01/k-v-p_attention.png&quot; alt=&quot;k-v-p attention&quot; /&gt;&lt;/p&gt;
+&lt;div style=&quot;text-align: center;&quot;&gt;
+    &lt;img src=&quot;/resources/2019-04-01/k-v-p_attention.png&quot; alt=&quot;k-v-p attention&quot; style=&quot;width: auto;&quot; /&gt;
+&lt;/div&gt;
 
 &lt;p&gt;一つの出力ベクトルに複数の役割を課すことは，モデルを複雑化させる要因となり，学習を難しくすると考えられる．&lt;br /&gt;
 したがって，本研究では，上記の三つの役割を別々のベクトルに割り当てることで，モデルを簡単化させることを目指す．&lt;br /&gt;
@@ -1438,7 +1487,6 @@ plt.close()
 論文内ではこれを，key-value-predictベクトルと名付けており，Attentionを含めて，key-value-predict Attentionと名付けている．&lt;/p&gt;
 
 &lt;h2 id=&quot;従来手法-attention-for-neural-language-modeling&quot;&gt;従来手法 (Attention for Neural Language Modeling)&lt;/h2&gt;
-&lt;hr /&gt;
 
 &lt;p&gt;(1) &lt;strong&gt;時刻: $t$において，$L$個の出力ベクトルを記憶領域として取る&lt;/strong&gt;&lt;/p&gt;
 
@@ -1484,10 +1532,11 @@ Concatではなく，以下の式に基づいて非線形に結合する．&lt;/
 &lt;p&gt;ただし，$W^* \in \mathbb{R}^{|V| \times k}$であり，$b \in \mathbb{R}^{|V|}$である．&lt;br /&gt;
 ともに学習パラメータである．&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../resources/2019-04-01/attention.png&quot; alt=&quot;ふつうのAttentionモデル&quot; /&gt;&lt;/p&gt;
+&lt;div style=&quot;text-align: center;&quot;&gt;
+    &lt;img src=&quot;/resources/2019-04-01/attention.png&quot; alt=&quot;ふつうのAttentionモデル&quot; style=&quot;width: auto;&quot; /&gt;
+&lt;/div&gt;
 
 &lt;h2 id=&quot;提案手法&quot;&gt;提案手法&lt;/h2&gt;
-&lt;hr /&gt;
 &lt;h3 id=&quot;key-value-attention&quot;&gt;Key-value attention&lt;/h3&gt;
 &lt;p&gt;key-value Attentionでは，出力ベクトルをkeyとvalueに分割する．&lt;br /&gt;
 具体的には，時刻: $t$における出力ベクトルを以下のように定義し直す．&lt;/p&gt;
@@ -1507,7 +1556,9 @@ h_t^* &amp;= {\rm tanh}(W^rr_t + W^xv_t)
 
 &lt;p&gt;→ ここで，$k$は検索キーとしての役割を果たしており，$v$はその中身のデータを表していると考えるとわかりやすいかもしれない．&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../resources/2019-04-01/k-v_attention.png&quot; alt=&quot;key-value attention&quot; /&gt;&lt;/p&gt;
+&lt;div style=&quot;text-align: center;&quot;&gt;
+    &lt;img src=&quot;/resources/2019-04-01/k-v_attention.png&quot; alt=&quot;key-value attention&quot; style=&quot;width: auto;&quot; /&gt;
+&lt;/div&gt;
 
 &lt;h3 id=&quot;key-value-predict-attention&quot;&gt;Key-value-predict attention&lt;/h3&gt;
 &lt;p&gt;key-value attentionにおいても，valueが複数回使われていることがわかる．&lt;br /&gt;
@@ -1519,10 +1570,11 @@ h_t^* &amp;= {\rm tanh}(W^rr_t + W^xv_t)
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;h_t = [k_t, v_t, p_t] \in \mathbb{R}^{3k}　\\
 h_t^* = {\rm tanh}(W^rr_t + W^xp_t)&lt;/script&gt;
 
-&lt;p&gt;&lt;img src=&quot;../resources/2019-04-01/k-v-p_attention.png&quot; alt=&quot;k-v-p attention&quot; /&gt;&lt;/p&gt;
+&lt;div style=&quot;text-align: center;&quot;&gt;
+    &lt;img src=&quot;/resources/2019-04-01/k-v-p_attention.png&quot; alt=&quot;k-v-p attention&quot; style=&quot;width: auto;&quot; /&gt;
+&lt;/div&gt;
 
 &lt;h2 id=&quot;実験結果&quot;&gt;実験結果&lt;/h2&gt;
-&lt;hr /&gt;
 &lt;h3 id=&quot;評価指標&quot;&gt;評価指標&lt;/h3&gt;
 &lt;h4 id=&quot;パープレキシティ&quot;&gt;パープレキシティ&lt;/h4&gt;
 &lt;p&gt;参考: &lt;a href=&quot;http://www.jnlp.org/lab/graduates/okada/nlp/term/entropy&quot;&gt;http://www.jnlp.org/lab/graduates/okada/nlp/term/entropy&lt;/a&gt;&lt;/p&gt;
@@ -1540,24 +1592,30 @@ h_t^* = {\rm tanh}(W^rr_t + W^xp_t)&lt;/script&gt;
 &lt;h3 id=&quot;評価結果&quot;&gt;評価結果&lt;/h3&gt;
 &lt;p&gt;提案手法： key-Value-Predictのパープレキシティが有意に小さいことがわかる．&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../resources/2019-04-01/result1.png&quot; alt=&quot;実験結果1&quot; /&gt;
-&lt;img src=&quot;../resources/2019-04-01/result2.png&quot; alt=&quot;実験結果2&quot; /&gt;&lt;/p&gt;
+&lt;div style=&quot;text-align: center;&quot;&gt;
+    &lt;img src=&quot;/resources/2019-04-01/result1.png&quot; alt=&quot;実験結果1&quot; style=&quot;width: auto;&quot; /&gt;
+&lt;/div&gt;
+
+&lt;div style=&quot;text-align: center;&quot;&gt;
+    &lt;img src=&quot;/resources/2019-04-01/result2.png&quot; alt=&quot;実験結果2&quot; style=&quot;width: auto;&quot; /&gt;
+&lt;/div&gt;
 
 &lt;p&gt;(a)の図から，提案手法: key-value-predict attentionのおかげで，広範囲な文脈を考慮出来るようになっていることがわかる．&lt;br /&gt;
-(b)の図から，より広範な文脈を考慮したとしても，パープレキシティが大幅に改善することは期待できないということが読み取れる．
-&lt;img src=&quot;../resources/2019-04-01/weight.png&quot; alt=&quot;重み&quot; /&gt;&lt;/p&gt;
+(b)の図から，より広範な文脈を考慮したとしても，パープレキシティが大幅に改善することは期待できないということが読み取れる．&lt;/p&gt;
+
+&lt;div style=&quot;text-align: center;&quot;&gt;
+    &lt;img src=&quot;/resources/2019-04-01/weight.png&quot; alt=&quot;注意機構の重み&quot; style=&quot;width: auto;&quot; /&gt;
+&lt;/div&gt;
 
 &lt;h2 id=&quot;議論&quot;&gt;議論&lt;/h2&gt;
-&lt;hr /&gt;
 &lt;p&gt;Attentionを用いた言語モデルによって，従来手法よりもパープレキシティを改善することができた．&lt;br /&gt;
 しかし，あまりにも長い文脈を考慮することは，パープレキシティの改善には得策ではないこともわかった．&lt;/p&gt;
 
 &lt;p&gt;Future workとしては局所的な文脈の内容を考慮しないで，その背景にあるより大域的に関係する文脈を考慮できるような手法を考えることが挙げられる．&lt;/p&gt;
 
 &lt;h2 id=&quot;次に読むべき論文は&quot;&gt;次に読むべき論文は？&lt;/h2&gt;
-&lt;hr /&gt;
 &lt;p&gt;Memory networksとか？&lt;br /&gt;
-→ key-valueの概念を初めて導入したらしい．&lt;/p&gt;</content><author><name></name></author><category term="論文メモ" /><summary type="html">文献情報 著者: M. Daniluk et al. 所属: University College London 出典: ICLR 2017 (https://arxiv.org/abs/1702.04521)</summary></entry><entry xml:lang="ja_JP"><title type="html">はじめに</title><link href="http://localhost:4000/Introduction/" rel="alternate" type="text/html" title="はじめに" /><published>2019-03-31T00:00:00+09:00</published><updated>2019-03-31T00:00:00+09:00</updated><id>http://localhost:4000/Introduction</id><content type="html" xml:base="http://localhost:4000/Introduction/">&lt;p&gt;当サイトでは，機械学習と自然言語処理に関するトピックをブログ形式で扱います．&lt;br /&gt;
-連絡等は，メールか&lt;a href=&quot;https://twitter.com/_gucciiiii&quot;&gt;Twitter&lt;/a&gt;のDMにてお願いいたします．&lt;/p&gt;
+→ key-valueの概念を初めて導入したらしい．&lt;/p&gt;</content><author><name></name></author><category term="論文メモ" /><summary type="html">文献情報</summary></entry><entry xml:lang="ja_JP"><title type="html">はじめに</title><link href="http://localhost:4000/Introduction/" rel="alternate" type="text/html" title="はじめに" /><published>2019-03-31T00:00:00+09:00</published><updated>2019-03-31T00:00:00+09:00</updated><id>http://localhost:4000/Introduction</id><content type="html" xml:base="http://localhost:4000/Introduction/">&lt;p&gt;当サイトでは，機械学習と自然言語処理に関するトピックをブログ形式で扱います．&lt;br /&gt;
+連絡等は，&lt;a href=&quot;/contact/&quot;&gt;お問い合わせフォーム&lt;/a&gt;か&lt;a href=&quot;https://twitter.com/_gucciiiii&quot;&gt;Twitter&lt;/a&gt;のDMにてお願いいたします．&lt;/p&gt;
 
-&lt;p&gt;当サイトのご利用規約やプライバシーポリシーに関しては，&lt;a href=&quot;/privacy/&quot;&gt;こちら&lt;/a&gt;をご覧ください．&lt;/p&gt;</content><author><name></name></author><summary type="html">当サイトでは，機械学習と自然言語処理に関するトピックをブログ形式で扱います． 連絡等は，メールかTwitterのDMにてお願いいたします．</summary></entry></feed>
+&lt;p&gt;当サイトのご利用規約やプライバシーポリシーに関しては，&lt;a href=&quot;/privacy/&quot;&gt;こちら&lt;/a&gt;をご覧ください．&lt;/p&gt;</content><author><name></name></author><summary type="html">当サイトでは，機械学習と自然言語処理に関するトピックをブログ形式で扱います． 連絡等は，お問い合わせフォームかTwitterのDMにてお願いいたします．</summary></entry></feed>

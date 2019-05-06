@@ -11,12 +11,8 @@
     
     <meta name="description" content="はじめに
 
-「ゼロから作るディープラーニング」は深層学習を学ぶ入門書として非常に人気があり，様々な場所で用いられています．
-
 " />
     <meta property="og:description" content="はじめに
-
-「ゼロから作るディープラーニング」は深層学習を学ぶ入門書として非常に人気があり，様々な場所で用いられています．
 
 " />
     
@@ -34,6 +30,7 @@
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <link rel="alternate" type="application/rss+xml" title="きままにNLP - A Technical Blog about NLP and ML" href="/feed.xml" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet">
     
     <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
 
@@ -45,15 +42,15 @@
 <meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="ゼロから作るDeep Learningとともに学ぶフレームワーク（パーセプトロン編）" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="「ゼロから作るDeep Learning」とともに深層学習フレームワークを学ぶプロジェクト第一弾として，Kerasの環境整備とパーセプトロンの実装を行います．" />
-<meta property="og:description" content="「ゼロから作るDeep Learning」とともに深層学習フレームワークを学ぶプロジェクト第一弾として，Kerasの環境整備とパーセプトロンの実装を行います．" />
+<meta name="description" content="「ゼロから作るDeep Learning」とともに深層学習フレームワークを学ぶプロジェクト第一弾として、Kerasの環境整備とパーセプトロンの実装を行います。" />
+<meta property="og:description" content="「ゼロから作るDeep Learning」とともに深層学習フレームワークを学ぶプロジェクト第一弾として、Kerasの環境整備とパーセプトロンの実装を行います。" />
 <link rel="canonical" href="http://localhost:4000/DL-Intro-1/" />
 <meta property="og:url" content="http://localhost:4000/DL-Intro-1/" />
 <meta property="og:site_name" content="きままにNLP" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-04-13T00:00:00+09:00" />
 <script type="application/ld+json">
-{"description":"「ゼロから作るDeep Learning」とともに深層学習フレームワークを学ぶプロジェクト第一弾として，Kerasの環境整備とパーセプトロンの実装を行います．","@type":"BlogPosting","url":"http://localhost:4000/DL-Intro-1/","headline":"ゼロから作るDeep Learningとともに学ぶフレームワーク（パーセプトロン編）","dateModified":"2019-04-13T00:00:00+09:00","datePublished":"2019-04-13T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/DL-Intro-1/"},"@context":"https://schema.org"}</script>
+{"description":"「ゼロから作るDeep Learning」とともに深層学習フレームワークを学ぶプロジェクト第一弾として、Kerasの環境整備とパーセプトロンの実装を行います。","@type":"BlogPosting","url":"http://localhost:4000/DL-Intro-1/","headline":"ゼロから作るDeep Learningとともに学ぶフレームワーク（パーセプトロン編）","dateModified":"2019-04-13T00:00:00+09:00","datePublished":"2019-04-13T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/DL-Intro-1/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <!-- Google Adsense-->
@@ -90,6 +87,7 @@
     <div id="main" role="main" class="container">
       <article class="post">
   <h1>ゼロから作るDeep Learningとともに学ぶフレームワーク（パーセプトロン編）</h1>
+
   <div class="post-tag">
     
 
@@ -119,19 +117,19 @@
     <ul>
       <li><a href="#31-sequential-モデル">3.1 Sequential モデル</a>
         <ul>
-          <li><a href="#1-レイヤー--numpyを読み込む">1. レイヤー + NumPyを読み込む</a></li>
-          <li><a href="#2-modelにsepuentialモデルを定義する">2. modelにSepuentialモデルを定義する</a></li>
-          <li><a href="#3-modelにdense層全結合層を追加する">3. modelにDense層（全結合層）を追加する</a></li>
-          <li><a href="#4-modelに重みを与える">4. modelに重みを与える</a></li>
-          <li><a href="#5-テストする">5. テストする</a></li>
+          <li><a href="#311-レイヤー--numpyを読み込む">3.1.1 レイヤー + NumPyを読み込む</a></li>
+          <li><a href="#312-modelにsepuentialモデルを定義する">3.1.2 modelにSepuentialモデルを定義する</a></li>
+          <li><a href="#313-modelにdense層全結合層を追加する">3.1.3 modelにDense層（全結合層）を追加する</a></li>
+          <li><a href="#314-modelに重みを与える">3.1.4 modelに重みを与える</a></li>
+          <li><a href="#315-テストする">3.1.5 テストする</a></li>
         </ul>
       </li>
       <li><a href="#32-fucntional-api">3.2 Fucntional API</a>
         <ul>
-          <li><a href="#1-レイヤー--numpyを読み込む-1">1. レイヤー + NumPyを読み込む</a></li>
-          <li><a href="#2-各種レイヤーを定義する">2. 各種レイヤーを定義する</a></li>
-          <li><a href="#3-モデルを定義する">3. モデルを定義する</a></li>
-          <li><a href="#4-重みを与える--テストする">4. 重みを与える &amp; テストする</a></li>
+          <li><a href="#321-レイヤー--numpyを読み込む">3.2.1 レイヤー + NumPyを読み込む</a></li>
+          <li><a href="#322-各種レイヤーを定義する">3.2.2 各種レイヤーを定義する</a></li>
+          <li><a href="#323-モデルを定義する">3.2.3 モデルを定義する</a></li>
+          <li><a href="#324-重みを与える--テストする">3.2.4 重みを与える &amp; テストする</a></li>
         </ul>
       </li>
     </ul>
@@ -140,20 +138,21 @@
   <li><a href="#発展課題">発展課題</a></li>
   <li><a href="#ソースコード">ソースコード</a></li>
 </ul>
-  </div> 
+  </div>
+
   <div class="entry">
-    <h1 id="はじめに">はじめに</h1>
-<hr />
-<p>「ゼロから作るディープラーニング」は深層学習を学ぶ入門書として非常に人気があり，様々な場所で用いられています．</p>
+    <h2 id="はじめに">はじめに</h2>
 
-<p>しかしながら，「フレームワークを用いないで深層学習の基礎を学ぶ」という本の目的により，深層学習フレームワークに関する内容は触れられていません．</p>
+<p>「ゼロから作るディープラーニング」は深層学習を学ぶ入門書として非常に人気があり、様々な場所で用いられています。</p>
 
-<p>したがって，読者の中には実際のフレームワークを用いた機械学習の勉強へと繋げる機会や気力を失ってしまった人も少なからずいると思います．</p>
+<p>しかしながら、「フレームワークを用いないで深層学習の基礎を学ぶ」という本の目的により、深層学習フレームワークに関する内容は触れられていません。</p>
 
-<p>このプロジェクトでは，「ゼロから作るDeep Learning」（以下，ゼロから〜）を学習しつつ，深層学習フレームワークの一つである，Kerasについて学んでいきます．<br />
-これにより，深層学習の基礎を理解しつつ，フレームワークを活用した実装方法について学ぶことができます！</p>
+<p>そのため、読者の中には実際のフレームワークを用いた機械学習の勉強へと繋げる機会や気力を失ってしまった人も少なからずいると思います。</p>
 
-<p>それでは，まずはKerasのインストールから始めていきましょう．</p>
+<p>このプロジェクトでは、「ゼロから作るDeep Learning」（以下、ゼロから〜）を学習しつつ、深層学習フレームワークの一つである、Kerasについて学んでいきます。<br />
+これにより、深層学習の基礎を理解しつつ、フレームワークを活用した実装方法について学ぶことができます！</p>
+
+<p>それでは、まずはKerasのインストールから始めていきましょう。</p>
 
 <div class="link_box">
     <span class="box-title">「ゼロからKeras」シリーズリンク</span>
@@ -177,84 +176,87 @@ msmaflink({"n":"ゼロから作るDeep Learning ―Pythonで学ぶディープ�
 
 <!-- MoshimoAffiliateEasyLink END -->
 
-<h1 id="1-kerasのインストール">1. Kerasのインストール</h1>
-<hr />
-<p>(<strong>注意</strong>) 本プロジェクトでは，すでにPythonやNumPy等のインストールは終えているものとしてスタートします．<br />
-環境整備がお済みでない方は，先にゼロから〜の一章を参考に済ませてください．</p>
+<h2 id="1-kerasのインストール">1. Kerasのインストール</h2>
+<p>(<strong>注意</strong>) 本プロジェクトでは、すでにPythonやNumPy等のインストールは終えているものとしてスタートします。<br />
+環境整備がお済みでない方は、先にゼロから〜の一章を参考に済ませてください。</p>
 
-<p>・コマンドライン上で，以下のコマンドを入力してKerasをインストールします．</p>
+<p>・コマンドライン上で、以下のコマンドを入力してKerasをインストールします。</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install keras
 </code></pre></div></div>
-<p><em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考: <a href="https://keras.io/ja/">https://keras.io/ja/</a></em></p>
+<blockquote>
+  <p><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考: <a href="https://keras.io/ja/">https://keras.io/ja/</a></p>
+</blockquote>
 
-<h1 id="2-プロジェクトの作成">2. プロジェクトの作成</h1>
-<hr />
-<p>お好きな環境でゼロから〜二章用のプロジェクトを作成してください．</p>
+<h2 id="2-プロジェクトの作成">2. プロジェクトの作成</h2>
 
-<p>ただし，ここでは，<code class="highlighter-rouge">sequential.py</code>と<code class="highlighter-rouge">functional.py</code>の二つのファイルを作成することとします．</p>
+<p>お好きな環境でゼロから〜二章用のプロジェクトを作成してください。</p>
 
-<h1 id="3-モデルの作成--テスト">3. モデルの作成 &amp; テスト</h1>
-<hr />
+<p>ただし、ここでは、<code class="highlighter-rouge">sequential.py</code>と<code class="highlighter-rouge">functional.py</code>の二つのファイルを作成することとします。</p>
+
+<h2 id="3-モデルの作成--テスト">3. モデルの作成 &amp; テスト</h2>
+
 <ul>
-  <li>KerasにはSepuentialモデルとFunctional APIの2種類のモデルの定義方法があります．
+  <li>KerasにはSepuentialモデルとFunctional APIの2種類のモデルの定義方法があります。
     <ul>
-      <li>Sepuentialモデル：様々な層を積み木のように積み重ねていくイメージ．線形スタック．</li>
-      <li>Functionalモデル：層をインスタンスとして扱う．複雑なモデルを定義するときに便利．</li>
+      <li>Sepuentialモデル：様々な層を積み木のように積み重ねていくイメージ。線形スタック。</li>
+      <li>Functionalモデル：層をインスタンスとして扱う。複雑なモデルを定義するときに便利。</li>
     </ul>
   </li>
 </ul>
 
-<p>それぞれのモデルの定義方法の違いを以下で見ていきましょう．</p>
+<p>それぞれのモデルの定義方法の違いを以下で見ていきましょう。</p>
 
-<h2 id="31-sequential-モデル">3.1 Sequential モデル</h2>
-<hr />
+<h3 id="31-sequential-モデル">3.1 Sequential モデル</h3>
+
 <ul>
-  <li>SequentialモデルでANDゲートのパーセプトロンを実装します．<br />
-<code class="highlighter-rouge">sequential.py</code>に以下のソースを順に書いていきましょう．</li>
+  <li>SequentialモデルでANDゲートのパーセプトロンを実装します。<br />
+<code class="highlighter-rouge">sequential.py</code>に以下のソースを順に書いていきましょう。</li>
 </ul>
 
-<h3 id="1-レイヤー--numpyを読み込む">1. レイヤー + NumPyを読み込む</h3>
+<h4 id="311-レイヤー--numpyを読み込む">3.1.1 レイヤー + NumPyを読み込む</h4>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from keras.models import Sequential
 from keras.layers import Dense
 
 import numpy as np
 </code></pre></div></div>
 
-<h3 id="2-modelにsepuentialモデルを定義する">2. <code class="highlighter-rouge">model</code>にSepuentialモデルを定義する</h3>
+<h4 id="312-modelにsepuentialモデルを定義する">3.1.2 <code class="highlighter-rouge">model</code>にSepuentialモデルを定義する</h4>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">model</span> <span class="p">=</span> <span class="n">Sequential</span><span class="p">()</span>
 </code></pre></div></div>
 
-<h3 id="3-modelにdense層全結合層を追加する">3. <code class="highlighter-rouge">model</code>にDense層（全結合層）を追加する</h3>
+<h4 id="313-modelにdense層全結合層を追加する">3.1.3 <code class="highlighter-rouge">model</code>にDense層（全結合層）を追加する</h4>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>model.add(Dense(input_dim=2, units=1))
 </code></pre></div></div>
 
 <ul>
-  <li>全結合層という用語はゼロから〜の二章には登場していませんが，ここでは単純パーセプトロンと同じと思ってください．<br />
-参考程度に，<code class="highlighter-rouge">input_dim=2, units=1</code>のときのDense層の様子を概念図にしたものを以下に示します．</li>
+  <li>全結合層という用語はゼロから〜の二章には登場していませんが、ここでは単純パーセプトロンと同じと思ってください。<br />
+参考程度に、<code class="highlighter-rouge">input_dim=2, units=1</code>のときのDense層の様子を概念図にしたものを以下に示します。</li>
 </ul>
 
 <div style="text-align: center;">
     <img src="/resources/2019-04-13/example_dense.png" alt="Dense層の様子の概念図" style="width: 450px;" />
 </div>
 
-<h3 id="4-modelに重みを与える">4. <code class="highlighter-rouge">model</code>に重みを与える</h3>
+<h4 id="314-modelに重みを与える">3.1.4 <code class="highlighter-rouge">model</code>に重みを与える</h4>
 <ul>
   <li>
-    <p>ゼロから〜の二章では予め重みとバイアスが与えられているので，この実装でも与えます．</p>
+    <p>ゼロから〜の二章では予め重みとバイアスが与えられているので、この実装でも与えます。</p>
   </li>
   <li>
-    <p>重みとバイアスの初期設定には，<code class="highlighter-rouge">model.set_weights()</code>を使用します．<br />
-引数は重みの入ったリストです．</p>
+    <p>重みとバイアスの初期設定には、<code class="highlighter-rouge">model.set_weights()</code>を使用します。<br />
+引数は重みの入ったリストです。</p>
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>model.set_weights([np.array([[0.5], [0.5]]), np.array([-0.7])])
 </code></pre></div>    </div>
-    <p><em><i class="fas fa-book-open" style="padding: 0 2px 0 0;"></i>参照: ゼロから〜のP27</em></p>
+    <blockquote>
+      <p><i class="fas fa-book-open" style="padding: 0 2px 0 0;"></i>参照: ゼロから〜のP27</p>
+    </blockquote>
   </li>
 </ul>
 
-<h3 id="5-テストする">5. テストする</h3>
+<h4 id="315-テストする">3.1.5 テストする</h4>
 <ul>
-  <li>モデルのテストは<code class="highlighter-rouge">predict</code>メソッドで行えます．<br />
-<code class="highlighter-rouge">predict</code>の返り値は，入力データの予測結果のリストになっています．</li>
+  <li>モデルのテストは<code class="highlighter-rouge">predict</code>メソッドで行えます。<br />
+<code class="highlighter-rouge">predict</code>の返り値は、入力データの予測結果のリストになっています。</li>
 </ul>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>X = np.array([[0,0], [0,1], [1,0], [1,1]])
@@ -266,7 +268,7 @@ print(Y_)
 </code></pre></div></div>
 
 <ul>
-  <li>この結果は以下のようになるはずです．<br />
+  <li>この結果は以下のようになるはずです。<br />
 Output:
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[-0.7       ]
  [-0.19999999]
@@ -274,15 +276,15 @@ Output:
  [ 0.3       ]]
 </code></pre></div>    </div>
   </li>
-  <li>これではわかりにくいので，マイナスのものは<code class="highlighter-rouge">False</code>で，プラスのものは<code class="highlighter-rouge">True</code>に置き換えます．
+  <li>これではわかりにくいので、マイナスのものは<code class="highlighter-rouge">False</code>で、プラスのものは<code class="highlighter-rouge">True</code>に置き換えます。
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Y_[Y_ &lt;= 0] = False
 Y_[Y_ &gt; 0] = True
 print(Y_)
 print(f'Results: {Y == Y_}')
 </code></pre></div>    </div>
   </li>
-  <li>以下のような結果が得られたと思います．<br />
-見事ANDゲートが実装できていることが確認できますね．<br />
+  <li>以下のような結果が得られたと思います。<br />
+見事ANDゲートが実装できていることが確認できますね。<br />
 Output:
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[0.]
  [0.]
@@ -296,60 +298,154 @@ Results: [[ True]
   </li>
 </ul>
 
-<h2 id="32-fucntional-api">3.2 Fucntional API</h2>
-<hr />
+<h3 id="32-fucntional-api">3.2 Fucntional API</h3>
+
 <ul>
-  <li>Functional APIでANDゲートのパーセプトロンを実装します．<br />
-<code class="highlighter-rouge">functional.py</code>に以下のソースを順に書いていきましょう．</li>
+  <li>Functional APIでANDゲートのパーセプトロンを実装します。<br />
+<code class="highlighter-rouge">functional.py</code>に以下のソースを順に書いていきましょう。</li>
 </ul>
 
-<h3 id="1-レイヤー--numpyを読み込む-1">1. レイヤー + NumPyを読み込む</h3>
+<h4 id="321-レイヤー--numpyを読み込む">3.2.1 レイヤー + NumPyを読み込む</h4>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from keras import Model
 from keras.layers import Input, Dense
 
 import numpy as np
 </code></pre></div></div>
 
-<h3 id="2-各種レイヤーを定義する">2. 各種レイヤーを定義する</h3>
-<p>Functional APIでは，入力層を追加で定義する必要があります．</p>
+<h4 id="322-各種レイヤーを定義する">3.2.2 各種レイヤーを定義する</h4>
+<p>Functional APIでは、入力層を追加で定義する必要があります。</p>
 
-<p>Dense部分のイメージとしては，Denseレイヤーのインスタンスを生成し，その入力として，テンソル：_inputを与えるという感じです．出力のテンソルは_outputとなります．</p>
+<p>Dense部分のイメージとしては、Denseレイヤーのインスタンスを生成し、その入力として、テンソル：_inputを与えるという感じです。出力のテンソルは_outputとなります。</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_input = Input(shape=(2, ))
 _output = Dense(units=1)(_input)
 </code></pre></div></div>
 
-<h3 id="3-モデルを定義する">3. モデルを定義する</h3>
-<p>以下のように，Functional APIでは，モデルを定義する際に入力と出力のテンソルを別々に保持しておく必要があります！</p>
+<h4 id="323-モデルを定義する">3.2.3 モデルを定義する</h4>
+<p>以下のように、Functional APIでは、モデルを定義する際に入力と出力のテンソルを別々に保持しておく必要があります！</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">model</span> <span class="p">=</span> <span class="k">Model</span><span class="p">(</span><span class="n">inputs</span><span class="p">=</span><span class="n">_input</span><span class="p">,</span> <span class="n">outputs</span><span class="p">=</span><span class="n">_output</span><span class="p">)</span>
 </code></pre></div></div>
-<p><em><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考: <a href="https://keras.io/ja/getting-started/functional-api-guide/">https://keras.io/ja/getting-started/functional-api-guide/</a></em></p>
+<blockquote>
+  <p><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考: <a href="https://keras.io/ja/getting-started/functional-api-guide/">https://keras.io/ja/getting-started/functional-api-guide/</a></p>
+</blockquote>
 
-<h3 id="4-重みを与える--テストする">4. 重みを与える &amp; テストする</h3>
-<p>Sequentialモデルと同じなので割愛します．<br />
-結果が同一になることを確認するとよいです．</p>
+<h4 id="324-重みを与える--テストする">3.2.4 重みを与える &amp; テストする</h4>
+<p>Sequentialモデルと同じなので割愛します。<br />
+結果が同一になることを確認するとよいです。</p>
 
-<h1 id="まとめ">まとめ</h1>
-<hr />
-<p>今回は，パーセプトロンによるANDゲートの実装をKerasにより行いました．</p>
+<h2 id="まとめ">まとめ</h2>
 
-<p>Kerasを用いることで，より「簡単に&amp;抽象的に」パーセプトロンを実装することが確認できたと思います．</p>
+<p>今回は、パーセプトロンによるANDゲートの実装をKerasにより行いました。</p>
 
-<p>次回は，3層ニューラルネットワークの実装を行います．</p>
+<p>Kerasを用いることで、より「簡単に&amp;抽象的に」パーセプトロンを実装することが確認できたと思います。</p>
 
-<h1 id="発展課題">発展課題</h1>
-<hr />
-<p>NAND, ORゲートも実装してみると良いでしょう．<br />
-重みとバイアスは，ゼロから〜のP27,28を参照してください．</p>
+<p>次回は、3層ニューラルネットワークの実装を行います。</p>
 
-<h1 id="ソースコード">ソースコード</h1>
-<hr />
-<p>ソースコードは，<a href="https://github.com/gucci-j/intro-deep-learning-keras">GitHub</a>にて公開しています．</p>
+<h2 id="発展課題">発展課題</h2>
+
+<p>NAND, ORゲートも実装してみると良いでしょう。<br />
+重みとバイアスは、ゼロから〜のP27,28を参照してください。</p>
+
+<h2 id="ソースコード">ソースコード</h2>
+
+<p>ソースコードは、<a href="https://github.com/gucci-j/intro-deep-learning-keras">GitHub</a>にて公開しています。</p>
 
   </div>
 
   <div class="date">
     Written on April 13, 2019
   </div>
+
+  <style type="text/css">
+    @font-face {
+	font-family: 'icomoon';
+	src:url('/resources/fonts/icomoon.eot?ookgoz');
+	src:url('/resources/fonts/icomoon.eot?ookgoz#iefix') format('embedded-opentype'),
+		url('/resources/fonts/icomoon.ttf?ookgoz') format('truetype'),
+		url('/resources/fonts/icomoon.woff?ookgoz') format('woff'),
+		url('/resources/fonts/icomoon.svg?ookgoz#icomoon') format('svg');
+		font-weight: normal;
+		font-style: normal;
+    }
+
+    [class^="icon-"], [class*=" icon-"] {
+        /* use !important to prevent issues with browser extensions that change fonts */
+        font-family: 'icomoon' !important;
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: inherit;
+        
+        /* Better Font Rendering =========== */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .icon-line:before        {content: "\e90a";}
+    .icon-pocket:before      {content: "\e902";}
+    .icon-twitter:before     {content: "\ea96";}
+    .icon-facebook:before    {content: "\ea90";}
+    .icon-hatebu:before      {content: "\e903";}
+
+    /*ソーシャルリストデザイン2*/
+    .shareList2 {
+        list-style:none;
+        display: flex;
+        flex-wrap:wrap;
+        width:100%;
+        margin:-5px 0 0 -5px;
+        padding:0;
+    }
+    .shareList2__item {
+        height:30px;
+        line-height:30px;
+        width:30px;
+        margin:5px 0 0 5px;
+        text-align:center;
+    }
+    .shareList2__link {
+        display:block;
+        color:#ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .shareList2__link::before{
+        font-size:16px;
+        display:block;
+        transition: ease-in-out .2s;
+        border-radius: 5px;
+    }
+    .shareList2__link:hover::before{
+        background:#ffffff;
+        transform: scale(1.2);
+        box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
+    }
+
+    .shareList2__link.icon-twitter{background:#55acee;}
+    .shareList2__link.icon-twitter:hover::before{color:#55acee;}
+
+    .shareList2__link.icon-facebook{background:#3B5998;}
+    .shareList2__link.icon-facebook:hover::before{color:#3B5998;}
+
+    .shareList2__link.icon-hatebu{background:#008FDE;}
+    .shareList2__link.icon-hatebu:hover::before{color:#008FDE;}
+
+    .shareList2__link.icon-pocket{background:#EB4654;}
+    .shareList2__link.icon-pocket:hover::before{color:#EB4654;}
+
+    .shareList2__link.icon-line{background:#1dcd00;}
+    .shareList2__link.icon-line:hover::before{color:#1dcd00;}
+</style>
+
+<ul class="shareList2" style="margin-top: 5px;">
+    <li class="shareList2__item"><a class="shareList2__link icon-twitter" href="https://twitter.com/intent/tweet?text=%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep%20Learning%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E5%AD%A6%E3%81%B6%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF(%E3%83%91%E3%83%BC%E3%82%BB%E3%83%97%E3%83%88%E3%83%AD%E3%83%B3%E7%B7%A8)+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP&amp;url=http%3A%2F%2Flocalhost%3A4000%2FDL-Intro-1%2F" target="_blank" title="Twitter"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-facebook" href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FDL-Intro-1%2F" target="_blank" title="Facebook"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-hatebu" href="https://b.hatena.ne.jp/add?mode=confirm&amp;url=http%3A%2F%2Flocalhost%3A4000%2FDL-Intro-1%2F" target="_blank" title="はてなブックマーク"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-pocket" href="//getpocket.com/edit?url=http%3A%2F%2Flocalhost%3A4000&title=%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep%20Learning%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E5%AD%A6%E3%81%B6%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF(%E3%83%91%E3%83%BC%E3%82%BB%E3%83%97%E3%83%88%E3%83%AD%E3%83%B3%E7%B7%A8)+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP" target="_blank" title="Pocket"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-line" href="http://line.me/R/msg/text/?%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep%20Learning%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E5%AD%A6%E3%81%B6%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF(%E3%83%91%E3%83%BC%E3%82%BB%E3%83%97%E3%83%88%E3%83%AD%E3%83%B3%E7%B7%A8)+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP%0Ahttp%3A%2F%2Flocalhost%3A4000%2FDL-Intro-1%2F" target="_blank" title="LINE"></a></li>
+</ul>
+
   <br />
 
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

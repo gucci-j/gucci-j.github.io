@@ -65,8 +65,9 @@ html {
 }
 
 body {
+  font: 17px/1.4 "Noto Sans Japanese", "游ゴシック", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ ゴシック", sans-serif;
   background: #fff;
-  font: 17px/1.4 "游ゴシック", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ ゴシック", sans-serif;
+  font-weight: 300;
   color: #333;
   letter-spacing: .5px;
   line-height: 1.5;
@@ -104,13 +105,23 @@ h2 {
   font-size: 22px;
 }
 
+.post h2 {
+  border-left: 6px solid #222;
+  border-bottom: 1px solid #222;
+  padding: 4px 16px;
+}
+
 h3 {
   font-size: 20px;
 }
 
+.post h3 {
+  border-bottom: 1px solid #222;
+  padding: 4px 10px;
+}
+
 h4 {
   font-size: 18px;
-  color: #666;
 }
 
 p {
@@ -180,6 +191,11 @@ img {
   max-width: 100%;
 }
 
+.post img, .page_en img {
+  border: 1px #eee solid;
+  padding: 4px;
+}
+
 .highlight {
   font-size: 15px;
 }
@@ -218,7 +234,23 @@ code.highlighter-rouge {
   clear: both;
 }
 
-/* 目次 */
+/* ページごとの指定 */
+.page_en h2 {
+  background-color: #f6f6f6;
+  border-left: 6px solid #222;
+  padding: 4px 16px;
+}
+.page_en h3 {
+  border-bottom: 1px solid #ddd;
+}
+
+.sitemap h3 {
+  background-color: #f6f6f6;
+  border-left: 6px solid #222;
+  padding: 4px 16px;
+}
+
+/* 目次関連 */
 .toc label {
   background: #eee;
   color: #666;
@@ -438,11 +470,10 @@ nav a {
 }
 
 .post blockquote {
-  margin: 1.8em .8em;
   border-left: 2px solid #666;
-  padding: 0.1em 1em;
+  padding: 0 1em;
   color: #666;
-  font-size: 22px;
+  font-size: 15px;
   font-style: italic;
 }
 .post .comments {
@@ -452,10 +483,6 @@ nav a {
   text-transform: uppercase;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 15px;
-}
-
-.page_en {
-  font-family: Helvetica, Arial, sans-serif;
 }
 
 .wrapper-footer {
@@ -473,7 +500,7 @@ footer {
 
 .highlight {
   background-color: #efefef;
-  padding: 8px 8px 8px 10px;
+  padding: 7px 7px 7px 10px;
   border: 1px solid #ddd;
   -moz-box-shadow: 3px 3px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 3px 3px rgba(0, 0, 0, 0.1);

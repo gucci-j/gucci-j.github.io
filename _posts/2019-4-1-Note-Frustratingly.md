@@ -9,19 +9,19 @@ tags:
 ---
 
 ## 文献情報  
-***
+
 著者: M. Daniluk et al.  
 所属: University College London  
 出典: ICLR 2017 [(https://arxiv.org/abs/1702.04521)](https://arxiv.org/abs/1702.04521)  
 
 ## この論文の主張
-***
+
 1. ニューラル言語モデルのためのkey-valueに基づくAttentionを提案
 2. さらにそれを改良したkey-value-predictに基づくAttentionの提案
 3. 従来のMemory-augumented言語モデルよりも，パープレキシティが小さくなった
 
 ## 背景・関連研究
-***
+
 言語モデルは次に出現する単語を予測する能力を持っている．古典的なNグラムに基づく言語モデルは短文内での単語間の依存関係を捉えることができる．  
 一方で，ニューラル言語モデルは，より広範囲な単語間の依存関係を捉えることができる．
 
@@ -32,7 +32,9 @@ Attentionを言語モデルに取り入れるには，モデル中の出力ベ�
 2. attentionベクトルを計算するためのベクトルとして振る舞う役割
 3. attentionにおいて文脈ベクトルを求めるために使われる役割->次のトークンを予測する際に文脈を考慮するのを助ける役割
 
-![k-v-p attention](../resources/2019-04-01/k-v-p_attention.png)
+<div style="text-align: center;">
+    <img src="{{ site.baseurl }}/resources/2019-04-01/k-v-p_attention.png" alt="k-v-p attention" style="width: auto;"/>
+</div>
 
 一つの出力ベクトルに複数の役割を課すことは，モデルを複雑化させる要因となり，学習を難しくすると考えられる．  
 したがって，本研究では，上記の三つの役割を別々のベクトルに割り当てることで，モデルを簡単化させることを目指す．  
@@ -40,7 +42,6 @@ Attentionを言語モデルに取り入れるには，モデル中の出力ベ�
 論文内ではこれを，key-value-predictベクトルと名付けており，Attentionを含めて，key-value-predict Attentionと名付けている．
 
 ## 従来手法 (Attention for Neural Language Modeling)
-***
 
 (1) **時刻: $t$において，$L$個の出力ベクトルを記憶領域として取る**  
 
@@ -96,11 +97,11 @@ $$
 ただし，$W^* \in \mathbb{R}^{\|V\| \times k}$であり，$b \in \mathbb{R}^{\|V\|}$である．  
 ともに学習パラメータである．
 
-
-![ふつうのAttentionモデル](../resources/2019-04-01/attention.png)
+<div style="text-align: center;">
+    <img src="{{ site.baseurl }}/resources/2019-04-01/attention.png" alt="ふつうのAttentionモデル" style="width: auto;"/>
+</div>
 
 ## 提案手法
-***
 ### Key-value attention
 key-value Attentionでは，出力ベクトルをkeyとvalueに分割する．  
 具体的には，時刻: $t$における出力ベクトルを以下のように定義し直す．  
@@ -123,7 +124,9 @@ $$
 
 → ここで，$k$は検索キーとしての役割を果たしており，$v$はその中身のデータを表していると考えるとわかりやすいかもしれない．
 
-![key-value attention](../resources/2019-04-01/k-v_attention.png)
+<div style="text-align: center;">
+    <img src="{{ site.baseurl }}/resources/2019-04-01/k-v_attention.png" alt="key-value attention" style="width: auto;"/>
+</div>
 
 ### Key-value-predict attention
 key-value attentionにおいても，valueが複数回使われていることがわかる．  
@@ -137,10 +140,11 @@ h_t = [k_t, v_t, p_t] \in \mathbb{R}^{3k}　\\
 h_t^* = {\rm tanh}(W^rr_t + W^xp_t)
 $$
 
-![k-v-p attention](../resources/2019-04-01/k-v-p_attention.png)
+<div style="text-align: center;">
+    <img src="{{ site.baseurl }}/resources/2019-04-01/k-v-p_attention.png" alt="k-v-p attention" style="width: auto;"/>
+</div>
 
 ## 実験結果
-***
 ### 評価指標
 #### パープレキシティ
 参考: [http://www.jnlp.org/lab/graduates/okada/nlp/term/entropy](http://www.jnlp.org/lab/graduates/okada/nlp/term/entropy)  
@@ -158,21 +162,27 @@ $$Perplexity = 2^{-\frac{1}{N}\sum_i^{N}\log P(w_i)}$$
 ### 評価結果
 提案手法： key-Value-Predictのパープレキシティが有意に小さいことがわかる．
 
-![実験結果1](../resources/2019-04-01/result1.png)
-![実験結果2](../resources/2019-04-01/result2.png)
+<div style="text-align: center;">
+    <img src="{{ site.baseurl }}/resources/2019-04-01/result1.png" alt="実験結果1" style="width: auto;"/>
+</div>
+
+<div style="text-align: center;">
+    <img src="{{ site.baseurl }}/resources/2019-04-01/result2.png" alt="実験結果2" style="width: auto;"/>
+</div>
 
 (a)の図から，提案手法: key-value-predict attentionのおかげで，広範囲な文脈を考慮出来るようになっていることがわかる．  
 (b)の図から，より広範な文脈を考慮したとしても，パープレキシティが大幅に改善することは期待できないということが読み取れる．
-![重み](../resources/2019-04-01/weight.png)
+
+<div style="text-align: center;">
+    <img src="{{ site.baseurl }}/resources/2019-04-01/weight.png" alt="注意機構の重み" style="width: auto;"/>
+</div>
 
 ## 議論
-***
 Attentionを用いた言語モデルによって，従来手法よりもパープレキシティを改善することができた．  
 しかし，あまりにも長い文脈を考慮することは，パープレキシティの改善には得策ではないこともわかった．
 
 Future workとしては局所的な文脈の内容を考慮しないで，その背景にあるより大域的に関係する文脈を考慮できるような手法を考えることが挙げられる．
 
 ## 次に読むべき論文は？
-***
 Memory networksとか？  
 → key-valueの概念を初めて導入したらしい．

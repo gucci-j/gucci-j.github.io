@@ -11,16 +11,8 @@
     
     <meta name="description" content="文献情報
 
-著者: M. Daniluk et al.
-所属: University College London
-出典: ICLR 2017 (https://arxiv.org/abs/1702.04521)
-
 " />
     <meta property="og:description" content="文献情報
-
-著者: M. Daniluk et al.
-所属: University College London
-出典: ICLR 2017 (https://arxiv.org/abs/1702.04521)
 
 " />
     
@@ -38,6 +30,7 @@
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <link rel="alternate" type="application/rss+xml" title="きままにNLP - A Technical Blog about NLP and ML" href="/feed.xml" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet">
     
     <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
 
@@ -94,6 +87,7 @@
     <div id="main" role="main" class="container">
       <article class="post">
   <h1>論文メモ：Frustratingly Short Attention Spans in Neural Language Modeling</h1>
+
   <div class="post-tag">
     
 
@@ -139,16 +133,17 @@
   <li><a href="#議論">議論</a></li>
   <li><a href="#次に読むべき論文は">次に読むべき論文は？</a></li>
 </ul>
-  </div> 
+  </div>
+
   <div class="entry">
     <h2 id="文献情報">文献情報</h2>
-<hr />
+
 <p>著者: M. Daniluk et al.<br />
 所属: University College London<br />
 出典: ICLR 2017 <a href="https://arxiv.org/abs/1702.04521">(https://arxiv.org/abs/1702.04521)</a></p>
 
 <h2 id="この論文の主張">この論文の主張</h2>
-<hr />
+
 <ol>
   <li>ニューラル言語モデルのためのkey-valueに基づくAttentionを提案</li>
   <li>さらにそれを改良したkey-value-predictに基づくAttentionの提案</li>
@@ -156,7 +151,7 @@
 </ol>
 
 <h2 id="背景関連研究">背景・関連研究</h2>
-<hr />
+
 <p>言語モデルは次に出現する単語を予測する能力を持っている．古典的なNグラムに基づく言語モデルは短文内での単語間の依存関係を捉えることができる．<br />
 一方で，ニューラル言語モデルは，より広範囲な単語間の依存関係を捉えることができる．</p>
 
@@ -169,7 +164,9 @@
   <li>attentionにおいて文脈ベクトルを求めるために使われる役割-&gt;次のトークンを予測する際に文脈を考慮するのを助ける役割</li>
 </ol>
 
-<p><img src="../resources/2019-04-01/k-v-p_attention.png" alt="k-v-p attention" /></p>
+<div style="text-align: center;">
+    <img src="/resources/2019-04-01/k-v-p_attention.png" alt="k-v-p attention" style="width: auto;" />
+</div>
 
 <p>一つの出力ベクトルに複数の役割を課すことは，モデルを複雑化させる要因となり，学習を難しくすると考えられる．<br />
 したがって，本研究では，上記の三つの役割を別々のベクトルに割り当てることで，モデルを簡単化させることを目指す．<br />
@@ -177,7 +174,6 @@
 論文内ではこれを，key-value-predictベクトルと名付けており，Attentionを含めて，key-value-predict Attentionと名付けている．</p>
 
 <h2 id="従来手法-attention-for-neural-language-modeling">従来手法 (Attention for Neural Language Modeling)</h2>
-<hr />
 
 <p>(1) <strong>時刻: $t$において，$L$個の出力ベクトルを記憶領域として取る</strong></p>
 
@@ -223,10 +219,11 @@ Concatではなく，以下の式に基づいて非線形に結合する．</p>
 <p>ただし，$W^* \in \mathbb{R}^{|V| \times k}$であり，$b \in \mathbb{R}^{|V|}$である．<br />
 ともに学習パラメータである．</p>
 
-<p><img src="../resources/2019-04-01/attention.png" alt="ふつうのAttentionモデル" /></p>
+<div style="text-align: center;">
+    <img src="/resources/2019-04-01/attention.png" alt="ふつうのAttentionモデル" style="width: auto;" />
+</div>
 
 <h2 id="提案手法">提案手法</h2>
-<hr />
 <h3 id="key-value-attention">Key-value attention</h3>
 <p>key-value Attentionでは，出力ベクトルをkeyとvalueに分割する．<br />
 具体的には，時刻: $t$における出力ベクトルを以下のように定義し直す．</p>
@@ -246,7 +243,9 @@ h_t^* &= {\rm tanh}(W^rr_t + W^xv_t)
 
 <p>→ ここで，$k$は検索キーとしての役割を果たしており，$v$はその中身のデータを表していると考えるとわかりやすいかもしれない．</p>
 
-<p><img src="../resources/2019-04-01/k-v_attention.png" alt="key-value attention" /></p>
+<div style="text-align: center;">
+    <img src="/resources/2019-04-01/k-v_attention.png" alt="key-value attention" style="width: auto;" />
+</div>
 
 <h3 id="key-value-predict-attention">Key-value-predict attention</h3>
 <p>key-value attentionにおいても，valueが複数回使われていることがわかる．<br />
@@ -258,10 +257,11 @@ h_t^* &= {\rm tanh}(W^rr_t + W^xv_t)
 <script type="math/tex; mode=display">h_t = [k_t, v_t, p_t] \in \mathbb{R}^{3k}　\\
 h_t^* = {\rm tanh}(W^rr_t + W^xp_t)</script>
 
-<p><img src="../resources/2019-04-01/k-v-p_attention.png" alt="k-v-p attention" /></p>
+<div style="text-align: center;">
+    <img src="/resources/2019-04-01/k-v-p_attention.png" alt="k-v-p attention" style="width: auto;" />
+</div>
 
 <h2 id="実験結果">実験結果</h2>
-<hr />
 <h3 id="評価指標">評価指標</h3>
 <h4 id="パープレキシティ">パープレキシティ</h4>
 <p>参考: <a href="http://www.jnlp.org/lab/graduates/okada/nlp/term/entropy">http://www.jnlp.org/lab/graduates/okada/nlp/term/entropy</a></p>
@@ -279,22 +279,28 @@ h_t^* = {\rm tanh}(W^rr_t + W^xp_t)</script>
 <h3 id="評価結果">評価結果</h3>
 <p>提案手法： key-Value-Predictのパープレキシティが有意に小さいことがわかる．</p>
 
-<p><img src="../resources/2019-04-01/result1.png" alt="実験結果1" />
-<img src="../resources/2019-04-01/result2.png" alt="実験結果2" /></p>
+<div style="text-align: center;">
+    <img src="/resources/2019-04-01/result1.png" alt="実験結果1" style="width: auto;" />
+</div>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-04-01/result2.png" alt="実験結果2" style="width: auto;" />
+</div>
 
 <p>(a)の図から，提案手法: key-value-predict attentionのおかげで，広範囲な文脈を考慮出来るようになっていることがわかる．<br />
-(b)の図から，より広範な文脈を考慮したとしても，パープレキシティが大幅に改善することは期待できないということが読み取れる．
-<img src="../resources/2019-04-01/weight.png" alt="重み" /></p>
+(b)の図から，より広範な文脈を考慮したとしても，パープレキシティが大幅に改善することは期待できないということが読み取れる．</p>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-04-01/weight.png" alt="注意機構の重み" style="width: auto;" />
+</div>
 
 <h2 id="議論">議論</h2>
-<hr />
 <p>Attentionを用いた言語モデルによって，従来手法よりもパープレキシティを改善することができた．<br />
 しかし，あまりにも長い文脈を考慮することは，パープレキシティの改善には得策ではないこともわかった．</p>
 
 <p>Future workとしては局所的な文脈の内容を考慮しないで，その背景にあるより大域的に関係する文脈を考慮できるような手法を考えることが挙げられる．</p>
 
 <h2 id="次に読むべき論文は">次に読むべき論文は？</h2>
-<hr />
 <p>Memory networksとか？<br />
 → key-valueの概念を初めて導入したらしい．</p>
 
@@ -303,6 +309,98 @@ h_t^* = {\rm tanh}(W^rr_t + W^xp_t)</script>
   <div class="date">
     Written on April  1, 2019
   </div>
+
+  <style type="text/css">
+    @font-face {
+	font-family: 'icomoon';
+	src:url('/resources/fonts/icomoon.eot?ookgoz');
+	src:url('/resources/fonts/icomoon.eot?ookgoz#iefix') format('embedded-opentype'),
+		url('/resources/fonts/icomoon.ttf?ookgoz') format('truetype'),
+		url('/resources/fonts/icomoon.woff?ookgoz') format('woff'),
+		url('/resources/fonts/icomoon.svg?ookgoz#icomoon') format('svg');
+		font-weight: normal;
+		font-style: normal;
+    }
+
+    [class^="icon-"], [class*=" icon-"] {
+        /* use !important to prevent issues with browser extensions that change fonts */
+        font-family: 'icomoon' !important;
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: inherit;
+        
+        /* Better Font Rendering =========== */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .icon-line:before        {content: "\e90a";}
+    .icon-pocket:before      {content: "\e902";}
+    .icon-twitter:before     {content: "\ea96";}
+    .icon-facebook:before    {content: "\ea90";}
+    .icon-hatebu:before      {content: "\e903";}
+
+    /*ソーシャルリストデザイン2*/
+    .shareList2 {
+        list-style:none;
+        display: flex;
+        flex-wrap:wrap;
+        width:100%;
+        margin:-5px 0 0 -5px;
+        padding:0;
+    }
+    .shareList2__item {
+        height:30px;
+        line-height:30px;
+        width:30px;
+        margin:5px 0 0 5px;
+        text-align:center;
+    }
+    .shareList2__link {
+        display:block;
+        color:#ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .shareList2__link::before{
+        font-size:16px;
+        display:block;
+        transition: ease-in-out .2s;
+        border-radius: 5px;
+    }
+    .shareList2__link:hover::before{
+        background:#ffffff;
+        transform: scale(1.2);
+        box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
+    }
+
+    .shareList2__link.icon-twitter{background:#55acee;}
+    .shareList2__link.icon-twitter:hover::before{color:#55acee;}
+
+    .shareList2__link.icon-facebook{background:#3B5998;}
+    .shareList2__link.icon-facebook:hover::before{color:#3B5998;}
+
+    .shareList2__link.icon-hatebu{background:#008FDE;}
+    .shareList2__link.icon-hatebu:hover::before{color:#008FDE;}
+
+    .shareList2__link.icon-pocket{background:#EB4654;}
+    .shareList2__link.icon-pocket:hover::before{color:#EB4654;}
+
+    .shareList2__link.icon-line{background:#1dcd00;}
+    .shareList2__link.icon-line:hover::before{color:#1dcd00;}
+</style>
+
+<ul class="shareList2" style="margin-top: 5px;">
+    <li class="shareList2__item"><a class="shareList2__link icon-twitter" href="https://twitter.com/intent/tweet?text=%E8%AB%96%E6%96%87%E3%83%A1%E3%83%A2:Frustratingly%20Short%20Attention%20Spans%20in%20Neural%20Language%20Modeling+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP&amp;url=http%3A%2F%2Flocalhost%3A4000%2FNote-Frustratingly%2F" target="_blank" title="Twitter"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-facebook" href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FNote-Frustratingly%2F" target="_blank" title="Facebook"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-hatebu" href="https://b.hatena.ne.jp/add?mode=confirm&amp;url=http%3A%2F%2Flocalhost%3A4000%2FNote-Frustratingly%2F" target="_blank" title="はてなブックマーク"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-pocket" href="//getpocket.com/edit?url=http%3A%2F%2Flocalhost%3A4000&title=%E8%AB%96%E6%96%87%E3%83%A1%E3%83%A2:Frustratingly%20Short%20Attention%20Spans%20in%20Neural%20Language%20Modeling+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP" target="_blank" title="Pocket"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-line" href="http://line.me/R/msg/text/?%E8%AB%96%E6%96%87%E3%83%A1%E3%83%A2:Frustratingly%20Short%20Attention%20Spans%20in%20Neural%20Language%20Modeling+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP%0Ahttp%3A%2F%2Flocalhost%3A4000%2FNote-Frustratingly%2F" target="_blank" title="LINE"></a></li>
+</ul>
+
   <br />
 
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

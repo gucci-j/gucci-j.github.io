@@ -1,0 +1,90 @@
+<style type="text/css">
+    @font-face {
+	font-family: 'icomoon';
+	src:url('{{ site.baseurl }}/resources/fonts/icomoon.eot?ookgoz');
+	src:url('{{ site.baseurl }}/resources/fonts/icomoon.eot?ookgoz#iefix') format('embedded-opentype'),
+		url('{{ site.baseurl }}/resources/fonts/icomoon.ttf?ookgoz') format('truetype'),
+		url('{{ site.baseurl }}/resources/fonts/icomoon.woff?ookgoz') format('woff'),
+		url('{{ site.baseurl }}/resources/fonts/icomoon.svg?ookgoz#icomoon') format('svg');
+		font-weight: normal;
+		font-style: normal;
+    }
+
+    [class^="icon-"], [class*=" icon-"] {
+        /* use !important to prevent issues with browser extensions that change fonts */
+        font-family: 'icomoon' !important;
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: inherit;
+        
+        /* Better Font Rendering =========== */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .icon-line:before        {content: "\e90a";}
+    .icon-pocket:before      {content: "\e902";}
+    .icon-twitter:before     {content: "\ea96";}
+    .icon-facebook:before    {content: "\ea90";}
+    .icon-hatebu:before      {content: "\e903";}
+
+    /*ソーシャルリストデザイン2*/
+    .shareList2 {
+        list-style:none;
+        display: flex;
+        flex-wrap:wrap;
+        width:100%;
+        margin:-5px 0 0 -5px;
+        padding:0;
+    }
+    .shareList2__item {
+        height:30px;
+        line-height:30px;
+        width:30px;
+        margin:5px 0 0 5px;
+        text-align:center;
+    }
+    .shareList2__link {
+        display:block;
+        color:#ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .shareList2__link::before{
+        font-size:16px;
+        display:block;
+        transition: ease-in-out .2s;
+        border-radius: 5px;
+    }
+    .shareList2__link:hover::before{
+        background:#ffffff;
+        transform: scale(1.2);
+        box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
+    }
+
+    .shareList2__link.icon-twitter{background:#55acee;}
+    .shareList2__link.icon-twitter:hover::before{color:#55acee;}
+
+    .shareList2__link.icon-facebook{background:#3B5998;}
+    .shareList2__link.icon-facebook:hover::before{color:#3B5998;}
+
+    .shareList2__link.icon-hatebu{background:#008FDE;}
+    .shareList2__link.icon-hatebu:hover::before{color:#008FDE;}
+
+    .shareList2__link.icon-pocket{background:#EB4654;}
+    .shareList2__link.icon-pocket:hover::before{color:#EB4654;}
+
+    .shareList2__link.icon-line{background:#1dcd00;}
+    .shareList2__link.icon-line:hover::before{color:#1dcd00;}
+</style>
+
+<ul class="shareList2" style="margin-top: 5px;">
+    <li class="shareList2__item"><a class="shareList2__link icon-twitter" href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }}+–+{{ site.name | uri_escape  }}&amp;url={{ site.url | cgi_escape }}{{ page.url  | cgi_escape }}" target="_blank" title="Twitter"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-facebook" href="https://www.facebook.com/sharer.php?u={{ site.url | cgi_escape }}{{ page.url  | cgi_escape }}" target="_blank" title="Facebook"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-hatebu" href="https://b.hatena.ne.jp/add?mode=confirm&amp;url={{ site.url | cgi_escape }}{{ page.url  | cgi_escape }}" target="_blank" title="はてなブックマーク"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-pocket" href="//getpocket.com/edit?url={{ site.url | cgi_escape }}&title={{ page.title | uri_escape }}+–+{{ site.name | uri_escape  }}" target="_blank" title="Pocket"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-line" href="http://line.me/R/msg/text/?{{ page.title | uri_escape }}+–+{{ site.name | uri_escape  }}%0A{{ site.url | cgi_escape }}{{ page.url  | cgi_escape }}" target="_blank" title="LINE"></a></li>
+</ul>
