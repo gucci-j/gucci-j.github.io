@@ -81,7 +81,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "游ゴシック", "Yu Gothic", YuGothic, "ＭＳ ゴシック", sans-serif;
   color: #222;
   font-weight: bold;
   line-height: 1.7;
@@ -388,7 +388,7 @@ code.highlighter-rouge {
   margin: 0;
   color: #333;
   cursor: pointer;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "游ゴシック", "Yu Gothic", YuGothic, "ＭＳ ゴシック", sans-serif;
   font-weight: 300;
   font-size: 26px;
   letter-spacing: 1px;
@@ -409,7 +409,7 @@ code.highlighter-rouge {
 nav {
   float: right;
   margin-top: 23px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "游ゴシック", "Yu Gothic", YuGothic, "ＭＳ ゴシック", sans-serif;
   font-size: 18px;
 }
 @media screen and (max-width: 640px) {
