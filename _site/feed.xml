@@ -1,4 +1,577 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-05-07T11:51:29+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog about NLP and ML</subtitle><entry xml:lang="ja_JP"><title type="html">ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編）</title><link href="http://localhost:4000/DL-Intro-4/" rel="alternate" type="text/html" title="ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編）" /><published>2019-05-03T00:00:00+09:00</published><updated>2019-05-03T00:00:00+09:00</updated><id>http://localhost:4000/DL-Intro-4</id><content type="html" xml:base="http://localhost:4000/DL-Intro-4/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-05-10T10:17:39+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog about NLP and ML</subtitle><entry xml:lang="ja_JP"><title type="html">ゼロから作るDeep Learningとともに学ぶフレームワーク（畳み込みニューラルネットワーク編）</title><link href="http://localhost:4000/DL-Intro-5/" rel="alternate" type="text/html" title="ゼロから作るDeep Learningとともに学ぶフレームワーク（畳み込みニューラルネットワーク編）" /><published>2019-05-10T00:00:00+09:00</published><updated>2019-05-10T00:00:00+09:00</updated><id>http://localhost:4000/DL-Intro-5</id><content type="html" xml:base="http://localhost:4000/DL-Intro-5/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
+&lt;p&gt;このシリーズでは，深層学習の入門書として有名な，「ゼロから作るDeep Learning」（以下，ゼロから〜）と同時並行でフレームワークを学習し，その定着を目指します．&lt;/p&gt;
+
+&lt;p&gt;前回は，学習に関する様々テクニックについて紹介しました．今回はこれまでの話題とは大きく変わって，畳み込みニューラルネットワーク（CNN）による画像分類に取り組みます．また，CNNのフィルターの重み可視化や，学習済みモデルの転移学習・最近のCNNモデルで使われるテクニックの一端についても紹介します．なお，本稿はゼロから〜の第7章に対応する内容となっています．&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: ゼロから〜の第7章: P205〜P238&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;link_box&quot;&gt;
+    &lt;span class=&quot;box-title&quot;&gt;「ゼロからKeras」シリーズリンク&lt;/span&gt;
+    &lt;p&gt;第一弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-1/&quot;&gt;パーセプトロン編&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;第二弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-2/&quot;&gt;3層ニューラルネットワーク &amp;amp; 手書き数字認識編&lt;/a&gt;&lt;/p&gt;  
+    &lt;p&gt;第三弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-3/&quot;&gt;ニューラルネットワークの学習編&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;第四弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-4/&quot;&gt;学習テクニック編&lt;/a&gt;&lt;/p&gt;
+    &lt;p&gt;第五弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-5/&quot;&gt;畳み込みニューラルネットワーク編&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;script async=&quot;&quot; src=&quot;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:block; text-align:center;&quot; data-ad-layout=&quot;in-article&quot; data-ad-format=&quot;fluid&quot; data-ad-client=&quot;ca-pub-1838422896597988&quot; data-ad-slot=&quot;7676908062&quot;&gt;&lt;/ins&gt;
+&lt;script&gt;
+     (adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;1-cifar10-データセット&quot;&gt;1. CIFAR10 データセット&lt;/h2&gt;
+&lt;p&gt;今回取り組むタスクは，CIFAR10と呼ばれる画像データセットをCNNで分類することです．&lt;/p&gt;
+
+&lt;p&gt;CIFAR10は，10個のクラスを持つカラー画像のデータセットとなっていて，MNISTデータセットと同様にKerasで簡単に呼び出せるようになっています．CIFAR10の画像の一部を試しに表示させてみましょう．&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from keras.datasets import cifar10
+import matplotlib.pyplot as plt
+from scipy.misc import toimage
+
+(x_train, y_train), (x_test, y_test) = cifar10.load_data()
+
+n = 3
+for i in range(n):
+    image = toimage(x_train[i])
+    plt.subplot(1, n, i + 1)
+    plt.imshow(image)
+    plt.axis('off')
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div style=&quot;text-align: center;&quot;&gt;
+    &lt;img src=&quot;/resources/2019-05-10/cifar10_example.png&quot; alt=&quot;CIFAR10の画像一例&quot; style=&quot;width: 400px;&quot; /&gt;&lt;br /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;出力結果から，大型自動車の画像や，動物のような画像が表示されていることが確認できます．&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://keras.io/ja/datasets/#cifar10&quot;&gt;（KerasのCIFAR10ドキュメント）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;2-モデルの実装&quot;&gt;2. モデルの実装&lt;/h2&gt;
+&lt;p&gt;それでは，CIFAR10を分類するためのCNNモデルの実装をしていきましょう．&lt;/p&gt;
+
+&lt;p&gt;今回実装するモデルは，ゼロから〜のP229で扱われているSimpleConvNetに似た構成とします．また，ソースコード名は，&lt;code class=&quot;highlighter-rouge&quot;&gt;cnn.py&lt;/code&gt;として進めていきます．&lt;/p&gt;
+
+&lt;p&gt;例によってモデルの概要図を以下に示します．実装の際の参考にしてください．なお，この図は自作ではなく，GitHubの@yu4uさんらによる「&lt;a href=&quot;https://github.com/yu4u/convnet-drawer&quot;&gt;convnet-drawer&lt;/a&gt;」により描画しています．CNNであれば簡単に作図できるので，ぜひ使ってみてください．&lt;/p&gt;
+
+&lt;div style=&quot;text-align: center;&quot;&gt;
+    &lt;img src=&quot;/resources/2019-05-10/model_diagram.png&quot; alt=&quot;1層CNNモデルの概要図&quot; style=&quot;width: 400px;&quot; /&gt;&lt;br /&gt;
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://github.com/oreilly-japan/deep-learning-from-scratch/blob/master/ch07/simple_convnet.py&quot;&gt;（SimpleConvNetの公式ソースコード）&lt;/a&gt;&lt;br /&gt;
+&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://github.com/yu4u/convnet-drawer&quot;&gt;（GitHub: convnet-drawer）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;21-レイヤーの定義&quot;&gt;2.1 レイヤーの定義&lt;/h3&gt;
+&lt;p&gt;今回使うモジュールやレイヤーをインポートします．&lt;/p&gt;
+
+&lt;p&gt;新たに登場するレイヤーとしては，&lt;code class=&quot;highlighter-rouge&quot;&gt;Conv2D&lt;/code&gt;，&lt;code class=&quot;highlighter-rouge&quot;&gt;MaxPooling2D&lt;/code&gt;，&lt;code class=&quot;highlighter-rouge&quot;&gt;Flatten&lt;/code&gt;が挙げられます．これらのレイヤーについては，以下でそれぞれ解説していきます．&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from keras import Model
+from keras.layers import Input, Dense, Flatten
+from keras.layers import Conv2D, MaxPooling2D
+from keras.datasets import cifar10
+from keras.utils import to_categorical
+import matplotlib.pyplot as plt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;22-畳み込み処理&quot;&gt;2.2 畳み込み処理&lt;/h3&gt;
+&lt;p&gt;畳み込み処理部のソースコードとその説明を以下に示します．&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;入力部&lt;br /&gt;
+  CIFAR10データセットは，32*32のカラー画像: RGBのデータセットです．&lt;br /&gt;
+  したがって，入力サイズは&lt;code class=&quot;highlighter-rouge&quot;&gt;(32, 32, 3)&lt;/code&gt;となります．&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;畳み込み部&lt;br /&gt;
+  画像の畳み込み処理には，&lt;code class=&quot;highlighter-rouge&quot;&gt;Conv2D&lt;/code&gt;レイヤーを活用します．&lt;br /&gt;
+  &lt;code class=&quot;highlighter-rouge&quot;&gt;Conv2D&lt;/code&gt;の主な引数の説明は以下のようになります．&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th style=&quot;text-align: center&quot;&gt;&lt;strong&gt;引数&lt;/strong&gt;&lt;/th&gt;
+          &lt;th style=&quot;text-align: left&quot;&gt;&lt;strong&gt;説明&lt;/strong&gt;&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;filters&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;フィルターの個数を指定する．&lt;br /&gt;ここで指定するフィルターはそれぞれ異なる重みやバイアスを持つものである．&lt;br /&gt;ゼロから〜では，&lt;code class=&quot;highlighter-rouge&quot;&gt;filter_num&lt;/code&gt;として定義されている．&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;kernel_size&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;フィルターのサイズを指定する．&lt;br /&gt;ゼロから〜では，&lt;code class=&quot;highlighter-rouge&quot;&gt;filter_size&lt;/code&gt;として定義されている．&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;strides&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;ストライド幅を指定する．&lt;br /&gt;ゼロから〜では，&lt;code class=&quot;highlighter-rouge&quot;&gt;stride&lt;/code&gt;として定義されている．&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;padding&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&quot;text-align: left&quot;&gt;ゼロパディングの有無を指定する．&lt;br /&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;'same'&lt;/code&gt;のときには，ゼロパディングが適用され，入力サイズと出力サイズは同じになる．&lt;code class=&quot;highlighter-rouge&quot;&gt;'valid'&lt;/code&gt;のときには，出力サイズは入力サイズよりも小さくなる．&lt;br /&gt;ゼロから〜では，&lt;code class=&quot;highlighter-rouge&quot;&gt;pad&lt;/code&gt;として定義されている．&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;p&gt;今回実装する畳み込み層は，ほぼゼロから〜の設定値に基づくので，各値の詳細な説明は省きます．&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;プーリング部&lt;br /&gt;
+  Kerasにおいて画像の最大値プーリングの処理は，&lt;code class=&quot;highlighter-rouge&quot;&gt;MaxPooling2D&lt;/code&gt;で実装できます．&lt;code class=&quot;highlighter-rouge&quot;&gt;MaxPooling2D&lt;/code&gt;の主な引数は，&lt;code class=&quot;highlighter-rouge&quot;&gt;pool_size&lt;/code&gt;のみです．例えば，2*2のプーリングを行いたい場合には，&lt;code class=&quot;highlighter-rouge&quot;&gt;pool_size&lt;/code&gt;に&lt;code class=&quot;highlighter-rouge&quot;&gt;2&lt;/code&gt;か&lt;code class=&quot;highlighter-rouge&quot;&gt;(2,2)&lt;/code&gt;を指定します．&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# 入力部
+_input = Input(shape=(32, 32, 3))
+
+# 畳み込み部
+_hidden = Conv2D(filters=30, kernel_size=5, strides=(1, 1), padding='valid', activation='relu')(_input)
+
+# プーリング部
+_hidden = MaxPooling2D(pool_size=(2, 2))(_hidden)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/layers/convolutional/#conv2d&quot;&gt;（Keras: Conv2Dのドキュメント）&lt;/a&gt;&lt;br /&gt;
+&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/layers/pooling/&quot;&gt;（Keras: MaxPooling2Dのドキュメント）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;23-出力処理&quot;&gt;2.3 出力処理&lt;/h3&gt;
+&lt;p&gt;プーリングが終わったら，残るは全結合層に通して，Softmaxで分類するだけです．簡単な気がしますが一つだけ落とし穴があります．&lt;/p&gt;
+
+&lt;p&gt;ここで，&lt;code class=&quot;highlighter-rouge&quot;&gt;MaxPooling2D&lt;/code&gt;の出力のテンソルサイズを見てみましょう．最大値プーリングまでのモデルを切り出して確認します．&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Model&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Input&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Conv2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MaxPooling2D&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Conv2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kernel_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strides&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'valid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'relu'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MaxPooling2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pool_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;_________________________________________________________________
+Layer (type)                 Output Shape              Param #
+=================================================================
+input_1 (InputLayer)         (None, 32, 32, 3)         0
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 28, 28, 30)        2280
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 14, 14, 30)        0
+=================================================================
+Total params: 2,280
+Trainable params: 2,280
+Non-trainable params: 0
+_________________________________________________________________
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MaxPooling2D&lt;/code&gt;の出力は，&lt;code class=&quot;highlighter-rouge&quot;&gt;(None, 14, 14, 30)&lt;/code&gt;となっていることがわかります．この状態で，&lt;code class=&quot;highlighter-rouge&quot;&gt;Dense&lt;/code&gt;レイヤーにこのテンソルを渡すとどうなるか，確認してみましょう．&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Model&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Conv2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MaxPooling2D&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Conv2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kernel_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strides&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'valid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'relu'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MaxPooling2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pool_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;_________________________________________________________________
+Layer (type)                 Output Shape              Param #
+=================================================================
+input_1 (InputLayer)         (None, 32, 32, 3)         0
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 28, 28, 30)        2280
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 14, 14, 30)        0
+_________________________________________________________________
+dense_1 (Dense)              (None, 14, 14, 100)       3100
+=================================================================
+Total params: 5,380
+Trainable params: 5,380
+Non-trainable params: 0
+_________________________________________________________________
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;なんと，&lt;code class=&quot;highlighter-rouge&quot;&gt;(None, 14, 14, 100)&lt;/code&gt;という出力が出てきてしまいました．本来ならば，ここでは出力として&lt;code class=&quot;highlighter-rouge&quot;&gt;(None, 100)&lt;/code&gt;が欲しい場面です．&lt;/p&gt;
+
+&lt;p&gt;この原因は，Kerasの&lt;code class=&quot;highlighter-rouge&quot;&gt;Dense&lt;/code&gt;レイヤーの出力の定義が，&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;nD tensor with shape: (batch_size, …, units)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;となっているためで，元の入力のテンソルの次元を変えない仕様になっているのです．&lt;/p&gt;
+
+&lt;p&gt;したがって，Kerasで3次元以上のデータを2次元に落とし込みたいときには，事前に&lt;code class=&quot;highlighter-rouge&quot;&gt;Reshape&lt;/code&gt;か&lt;code class=&quot;highlighter-rouge&quot;&gt;Flatten&lt;/code&gt;などを用いてテンソルの形状を変更（平滑化）する必要があります．今回の場合，以下のようにすれば望みの出力が得られます．&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Model&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flatten&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Conv2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MaxPooling2D&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Conv2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kernel_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strides&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'valid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'relu'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MaxPooling2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pool_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flatten&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'relu'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_output&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'softmax'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;_________________________________________________________________
+Layer (type)                 Output Shape              Param #
+=================================================================
+input_1 (InputLayer)         (None, 32, 32, 3)         0
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 28, 28, 30)        2280
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 14, 14, 30)        0
+_________________________________________________________________
+flatten_1 (Flatten)          (None, 5880)              0
+_________________________________________________________________
+dense_1 (Dense)              (None, 100)               588100
+_________________________________________________________________
+dense_2 (Dense)              (None, 10)                1010
+=================================================================
+Total params: 591,390
+Trainable params: 591,390
+Non-trainable params: 0
+_________________________________________________________________
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;なお，&lt;code class=&quot;highlighter-rouge&quot;&gt;Flatten&lt;/code&gt;はその名の通り，入力のテンソルを平らにする（平滑化する）レイヤーです．&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/layers/core/#flatten&quot;&gt;（Keras: Flattenのドキュメント）&lt;/a&gt;&lt;br /&gt;
+&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/layers/core/#dense&quot;&gt;（Keras: Denseのドキュメント）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;24-データセットの読み込みと学習設定&quot;&gt;2.4 データセットの読み込みと学習設定&lt;/h3&gt;
+
+&lt;p&gt;この部分は前回までとほぼ同一なので，説明は省きます．以下にソースコードを示すので，上のソースコードと合わせて動かしてみてください．&lt;/p&gt;
+
+&lt;p&gt;(&lt;strong&gt;注意&lt;/strong&gt;) 畳み込みニューラルネットの学習は，普通のパソコンで回すとそれなりの時間を要します．（手持ちのノートPCでは，エポックあたり30秒程度かかりました．）また，初めて動かすときには，CIFAR10データセットのダウンロード処理に数分を要します．&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from keras.datasets import cifar10
+from keras.utils import to_categorical
+
+# データセットの読み込み
+(x_train, y_train), (x_test, y_test) = cifar10.load_data()
+x_train = x_train.astype('float') / 255.
+x_test = x_test.astype('float') / 255.
+y_train = to_categorical(y_train, num_classes=10)
+y_test = to_categorical(y_test, num_classes=10)
+
+# 学習設定
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+_results = model.fit(x=x_train, y=y_train, batch_size=100, epochs=20, verbose=1, validation_data=(x_test, y_test))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;3-実験&quot;&gt;3. 実験&lt;/h2&gt;
+&lt;h3 id=&quot;31-１層畳み込みニューラルネットの学習結果&quot;&gt;3.1 １層畳み込みニューラルネットの学習結果&lt;/h3&gt;
+&lt;p&gt;上記で実装した&lt;code class=&quot;highlighter-rouge&quot;&gt;cnn.py&lt;/code&gt;を動作させた結果，以下のような分類精度の推移となりました．&lt;/p&gt;
+
+&lt;div style=&quot;text-align: center;&quot;&gt;
+    &lt;img src=&quot;/resources/2019-05-10/acc.png&quot; alt=&quot;１層CNNの分類精度の推移&quot; style=&quot;width: 500px;&quot; /&gt;&lt;br /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;5エポック目あたりから過学習の傾向が見られます．また，テストデータでの最高精度は65%程度であることが読み取れます．&lt;/p&gt;
+
+&lt;p&gt;10クラスの分類で65%の精度なので，デタラメに分類しているわけではなさそうです．そこで，次節ではゼロから〜のP234と同様に，CNNのフィルターの重みを可視化することで，規則性のあるフィルターを学習できているかどうかを確認してみることにします．&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter7&quot;&gt;（GitHub: cnn.py）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;32-重みの可視化&quot;&gt;3.2 重みの可視化&lt;/h3&gt;
+&lt;h4 id=&quot;321-重み画像の生成&quot;&gt;3.2.1 重み画像の生成&lt;/h4&gt;
+&lt;p&gt;CNNの重みを可視化するには，&lt;code class=&quot;highlighter-rouge&quot;&gt;model.get_weights()&lt;/code&gt;でパラメータのリストを取得して，そのリストに少し手を加える必要があります．&lt;/p&gt;
+
+&lt;p&gt;本シリーズの第2弾で確認したように，パラメータのリストはモデルの入力側から順に登録されています．したがって，今回のモデルでは，畳み込み層のフィルターの重みは先頭に格納されていることになります．&lt;/p&gt;
+
+&lt;p&gt;その点を踏まえて，次のCNNのフィルターの重みを可視化するスクリプト抜粋をみてください．このスクリプトは，&lt;code class=&quot;highlighter-rouge&quot;&gt;weight_image&lt;/code&gt;というリストに各フィルタの重みのNumPy配列を追加していくものになっています．&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import numpy as np
+from keras.preprocessing.image import array_to_img
+
+weights = model.get_weights()
+weights = weights[0] # 畳み込み層の重みを取ってくる
+weights = np.split(weights, 30, axis=3) # 各フィルターに分割する
+
+weight_image = []
+
+for weight in weights:
+    weight = np.squeeze(weight, axis=3)
+    weight = array_to_img(weight)
+    weight = np.array(weight)
+    weight_image.append(weight)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;簡単に各部を説明していきます．まず，&lt;code class=&quot;highlighter-rouge&quot;&gt;np.split()&lt;/code&gt;により，&lt;code class=&quot;highlighter-rouge&quot;&gt;(5, 5, 3, 30)&lt;/code&gt;となっている重みのリストを，&lt;code class=&quot;highlighter-rouge&quot;&gt;(5, 5, 3, 1)&lt;/code&gt;の形を持つ30個のリストに分割します．&lt;/p&gt;
+
+&lt;p&gt;その後，&lt;code class=&quot;highlighter-rouge&quot;&gt;np.squeeze()&lt;/code&gt;により，無駄な次元: 3次元目をなくします．これにより，&lt;code class=&quot;highlighter-rouge&quot;&gt;(5, 5, 3)&lt;/code&gt;の形状を持つリストが得られます．&lt;/p&gt;
+
+&lt;p&gt;最後に&lt;code class=&quot;highlighter-rouge&quot;&gt;array_to_image()&lt;/code&gt;を用いてリストをPIL形式の画像に変換し，タイル状に画像を並べるために再びNumPy形式に変換し直して，リストに追加しておきます．&lt;/p&gt;
+
+&lt;h4 id=&quot;322-タイル状に画像を表示&quot;&gt;3.2.2 タイル状に画像を表示&lt;/h4&gt;
+&lt;p&gt;残るは&lt;code class=&quot;highlighter-rouge&quot;&gt;weight_image&lt;/code&gt;を画像化すれば良いだけですが，どうせならタイル状に並べて表示したいところです．しかし，タイル状に複数画像を出力するのは若干手間がかかります…&lt;/p&gt;
+
+&lt;p&gt;以下に，タイル状に画像を表示するサンプルスクリプトを示します．各部の詳しい説明は省きますが，大まかには空の生成画像サイズのリストを用意して，そこに元のピースとなる画像を入れていく流れになります．&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import math
+from PIL import Image
+
+img = combine_images(np.array(weight_image)) # 重み画像の合体
+Image.fromarray(img.astype(np.uint8)).save('weight.png')
+
+def combine_images(images):
+    num = images.shape[0]
+    width = int(math.sqrt(num))
+    height = int(math.ceil(float(num) / width))
+    shape = images.shape[1:]
+    image = np.zeros((height * shape[0], width * shape[1], shape[2]),
+                     dtype=images.dtype)
+    for index, img in enumerate(images):
+        i = int(index / width)
+        j = index % width
+        image[i * shape[0]:(i + 1) * shape[0], j * shape[1]:(j + 1) * shape[1], :] = img
+    return image
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;上のスクリプトで重み画像を可視化した結果が以下の図です．&lt;/p&gt;
+&lt;div style=&quot;text-align: center;&quot;&gt;
+    &lt;img src=&quot;/resources/2019-05-10/param.png&quot; alt=&quot;CNNのフィルター重み可視化結果&quot; style=&quot;width: 300px;&quot; /&gt;&lt;br /&gt;
+    ＜重みの可視化結果＞
+&lt;/div&gt;
+
+&lt;p&gt;重みの可視化結果の図から，学習前は完全にランダムな重みとなっているフィルタが，学習後にはある特定の方向に反応するフィルタとして変化していることがわかります．したがって，本来の目的である，規則性のあるフィルターを学習できていることが確認できました！&lt;/p&gt;
+
+&lt;p&gt;なお，一連のソースコードについては，&lt;code class=&quot;highlighter-rouge&quot;&gt;visualize_weights.py&lt;/code&gt;としてGitHubに置いてあります．参考にしてください．&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter7&quot;&gt;（GitHub: visualize_weights.py）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;script async=&quot;&quot; src=&quot;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
+
+&lt;!-- 記事内広告2 --&gt;
+&lt;p&gt;&lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:block&quot; data-ad-client=&quot;ca-pub-1838422896597988&quot; data-ad-slot=&quot;1400355899&quot; data-ad-format=&quot;auto&quot; data-full-width-responsive=&quot;true&quot;&gt;&lt;/ins&gt;
+&lt;script&gt;
+     (adsbygoogle = window.adsbygoogle || []).push({});
+&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;4-学習済みモデルの活用&quot;&gt;4. 学習済みモデルの活用&lt;/h2&gt;
+&lt;p&gt;今回実装してきた1層のCNNでは，CIFAR10で65%程度の分類精度しか出せませんでした．満足に写真の分類をできるようになるには程遠いですね．&lt;/p&gt;
+
+&lt;p&gt;分類精度をより向上させるにはモデルの構造を改良することも考えられますが，手っ取り早いのは，学習済みモデルを活用して転移学習を行うことです．ここでは一例として，Kerasが学習済みモデルとして提供している&lt;code class=&quot;highlighter-rouge&quot;&gt;MobileNet&lt;/code&gt;を用いて，転移学習によるCIFAR10データセットの分類実験をして，どれほど高い分類性能が記録されるかを検証していこうと思います．&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照： &lt;a href=&quot;https://keras.io/ja/applications/#mobilenet&quot;&gt;（KerasにおけるMobileNetのドキュメント）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;41-mobilenetの特徴&quot;&gt;4.1 MobileNetの特徴&lt;/h3&gt;
+&lt;p&gt;MobileNetはその名の通り，学習が速い＆軽いという特徴を持ち，それなりの分類精度を誇るモデルです．学習はImageNetという画像データベースを用いて行っています．&lt;/p&gt;
+
+&lt;p&gt;今回MobileNetを扱った理由は，各自のパソコン上でも現実的に動作可能な学習済みモデルであるためです．モデルの詳細を知りたい方は，下記のリンクより論文を確認してみてください．&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;http://www.image-net.org/&quot;&gt;（ImageNetの公式サイト）&lt;/a&gt;&lt;br /&gt;
+&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://arxiv.org/abs/1704.04861&quot;&gt;（MobileNetの論文）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;42-mobilenetの読み込み&quot;&gt;4.2 MobileNetの読み込み&lt;/h3&gt;
+&lt;p&gt;では，Kerasで実際にMobileNetを活用したモデルを構築してみましょう．&lt;/p&gt;
+
+&lt;p&gt;MobileNetモデルの読み込みは非常に簡単で，下記に示すように1行で読み込めます．&lt;/p&gt;
+
+&lt;p&gt;MobileNetの引数については，&lt;code class=&quot;highlighter-rouge&quot;&gt;include_top&lt;/code&gt;は出力層も含めたモデルにするかどうかを指定し，&lt;code class=&quot;highlighter-rouge&quot;&gt;pooling&lt;/code&gt;については出力層を含めないモデルのときに，プーリングの有無やその種類を指定します．今回は10クラス分類のため，出力層を含めないモデルとし，プーリングには次章で説明する「Global Average Pooling」を指定しました．&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;applications&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mobilenet&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MobileNet&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Model&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MobileNet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;include_top&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pooling&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'avg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_output&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'softmax'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;_________________________________________________________________
+Layer (type)                 Output Shape              Param #
+=================================================================
+input_1 (InputLayer)         (None, 32, 32, 3)         0
+_________________________________________________________________
+mobilenet_1.00_224 (Model)   (None, 1024)              3228864
+_________________________________________________________________
+dense_1 (Dense)              (None, 10)                10250
+=================================================================
+Total params: 3,239,114
+Trainable params: 3,217,226
+Non-trainable params: 21,888
+_________________________________________________________________
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;43-データセットの読み込み&quot;&gt;4.3 データセットの読み込み&lt;/h3&gt;
+&lt;p&gt;MobileNetは入力サイズとして，&lt;code class=&quot;highlighter-rouge&quot;&gt;(224, 224, 3)&lt;/code&gt;を想定していますが，Kerasのドキュメントを見ると，幅と高さが32以上であれば良いと書いてあります．そのため，今回に限っては特にリサイズすることなく，CIFAR10の画像データをそのままモデルに入力することができます．&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from keras.datasets import cifar10
+from keras.utils import to_categorical
+
+(x_train, y_train), (x_test, y_test) = cifar10.load_data()
+x_train = x_train.astype('float') / 255.
+x_test = x_test.astype('float') / 255.
+y_train = to_categorical(y_train, num_classes=10)
+y_test = to_categorical(y_test, num_classes=10)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;44-転移学習の実行&quot;&gt;4.4 転移学習の実行&lt;/h3&gt;
+&lt;p&gt;転移学習を実行する前に，&lt;code class=&quot;highlighter-rouge&quot;&gt;evaluate&lt;/code&gt;メソッドを使って学習前のモデルの精度を確認しておこうと思います．&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# 学習設定
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+# 事前学習済みモデルのテスト
+print(model.evaluate(x=x_test, y=y_test, batch_size=128))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;10000/10000 [==============================] - 2s 211us/step
+[2.3138149349212647, 0.1194]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;出力からわかるように，精度は11.9%でした．出力層の学習が全くできていない状態なので，このような結果となったと考えられます．&lt;/p&gt;
+
+&lt;p&gt;では，転移学習なので数エポック回すだけで事足りるため，今回は3エポックだけ回して精度の推移を見ていくことにします．&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# 転移学習してみる
+_results = model.fit(x=x_train, y=y_train, batch_size=128, epochs=3, verbose=1, validation_data=(x_test, y_test))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Train on 50000 samples, validate on 10000 samples
+Epoch 1/3
+50000/50000 [==============================] - 17s 344us/step - loss: 1.0968 - acc: 0.6426 - val_loss: 0.9881 - val_acc: 0.7144
+Epoch 2/3
+50000/50000 [==============================] - 15s 307us/step - loss: 0.6443 - acc: 0.7826 - val_loss: 0.7400 - val_acc: 0.7499
+Epoch 3/3
+50000/50000 [==============================] - 16s 314us/step - loss: 0.5114 - acc: 0.8265 - val_loss: 0.7199 - val_acc: 0.7728
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;2エポック目の時点で，&lt;code class=&quot;highlighter-rouge&quot;&gt;val_acc&lt;/code&gt;が74.99%とほぼ10%精度が向上していることがわかります．やはり，転移学習を用いることで，省コストでそれなりの精度を出せる分類器を手に入れられるメリットは大きいと感じます．&lt;/p&gt;
+
+&lt;p&gt;ソースコードは，&lt;code class=&quot;highlighter-rouge&quot;&gt;transfer_learning.py&lt;/code&gt;として，GitHubに置いてあります．&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter7&quot;&gt;（GitHub: transfer_learning.py）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;5-最近のcnn&quot;&gt;5. 最近のCNN&lt;/h2&gt;
+&lt;p&gt;最後に簡単ですが，ゼロから〜には書かれていないCNN関連のテクニックについて触れていきたいと思います．&lt;/p&gt;
+
+&lt;h3 id=&quot;51-global-average-pooling&quot;&gt;5.1 Global Average Pooling&lt;/h3&gt;
+&lt;p&gt;Global Average Pooling（以下，GAP）は出力側の全結合層を置き換えるものとして活用されています．このメリットとしては，過学習を防ぎつつ，モデルのパラメータ数を減らすことができる点が挙げられます．&lt;/p&gt;
+
+&lt;p&gt;GAPでは，各チャンネルごとにその特徴マップの値を平均した値を出力値とします．つまり，畳み込み＆プーリング処理後のテンソルの形状が，&lt;code class=&quot;highlighter-rouge&quot;&gt;(None, 14, 14, 30)&lt;/code&gt;であったとき，GAPを適用すると，&lt;code class=&quot;highlighter-rouge&quot;&gt;(None, 30)&lt;/code&gt;となります．&lt;a href=&quot;https://arxiv.org/abs/1312.4400&quot;&gt;論文&lt;/a&gt;によると，各出力の特徴マップは，分類カテゴリの”confidence map”として容易に解釈できるとされています．&lt;/p&gt;
+
+&lt;p&gt;KerasでGAPを適用するのは非常に簡単であり，&lt;code class=&quot;highlighter-rouge&quot;&gt;keras.layers&lt;/code&gt;にある，&lt;code class=&quot;highlighter-rouge&quot;&gt;GlobalAveragePooling2D&lt;/code&gt;レイヤーをインポートして使うだけです．&lt;/p&gt;
+
+&lt;p&gt;以下に，&lt;code class=&quot;highlighter-rouge&quot;&gt;cnn.py&lt;/code&gt;にGAPを適用したモデルのスクリプトを示します．このモデルでは，最大値プーリングと全結合層の間にGAPを配置しています．&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Model&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Conv2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MaxPooling2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GlobalAveragePooling2D&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;#&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;モデル定義&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Conv2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kernel_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strides&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'valid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'relu'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MaxPooling2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pool_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GlobalAveragePooling2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'relu'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;_output&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'softmax'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;_________________________________________________________________
+Layer (type)                 Output Shape              Param #
+=================================================================
+input_1 (InputLayer)         (None, 32, 32, 3)         0
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 28, 28, 30)        2280
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 14, 14, 30)        0
+_________________________________________________________________
+global_average_pooling2d_1 ( (None, 30)                0
+_________________________________________________________________
+dense_1 (Dense)              (None, 100)               3100
+_________________________________________________________________
+dense_2 (Dense)              (None, 10)                1010
+=================================================================
+Total params: 6,390
+Trainable params: 6,390
+Non-trainable params: 0
+_________________________________________________________________
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;出力結果より，&lt;code class=&quot;highlighter-rouge&quot;&gt;cnn.py&lt;/code&gt;では，総パラメータ数が591,390であったのに対し，GAPを適用したモデルでは，6,390とかなり減少していることが実際に確認できます．&lt;/p&gt;
+
+&lt;p&gt;ちなみにこのモデルを学習させた結果が以下の図のようになります．&lt;/p&gt;
+
+&lt;div style=&quot;text-align: center;&quot;&gt;
+    &lt;img src=&quot;/resources/2019-05-10/acc_gap.png&quot; alt=&quot;GAP適用モデルの分類精度の推移&quot; style=&quot;width: 400px;&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;150エポック回して，分類精度は56%程度となりました．チューニング等一切していないので，元のモデルよりも，10%程度下がってしまっていますね…なお，この例のようにGAPを適用したモデルは一般に学習が遅くなるというデメリットが報告されているので，ご注意ください．&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://keras.io/ja/layers/pooling/#globalaveragepooling2d&quot;&gt;（KerasのGlobal Average Poolingのドキュメント）&lt;/a&gt;&lt;br /&gt;
+&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://arxiv.org/abs/1312.4400&quot;&gt;（GAPの原著論文）&lt;/a&gt;&lt;br /&gt;
+&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter7&quot;&gt;（GitHub: cnn_with_gap.py）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;52-cnnのサーベイ記事&quot;&gt;5.2 CNNのサーベイ記事&lt;/h3&gt;
+&lt;p&gt;CNNに関する研究のより詳しい流れについては，若干古くなっていますが，かなり充実したまとめがあるので，以下のリンクを参考にすると良いと思います．&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://qiita.com/yu4u/items/7e93c454c9410c4b5427&quot;&gt;（畳み込みニューラルネットワークの最新研究動向 (〜2017)）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;まとめ&quot;&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;今回は，畳み込みニューラルネットワーク（CNN）について触れていきました．Global Average Poolingは単に一般物体認識だけでなく，深層生成モデルの分野でも使われる重要な重要なテクニックです．また，前回までに登場したドロップアウトやバッチ正規化もよくCNNで使われる手法であることは，間違いないです．今後，GAPと合わせて意識しておくと良いかもしれません．&lt;/p&gt;
+
+&lt;p&gt;これにて，ゼロから〜とともに学ぶKerasシリーズは完結となりますが，本シリーズで少しでも深層学習フレームワークに慣れる一助となっていたら幸いです．&lt;/p&gt;
+
+&lt;p&gt;今後は少し期間を置いて，自然言語処理の入門のための記事などを投稿できたらと思っています，&lt;/p&gt;
+
+&lt;h2 id=&quot;ソースコード&quot;&gt;ソースコード&lt;/h2&gt;
+&lt;p&gt;ソースコードは，&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/&quot;&gt;GitHub&lt;/a&gt;より入手できます．&lt;/p&gt;</content><author><name></name></author><category term="「ゼロからKeras」シリーズ" /><summary type="html">はじめに このシリーズでは，深層学習の入門書として有名な，「ゼロから作るDeep Learning」（以下，ゼロから〜）と同時並行でフレームワークを学習し，その定着を目指します．</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/resources/2019-05-10/model_diagram.png" /></entry><entry xml:lang="ja_JP"><title type="html">ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編）</title><link href="http://localhost:4000/DL-Intro-4/" rel="alternate" type="text/html" title="ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編）" /><published>2019-05-03T00:00:00+09:00</published><updated>2019-05-03T00:00:00+09:00</updated><id>http://localhost:4000/DL-Intro-4</id><content type="html" xml:base="http://localhost:4000/DL-Intro-4/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
 
 &lt;p&gt;このシリーズでは、深層学習の入門書として有名な、「ゼロから作るDeep Learning」（以下、ゼロから〜）と同時並行で、フレームワークを学習し、その定着を目指します。&lt;/p&gt;
 
@@ -12,7 +585,7 @@
     &lt;p&gt;第二弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-2/&quot;&gt;3層ニューラルネットワーク &amp;amp; 手書き数字認識編&lt;/a&gt;&lt;/p&gt;  
     &lt;p&gt;第三弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-3/&quot;&gt;ニューラルネットワークの学習編&lt;/a&gt;&lt;/p&gt;
     &lt;p&gt;第四弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-4/&quot;&gt;学習テクニック編&lt;/a&gt;&lt;/p&gt;
-    &lt;p&gt;第五弾：畳み込みニューラルネットワーク編&lt;/p&gt;
+    &lt;p&gt;第五弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-5/&quot;&gt;畳み込みニューラルネットワーク編&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;script async=&quot;&quot; src=&quot;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
@@ -349,7 +922,7 @@ model.fit(x=x_train, y=y_train, batch_size=batch_size, epochs=epochs, verbose=1,
     &lt;p&gt;第二弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-2/&quot;&gt;3層ニューラルネットワーク &amp;amp; 手書き数字認識編&lt;/a&gt;&lt;/p&gt;  
     &lt;p&gt;第三弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-3/&quot;&gt;ニューラルネットワークの学習編&lt;/a&gt;&lt;/p&gt;
     &lt;p&gt;第四弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-4/&quot;&gt;学習テクニック編&lt;/a&gt;&lt;/p&gt;
-    &lt;p&gt;第五弾：畳み込みニューラルネットワーク編&lt;/p&gt;
+    &lt;p&gt;第五弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-5/&quot;&gt;畳み込みニューラルネットワーク編&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;script async=&quot;&quot; src=&quot;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
@@ -683,7 +1256,7 @@ plt.close()
 &lt;p&gt;今回はニューラルネットワークの学習について扱いました。&lt;br /&gt;
 フレームワークを活用することで、誤差逆伝播が自動で実行されるため、順伝播の処理だけ記述すればよいという大きなメリットを体感できたと思います。&lt;/p&gt;
 
-&lt;p&gt;次回は、ゼロから〜の第6章に対応する、「学習に関するテクニック」をKerasを用いて実証していきたいと思います。また、ハイパーパラメータの探索や交差検証等についても扱う予定です。&lt;/p&gt;
+&lt;p&gt;次回は、ゼロから〜の第6章に対応する、「学習に関するテクニック」をKerasを用いて実証していきたいと思います。&lt;/p&gt;
 
 &lt;h2 id=&quot;ソースコード&quot;&gt;ソースコード&lt;/h2&gt;
 
@@ -706,7 +1279,7 @@ plt.close()
     &lt;p&gt;第二弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-2/&quot;&gt;3層ニューラルネットワーク &amp;amp; 手書き数字認識編&lt;/a&gt;&lt;/p&gt;  
     &lt;p&gt;第三弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-3/&quot;&gt;ニューラルネットワークの学習編&lt;/a&gt;&lt;/p&gt;
     &lt;p&gt;第四弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-4/&quot;&gt;学習テクニック編&lt;/a&gt;&lt;/p&gt;
-    &lt;p&gt;第五弾：畳み込みニューラルネットワーク編&lt;/p&gt;
+    &lt;p&gt;第五弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-5/&quot;&gt;畳み込みニューラルネットワーク編&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;script async=&quot;&quot; src=&quot;//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js&quot;&gt;&lt;/script&gt;
@@ -1084,7 +1657,7 @@ print(f'Accuracy: {np.sum(y_test == _y_test) / len(y_test)}')
     &lt;p&gt;第二弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-2/&quot;&gt;3層ニューラルネットワーク &amp;amp; 手書き数字認識編&lt;/a&gt;&lt;/p&gt;  
     &lt;p&gt;第三弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-3/&quot;&gt;ニューラルネットワークの学習編&lt;/a&gt;&lt;/p&gt;
     &lt;p&gt;第四弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-4/&quot;&gt;学習テクニック編&lt;/a&gt;&lt;/p&gt;
-    &lt;p&gt;第五弾：畳み込みニューラルネットワーク編&lt;/p&gt;
+    &lt;p&gt;第五弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-5/&quot;&gt;畳み込みニューラルネットワーク編&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;!-- START MoshimoAffiliateEasyLink --&gt;
