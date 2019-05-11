@@ -1,31 +1,31 @@
 ---
 layout: post
 title: MatplotlibとseabornによるSelf Attentionの可視化
-description: Self Attentionの重みを，Pythonのライブラリである「Matplotlibとseaborn」を活用して可視化する方法について紹介します．モデルの実装は，PyTorchに基づきます．
+description: Self Attentionの重みを、Pythonのライブラリである「Matplotlibとseaborn」を活用して可視化する方法について紹介します。モデルの実装は、PyTorchに基づきます。
 mathjax: true
 lang: ja_JP
 tags:
 - Tips
 ---
 
-Pythonの可視化ライブラリであるseabornとグラフ描画ライブラリのMatplotlibを組み合わせることで，意外と簡単にSelf Attentionの重みを可視化することができる．
+Pythonの可視化ライブラリであるseabornとグラフ描画ライブラリのMatplotlibを組み合わせることで、意外と簡単にSelf Attentionの重みを可視化することができる。
 
-とあるデータセットを用いて実際に可視化した結果が以下の図です．
+とあるデータセットを用いて実際に可視化した結果が以下の図です。
 
 ![attentionの可視化結果](../resources/2019-04-02/attention.png)
 
-それでは，順を追って簡単に見ていきましょう．
-なお，深層学習のフレームワークにはPyTorchを使用し，テキストデータの前処理にはtorchtextを使用しています．
+それでは、順を追って簡単に見ていきましょう。
+なお、深層学習のフレームワークにはPyTorchを使用し、テキストデータの前処理にはtorchtextを使用しています。
 
 ## 1. ダウンロード & インストール
-Matplotlib，seabornをインストールしていない場合は，インストールしましょう．
+Matplotlib、seabornをインストールしていない場合は、インストールしましょう。
 ```
 pip install matplotlib
 pip install seaborn
 ```
 
 ## 2. インポート
-本稿ではサーバー上で動作させることを想定しているので，前もって`mpl.use('Agg')`を指定することで，描画エラーを回避します．
+本稿ではサーバー上で動作させることを想定しているので、前もって`mpl.use('Agg')`を指定することで、描画エラーを回避します。
 ```
 import matplotlib as mpl
 mpl.use('Agg')
@@ -35,7 +35,7 @@ import numpy as np
 ```
 
 ## 3. Self Attentionの実装
-Self Attentionの実装については，[GitHub](https://github.com/gucci-j/imdb-classification-gru)にあげている，ソースコード: `model_with_self_attention.py`を流用しました．クラス部分を以下に貼ります．
+Self Attentionの実装については、[GitHub](https://github.com/gucci-j/imdb-classification-gru)にあげている、ソースコード: `model_with_self_attention.py`を流用しました。クラス部分を以下に貼ります。
 
 ```
 class Self_Attention(nn.Module):
@@ -61,16 +61,16 @@ class Self_Attention(nn.Module):
         return attention_output, attention_weight.squeeze(1)
 ```
 
-ソースコード中において，`attention_weight`は時系列方向に正規化された重みベクトルとなっています．そのため，このベクトルを可視化することで，各時刻における入力の単語の重要度を可視化できることになります．  
-要するに，このソースコードにおいては，可視化には`attention_weight`のみを用いれば良いことになります．
+ソースコード中において、`attention_weight`は時系列方向に正規化された重みベクトルとなっています。そのため、このベクトルを可視化することで、各時刻における入力の単語の重要度を可視化できることになります。  
+要するに、このソースコードにおいては、可視化には`attention_weight`のみを用いれば良いことになります。
 
 ## 4. いざ描画
 
-ヒートマップの描画には，`sns.heatmap()`を使います．詳しい使い方は，[ドキュメント](https://seaborn.pydata.org/generated/seaborn.heatmap.html)をご覧ください．
+ヒートマップの描画には、`sns.heatmap()`を使います。詳しい使い方は、[ドキュメント](https://seaborn.pydata.org/generated/seaborn.heatmap.html)をご覧ください。
 
-重要な点としては，ヒートマップ中の各セル内に入力の単語を表示させたいときに，`annot`に`string`型のリストを渡すことで，描画できてしまうということです！
+重要な点としては、ヒートマップ中の各セル内に入力の単語を表示させたいときに、`annot`に`string`型のリストを渡すことで、描画できてしまうということです！
 
-ただし，必ず**リストをNumPyに通すこと** + **`fmt=''`**を指定するのを忘れないでください！
+ただし、必ず**リストをNumPyに通すこと** + **`fmt=''`**を指定するのを忘れないでください！
 
 ```
 plt.figure(figsize = (15, 7))
@@ -80,4 +80,4 @@ plt.close()
 ```
 
 ## ソースコード
-ソースコードは後日: [GitHub](https://github.com/gucci-j/imdb-classification-gru)に追加して公開する予定です．
+ソースコードは後日: [GitHub](https://github.com/gucci-j/imdb-classification-gru)に追加して公開する予定です。
