@@ -57,6 +57,12 @@ table {
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: 'Noto Sans Japanese';
+  font-style: normal;
+  font-weight: 300;
+  src: local("Noto Sans CJK JP DemiLight"), local("NotoSansCJKjp-DemiLight"), local("NotoSansJP-DemiLight"), url("/resources/fonts/Noto-Sans/NotoSansCJKjp-DemiLight.woff2") format("woff2"), url("/resources/fonts/Noto-Sans/NotoSansCJKjp-DemiLight.woff") format("woff"), url("/resources/fonts/Noto-Sans/NotoSansCJKjp-DemiLight.ttf") format("truetype"), url("/resources/fonts/Noto-Sans/NotoSansCJKjp-DemiLight.eot") format("embedded-opentype");
+}
 /**************/
 /* BASE RULES */
 /**************/
@@ -76,6 +82,13 @@ body {
 .container {
   margin: 0 auto;
   max-width: 740px;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.head_container {
+  margin: 0 auto;
+  max-width: 900px;
   padding: 0 10px;
   width: 100%;
 }
@@ -344,11 +357,11 @@ code.highlighter-rouge {
 /*********************/
 .wrapper-masthead {
   margin-bottom: 50px;
+  border-bottom: 2px solid #ddd;
 }
 
 .masthead {
   padding: 20px 0;
-  border-bottom: 1px solid #eee;
 }
 @media screen and (max-width: 640px) {
   .masthead {
@@ -370,7 +383,7 @@ code.highlighter-rouge {
   }
 }
 .site-avatar img {
-  border-radius: 5px;
+  border-radius: 35px;
 }
 
 .site-info {
@@ -389,7 +402,7 @@ code.highlighter-rouge {
   color: #333;
   cursor: pointer;
   font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "游ゴシック", "Yu Gothic", YuGothic, "ＭＳ ゴシック", sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 26px;
   letter-spacing: 1px;
 }

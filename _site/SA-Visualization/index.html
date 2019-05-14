@@ -9,10 +9,10 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
 
     
-    <meta name="description" content="Pythonの可視化ライブラリであるseabornとグラフ描画ライブラリのMatplotlibを組み合わせることで，意外と簡単にSelf Attentionの重みを可視化することができる．
+    <meta name="description" content="Pythonの可視化ライブラリであるseabornとグラフ描画ライブラリのMatplotlibを組み合わせることで、意外と簡単にSelf Attentionの重みを可視化することができる。
 
 " />
-    <meta property="og:description" content="Pythonの可視化ライブラリであるseabornとグラフ描画ライブラリのMatplotlibを組み合わせることで，意外と簡単にSelf Attentionの重みを可視化することができる．
+    <meta property="og:description" content="Pythonの可視化ライブラリであるseabornとグラフ描画ライブラリのMatplotlibを組み合わせることで、意外と簡単にSelf Attentionの重みを可視化することができる。
 
 " />
     
@@ -30,30 +30,31 @@
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <link rel="alternate" type="application/rss+xml" title="きままにNLP - A Technical Blog about NLP and ML" href="/feed.xml" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet">
     
     <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
 
     <!-- Favicon head tag -->
-    <link rel="icon" href="https://pbs.twimg.com/profile_images/1112635060480442368/Ou7bjYFs_400x400.png" type="image/x-icon">
+    <link rel="icon" href="/resources/logo/logo.jpg" type="image/x-icon">
 
     <!-- Begin Jekyll SEO tag v2.6.0 -->
 <title>MatplotlibとseabornによるSelf Attentionの可視化 | きままにNLP</title>
 <meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="MatplotlibとseabornによるSelf Attentionの可視化" />
 <meta property="og:locale" content="ja_JP" />
-<meta name="description" content="Self Attentionの重みを，Pythonのライブラリである「Matplotlibとseaborn」を活用して可視化する方法について紹介します．モデルの実装は，PyTorchに基づきます．" />
-<meta property="og:description" content="Self Attentionの重みを，Pythonのライブラリである「Matplotlibとseaborn」を活用して可視化する方法について紹介します．モデルの実装は，PyTorchに基づきます．" />
+<meta name="description" content="Self Attentionの重みを、Pythonのライブラリである「Matplotlibとseaborn」を活用して可視化する方法について紹介します。モデルの実装は、PyTorchに基づきます。" />
+<meta property="og:description" content="Self Attentionの重みを、Pythonのライブラリである「Matplotlibとseaborn」を活用して可視化する方法について紹介します。モデルの実装は、PyTorchに基づきます。" />
 <link rel="canonical" href="http://localhost:4000/SA-Visualization/" />
 <meta property="og:url" content="http://localhost:4000/SA-Visualization/" />
 <meta property="og:site_name" content="きままにNLP" />
+<meta property="og:image" content="http://localhost:4000/resources/2019-04-02/attention.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-04-02T00:00:00+09:00" />
-<meta name="twitter:card" content="summary" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://localhost:4000/resources/2019-04-02/attention.png" />
 <meta property="twitter:title" content="MatplotlibとseabornによるSelf Attentionの可視化" />
 <meta name="twitter:site" content="@_gucciiiii" />
 <script type="application/ld+json">
-{"description":"Self Attentionの重みを，Pythonのライブラリである「Matplotlibとseaborn」を活用して可視化する方法について紹介します．モデルの実装は，PyTorchに基づきます．","@type":"BlogPosting","url":"http://localhost:4000/SA-Visualization/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/logo.jpg"}},"headline":"MatplotlibとseabornによるSelf Attentionの可視化","dateModified":"2019-04-02T00:00:00+09:00","datePublished":"2019-04-02T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/SA-Visualization/"},"@context":"https://schema.org"}</script>
+{"description":"Self Attentionの重みを、Pythonのライブラリである「Matplotlibとseaborn」を活用して可視化する方法について紹介します。モデルの実装は、PyTorchに基づきます。","@type":"BlogPosting","url":"http://localhost:4000/SA-Visualization/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/logo.jpg"}},"image":"http://localhost:4000/resources/2019-04-02/attention.png","headline":"MatplotlibとseabornによるSelf Attentionの可視化","dateModified":"2019-04-02T00:00:00+09:00","datePublished":"2019-04-02T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/SA-Visualization/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <!-- Google Adsense-->
@@ -70,7 +71,7 @@
 
   <body>
     <div class="wrapper-masthead">
-      <div class="container">
+      <div class="head_container">
         <header class="masthead clearfix">
           <a href="/" class="site-avatar"><img src="/resources/logo/logo.jpg" /></a>
 
@@ -122,23 +123,23 @@
   </div>
 
   <div class="entry">
-    <p>Pythonの可視化ライブラリであるseabornとグラフ描画ライブラリのMatplotlibを組み合わせることで，意外と簡単にSelf Attentionの重みを可視化することができる．</p>
+    <p>Pythonの可視化ライブラリであるseabornとグラフ描画ライブラリのMatplotlibを組み合わせることで、意外と簡単にSelf Attentionの重みを可視化することができる。</p>
 
-<p>とあるデータセットを用いて実際に可視化した結果が以下の図です．</p>
+<p>とあるデータセットを用いて実際に可視化した結果が以下の図です。</p>
 
 <p><img src="../resources/2019-04-02/attention.png" alt="attentionの可視化結果" /></p>
 
-<p>それでは，順を追って簡単に見ていきましょう．
-なお，深層学習のフレームワークにはPyTorchを使用し，テキストデータの前処理にはtorchtextを使用しています．</p>
+<p>それでは、順を追って簡単に見ていきましょう。
+なお、深層学習のフレームワークにはPyTorchを使用し、テキストデータの前処理にはtorchtextを使用しています。</p>
 
 <h2 id="1-ダウンロード--インストール">1. ダウンロード &amp; インストール</h2>
-<p>Matplotlib，seabornをインストールしていない場合は，インストールしましょう．</p>
+<p>Matplotlib、seabornをインストールしていない場合は、インストールしましょう。</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install matplotlib
 pip install seaborn
 </code></pre></div></div>
 
 <h2 id="2-インポート">2. インポート</h2>
-<p>本稿ではサーバー上で動作させることを想定しているので，前もって<code class="highlighter-rouge">mpl.use('Agg')</code>を指定することで，描画エラーを回避します．</p>
+<p>本稿ではサーバー上で動作させることを想定しているので、前もって<code class="highlighter-rouge">mpl.use('Agg')</code>を指定することで、描画エラーを回避します。</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import matplotlib as mpl
 mpl.use('Agg')
 import matplotlib.pyplot as plt
@@ -147,7 +148,7 @@ import numpy as np
 </code></pre></div></div>
 
 <h2 id="3-self-attentionの実装">3. Self Attentionの実装</h2>
-<p>Self Attentionの実装については，<a href="https://github.com/gucci-j/imdb-classification-gru">GitHub</a>にあげている，ソースコード: <code class="highlighter-rouge">model_with_self_attention.py</code>を流用しました．クラス部分を以下に貼ります．</p>
+<p>Self Attentionの実装については、<a href="https://github.com/gucci-j/imdb-classification-gru">GitHub</a>にあげている、ソースコード: <code class="highlighter-rouge">model_with_self_attention.py</code>を流用しました。クラス部分を以下に貼ります。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Self_Attention(nn.Module):
     def __init__(self, query_dim):
@@ -172,16 +173,16 @@ import numpy as np
         return attention_output, attention_weight.squeeze(1)
 </code></pre></div></div>
 
-<p>ソースコード中において，<code class="highlighter-rouge">attention_weight</code>は時系列方向に正規化された重みベクトルとなっています．そのため，このベクトルを可視化することで，各時刻における入力の単語の重要度を可視化できることになります．<br />
-要するに，このソースコードにおいては，可視化には<code class="highlighter-rouge">attention_weight</code>のみを用いれば良いことになります．</p>
+<p>ソースコード中において、<code class="highlighter-rouge">attention_weight</code>は時系列方向に正規化された重みベクトルとなっています。そのため、このベクトルを可視化することで、各時刻における入力の単語の重要度を可視化できることになります。<br />
+要するに、このソースコードにおいては、可視化には<code class="highlighter-rouge">attention_weight</code>のみを用いれば良いことになります。</p>
 
 <h2 id="4-いざ描画">4. いざ描画</h2>
 
-<p>ヒートマップの描画には，<code class="highlighter-rouge">sns.heatmap()</code>を使います．詳しい使い方は，<a href="https://seaborn.pydata.org/generated/seaborn.heatmap.html">ドキュメント</a>をご覧ください．</p>
+<p>ヒートマップの描画には、<code class="highlighter-rouge">sns.heatmap()</code>を使います。詳しい使い方は、<a href="https://seaborn.pydata.org/generated/seaborn.heatmap.html">ドキュメント</a>をご覧ください。</p>
 
-<p>重要な点としては，ヒートマップ中の各セル内に入力の単語を表示させたいときに，<code class="highlighter-rouge">annot</code>に<code class="highlighter-rouge">string</code>型のリストを渡すことで，描画できてしまうということです！</p>
+<p>重要な点としては、ヒートマップ中の各セル内に入力の単語を表示させたいときに、<code class="highlighter-rouge">annot</code>に<code class="highlighter-rouge">string</code>型のリストを渡すことで、描画できてしまうということです！</p>
 
-<p>ただし，必ず<strong>リストをNumPyに通すこと</strong> + <strong><code class="highlighter-rouge">fmt=''</code></strong>を指定するのを忘れないでください！</p>
+<p>ただし、必ず<strong>リストをNumPyに通すこと</strong> + <strong><code class="highlighter-rouge">fmt=''</code></strong>を指定するのを忘れないでください！</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plt.figure(figsize = (15, 7))
 sns.heatmap(attention_weight, annot=np.asarray(itos), fmt='', cmap='Blues')
@@ -190,7 +191,7 @@ plt.close()
 </code></pre></div></div>
 
 <h2 id="ソースコード">ソースコード</h2>
-<p>ソースコードは後日: <a href="https://github.com/gucci-j/imdb-classification-gru">GitHub</a>に追加して公開する予定です．</p>
+<p>ソースコードは後日: <a href="https://github.com/gucci-j/imdb-classification-gru">GitHub</a>に追加して公開する予定です。</p>
 
   </div>
 

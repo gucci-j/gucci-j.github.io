@@ -9,6 +9,19 @@
 @import "variables";
 // Syntax highlighting @import is at the bottom of this file
 
+@font-face {
+  font-family: 'Noto Sans Japanese';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Noto Sans CJK JP DemiLight'),
+       local('NotoSansCJKjp-DemiLight'),
+       local('NotoSansJP-DemiLight'),
+    url('/resources/fonts/Noto-Sans/NotoSansCJKjp-DemiLight.woff2') format('woff2'),
+    url('/resources/fonts/Noto-Sans/NotoSansCJKjp-DemiLight.woff') format('woff'),
+    url('/resources/fonts/Noto-Sans/NotoSansCJKjp-DemiLight.ttf')  format('truetype'),
+    url('/resources/fonts/Noto-Sans/NotoSansCJKjp-DemiLight.eot') format('embedded-opentype');
+}
+
 /**************/
 /* BASE RULES */
 /**************/
@@ -31,6 +44,13 @@ body {
 .container {
   margin: 0 auto;
   max-width: 740px;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.head_container {
+  margin: 0 auto;
+  max-width: 900px;
   padding: 0 10px;
   width: 100%;
 }
@@ -320,11 +340,11 @@ code.highlighter-rouge{
 
 .wrapper-masthead {
   margin-bottom: 50px;
+  border-bottom: 2px solid #ddd;
 }
 
 .masthead {
   padding: 20px 0;
-  border-bottom: 1px solid $lightGray;
 
   @include mobile {
     text-align: center;
@@ -344,7 +364,7 @@ code.highlighter-rouge{
   }
 
   img {
-    border-radius: 5px;
+    border-radius: 35px;
   }
 }
 
@@ -363,7 +383,7 @@ code.highlighter-rouge{
   color: $darkGray;
   cursor: pointer;
   font-family: $helveticaNeue;
-  font-weight: 300;
+  font-weight: 400;
   font-size: 26px;
   letter-spacing: 1px;
 }
