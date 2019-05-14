@@ -62,6 +62,14 @@ table {
   font-style: normal;
   font-weight: 300;
   src: local("Noto Sans CJK JP DemiLight"), local("NotoSansCJKjp-DemiLight"), local("NotoSansJP-DemiLight"), url("/resources/fonts/Noto-Sans/NotoSansCJKjp-DemiLight.woff2") format("woff2"), url("/resources/fonts/Noto-Sans/NotoSansCJKjp-DemiLight.woff") format("woff"), url("/resources/fonts/Noto-Sans/NotoSansCJKjp-DemiLight.ttf") format("truetype"), url("/resources/fonts/Noto-Sans/NotoSansCJKjp-DemiLight.eot") format("embedded-opentype");
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Noto Sans Japanese';
+  font-style: normal;
+  font-weight: bold;
+  src: local("Noto Sans CJK JP Bold"), local("NotoSansCJKjp-Bold"), local("NotoSansJP-Bold"), url("/resources/fonts/Noto-Sans/NotoSansCJKjp-Bold.woff2") format("woff2"), url("/resources/fonts/Noto-Sans/NotoSansCJKjp-Bold.woff") format("woff"), url("/resources/fonts/Noto-Sans/NotoSansCJKjp-Bold.ttf") format("truetype"), url("/resources/fonts/Noto-Sans/NotoSansCJKjp-Bold.eot") format("embedded-opentype");
+  font-display: swap;
 }
 /**************/
 /* BASE RULES */
@@ -71,12 +79,17 @@ html {
 }
 
 body {
-  font: 17px/1.4 "Noto Sans Japanese", "游ゴシック", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ ゴシック", sans-serif;
+  font: 17px "Noto Sans Japanese", "游ゴシック", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ ゴシック", sans-serif;
   background: #fff;
   font-weight: 300;
   color: #333;
   letter-spacing: .5px;
   line-height: 1.5;
+}
+@media screen and (max-width: 640px) {
+  body {
+    font-size: 16px;
+  }
 }
 
 .container {
@@ -103,7 +116,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 @media screen and (max-width: 640px) {
   h1, h2, h3, h4, h5, h6 {
-    line-height: 1.4;
+    line-height: 1.5;
   }
 }
 
@@ -113,9 +126,19 @@ h1 {
 h1 a {
   color: inherit;
 }
+@media screen and (max-width: 640px) {
+  h1 {
+    font-size: 22px;
+  }
+}
 
 h2 {
   font-size: 22px;
+}
+@media screen and (max-width: 640px) {
+  h2 {
+    font-size: 20px;
+  }
 }
 
 .post h2 {
@@ -123,18 +146,39 @@ h2 {
   border-bottom: 1px solid #222;
   padding: 4px 16px;
 }
+@media screen and (max-width: 640px) {
+  .post h2 {
+    border-left: 4px solid #222;
+    padding: 4px 14px;
+  }
+}
 
 h3 {
   font-size: 20px;
+}
+@media screen and (max-width: 640px) {
+  h3 {
+    font-size: 18px;
+  }
 }
 
 .post h3 {
   border-bottom: 1px solid #222;
   padding: 4px 10px;
 }
+@media screen and (max-width: 640px) {
+  .post h3 {
+    padding: 2px 8px;
+  }
+}
 
 h4 {
   font-size: 18px;
+}
+@media screen and (max-width: 640px) {
+  h4 {
+    font-size: 16px;
+  }
 }
 
 p {
@@ -488,6 +532,11 @@ nav a {
   color: #666;
   font-size: 15px;
   font-style: italic;
+}
+@media screen and (max-width: 640px) {
+  .post blockquote {
+    font-size: 13px;
+  }
 }
 .post .comments {
   margin-top: 10px;

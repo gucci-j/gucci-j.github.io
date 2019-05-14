@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-05-14T11:20:46+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog about NLP and ML</subtitle><entry xml:lang="ja_JP"><title type="html">ゼロから作るDeep Learningとともに学ぶフレームワーク（畳み込みニューラルネットワーク編）</title><link href="http://localhost:4000/DL-Intro-5/" rel="alternate" type="text/html" title="ゼロから作るDeep Learningとともに学ぶフレームワーク（畳み込みニューラルネットワーク編）" /><published>2019-05-10T00:00:00+09:00</published><updated>2019-05-10T00:00:00+09:00</updated><id>http://localhost:4000/DL-Intro-5</id><content type="html" xml:base="http://localhost:4000/DL-Intro-5/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-05-14T13:15:34+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog about NLP and ML</subtitle><entry xml:lang="ja_JP"><title type="html">ゼロから作るDeep Learningとともに学ぶフレームワーク（畳み込みニューラルネットワーク編）</title><link href="http://localhost:4000/DL-Intro-5/" rel="alternate" type="text/html" title="ゼロから作るDeep Learningとともに学ぶフレームワーク（畳み込みニューラルネットワーク編）" /><published>2019-05-10T00:00:00+09:00</published><updated>2019-05-10T00:00:00+09:00</updated><id>http://localhost:4000/DL-Intro-5</id><content type="html" xml:base="http://localhost:4000/DL-Intro-5/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
 &lt;p&gt;このシリーズでは、深層学習の入門書として有名な、「ゼロから作るDeep Learning」（以下、ゼロから〜）と同時並行でフレームワークを学習し、その定着を目指します。&lt;/p&gt;
 
 &lt;p&gt;前回は、学習に関する様々テクニックについて紹介しました。今回はこれまでの話題とは大きく変わって、畳み込みニューラルネットワーク（CNN）による画像分類に取り組みます。また、CNNのフィルターの重み可視化や、学習済みモデルの転移学習・最近のCNNモデルで使われるテクニックの一端についても紹介します。なお、本稿はゼロから〜の第7章に対応する内容となっています。&lt;/p&gt;
@@ -8,7 +8,7 @@
 &lt;/blockquote&gt;
 
 &lt;div class=&quot;link_box&quot;&gt;
-    &lt;span class=&quot;box-title&quot;&gt;「ゼロからKeras」シリーズリンク&lt;/span&gt;
+    &lt;span class=&quot;box-title&quot;&gt;シリーズリンク&lt;/span&gt;
     &lt;p&gt;第一弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-1/&quot;&gt;パーセプトロン編&lt;/a&gt;&lt;/p&gt;
     &lt;p&gt;第二弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-2/&quot;&gt;3層ニューラルネットワーク &amp;amp; 手書き数字認識編&lt;/a&gt;&lt;/p&gt;  
     &lt;p&gt;第三弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-3/&quot;&gt;ニューラルネットワークの学習編&lt;/a&gt;&lt;/p&gt;
@@ -580,7 +580,7 @@ _________________________________________________________________
 &lt;p&gt;それでは、まずはパラメータの最適化アルゴリズムについての話題から入っていきましょう！&lt;/p&gt;
 
 &lt;div class=&quot;link_box&quot;&gt;
-    &lt;span class=&quot;box-title&quot;&gt;「ゼロからKeras」シリーズリンク&lt;/span&gt;
+    &lt;span class=&quot;box-title&quot;&gt;シリーズリンク&lt;/span&gt;
     &lt;p&gt;第一弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-1/&quot;&gt;パーセプトロン編&lt;/a&gt;&lt;/p&gt;
     &lt;p&gt;第二弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-2/&quot;&gt;3層ニューラルネットワーク &amp;amp; 手書き数字認識編&lt;/a&gt;&lt;/p&gt;  
     &lt;p&gt;第三弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-3/&quot;&gt;ニューラルネットワークの学習編&lt;/a&gt;&lt;/p&gt;
@@ -917,7 +917,7 @@ model.fit(x=x_train, y=y_train, batch_size=batch_size, epochs=epochs, verbose=1,
 &lt;p&gt;では、２層のニューラルネットワークを題材にMNISTの分類モデルをKerasで実装し、学習させてみましょう！&lt;/p&gt;
 
 &lt;div class=&quot;link_box&quot;&gt;
-    &lt;span class=&quot;box-title&quot;&gt;「ゼロからKeras」シリーズリンク&lt;/span&gt;
+    &lt;span class=&quot;box-title&quot;&gt;シリーズリンク&lt;/span&gt;
     &lt;p&gt;第一弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-1/&quot;&gt;パーセプトロン編&lt;/a&gt;&lt;/p&gt;
     &lt;p&gt;第二弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-2/&quot;&gt;3層ニューラルネットワーク &amp;amp; 手書き数字認識編&lt;/a&gt;&lt;/p&gt;  
     &lt;p&gt;第三弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-3/&quot;&gt;ニューラルネットワークの学習編&lt;/a&gt;&lt;/p&gt;
@@ -1274,7 +1274,7 @@ plt.close()
 &lt;/blockquote&gt;
 
 &lt;div class=&quot;link_box&quot;&gt;
-    &lt;span class=&quot;box-title&quot;&gt;「ゼロからKeras」シリーズリンク&lt;/span&gt;
+    &lt;span class=&quot;box-title&quot;&gt;シリーズリンク&lt;/span&gt;
     &lt;p&gt;第一弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-1/&quot;&gt;パーセプトロン編&lt;/a&gt;&lt;/p&gt;
     &lt;p&gt;第二弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-2/&quot;&gt;3層ニューラルネットワーク &amp;amp; 手書き数字認識編&lt;/a&gt;&lt;/p&gt;  
     &lt;p&gt;第三弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-3/&quot;&gt;ニューラルネットワークの学習編&lt;/a&gt;&lt;/p&gt;
@@ -1652,7 +1652,7 @@ print(f'Accuracy: {np.sum(y_test == _y_test) / len(y_test)}')
 &lt;p&gt;それでは、まずはKerasのインストールから始めていきましょう。&lt;/p&gt;
 
 &lt;div class=&quot;link_box&quot;&gt;
-    &lt;span class=&quot;box-title&quot;&gt;「ゼロからKeras」シリーズリンク&lt;/span&gt;
+    &lt;span class=&quot;box-title&quot;&gt;シリーズリンク&lt;/span&gt;
     &lt;p&gt;第一弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-1/&quot;&gt;パーセプトロン編&lt;/a&gt;&lt;/p&gt;
     &lt;p&gt;第二弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-2/&quot;&gt;3層ニューラルネットワーク &amp;amp; 手書き数字認識編&lt;/a&gt;&lt;/p&gt;  
     &lt;p&gt;第三弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-3/&quot;&gt;ニューラルネットワークの学習編&lt;/a&gt;&lt;/p&gt;
