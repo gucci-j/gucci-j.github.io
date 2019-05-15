@@ -79,17 +79,12 @@ html {
 }
 
 body {
-  font: 17px "Noto Sans Japanese", "游ゴシック", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ ゴシック", sans-serif;
+  font: 16px "Noto Sans Japanese", "游ゴシック", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "ＭＳ ゴシック", sans-serif;
   background: #fff;
   font-weight: 300;
   color: #333;
   letter-spacing: .5px;
   line-height: 1.5;
-}
-@media screen and (max-width: 640px) {
-  body {
-    font-size: 16px;
-  }
 }
 
 .container {
@@ -233,7 +228,7 @@ table th, table td {
 }
 
 table tr:nth-child(even) {
-  background-color: whitesmoke;
+  background-color: #f8f8f8;
 }
 
 em, i {
@@ -253,13 +248,10 @@ img {
   padding: 4px;
 }
 
-.highlight {
-  font-size: 15px;
-}
-
 code.highlighter-rouge {
-  background-color: #e0e0e0;
-  padding: 0 5px 0 5px;
+  background-color: #eeeeee;
+  padding: 2px 3px 2px 3px;
+  border-radius: 3px;
 }
 
 .gmnoprint img {
@@ -560,19 +552,25 @@ footer {
   font-family: Helvetica, Arial, sans-serif;
 }
 
-.highlight {
-  background-color: #efefef;
-  padding: 7px 7px 7px 10px;
+pre.highlight {
+  padding: 1em;
+  color: #333;
+  background-color: #f0f0f0;
   border: 1px solid #ddd;
-  -moz-box-shadow: 3px 3px rgba(0, 0, 0, 0.1);
-  -webkit-box-shadow: 3px 3px rgba(0, 0, 0, 0.1);
-  box-shadow: 3px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  overflow-x: auto;
   margin: 10px 0 10px 0;
-  overflow: scroll;
 }
 
 code {
   font-family: 'Bitstream Vera Sans Mono','Courier', monospace;
+}
+
+.highlight code {
+  font-size: 14px;
+  border: 0;
+  padding-right: 0;
+  padding-left: 0;
 }
 
 .highlight .c {

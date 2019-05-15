@@ -46,7 +46,7 @@ html {
 }
 
 body {
-  font: 17px $yugothic;
+  font: 16px $yugothic;
   background: $white;
   font-weight: 300;
   color: $darkGray;
@@ -54,10 +54,6 @@ body {
   letter-spacing: .5px;
   // 行間の設定
   line-height: 1.5;
-
-  @include mobile {
-    font-size: 16px;
-  }
 }
 
 .container {
@@ -195,7 +191,7 @@ table th,table td{
 }
 
 table tr:nth-child(even){
-  background-color: rgb(245, 245, 245)
+  background-color: rgb(248, 248, 248)
 }
 
 em, i {
@@ -217,13 +213,10 @@ img {
   }
 }
 
-.highlight {
-  font-size: 15px;
-}
-
 code.highlighter-rouge{
-  background-color: #e0e0e0;
-  padding: 0 5px 0 5px;
+  background-color: rgb(238, 238, 238);
+  padding: 2px 3px 2px 3px;
+  border-radius: 3px;
 }
 
 // Fixes images in popup boxes from Google Translate
