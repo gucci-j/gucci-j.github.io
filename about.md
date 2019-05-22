@@ -4,10 +4,11 @@ title: Atsuki Yamaguchi
 permalink: /about/
 lang: en_US
 ---
+<div style="text-align: right;"><i class="fas fa-language" style="padding: 0 4px 0 0;"></i>English | <a href="./ja/">日本語</a></div>
 
 ## Currently
 
-I'm a master student at [Tokyo University of Agriculture and Technology](http://www.tuat.ac.jp/en/), majoring in Computer and Information Sciences.
+I'm a master student at [Tokyo University of Agriculture and Technology](https://www.tuat.ac.jp/en/), majoring in Computer and Information Sciences.
 
 My curriculum vitae (CV) is available [here]({{ site.baseurl }}/resources/about/a_yamaguchi_cv.pdf).
 

@@ -13,10 +13,14 @@ code {
 }
 
 .highlight code {
-  font-size: 14px;
+  font-size: 15px;
   border: 0;
   padding-right: 0;
   padding-left: 0;
+
+  @include mobile {
+    font-size: 14px;
+  }
 }
 
 .highlight .c { color: #586E75 } /* Comment */
