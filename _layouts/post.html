@@ -3,6 +3,16 @@ layout: default
 ---
 
 <article class="post">
+  <div class="date_front">
+    <i class="far fa-calendar-alt" style="padding: 0 2px 0 0;"></i>
+    {{ page.date | date: "%F" }}
+
+    {% if page.last_modified_at %}
+      <i class="fas fa-redo-alt" style="padding: 0 2px 0 10px;"></i>
+      {{ page.last_modified_at | date: "%F" }}
+    {% endif %}
+
+  </div>
   <h1>{{ page.title }}</h1>
 
   <div class="post-tag">
@@ -19,9 +29,11 @@ layout: default
     {{ content }}
   </div>
 
+  <!--
   <div class="date">
     Written on {{ page.date | date: "%B %e, %Y" }}
   </div>
+  -->
 
   {% include share_button.html %}
   <br />
