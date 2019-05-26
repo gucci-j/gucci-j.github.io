@@ -1,5 +1,5 @@
 ---
-layout: page_en
+layout: page_ja
 title: 山口 篤季
 permalink: /about/ja/
 lang: ja_JP

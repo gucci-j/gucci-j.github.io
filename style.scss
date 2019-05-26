@@ -61,6 +61,10 @@ body {
   max-width: 740px;
   padding: 0 10px;
   width: 100%;
+
+  @include mobile {
+    width: 96%;
+  }
 }
 
 .head_container {
@@ -206,7 +210,7 @@ img {
   max-width: 100%;
 }
 
-.post, .page_en {
+.post, .page_en, .page_ja {
   img {
     border: 1px $lightGray solid;
     padding:4px;
@@ -263,7 +267,7 @@ code.highlighter-rouge{
 
 /* ページごとの指定 */
 
-.page_en {
+.page_en, .page_ja {
   h2 {
     // Added
     background-color: #f6f6f6;
@@ -274,6 +278,12 @@ code.highlighter-rouge{
   h3 {
     // Added
     border-bottom: 1px solid #ddd;
+  }
+}
+
+.page_en {
+  body { 
+    font-family: $helvetica;
   }
 }
 
@@ -405,9 +415,7 @@ code.highlighter-rouge{
   margin-right: 15px;
 
   @include mobile {
-    float: none;
-    display: block;
-    margin: 0 auto;
+    display: none;
   }
 
   img {
@@ -469,6 +477,7 @@ nav {
     @include mobile {
       margin: 0 10px;
       color: $blue;
+      font-weight: bold;
     }
   }
 }

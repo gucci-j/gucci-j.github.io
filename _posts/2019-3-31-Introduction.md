@@ -1,11 +1,23 @@
 ---
-layout: page
+layout: post
 title: はじめに
 description: 当サイトについての説明とプライバシーポリシーに関して紹介いたします．
+last_modified_at: 2019-05-26 14:30:00 +0900
 lang: ja_JP
+tags:
+- ブログ全般
 ---
 
+## 当サイトについて
 当サイトでは，機械学習と自然言語処理に関するトピックをブログ形式で扱います．  
-連絡等は，[お問い合わせフォーム]({{ site.baseurl }}/contact/)か[Twitter](https://twitter.com/_gucciiiii)のDMにてお願いいたします．
+記事一覧は，[サイトマップ（タグ一覧）]({{ site.baseurl }}/sitemap/)からカテゴリ別に閲覧いただけます．
 
-当サイトのご利用規約やプライバシーポリシーに関しては，[こちら]({{ site.baseurl }}/privacy/)をご覧ください．
+## 当サイトの管理人について
+当サイトの管理人に関する情報は，[Aboutページ]({{ site.baseurl }}/about/)からご覧いただけます．  
+英語と日本語の2カ国語で提供していますので，当該ページ右上にある言語選択部でお好みの言語を選択してください．
+
+## お問い合わせ
+連絡やお仕事の依頼等は，[お問い合わせフォーム]({{ site.baseurl }}/contact/)か[Twitter](https://twitter.com/_gucciiiii)のDMにてお願いいたします．
+
+## プライバシーポリシー・免責事項
+当サイトの免責事項やプライバシーポリシーに関しては，[こちら]({{ site.baseurl }}/privacy/)をご覧ください．

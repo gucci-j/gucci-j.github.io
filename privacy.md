@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: page_ja
 title: プライバシーポリシー
 permalink: /privacy/
 ---
@@ -8,15 +8,14 @@ permalink: /privacy/
 
 当サイトでは，Googleによるアクセス解析ツール「Google Analytics」を利用しています．
 
-Google Analyticsはトラフィックデータの収集のためにCookieを使用しています．このトラフィックデータは「匿名」で収集されており，個人を特定するものではありません．この機能はCookieを無効化することで収集を拒否できますので，お使いのブラウザの設定をご確認ください．Google Analyticsの規約の詳細に関しては，[リンク先](https://www.google.com/analytics/terms/jp.html)をご確認ください．
+Google Analyticsはトラフィックデータの収集のためにCookieを使用しています．このトラフィックデータは「匿名」で収集されており，個人を特定するものではありません．この機能はCookieを無効化することで収集を拒否できますので，お使いのブラウザの設定をご確認ください．Google Analyticsの規約の詳細に関しては，[Googleアナリティクス利用規約](https://www.google.com/analytics/terms/jp.html)をご確認ください．
 
 ## 広告の配信について
 
 当サイトでは，Googleによる広告配信サービス「Google Adsense」を利用しています．
 
 Google Adsenseでは，ユーザーの興味に応じた広告を表示するためにCookieを使用する場合があります．
-Cookieを無効化する方法やGoogle Adsenseの詳細に関しては，[リンク先](https://policies.google.com/technologies/ads?hl=ja)をご確認ください．
-
+Cookieを無効化する方法やGoogle Adsenseの詳細に関しては，[Googleによる広告でのCookieの利用方法](https://policies.google.com/technologies/ads?hl=ja)をご確認ください．
 
 ## 個人情報の利用目的
 
