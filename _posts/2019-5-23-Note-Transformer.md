@@ -5,6 +5,7 @@ description: BERTの基本構成要素となっていることで，ますます
 mathjax: true
 lang: ja_JP
 image: /resources/2019-05-23/pe.png
+last_modified_at: 2019-05-30 15:00:00 +0900
 tags:
 - 論文メモ
 ---
@@ -268,7 +269,14 @@ Self-Attentionの重み算出式は，${\rm softmax}(QK^{T}) V$ である．
 
     したがって，これらを合計すると，$O(n^2d) + O(n^2) + O(n^2d)$ であり，$O(n^2d)$ とまとめることができる．ゆえに，Self-Attentionの層あたりの計算量は，$O(n^2d)$ となる．
 
-> ConvolutionとRecurrentについてはどうやって算出したのか不明．何か情報があればご教示ください．
+* Recurrentの場合  
+Recurrentの時刻 $t$ における隠れ層の重み算出式は，$\mathbf{h_t} = \tanh \left(\mathbf{h_{t-1}} W + \mathbf{x_t} U + \mathbf{b} \right)$ と表せる．なお，活性化関数は，$\tanh$ に限らず，シグモイド関数のときもある．いずれにせよ，計算量を
+
+    Self-Attentionと同様に，分解して考えていくと，まず，$\mathbf{h_{t-1}} W$ は，$(1 \times d)$ と $(d \times d)$ の行列積であるから，$O(d^2)$ である．続いて，$\mathbf{x_t} U$ は，$(1 \times d)$ と $(d \times d)$ の行列積であるので，$O(d^2)$ である．また，行列和については，サイズが $(1 \times d)$ 同士の和であるので，$O(d)$ である．最後に，$\tanh (x) = \frac{\exp(x) - \exp(-x)}{\exp(x) + \exp(-x)}$ の計算量は，$d$ 個の要素に対して適用するので，$O(d)$である．
+
+    したがって，時刻 $t$における計算量は，$O(d^2) + O(d^2) + O(d) + O(d)$ で，O(d^2)とまとめられる．入力シーケンスの長さは，$n$ であるから，層あたりの計算量は $O(d^2) \times n$ で， $O(nd^2)$ となる．
+
+> Convolutionについてはどうやって算出したのか不明．何か情報があればご教示ください．
 
 #### Sequential Operations  
 逐次処理を最小限にする並列処理可能な計算量のこと．Recurrent層はシーケンスの長さだけコストがかかるのは直感的である．
