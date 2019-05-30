@@ -270,7 +270,7 @@ Self-Attentionの重み算出式は，${\rm softmax}(QK^{T}) V$ である．
     したがって，これらを合計すると，$O(n^2d) + O(n^2) + O(n^2d)$ であり，$O(n^2d)$ とまとめることができる．ゆえに，Self-Attentionの層あたりの計算量は，$O(n^2d)$ となる．
 
 * Recurrentの場合  
-Recurrentの時刻 $t$ における隠れ層の重み算出式は，$\mathbf{h_t} = \tanh \left(\mathbf{h_{t-1}} W + \mathbf{x_t} U + \mathbf{b} \right)$ と表せる．なお，活性化関数は，$\tanh$ に限らず，シグモイド関数のときもある．いずれにせよ，計算量を
+Recurrentの時刻 $t$ における隠れ層の重み算出式は，$\mathbf{h_t} = \tanh \left(\mathbf{h_{t-1}} W + \mathbf{x_t} U + \mathbf{b} \right)$ と表せる．なお，活性化関数は $\tanh$ に限らず，シグモイド関数のときもある．いずれにせよ，どちらの手法も定数時間で処理できるので，ここでは $\tanh$ を活性化関数として使う．
 
     Self-Attentionと同様に，分解して考えていくと，まず，$\mathbf{h_{t-1}} W$ は，$(1 \times d)$ と $(d \times d)$ の行列積であるから，$O(d^2)$ である．続いて，$\mathbf{x_t} U$ は，$(1 \times d)$ と $(d \times d)$ の行列積であるので，$O(d^2)$ である．また，行列和については，サイズが $(1 \times d)$ 同士の和であるので，$O(d)$ である．最後に，$\tanh (x) = \frac{\exp(x) - \exp(-x)}{\exp(x) + \exp(-x)}$ の計算量は，$d$ 個の要素に対して適用するので，$O(d)$である．
 
