@@ -4,10 +4,11 @@ title: MatplotlibとseabornによるSelf Attentionの可視化
 description: Self Attentionの重みを、Pythonのライブラリである「Matplotlibとseaborn」を活用して可視化する方法について紹介します。モデルの実装は、PyTorchに基づきます。
 mathjax: true
 image: /resources/2019-04-02/attention.png
-last_modified_at: 2019-05-25 10:00:00 +0900
+last_modified_at: 2019-06-09 12:00:00 +0900
 lang: ja_JP
 tags:
 - Tips
+- PyTorch
 ---
 
 Pythonの可視化ライブラリであるseabornとグラフ描画ライブラリのMatplotlibを組み合わせることで、意外と簡単にSelf Attentionの重みを可視化することができます。
@@ -82,4 +83,4 @@ plt.close()
 ```
 
 ## ソースコード
-ソースコードは後日: [GitHub](https://github.com/gucci-j/imdb-classification-gru)に追加して公開する予定です。
+（**更新** 2019-06-09）Self-Attention部分のソースコードを[GitHub](https://github.com/gucci-j/imdb-classification-gru)に追加して公開しました．
