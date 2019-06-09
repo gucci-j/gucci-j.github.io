@@ -1,7 +1,7 @@
 ---
 layout: post
-title: torchtextで交差分割検証をする話
-description: PyTorchの自然言語処理（NLP）系データ処理ライブラリである，torchtextでどうしても交差分割検証をしたい人のためのTipsです．scikit-learnライクな，交差分割検証をしやすいライブラリとして有名である，skorchは使いません．
+title: torchtextでk-分割交差検証をする話
+description: PyTorchの自然言語処理（NLP）系データ処理ライブラリである，torchtextでどうしても交差検証をしたい人のためのTipsです．scikit-learnライクな，交差検証をしやすいライブラリとして有名である，skorchは使いません．
 lang: ja_JP
 tags:
 - Tips
@@ -9,11 +9,11 @@ tags:
 ---
 
 ## はじめに
-[torchtext](https://github.com/pytorch/text)は，PyTorchで自然言語処理（NLP）系のデータを比較的簡単に読み込むことができるライブラリとして有名です．しかし，とっつきやすい性質を持つ分，細かいところで苦戦する場合があります．その一例として，交差分割検証をやりにくいという点が挙げられます．
+[torchtext](https://github.com/pytorch/text)は，PyTorchで自然言語処理（NLP）系のデータを比較的簡単に読み込むことができるライブラリとして有名です．しかし，とっつきやすい性質を持つ分，細かいところで苦戦する場合があります．その一例として，交差検証をやりにくいという点が挙げられます．
 
-正確には，torchtextで処理したデータを用いて交差分割検証をした例がネット上に少ないことに加え，torchtextのドキュメントにそれに関する記述がないことも災いしていると思われます．
+正確には，torchtextで処理したデータを用いて交差検証をした例がネット上に少ないことに加え，torchtextのドキュメントにそれに関する記述がないことも災いしていると思われます．
 
-通常なら，torchtextで交差分割検証をするのは諦めて，[skorch](https://github.com/skorch-dev/skorch)などの他のライブラリを使うと思いますが，ここではあえて「torchtext」と「sklearn」の `KFold` を使うことで交差分割検証を適用する方法を紹介したいと思います．
+通常なら，torchtextで交差検証をするのは諦めて，[skorch](https://github.com/skorch-dev/skorch)などの他のライブラリを使うと思いますが，ここではあえて「torchtext」と「sklearn」の `KFold` を使うことで交差検証を適用する方法を紹介したいと思います．
 
 > <i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考: [Use torchtext to Load NLP Datasets — Part II](https://towardsdatascience.com/use-torchtext-to-load-nlp-datasets-part-ii-f146c8b9a496)
 
@@ -29,12 +29,12 @@ tags:
 </script>
 
 ## 1. タスク設定
-映画レビュー文データセットである，IMDBデータセットを用いたネガティブ・ポジティブの2値分類タスクを解くモデルを，交差分割検証にかけてみます．
+映画レビュー文データセットである，IMDBデータセットを用いたネガティブ・ポジティブの2値分類タスクを解くモデルを，k分割交差検証にかけてみます．
 
 ベースにするモデルは，GRUとSelf-Attentionで構成されたモデルです．この実装は，[GitHub](https://github.com/gucci-j/imdb-classification-gru)にて公開してあります．
 
 ## 2. 実装
-それでは，torchtextで読み込んだデータを交差分割検証にかけられるようにしていきましょう．
+それでは，torchtextで読み込んだデータを交差検証にかけられるようにしていきましょう．
 
 ### 2.1 データローダ側
 #### 2.1.1 初期設定 ＆ コンストラクタ
@@ -108,7 +108,7 @@ def get_test_data(self):
 
 ### 2.2 呼び出し側
 
-呼び出し側は基本的には，交差分割検証無しの[ベースモデル](https://github.com/gucci-j/imdb-classification-gru)と同じです．
+呼び出し側は基本的には，交差検証無しの[ベースモデル](https://github.com/gucci-j/imdb-classification-gru)と同じです．
 
 追加されている点としては，`data.Iterator` でイテレータを生成する作業が追加されていることです．また，各foldでの結果を保存するために，リスト: `_history` を用意してあります．
 
@@ -163,9 +163,9 @@ def main():
 
 ## まとめ
 
-やや駆け足の解説となりましたが，一回NumPy配列に変換してあげることで交差分割検証が可能になるので，どうしてもtorchtextでデータセットを読み込みたい人には使えるテクニックだと思います．
+やや駆け足の解説となりましたが，一回NumPy配列に変換してあげることで交差検証が可能になるので，どうしてもtorchtextでデータセットを読み込みたい人には使えるテクニックだと思います．
 
-実際のところtorchtextのレポジトリを見ると，交差分割検証に関するissueが出ているので，この機能を設けて欲しい人はそれなりにいるみたいですね．（ですが，今の所はこの投稿のような形で無理やり対処するしかないでしょう...）
+実際のところtorchtextのレポジトリを見ると，交差検証に関するissueが出ているので，この機能を設けて欲しい人はそれなりにいるみたいですね．（ですが，今の所はこの投稿のような形で無理やり対処するしかないでしょう...）
 
 ## ソースコード
 
