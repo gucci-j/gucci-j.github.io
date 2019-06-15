@@ -147,7 +147,7 @@ $$
 ## 実験結果
 ### 評価指標
 #### パープレキシティ
-参考: [http://www.jnlp.org/lab/graduates/okada/nlp/term/entropy](http://www.jnlp.org/lab/graduates/okada/nlp/term/entropy)  
+参考: [エントロピーとパープレキシティ](http://www.jnlp.org/lab/graduates/okada/nlp/term/entropy)  
 
 パープレキシティ(perplexity)とは，言語モデルにおいてモデルの複雑性を評価するのに使われる指標である．   
 パープレキシティは2のクロスエントロピー乗で定義され，一般に小さいほど良いモデルであるとされる．  

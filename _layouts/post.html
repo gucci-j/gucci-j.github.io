@@ -50,6 +50,27 @@ layout: default
       (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
 
+  <!-- 前後のページへのリンク-->
+  <div class="pager">
+    {% if page.next %}
+      <div class="next">
+        <p><i class="fas fa-arrow-circle-left" style="margin: 0 0.5em 0 0;"></i>次の記事</p>
+        <p>
+          <a href="{{ page.next.url | relative_url }}">{{ page.next.title }}</a>
+        </p>
+      </div>
+    {% endif %}
+
+    {% if page.previous %}
+      <div class="prev">
+        <p>前の記事<i class="fas fa-arrow-circle-right" style="margin: 0 0 0 0.5em;"></i></p>
+        <p>
+            <a href="{{ page.previous.url | relative_url }}">{{ page.previous.title }}</a>
+        </p>
+      </div>
+    {% endif %}
+  </div>
+
   {% include disqus.html %}
   {% include mathjax.html %}
 </article>

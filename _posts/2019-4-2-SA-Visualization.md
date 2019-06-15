@@ -29,7 +29,7 @@ pip install seaborn
 
 ## 2. インポート
 本稿ではサーバー上で動作させることを想定しているので、前もって`mpl.use('Agg')`を指定することで、描画エラーを回避します。
-```
+```python
 import matplotlib as mpl
 mpl.use('Agg')
 import matplotlib.pyplot as plt
@@ -40,7 +40,7 @@ import numpy as np
 ## 3. Self Attentionの実装
 Self Attentionの実装については、[GitHub](https://github.com/gucci-j/imdb-classification-gru)にあげている、ソースコード: `model_with_self_attention.py`を流用しました。クラス部分を以下に貼ります。
 
-```
+```python
 class Self_Attention(nn.Module):
     def __init__(self, query_dim):
         # assume: query_dim = key/value_dim
@@ -75,7 +75,7 @@ class Self_Attention(nn.Module):
 
 ただし、必ず**リストをNumPyに通すこと** + **`fmt=''`**を指定するのを忘れないでください！
 
-```
+```python
 plt.figure(figsize = (15, 7))
 sns.heatmap(attention_weight, annot=np.asarray(itos), fmt='', cmap='Blues')
 plt.savefig('./fig/attention_' + str(batch_count) + '.png')

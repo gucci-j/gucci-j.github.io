@@ -51,9 +51,9 @@ body {
   font-weight: 300;
   color: $darkGray;
   // 文字間隔の調整の設定
-  letter-spacing: .5px;
+  letter-spacing: 0.05em;
   // 行間の設定
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .container {
@@ -128,7 +128,7 @@ h3 {
 
 .post h3 {
   border-bottom: 1px solid $darkerGray;
-  padding: 4px 10px;
+  padding: 4px 12px;
 
   @include mobile {
     padding: 2px 8px;
@@ -140,6 +140,14 @@ h4 {
 
   @include mobile {
     font-size: 16px;
+  }
+}
+
+.post h4 {
+  padding: 0 8px;
+
+  @include mobile {
+    padding: 0 6px;
   }
 }
 
@@ -505,6 +513,54 @@ nav {
   margin: 0; 
   padding: 0;
 }
+
+
+.pager {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  @include mobile {
+    flex-wrap: wrap;
+  }
+
+  .prev {
+    padding: 0.5em 1em; // うち
+    background: $lightGray;
+    border-radius: 10px;
+    text-align: right;
+    margin-left: auto;
+    width: 50%;
+
+    p {
+      margin: 0; 
+      padding: 0;
+    }
+
+    @include mobile {
+      width: 100%
+    }
+  }
+
+  .next {
+    padding: 0.5em 1em;
+    margin: 0 1em 0 0; // そと
+    background: $lightGray;
+    border-radius: 10px;
+    width: 50%;
+
+    @include mobile {
+      margin: 0 0 0.5em 0;
+      width: 100%
+    }
+
+    p {
+      margin: 0; 
+      padding: 0;
+    }
+  }
+}
+
 
 //
 // .main
