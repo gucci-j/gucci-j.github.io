@@ -514,6 +514,31 @@ nav {
   padding: 0;
 }
 
+.footer_ads {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  @include mobile {
+    flex-wrap: wrap;
+  }
+
+  .left_ad {
+    width:336px;
+
+    @include mobile {
+      width: 100%;
+    }
+  }
+
+  .right_ad {
+    width:336px;
+
+    @include mobile {
+      display: none;
+    }
+  }
+}
 
 .pager {
   display: flex;
