@@ -518,6 +518,7 @@ nav {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  justify-content: center;
 
   @include mobile {
     flex-wrap: wrap;
@@ -532,6 +533,7 @@ nav {
   }
 
   .right_ad {
+    margin: 0 0 0 0.5em;
     width:336px;
 
     @include mobile {
