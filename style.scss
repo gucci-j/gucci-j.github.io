@@ -47,7 +47,7 @@ html {
 
 body {
   font: 16px $yugothic;
-  background: $white;
+  background: $background;
   font-weight: 300;
   color: $darkGray;
   // 文字間隔の調整の設定
@@ -57,6 +57,102 @@ body {
 }
 
 .container {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+  max-width: 1100px;
+  margin: auto;
+
+  @include mobile {
+    flex-direction: column;
+    margin: 0 auto;
+  }
+
+  .main_contents {
+    width: calc(100% - 300px);
+    flex: 1 1;
+    padding: 35px;
+    background: $white;
+    border-radius: 30px;
+
+    @include mobile {
+      width: 100%;
+      padding: 1em;
+      border-radius: 0;
+    }
+  }
+
+  .sidebar {
+    flex: 0 0 300px;
+    margin-left: 1em;
+
+    @include mobile {
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+
+.side-ad {
+  @include mobile {
+    margin-top: 0.5em;
+  }
+}
+
+.profile {
+  background: $white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 0.5em;
+
+  @include mobile {
+    border-radius: 0;
+  }
+
+  hr {
+    border-top: 2px dashed $background;
+  }
+
+  .profile_icon {
+    text-align: center;
+  }
+}
+
+.search {
+  background: $white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 0.5em;
+
+  @include mobile {
+    border-radius: 0;
+  }
+}
+
+.side-category {
+  background: $white;
+  padding: 0.05em 0;
+  border-radius: 10px;
+  margin-top: 0.5em;
+  font-size: 0.8em;
+
+  @include mobile {
+    border-radius: 0;
+  }
+
+  ul {
+    list-style: none;
+  }
+  li:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: '\f02b';
+  }
+}
+
+.footer_container {
   margin: 0 auto;
   max-width: 740px;
   padding: 0 10px;
@@ -406,6 +502,7 @@ code.highlighter-rouge{
 .wrapper-masthead {
   margin-bottom: 50px;
   border-bottom: 2px solid #ddd;
+  background-color: $white;
 }
 
 .masthead {
