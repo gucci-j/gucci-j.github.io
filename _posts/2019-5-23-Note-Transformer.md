@@ -42,9 +42,9 @@ Attentionをフルに活用した系列変換モデルを提案した．
 
 <br />
 
+<!--
 <div class="inside-ads">
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 記事内広告2 -->
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-1838422896597988"
@@ -55,6 +55,7 @@ Attentionをフルに活用した系列変換モデルを提案した．
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 </div>
+-->
 
 ## 論文の主張
 近年の系列変換モデルは，再帰ニューラルネットや畳込みニューラルネットに大きく依存している．また，SoTAを達成するようなモデルであっても，注意機構を取り入れた再帰 or CNNのモデルに依存しており，モデルが複雑になっている．

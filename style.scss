@@ -81,8 +81,9 @@ body {
     padding: 35px;
     background: $white;
     border-radius: 30px;
-
+/*
     .inside-ads {
+      width: calc(100% - 300px);
       @include tablet {
         width: 95%;
       }  
@@ -91,6 +92,7 @@ body {
         width: 100%
       }
     }
+*/
 
     @include tablet {
       width: 95%;
