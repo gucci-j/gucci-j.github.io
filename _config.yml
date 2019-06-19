@@ -9,7 +9,7 @@ name: きままにNLP
 description: A Technical Blog about NLP and ML
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: /resources/logo/logo.jpg
+avatar: /resources/logo/kimamani.png
 
 #
 # Flags below are optional
@@ -89,7 +89,7 @@ exclude:
 twitter:
   username: _gucciiiii
 
-logo: /resources/logo/logo.jpg
+logo: /resources/logo/kimamani.png
 
 defaults:
   - scope:

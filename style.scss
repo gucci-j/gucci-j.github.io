@@ -47,7 +47,7 @@ html {
 
 body {
   font: 16px $yugothic;
-  background: $white;
+  background: $background;
   font-weight: 300;
   color: $darkGray;
   // 文字間隔の調整の設定
@@ -57,6 +57,124 @@ body {
 }
 
 .container {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+  max-width: 1100px;
+  margin: auto;
+
+  @include tablet {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @include mobile {
+    flex-direction: column;
+    margin: 0 auto;
+  }
+
+  .main_contents {
+    width: calc(100% - 300px);
+    flex: 1 1;
+    padding: 35px;
+    background: $white;
+    border-radius: 30px;
+
+    @include tablet {
+      width: 95%;
+    }
+
+    @include mobile {
+      width: 100%;
+      padding: 1em;
+      border-radius: 0;
+    }
+  }
+
+  .sidebar {
+    flex: 0 0 300px;
+    margin-left: 1em;
+
+    @include mobile {
+      width: 100%;
+      margin: 0;
+    }
+  }
+}
+
+.side-ad {
+  @include tablet {
+    margin-top: 0.5em;
+  }
+  @include mobile {
+    margin-top: 0.5em;
+  }
+}
+
+.profile {
+  background: $white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 0.5em;
+
+  @include mobile {
+    border-radius: 0;
+  }
+
+  hr {
+    border: none;
+    border-top: 3px dashed $background;
+  }
+
+  .profile_icon {
+    text-align: center;
+  }
+}
+
+.search {
+  background: $white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 0.5em;
+
+  @include mobile {
+    border-radius: 0;
+  }
+  
+  table tr{
+    border-bottom: none;
+  }
+  
+  table th,table td{
+    border: none;
+    margin: 0;
+  }
+}
+
+.side-category {
+  background: $white;
+  padding: 0.05em 0;
+  border-radius: 10px;
+  margin-top: 0.5em;
+  font-size: 0.9em;
+
+  @include mobile {
+    border-radius: 0;
+  }
+
+  ul {
+    list-style: none;
+  }
+  li:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: '\f02b';
+  }
+}
+
+.footer_container {
   margin: 0 auto;
   max-width: 740px;
   padding: 0 10px;
@@ -69,7 +187,7 @@ body {
 
 .head_container {
   margin: 0 auto;
-  max-width: 900px;
+  max-width: 1100px;
   padding: 0 10px;
   width: 100%;
 }
@@ -405,11 +523,13 @@ code.highlighter-rouge{
 
 .wrapper-masthead {
   margin-bottom: 50px;
-  border-bottom: 2px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 0 10px gray;
+  background-color: $white;
 }
 
 .masthead {
-  padding: 20px 0;
+  padding: 10px 0;
 
   @include mobile {
     text-align: center;
@@ -417,6 +537,7 @@ code.highlighter-rouge{
 }
 
 .site-avatar {
+  margin-left: 0.25em;
   float: left;
   width: 70px;
   height: 70px;
@@ -424,10 +545,6 @@ code.highlighter-rouge{
 
   @include mobile {
     display: none;
-  }
-
-  img {
-    border-radius: 35px;
   }
 }
 
@@ -442,13 +559,12 @@ code.highlighter-rouge{
 }
 
 .site-name {
-  margin: 0;
-  color: $darkGray;
+  margin: 15px 0 0 0;
   cursor: pointer;
-  font-family: $helveticaNeue;
-  font-weight: 400;
-  font-size: 26px;
-  letter-spacing: 1px;
+  
+  img {
+    height: 40px;
+  }
 }
 
 .site-description {
@@ -465,6 +581,7 @@ code.highlighter-rouge{
 nav {
   float: right;
   margin-top: 23px; // @TODO: Vertically middle align
+  margin-right: 0.25em;
   font-family: $helveticaNeue;
   font-size: 18px;
 
@@ -643,6 +760,10 @@ footer {
   padding: 20px 0;
   text-align: center;
   font-family: $helvetica;
+}
+
+.mathjax-scroll {
+  overflow-x: auto;
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS

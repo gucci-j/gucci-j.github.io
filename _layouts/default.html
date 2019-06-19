@@ -16,7 +16,7 @@
     <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
 
     <!-- Favicon head tag -->
-    <link rel="icon" href="{{ site.baseurl }}/resources/logo/logo.jpg" type="image/x-icon">
+    <link rel="icon" href="{{ site.baseurl }}/resources/logo/kimamani_simple.png" type="image/x-icon">
 
     {% seo %}
     <!-- Google Adsense-->
@@ -38,8 +38,7 @@
           <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
 
           <div class="site-info">
-            <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-            <p class="site-description">{{ site.description }}</p>
+            <h1 class="site-name"><a href="{{ site.baseurl }}/"><img src="{{ site.baseurl }}/resources/logo/kimamani_moji.png" /></a></h1>
           </div>
 
           <nav>
@@ -50,19 +49,25 @@
       </div>
     </div>
 
-    <div id="main" role="main" class="container">
-      {{ content }}
+    <div class="container">
+      <main class="main_contents" role="main">
+        {{ content }}
+      </main>
+
+      <aside class="sidebar" role="complementary">
+        {% include sidebar.html %}
+      </aside>
     </div>
 
     <div class="wrapper-footer">
-      <div class="container">
+      <div class="footer_container">
         <footer class="footer">
           {% include svg-icons.html %}<br />
           <a href="{{ site.baseurl }}/">Home</a>
           | <a href="{{ site.baseurl }}/Introduction/">About This Blog</a>  
           | <a href="{{ site.baseurl }}/sitemap/">Sitemap</a> 
           | <a href="{{ site.baseurl }}/privacy/">Privacy</a><br />
-          <div style="font-size: 8pt">© 2019 Atsuki Yamaguchi.</div>
+          <div style="font-size: 8pt;">© 2019 Atsuki Yamaguchi.</div>
         </footer>
       </div>
     </div>

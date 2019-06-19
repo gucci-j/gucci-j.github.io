@@ -1,0 +1,79 @@
+<div class="side-ad">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- サイドバー -->
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-1838422896597988"
+      data-ad-slot="3641305571"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+
+<div class="profile">
+  <div style="text-align: center;">
+    <a href="{{ site.baseurl }}/about/">
+      <img style="width: 100px; border-radius: 50px;" src="{{ site.baseurl }}/resources/logo/profile.jpg" />
+    </a>
+    <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1;"><strong>Gucci</strong></p>
+  </div>
+  <p style="margin-top: 0.5em; margin-bottom: 0; font-size: 0.8em; text-align: center;">
+    自然言語処理や機械学習に関連する情報を発信しています。
+    留学系の話題も<a href="https://note.mu/_gucciiiii">note</a>に書いています。
+  </p>
+  <hr />
+  <div class="profile_icon">
+    {% include svg-icons.html %}
+  </div>
+</div>
+
+
+<div class="search">
+  <script>
+    (function() {
+      var cx = 'partner-pub-1838422896597988:8655986192';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+    })();
+  </script>
+  <gcse:searchbox-only></gcse:searchbox-only>
+</div>
+
+{% assign tag_names = "" | split: "|"  %}
+
+{% for posts_by_tag in site.tags %}
+{% assign tag_names = tag_names | push: posts_by_tag.first %}
+{% endfor %}
+
+{% assign tag_names = tag_names | sort %}
+
+{% if include.tag_names %}
+  {% assign tag_names = include.tag_names %}
+
+{% else %}
+  {% assign tag_names = "" | split: "|"  %}
+
+  {% for posts_by_tag in site.tags %}
+    {% assign tag_names = tag_names | push: posts_by_tag.first %}
+  {% endfor %}
+
+  {% assign tag_names = tag_names | sort %}
+{% endif %}
+
+<div class="side-category">
+  <ul class="tag-cloud">
+    {% for tag_name in tag_names %}
+      <li>
+        <a href="{{ baseurl }}/sitemap#{{ tag_name | slugize }}">
+          {{ tag_name }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
