@@ -17,6 +17,7 @@ tags:
 
 > <i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考: [Use torchtext to Load NLP Datasets — Part II](https://towardsdatascience.com/use-torchtext-to-load-nlp-datasets-part-ii-f146c8b9a496)
 
+<div class="inside-ads">
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
@@ -27,6 +28,7 @@ tags:
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
+</div>
 
 ## 1. タスク設定
 映画レビュー文データセットである，IMDBデータセットを用いたネガティブ・ポジティブの2値分類タスクを解くモデルを，k分割交差検証にかけてみます．
