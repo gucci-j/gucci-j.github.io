@@ -19,7 +19,7 @@ Googleが昨年発表した，BERT：Bidirectional Encoder Representation for Tr
 ## 文献情報
 著者: A. Vaswani et al.  
 所属: Google Brain  
-出典: NeurIPS 2017 ([https://arxiv.org/abs/1706.03762](https://arxiv.org/abs/1706.03762))
+出典: [NeurIPS 2017](https://arxiv.org/abs/1706.03762)
 
 ## どんなもの？
 Attentionをフルに活用した系列変換モデルを提案した．  
@@ -150,9 +150,11 @@ Attentionをフルに活用した系列変換モデルを提案した．
 <br />
 * 実際には，複数のクエリを同時に処理するため，行列を用いて以下のように求められる．
 
+<div class="mathjax-scroll">
 $$
 {\rm Attention}(Q, K, V) = {\rm softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
 $$
+</div>
 
 * $d_k$ が小さいときは内積注意も加法注意も実行時間に変わりはないが，$d_k$ が大きくなるにつれて，加法注意の方が高速になってしまう．  
     → 内積が大きくなるので，勾配が極端に小さくなり，学習が進まなくなる．  
@@ -164,10 +166,12 @@ $$
 → いろいろなnグラムを取る目的と一緒．  
 → イメージとしてはCNNでチャンネル数を増やしてモデルの表現力を高めることと同じ？
 
+<div class="mathjax-scroll">
 $$
 {\rm MultiHead}(Q, K, V) = {\rm Concat}({\rm head_1}, \dots, {\rm head_h})W^O \\
 {\rm head_i} = {\rm Attention}(QW_i^Q, KW_i^K, VW_i^V)
 $$
+</div>
 
 ただし，$W_i^Q, W_i^K \in \mathbb{R}^{d_{model} \times d_k}$, $W_i^V \in \mathbb{R}^{d_{model} \times d_v}$, $W^O \in \mathbb{R}^{hd_v \times d_{model}}$ である．
 
@@ -199,13 +203,17 @@ $$
 * Transformerは畳み込みや再帰を伴わないので，それだけでは時系列を考慮することができない．  
 → 時系列を考慮するために，入力の埋め込み表現に「位置情報」を埋め込む．
 
+<div class="mathjax-scroll">
 $$
 PE_{(pos, 2i + 1)} = \cos\left(\frac{pos}{10000^{\frac{2i}{d_{model}}}}\right)
 $$
+</div>
 
+<div class="mathjax-scroll">
 $$
 PE_{(pos, 2i)} = \sin\left(\frac{pos}{10000^{\frac{2i}{d_{model}}}}\right)
 $$
+</div>
 
 <div style="text-align: center;">
     <img src="{{ site.baseurl }}/resources/2019-05-23/pe.png" alt="Positional Encodingを可視化した図" style="width: 500px;"/><br />
@@ -220,9 +228,11 @@ ACL2002で発表された機械翻訳の自動評価指標である．
 
 BLEUスコアは高ければ高いほどよい指標となっている．
 
+<div class="mathjax-scroll">
 $$
 {\rm BLEU} = {\rm BP} \exp{\left(\sum_{n=1}^N \frac{1}{N} \log P_n \right)}
 $$
+</div>
 
 ### BPとは？
 BPとは，brevity penaltyの略．brevityは英語で「簡潔さ・短さ」を意味する．  
@@ -230,12 +240,14 @@ BPとは，brevity penaltyの略．brevityは英語で「簡潔さ・短さ」�
 
 修正Nグラムだけでは，翻訳文が短い文のときに$P_n$が高くなってしまうため，このBP項で低減させる．
 
+<div class="mathjax-scroll">
 $$
 {\rm BP} = \begin{cases}
     1 & {\rm if}\  c > r\\
     \exp{(1-r/c)} & {\rm if}\  c \leq r\\
     \end{cases}
 $$
+</div>
 
 ただし，$c$は翻訳された文の長さを意味し，$r$は正解コーパス中の対応する文の長さである．
 

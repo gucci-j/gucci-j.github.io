@@ -11,7 +11,7 @@ tags:
 ## 文献情報  
 著者: M. Peters et al.  
 所属: Allen Institute for Artificial Intelligence / Paul G. Allen School of Computer Science & Engineering, University of Washington  
-出典: NAACL 2018 [(https://aclweb.org/anthology/papers/N/N18/N18-1202/)](https://aclweb.org/anthology/papers/N/N18/N18-1202/)
+出典: [NAACL 2018](https://aclweb.org/anthology/papers/N/N18/N18-1202/)
 
 ## どんな論文か？
 ELMo = Embeddings from Language Modelsの略であり，言語モデルを活用した文脈に応じた単語分散表現: ELMoを提唱した論文．
@@ -35,7 +35,9 @@ ELMo = Embeddings from Language Modelsの略であり，言語モデルを活用
 ### 1. 順方向言語モデル
 トークン数: $N$の単語列: $(t_1, t_2, \dots, t_N)$が与えられたとき，順方向の言語モデルは，単語: $t_k$と単語列: $(t_1, \dots, t_{k-1})$の条件付き確率をモデリングすることで，次のように表される.順方向の言語モデルでは，次の単語: $t_{k+1}$を予測することを目的とする．
 
+<div class="mathjax-scroll">
 $$p(t_1, t_2, ..., t_N) = \prod_{k=1}^N p(t_k | t_1, t_2, \dots, t_{k-1})$$
+</div>
 
 * 最近の言語モデルでは，文脈非依存な単語表現: $\mathbf{x}_k^{LM}$を単語埋め込みやcharacter-based CNNにより算出してから，L層のLSTMに入力することが多い．
 
@@ -46,7 +48,9 @@ $$p(t_1, t_2, ..., t_N) = \prod_{k=1}^N p(t_k | t_1, t_2, \dots, t_{k-1})$$
 ### 2. 逆方向言語モデル
 逆方向言語モデルは順方向言語モデルと類似しているが，単語列を逆に処理していく点で異なる．なお，逆方向の言語モデルでは，未来の単語列から一つ前の単語: $t_{k-1}$を予測することを目的とする．つまり，逆方向の言語モデルは次のように定義される．
 
+<div class="mathjax-scroll">
 $$p(t_1, t_2, ..., t_N) = \prod_{k=1}^N p(t_k | t_{k+1}, t_{k+2}, \dots, t_N)$$
+</div>
 
 * 最終的には，$$\overleftarrow{\mathbf{h}}_{k, L}^{LM}$$ を求めることで，$t_{k-1}$ をsoftmax層で予測する．
 
@@ -58,15 +62,18 @@ $$p(t_1, t_2, ..., t_N) = \prod_{k=1}^N p(t_k | t_{k+1}, t_{k+2}, \dots, t_N)$$
 → 文脈非依存な単語表現とソフトマックス層のパラメータ: $\Theta_{x}, \Theta_s$は共有．LSTMのパラメータについてのみ独立．  
 → 従来手法ではパラメータはすべて独立
 
+<div class="mathjax-scroll">
 $$
 \sum_{k=1}^{N}(\log p(t_k | t_1, t_2, \dots, t_{k-1}; \Theta_x, \overrightarrow{\Theta}_{LSTM}, \Theta_s) \\+ \log p(t_k | t_{k+1}, t_{k+2}, \dots, t_N; \Theta_x, \overleftarrow{\Theta}_{LSTM}, \Theta_s))
 $$
+</div>
 
 ### 4. ELMoのパラメータ算出
 * 全てのトークン: $t_k$はL層の双方向言語モデルに対し，2L+1個の特徴量を持つ．  
 → 文脈依存しない単語ベクトル: 1個  
 → 文脈依存のする順方向と逆方向のLSTM: 2L個
 
+<div class="mathjax-scroll">
 $$
 \begin{equation*}
 \begin{split}
@@ -75,13 +82,16 @@ R_k &= \{x_k^{LM}, \overrightarrow{\mathbf{h}}_{k, j}^{LM}, \overleftarrow{\math
 \end{split}
 \end{equation*}
 $$
+</div>
 
 * ELMoを他のタスクに応用するには，Rのすべての要素を一つのベクトル表現に変換する．  
 → 簡単な例だと，一番上の層だけを取ってくるものがある．CoVeやTagLMはこれを採用している．
 
+<div class="mathjax-scroll">
 $$
 \mathbf{ELMo}_k^{task} = E(R_k; \Theta_e) = \mathbf{h}_{k, L}^{LM}
 $$
+</div>
 
 <div style="text-align: center">ただし，$\mathbf{h}_{k, L}^{LM} = \left[\overrightarrow{\mathbf{h}}_{k, j}^{LM}; \overleftarrow{\mathbf{h}}_{k, j}^{LM}\right]$</div>
 
@@ -89,9 +99,11 @@ $$
 → $s_j^{task}$はsoftmaxで正規化された重み  
 → $\gamma^{task}$はELMoのベクトル全体をスケーリングするため．チューニングの最適化の観点から必要．
 
+<div class="mathjax-scroll">
 $$
 \mathbf{ELMo}_k^{task} = \gamma^{task} \sum_{j=0}^L s_j^{task}\mathbf{h}_{k, j}^{LM}
 $$
+</div>
 
 ### 5. ELMoモデルのNLPタスクへの適用
 単に$\mathbf{ELMo}_k^{task}$を入力の埋め込みベクトルとconcatすれば良い．
@@ -101,5 +113,5 @@ $$
 
 ## 実装
 試しにKerasでELMo + BiLSTMを使ってIMDBの分類を行ったので，GitHubにあげました．  
-→ [https://github.com/gucci-j/elmo-imdb](https://github.com/gucci-j/elmo-imdb)
+→ [GitHub-ELMo](https://github.com/gucci-j/elmo-imdb)
 

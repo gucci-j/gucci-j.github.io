@@ -23,7 +23,14 @@ $yugothic:'Noto Sans Japanese', "游ゴシック", "Yu Gothic", YuGothic, "Hirag
 
 // Mobile breakpoints
 @mixin mobile {
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
+    @content;
+  }
+}
+
+//tablet
+@mixin tablet {
+  @media screen and (max-width: 1020px) and (min-width: 768px) {
     @content;
   }
 }
