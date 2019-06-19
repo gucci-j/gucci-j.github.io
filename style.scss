@@ -82,6 +82,16 @@ body {
     background: $white;
     border-radius: 30px;
 
+    .inside-ads {
+      @include tablet {
+        width: 95%;
+      }  
+
+      @include mobile {
+        width: 100%
+      }
+    }
+
     @include tablet {
       width: 95%;
     }
