@@ -28,6 +28,10 @@
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
+
+    @include mobile {
+      table-layout: fixed;
+    }
   }
 
   table tr{
@@ -195,12 +199,6 @@
 .link_box p {
   margin: 0; 
   padding: 0;
-}
-
-/* 上の方に出すワンライナーな広告 */
-.inside_ad {
-  
-  width: 100%;
 }
 
 /* 記事フッターの広告 */

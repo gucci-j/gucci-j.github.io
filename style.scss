@@ -148,12 +148,50 @@ body {
   }
 }
 
-.side-category {
+.recent-posts {
   background: $white;
-  padding: 0.05em 0;
+  padding: 10px 10px 1px 10px;
   border-radius: 10px;
   margin-top: 0.5em;
   font-size: 0.9em;
+
+  hr {
+    border: none;
+    border-top: 3px dashed $background;
+  }
+
+  a {
+    color: $darkGray;
+
+    @include mobile {
+      color: $blue;
+    }
+  }
+
+  @include mobile {
+    border-radius: 0;
+  }
+}
+
+.side-category {
+  background: $white;
+  padding: 10px 10px 1px 10px;
+  border-radius: 10px;
+  margin-top: 0.5em;
+  font-size: 0.9em;
+
+  hr {
+    border: none;
+    border-top: 3px dashed $background;
+  }
+
+  a {
+    color: $darkGray;
+
+    @include mobile {
+      color: $blue;
+    }
+  }
 
   @include mobile {
     border-radius: 0;

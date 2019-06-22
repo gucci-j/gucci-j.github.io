@@ -45,6 +45,23 @@
   <gcse:searchbox-only></gcse:searchbox-only>
 </div>
 
+
+<div class="recent-posts">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>最近の記事</strong>
+  </p>
+  <hr />
+  <ul style="padding-right: 5px; padding-left: 1.5em;">
+    {% for post in site.posts limit:5 %}
+      <li>
+        <a href="{{ site.baseurl }}{{ post.url }}">
+          {{ post.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
 {% assign tag_names = "" | split: "|"  %}
 
 {% for posts_by_tag in site.tags %}
@@ -67,7 +84,11 @@
 {% endif %}
 
 <div class="side-category">
-  <ul class="tag-cloud">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>タグ一覧</strong>
+  </p>
+  <hr />
+  <ul style="padding: 0 10px 0 10px;">
     {% for tag_name in tag_names %}
       <li>
         <a href="{{ baseurl }}/sitemap#{{ tag_name | slugize }}">
