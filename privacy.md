@@ -2,6 +2,7 @@
 layout: page_ja
 title: プライバシーポリシー
 permalink: /privacy/
+custom_css: page
 ---
 
 ## アクセス解析ツールについて

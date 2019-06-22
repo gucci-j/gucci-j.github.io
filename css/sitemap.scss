@@ -1,0 +1,12 @@
+---
+---
+@import "variables";
+
+.sitemap {
+  h3 {
+    // Added
+    background-color: #f6f6f6;
+    border-left: 6px solid $darkerGray;
+    padding: 4px 16px;
+  }
+}

@@ -64,35 +64,27 @@ body {
   justify-content: center;
   max-width: 1100px;
   margin: auto;
+  padding: 0 0.5em 0 0.5em;
 
   @include tablet {
     flex-direction: column;
     align-items: center;
+    max-width: 800px;
+    padding: 0;
   }
 
   @include mobile {
     flex-direction: column;
     margin: 0 auto;
+    padding: 0;
   }
 
   .main_contents {
-    width: calc(100% - 300px);
+    width: calc(100% - 332px);
     flex: 1 1;
     padding: 35px;
     background: $white;
     border-radius: 30px;
-/*
-    .inside-ads {
-      width: calc(100% - 300px);
-      @include tablet {
-        width: 95%;
-      }  
-
-      @include mobile {
-        width: 100%
-      }
-    }
-*/
 
     @include tablet {
       width: 95%;
@@ -153,15 +145,6 @@ body {
 
   @include mobile {
     border-radius: 0;
-  }
-  
-  table tr{
-    border-bottom: none;
-  }
-  
-  table th,table td{
-    border: none;
-    margin: 0;
   }
 }
 
@@ -237,17 +220,6 @@ h2 {
   }
 }
 
-.post h2 {
-  border-left: 6px solid $darkerGray;
-  border-bottom: 1px solid $darkerGray;
-  padding: 4px 16px;
-
-  @include mobile {
-    border-left: 4px solid $darkerGray;
-    padding: 4px 14px;
-  }
-}
-
 h3 {
   font-size: 20px;
 
@@ -256,28 +228,11 @@ h3 {
   }
 }
 
-.post h3 {
-  border-bottom: 1px solid $darkerGray;
-  padding: 4px 12px;
-
-  @include mobile {
-    padding: 2px 8px;
-  }
-}
-
 h4 {
   font-size: 18px;
 
   @include mobile {
     font-size: 16px;
-  }
-}
-
-.post h4 {
-  padding: 0 8px;
-
-  @include mobile {
-    padding: 0 6px;
   }
 }
 
@@ -315,27 +270,6 @@ ul ul, ol ul {
   list-style-type: circle;
 }
 
-table{
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-}
-
-table tr{
-  border-bottom: solid 1px #eee;
-}
-
-table th,table td{
-  text-align: center;
-  width: auto;
-  padding: 5px 5px;
-  border: 1px $darkerGray solid;
-}
-
-table tr:nth-child(even){
-  background-color: rgb(248, 248, 248)
-}
-
 em, i {
   font-style: italic;
 }
@@ -346,19 +280,6 @@ strong, b {
 
 img {
   max-width: 100%;
-}
-
-.post, .page_en, .page_ja {
-  img {
-    border: 1px $lightGray solid;
-    padding:4px;
-  }
-}
-
-code.highlighter-rouge{
-  background-color: rgb(238, 238, 238);
-  padding: 2px 3px 2px 3px;
-  border-radius: 3px;
 }
 
 // Fixes images in popup boxes from Google Translate
@@ -401,128 +322,6 @@ code.highlighter-rouge{
 
 .clearfix:after {
     clear: both;
-}
-
-/* ページごとの指定 */
-
-.page_en, .page_ja {
-  h2 {
-    // Added
-    background-color: #f6f6f6;
-    border-left: 6px solid $darkerGray;
-    padding: 4px 16px;
-  }
-
-  h3 {
-    // Added
-    border-bottom: 1px solid #ddd;
-  }
-}
-
-.page_en {
-  body { 
-    font-family: $helvetica;
-  }
-}
-
-.sitemap {
-  h3 {
-    // Added
-    background-color: #f6f6f6;
-    border-left: 6px solid $darkerGray;
-    padding: 4px 16px;
-  }
-}
-
-/* 目次関連 */
-
-.toc label {
-  background: $lightGray;
-  color: $gray;
-  padding: 10px;
-  display: block;
-  margin: 0;
-  border-bottom: 2px solid #fff;
-}
-
-.toc ul {
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  -ms-transition: all 0.5s;
-  -o-transition: all 0.5s;
-  transition: all 0.5s;
-  margin: 0;
-  list-style: none;
-  font-size: 90%;
-  color: #1e366a;
-  padding: 0.1em 0 0.1em 1.0em;
-}
-
-.toc li {
-  padding: 0.1em 0;
-}
-
-.toc input[type="checkbox"].on-off{
-  display: none;
-}
-
-.toc input[type="checkbox"].on-off + label + ul{
-  height: 0;
-  overflow: hidden;
-}
-
-.toc input[type="checkbox"].on-off:checked + label + ul{
-  height: auto;
-  background: $lightGray;
-}
-
-.toc label::before {
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  content: '\f054';
-  padding-right: 8px;
-}
-
-.toc input[type="checkbox"].on-off:checked + label::before {
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  content: '\f078';
-}
-
-
-/* タグ関連 */
-.post-tag ul {
-  margin: 0 0 5px 0;
-  padding: 0;
-  list-style: none;
-}
-.post-tag ul li {
-  display: inline-block;
-  margin: 0 .3em .3em 0;
-  padding: 0;
-}
-.post-tag ul li a {
-  display: inline-block;
-  // max-width: 100px;
-  height: 28px;
-  line-height: 28px;
-  padding: 0 1em;
-  background-color: #fff;
-  border: 1px solid #aaa;
-  border-radius: 3px;
-  white-space: nowrap;
-  // text-overflow: ellipsis;
-  // overflow: hidden;
-  color: #333;
-  font-size: 13px;
-  text-decoration: none;
-  -webkit-transition: .2s;
-  transition: .2s;
-}
-.post-tag ul li a:hover {
-  background-color: #3498db;
-  border: 1px solid #3498db;
-  color: #fff;
 }
 
 /*********************/
@@ -619,105 +418,6 @@ nav {
   }
 }
 
-
-.link_box {
-  position: relative;
-  margin: 2em 0;
-  padding: 0.5em 1em;
-  border: solid 3px $gray;
-  border-radius: 8px;
-}
-.link_box .box-title {
-  position: absolute;
-  display: inline-block;
-  top: -13px;
-  left: 10px;
-  padding: 0 9px;
-  line-height: 1;
-  font-size: 19px;
-  background: #fff;
-  font-weight: bold;
-}
-.link_box p {
-  margin: 0; 
-  padding: 0;
-}
-
-.footer_ads {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
-
-  @include mobile {
-    flex-wrap: wrap;
-  }
-
-  .left_ad {
-    width:336px;
-
-    @include mobile {
-      width: 100%;
-    }
-  }
-
-  .right_ad {
-    margin: 0 0 0 0.5em;
-    width:336px;
-
-    @include mobile {
-      display: none;
-    }
-  }
-}
-
-.pager {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-
-  @include mobile {
-    flex-wrap: wrap;
-  }
-
-  .prev {
-    padding: 0.5em 1em; // うち
-    background: $lightGray;
-    border-radius: 10px;
-    text-align: right;
-    margin-left: auto;
-    width: 50%;
-
-    p {
-      margin: 0; 
-      padding: 0;
-    }
-
-    @include mobile {
-      width: 100%
-    }
-  }
-
-  .next {
-    padding: 0.5em 1em;
-    margin: 0 1em 0 0; // そと
-    background: $lightGray;
-    border-radius: 10px;
-    width: 50%;
-
-    @include mobile {
-      margin: 0 0 0.5em 0;
-      width: 100%
-    }
-
-    p {
-      margin: 0; 
-      padding: 0;
-    }
-  }
-}
-
-
 //
 // .main
 //
@@ -735,19 +435,6 @@ nav {
 .post {
   h1 {
     margin-top: 3px;
-  }
-
-  blockquote {
-    //margin: 1.8em .8em;
-    border-left: 2px solid $gray;
-    padding: 0 1em;
-    color: $gray;
-    font-size: 15px;
-    font-style: italic;
-
-    @include mobile {
-      font-size: 13px;
-    }
   }
 
   .comments {
@@ -772,10 +459,6 @@ footer {
   padding: 20px 0;
   text-align: center;
   font-family: $helvetica;
-}
-
-.mathjax-scroll {
-  overflow-x: auto;
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS

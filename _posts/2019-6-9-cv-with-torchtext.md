@@ -3,6 +3,7 @@ layout: post
 title: torchtextでk-分割交差検証をする話
 description: PyTorchの自然言語処理（NLP）系データ処理ライブラリである，torchtextでどうしても交差検証をしたい人のためのTipsです．scikit-learnライクな，交差検証をしやすいライブラリとして有名である，skorchは使いません．
 lang: ja_JP
+custom_css: post
 tags:
 - Tips
 - PyTorch
@@ -71,7 +72,7 @@ class load_data(object):
 
 学習データを読み込む際は，`get_fold_data()` を使うようにします．
 
-scikit-learnの `sklearn.model_selection.KFold` クラスを使うことで，データセットを交差分割用に分割します．scikit-learnを普段から使っている人なら，おなじみかもしれません．
+scikit-learnの `model_selection.KFold` クラスを使うことで，データセットを交差分割用に分割します．scikit-learnを普段から使っている人なら，おなじみかもしれません．
 
 `KFold` のメソッドである，`split` は，引数にNumPy配列を渡す必要があるので，torchtextから生成されたデータセットでは型エラーとなってしまいます．そこで，データをNumPy配列に変換して渡してあげると型エラーにならずに動作してくれます．
 

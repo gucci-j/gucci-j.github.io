@@ -4,6 +4,7 @@ title: はじめに
 description: 当サイトについての説明とプライバシーポリシーに関して紹介いたします．
 last_modified_at: 2019-06-19 9:30:00 +0900
 lang: ja_JP
+custom_css: post
 tags:
 - ブログ全般
 ---
@@ -31,4 +32,4 @@ tags:
 連絡やお仕事の依頼等は，[お問い合わせフォーム]({{ site.baseurl }}/contact/)か[Twitter](https://twitter.com/_gucciiiii)のDMにてお願いいたします．
 
 ## プライバシーポリシー・免責事項
-当サイトの免責事項やプライバシーポリシーに関しては，[こちら]({{ site.baseurl }}/privacy/)をご覧ください．
+当サイトの免責事項やプライバシーポリシーに関しては，[プライバシーポリシー]({{ site.baseurl }}/privacy/)をご覧ください．

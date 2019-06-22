@@ -4,6 +4,7 @@ title: 論文メモ：Attention Is All You Need
 description: BERTの基本構成要素となっていることで，ますますの注目を集めている，Attention is All You Need（Transformer）の論文メモ書きを共有・紹介します．
 mathjax: true
 lang: ja_JP
+custom_css: post
 image: /resources/2019-05-23/pe.png
 last_modified_at: 2019-05-30 15:00:00 +0900
 tags:

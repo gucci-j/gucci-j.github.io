@@ -4,6 +4,7 @@ title: 論文メモ：Deep contextualized word representations
 description: NAACL 2018でベストペーパーアワードに輝いた，Deep contextualized word representations（通称ELMo）の論文メモ書きを共有・紹介します．
 mathjax: true
 lang: ja_JP
+custom_css: post
 tags:
 - 論文メモ
 ---

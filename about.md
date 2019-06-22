@@ -3,6 +3,7 @@ layout: page_en
 title: Atsuki Yamaguchi
 permalink: /about/
 lang: en_US
+custom_css: page
 ---
 <div style="text-align: right;"><i class="fas fa-language" style="padding: 0 4px 0 0;"></i>English | <a href="./ja/">日本語</a></div>
 

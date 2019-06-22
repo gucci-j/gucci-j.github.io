@@ -3,6 +3,7 @@ layout: page_ja
 title: 山口 篤季
 permalink: /about/ja/
 lang: ja_JP
+custom_css: page
 ---
 <div style="text-align: right;"><i class="fas fa-language" style="padding: 0 4px 0 0;"></i><a href="../">English</a> | 日本語</div>
 
@@ -14,7 +15,7 @@ lang: ja_JP
 
 ## 研究・興味分野
 
-自然言語処理，対話文生成・解析，生成モデル，機械学習全般
+自然言語処理，交渉対話，対話文生成・解析，生成モデル，機械学習全般
 
 ## 経歴
 ### 学歴  

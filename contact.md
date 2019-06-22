@@ -3,6 +3,7 @@ layout: page
 title: お問い合わせ / Contact
 description: 当サイトに関するお問い合わせページ
 permalink: /contact/
+custom_css: page
 ---
 
 当サイトに関するお問い合わせは，下記の「Google Form」より受け付けております．
