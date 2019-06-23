@@ -230,6 +230,34 @@
   }
 }
 
+.inner_ads {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+
+  @include mobile {
+    flex-wrap: wrap;
+  }
+
+  .left_ad_in {
+    width:300px;
+
+    @include mobile {
+      width: 100%;
+    }
+  }
+
+  .right_ad_in {
+    margin: 0 0 0 0.5em;
+    width:300px;
+
+    @include mobile {
+      display: none;
+    }
+  }
+}
+
 /* 記事のリンク */
 .pager {
   display: flex;

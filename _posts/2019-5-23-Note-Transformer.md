@@ -41,6 +41,14 @@ Attentionをフルに活用した系列変換モデルを提案した．
 * 主にBLEUスコアとパープレキシティ
 * 構文解析のスコア
 
+<div class="inner_ads">
+    <div class="left_ad">
+        <a href="//af.moshimo.com/af/c/click?a_id=1502939&p_id=1555&pc_id=2816&pl_id=22749&guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0866/000000022749.jpg" width="300" height="250" style="border:none;"></a><img src="//i.moshimo.com/af/i/impression?a_id=1502939&p_id=1555&pc_id=2816&pl_id=22749" width="1" height="1" style="border:none;">
+    </div> 
+    <div class="right_ad">
+        <a href="//af.moshimo.com/af/c/click?a_id=1502952&p_id=1386&pc_id=2364&pl_id=20737&guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0598/000000020737.png" width="300" height="250" style="border:none;"></a><img src="//i.moshimo.com/af/i/impression?a_id=1502952&p_id=1386&pc_id=2364&pl_id=20737" width="1" height="1" style="border:none;">
+    </div>
+</div>
 
 ## 論文の主張
 近年の系列変換モデルは，再帰ニューラルネットや畳込みニューラルネットに大きく依存している．また，SoTAを達成するようなモデルであっても，注意機構を取り入れた再帰 or CNNのモデルに依存しており，モデルが複雑になっている．
