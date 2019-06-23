@@ -1,6 +1,13 @@
 {% if page.mathjax %}
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
+    TeX: {
+      Macros: {
+               bm: ["\\boldsymbol{#1}", 1],
+               argmax: ["\\mathop{\\rm arg\\,max}\\limits"],
+               argmin: ["\\mathop{\\rm arg\\,min}\\limits"]},
+      extensions: ["AMSmath.js","AMSsymbols.js"]
+    },
     tex2jax: {
       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
       processEscapes: true
