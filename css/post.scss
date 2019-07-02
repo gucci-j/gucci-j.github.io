@@ -83,6 +83,7 @@
 }
 
 .post h4 {
+  border-left: 5px solid $darkerGray;
   padding: 0 8px;
 
   @include mobile {
