@@ -5,6 +5,7 @@ description: EMNLP 2018に採択された，自然言語で売り物の価格交
 mathjax: true
 lang: ja_JP
 custom_css: post
+last_modified_at: 2019-07-11 00:15:00 +0900
 image: /resources/2019-07-01/model_diagram.png
 tags:
 - 論文メモ
@@ -55,16 +56,6 @@ Deal or no deal データセットと，著者らが作成した，Craigslist Ba
 ## 議論はある？
 
 教師あり学習時は，著者の提案するモジュール型のモデルを使うとよいことが示されている．また，強化学習時も，wordベースではなくdialogue actベースにすると，報酬を最適化しつつ，発話の自然さも維持できることが示されている．
-
-
-<div class="inner_ads">
-    <div class="left_ad_in">
-        <a href="//af.moshimo.com/af/c/click?a_id=1502939&p_id=1555&pc_id=2816&pl_id=22749&guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0866/000000022749.jpg" width="300" height="250" style="border:none;"></a><img src="//i.moshimo.com/af/i/impression?a_id=1502939&p_id=1555&pc_id=2816&pl_id=22749" width="1" height="1" style="border:none;">
-    </div> 
-    <div class="right_ad_in">
-        <a href="//af.moshimo.com/af/c/click?a_id=1502952&p_id=1386&pc_id=2364&pl_id=20737&guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0598/000000020737.png" width="300" height="250" style="border:none;"></a><img src="//i.moshimo.com/af/i/impression?a_id=1502952&p_id=1386&pc_id=2364&pl_id=20737" width="1" height="1" style="border:none;">
-    </div>
-</div>
 
 ## 1. はじめに
 交渉エージェントは以下の二つの点をうまく実行できる必要がある．
@@ -152,7 +143,7 @@ Settlers of catan データセットや，Deal or no deal データセットは�
 
 * **coarse dialogue act**：  
 $x_t$に対して，coarse dialogue act $z_t$ が設けられている．  
-例：$x_t$→ "I am willing tp pay ＄15." $z_t$→ "propose(price=15)"  
+例：$x_t$→ "I am willing to pay ＄15." $z_t$→ "propose(price=15)"  
 
 #### モジュール型モデルの各定義  
 1. **parser**  
@@ -185,6 +176,8 @@ dialogue managerは，各タイムステップ $t$ において，過去のcoars
 Managerの学習手法は，教師あり学習，強化学習，ハイブリッド方式の三つが用いられている．
 
 #### 3.3.1 教師あり学習
+人間の振る舞いをモデリングするのに最適な学習手法．
+
 **入力**: 各学習データは，各対話のcoarse dialogue acts $z_1, \dots. z_T$ からなる．  
 **出力**: $p_\theta (z_t | z_{<t}, c)$
 
@@ -192,19 +185,21 @@ Managerの学習手法は，教師あり学習，強化学習，ハイブリッ�
 モデルは，通常のseq2seqモデルに注意機構を付加したものである．各dialogue actは，通常のトークンとして入力される．例：offer 150．この場合，語彙数はかなり少なくなる．
 
 #### 3.3.2 強化学習
-報酬関数 $R(z_{1:T})$ をcoarse dialogue actsのひとまとまりに対して適用．3つの報酬関数により実験を行う．
+報酬 $R(z_{1:T})$ をcoarse dialogue actsのひとまとまりに対して適用．3つの報酬関数により実験を行う．
 
 1. **Utility**  
 クレイグスリストデータセットでは，ゼロサムゲームとして与える．それ以外のFBのような二者間山分け交渉の場合は，総和となる．
 
+    クレイグスリストでは，目標価格で購入 or 販売できたときにのみ，効用として，1を獲得でき，それ以外の場合には，0を獲得する
+
 2. **Fairness**   
-二者間の効用になるべく差がなくなるようにする．平等重視．
+二者間の効用になるべく差がなくなるようにする．平等重視．計算方法としては，二者間の効用の差で表される．
 
 3. **Length**  
 長く会話させるための指標．
 
 合意が形成されなかった場合，報酬は一律に$-1$  である．
-最適化には，policy gradientを用いる．パラメータは以下の式(1)に基づいて更新される．
+最適化には，policy gradient（方策勾配法）を用いる．パラメータは以下の式(1)に基づいて更新される．
 
 <div class="mathjax-scroll">
 $$
@@ -213,6 +208,10 @@ $$
 </div>
 
 ただし，$\eta$ は学習率，$b$ は出力の平均から推定されるベースライン．$a_i$ は生成されたトークン（policyが取る行動）を意味しており，$z_{1:T}$に対応している．
+
+> * 方策勾配法について  
+方策勾配法は価値関数 $Q^{\pi_\theta}(s, a)$ を実際に得られた報酬の合計で近似するもの．  
+>ベースラインを設けるのは，期待値の分散を減らすため（variance reduction)． これによって，モデルの学習を成功させやすくなるらしい．
 
 #### 3.3.3 Hybrid Policy
 coarse dialogue actsが与えられたとき，ドメインに関する知識があれば，ルールベースのmanagerを作成できる．
@@ -240,7 +239,7 @@ $d$はテンプレート抽出器："How about ＄150?"という文があった�
 2. **SL(act)**: モジュール型のモデル  
 ルールベースのパーサー，学習済みのmanager，検索ベースのgeneratorからなる．
 
-クレイグスリストデータセットには様々な価格帯があるので，値段を正規化して扱う．（target priceが1，bottomline priceが0）
+クレイグスリストデータセットには様々な価格帯があるので，値段を正規化して扱う．（target priceが1，bottomline priceが0．）売り手のbottomlineは，listing priceの0.7倍．買い手のbottomlineはlisting price．
 
 教師あり学習で学習させたモデルを用いて，強化学習でfine-tuneする．モデルの詳細は以下の表6の通り．
 
@@ -253,14 +252,14 @@ $d$はテンプレート抽出器："How about ＄150?"という文があった�
 ### 4.2 実験設定
 
 * **SL(word)**  
-三つ前までの発言をattentionの対象にする．交渉シナリオは，CBoWで埋め込み．
+3個前までの発言をattentionの対象にする．交渉シナリオは，CBoWで埋め込み．
 
 * **SL(word) / SL(act)の両方**  
 GloVe埋め込み：300次元  
 2層のLSTM：300次元  
 パラメータは-0.1から0.1の一様分布で初期化  
-AdaGrad：ptimizer（学習率：0.01，バッチサイズ：128）  
-20エポック  
+AdaGrad：（学習率：0.01，バッチサイズ：128）  
+20エポック学習 
 
 * **RL**  
 学習率：0.001  
@@ -272,7 +271,7 @@ AdaGrad：ptimizer（学習率：0.01，バッチサイズ：128）
 例：効用など  
 
 2. **human-likeness**  
-5点満点評価  
+1〜5の5段階評価．高ければ高いほど良い．スコアはAMTのworkerによりつけられた．
 
 #### 表7の意味するところ
 1. 教師あり学習をつけると人間らしさが向上．ただし，actベースの方がスコアが良い．
