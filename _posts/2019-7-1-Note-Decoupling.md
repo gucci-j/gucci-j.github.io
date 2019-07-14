@@ -5,13 +5,13 @@ description: EMNLP 2018に採択された，自然言語で売り物の価格交
 mathjax: true
 lang: ja_JP
 custom_css: post
-last_modified_at: 2019-07-11 00:15:00 +0900
+last_modified_at: 2019-07-14 11:20:00 +0900
 image: /resources/2019-07-01/model_diagram.png
 tags:
 - 論文メモ
 ---
 
-本稿では，EMNLP 2018に採択された，自然言語で売り物の価格交渉をするエージェントを提案した論文：「Decoupling Strategy and Generation in Negotiation Dialogues」の論文のメモ書きを共有・紹介します．紹介スライドは後ほど追加する予定です．
+本稿では，EMNLP 2018に採択された，自然言語で売り物の価格交渉をするエージェントを提案した論文：「Decoupling Strategy and Generation in Negotiation Dialogues」の論文のメモ書きを共有・紹介します．
 
 ## 文献情報
 著者: H. He et al.  
@@ -266,9 +266,9 @@ AdaGrad：（学習率：0.01，バッチサイズ：128）
 5000エピソード学習
 
 ### 4.3 人間による評価
-二つの指標により評価．スコアはAMTのworkerによりつけられた．
+二つの指標により評価．
 1. **task specificなスコア**  
-例：効用など  
+効用・合意案の公平性・発話の長さ・合意率  
 
 2. **human-likeness**  
 1〜5の5段階評価．高ければ高いほど良い．スコアはAMTのworkerによりつけられた．
@@ -290,4 +290,5 @@ AdaGrad：（学習率：0.01，バッチサイズ：128）
 
 
 ## スライド  
-後ほど（7月下旬）追加更新予定．
+(**追加**: 2019/07/14) 
+<div style="text-align: center"><iframe src="//www.slideshare.net/slideshow/embed_code/key/3L3ugPvxSRAt6o" width="510" height="420" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen></iframe></div>
