@@ -2,7 +2,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://localhost:4000/Introduction/</loc>
-<lastmod>2019-03-31T00:00:00+09:00</lastmod>
+<lastmod>2019-06-19T09:30:00+09:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/Note-Frustratingly/</loc>
@@ -10,7 +10,7 @@
 </url>
 <url>
 <loc>http://localhost:4000/SA-Visualization/</loc>
-<lastmod>2019-04-02T00:00:00+09:00</lastmod>
+<lastmod>2019-06-09T12:00:00+09:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/Note-ELMo/</loc>
@@ -37,7 +37,28 @@
 <lastmod>2019-05-10T00:00:00+09:00</lastmod>
 </url>
 <url>
+<loc>http://localhost:4000/Note-Transformer/</loc>
+<lastmod>2019-05-30T15:00:00+09:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/cv-with-torchtext/</loc>
+<lastmod>2019-06-09T00:00:00+09:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/memo-svm/</loc>
+<lastmod>2019-06-23T00:00:00+09:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/Note-Decoupling/</loc>
+<lastmod>2019-07-14T11:20:00+09:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/about/</loc>
+<lastmod>2019-07-26T17:45:00+09:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/about/ja/</loc>
+<lastmod>2019-07-26T17:45:00+09:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/contact/</loc>

@@ -28,13 +28,18 @@
     <![endif]-->
 
     <link rel="stylesheet" type="text/css" href="/style.css" />
+    
+      
+        <link rel="stylesheet" type="text/css" href="/css/post.css">
+      
+    
     <link rel="alternate" type="application/rss+xml" title="きままにNLP - A Technical Blog about NLP and ML" href="/feed.xml" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     
     <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
 
     <!-- Favicon head tag -->
-    <link rel="icon" href="/resources/logo/logo.jpg" type="image/x-icon">
+    <link rel="icon" href="/resources/logo/kimamani_simple.png" type="image/x-icon">
 
     <!-- Begin Jekyll SEO tag v2.6.0 -->
 <title>ゼロから作るDeep Learningとともに学ぶフレームワーク（パーセプトロン編） | きままにNLP</title>
@@ -52,7 +57,7 @@
 <meta property="twitter:title" content="ゼロから作るDeep Learningとともに学ぶフレームワーク（パーセプトロン編）" />
 <meta name="twitter:site" content="@_gucciiiii" />
 <script type="application/ld+json">
-{"description":"「ゼロから作るDeep Learning」とともに深層学習フレームワークを学ぶプロジェクト第一弾として、Kerasの環境整備とパーセプトロンの実装を行います。","@type":"BlogPosting","url":"http://localhost:4000/DL-Intro-1/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/logo.jpg"}},"headline":"ゼロから作るDeep Learningとともに学ぶフレームワーク（パーセプトロン編）","dateModified":"2019-04-13T00:00:00+09:00","datePublished":"2019-04-13T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/DL-Intro-1/"},"@context":"https://schema.org"}</script>
+{"description":"「ゼロから作るDeep Learning」とともに深層学習フレームワークを学ぶプロジェクト第一弾として、Kerasの環境整備とパーセプトロンの実装を行います。","@type":"BlogPosting","url":"http://localhost:4000/DL-Intro-1/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/kimamani.png"}},"headline":"ゼロから作るDeep Learningとともに学ぶフレームワーク（パーセプトロン編）","dateModified":"2019-04-13T00:00:00+09:00","datePublished":"2019-04-13T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/DL-Intro-1/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <!-- Google Adsense-->
@@ -71,11 +76,10 @@
     <div class="wrapper-masthead">
       <div class="head_container">
         <header class="masthead clearfix">
-          <a href="/" class="site-avatar"><img src="/resources/logo/logo.jpg" /></a>
+          <a href="/" class="site-avatar"><img src="/resources/logo/kimamani.png" /></a>
 
           <div class="site-info">
-            <h1 class="site-name"><a href="/">きままにNLP</a></h1>
-            <p class="site-description">A Technical Blog about NLP and ML</p>
+            <h1 class="site-name"><a href="/"><img src="/resources/logo/kimamani_moji.png" /></a></h1>
           </div>
 
           <nav>
@@ -86,8 +90,16 @@
       </div>
     </div>
 
-    <div id="main" role="main" class="container">
-      <article class="post">
+    <div class="container">
+      <main class="main_contents" role="main">
+        <article class="post">
+  <div class="date_front">
+    <i class="far fa-calendar-alt" style="padding: 0 2px 0 0;"></i>
+    2019-04-13
+
+    
+
+  </div>
   <h1>ゼロから作るDeep Learningとともに学ぶフレームワーク（パーセプトロン編）</h1>
 
   <div class="post-tag">
@@ -216,18 +228,18 @@ msmaflink({"n":"ゼロから作るDeep Learning ―Pythonで学ぶディープ�
 </ul>
 
 <h4 id="311-レイヤー--numpyを読み込む">3.1.1 レイヤー + NumPyを読み込む</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from keras.models import Sequential
-from keras.layers import Dense
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
 
-import numpy as np
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 </code></pre></div></div>
 
 <h4 id="312-modelにsepuentialモデルを定義する">3.1.2 <code class="highlighter-rouge">model</code>にSepuentialモデルを定義する</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">model</span> <span class="p">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
 </code></pre></div></div>
 
 <h4 id="313-modelにdense層全結合層を追加する">3.1.3 <code class="highlighter-rouge">model</code>にDense層（全結合層）を追加する</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>model.add(Dense(input_dim=2, units=1))
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
 </code></pre></div></div>
 
 <ul>
@@ -247,7 +259,7 @@ import numpy as np
   <li>
     <p>重みとバイアスの初期設定には、<code class="highlighter-rouge">model.set_weights()</code>を使用します。<br />
 引数は重みの入ったリストです。</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>model.set_weights([np.array([[0.5], [0.5]]), np.array([-0.7])])
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span><span class="o">.</span><span class="n">set_weights</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">]]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.7</span><span class="p">])])</span>
 </code></pre></div>    </div>
     <blockquote>
       <p><i class="fas fa-book-open" style="padding: 0 2px 0 0;"></i>参照: ゼロから〜のP27</p>
@@ -261,12 +273,12 @@ import numpy as np
 <code class="highlighter-rouge">predict</code>の返り値は、入力データの予測結果のリストになっています。</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>X = np.array([[0,0], [0,1], [1,0], [1,1]])
-Y = np.array([[0], [0], [0], [1]])
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
 
-Y_ = model.predict(X)
+<span class="n">Y_</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 
-print(Y_)
+<span class="k">print</span><span class="p">(</span><span class="n">Y_</span><span class="p">)</span>
 </code></pre></div></div>
 
 <ul>
@@ -279,10 +291,10 @@ Output:
 </code></pre></div>    </div>
   </li>
   <li>これではわかりにくいので、マイナスのものは<code class="highlighter-rouge">False</code>で、プラスのものは<code class="highlighter-rouge">True</code>に置き換えます。
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Y_[Y_ &lt;= 0] = False
-Y_[Y_ &gt; 0] = True
-print(Y_)
-print(f'Results: {Y == Y_}')
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Y_</span><span class="p">[</span><span class="n">Y_</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">Y_</span><span class="p">[</span><span class="n">Y_</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="k">print</span><span class="p">(</span><span class="n">Y_</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Results: {Y == Y_}'</span><span class="p">)</span>
 </code></pre></div>    </div>
   </li>
   <li>以下のような結果が得られたと思います。<br />
@@ -308,23 +320,23 @@ Results: [[ True]
 </ul>
 
 <h4 id="321-レイヤー--numpyを読み込む">3.2.1 レイヤー + NumPyを読み込む</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from keras import Model
-from keras.layers import Input, Dense
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">keras</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Dense</span>
 
-import numpy as np
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 </code></pre></div></div>
 
 <h4 id="322-各種レイヤーを定義する">3.2.2 各種レイヤーを定義する</h4>
 <p>Functional APIでは、入力層を追加で定義する必要があります。</p>
 
 <p>Dense部分のイメージとしては、Denseレイヤーのインスタンスを生成し、その入力として、テンソル：_inputを与えるという感じです。出力のテンソルは_outputとなります。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_input = Input(shape=(2, ))
-_output = Dense(units=1)(_input)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_input</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">))</span>
+<span class="n">_output</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">1</span><span class="p">)(</span><span class="n">_input</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h4 id="323-モデルを定義する">3.2.3 モデルを定義する</h4>
 <p>以下のように、Functional APIでは、モデルを定義する際に入力と出力のテンソルを別々に保持しておく必要があります！</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">model</span> <span class="p">=</span> <span class="k">Model</span><span class="p">(</span><span class="n">inputs</span><span class="p">=</span><span class="n">_input</span><span class="p">,</span> <span class="n">outputs</span><span class="p">=</span><span class="n">_output</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">_input</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">_output</span><span class="p">)</span>
 </code></pre></div></div>
 <blockquote>
   <p><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考: <a href="https://keras.io/ja/getting-started/functional-api-guide/">https://keras.io/ja/getting-started/functional-api-guide/</a></p>
@@ -353,9 +365,11 @@ _output = Dense(units=1)(_input)
 
   </div>
 
+  <!--
   <div class="date">
     Written on April 13, 2019
   </div>
+  -->
 
   <style type="text/css">
     @font-face {
@@ -390,6 +404,8 @@ _output = Dense(units=1)(_input)
     .icon-facebook:before    {content: "\ea90";}
     .icon-hatebu:before      {content: "\e903";}
 
+    .amazon-icon::before     {content: "Amazon.co.jpで買って応援！";}
+
     /*ソーシャルリストデザイン2*/
     .shareList2 {
         list-style:none;
@@ -403,6 +419,13 @@ _output = Dense(units=1)(_input)
         height:30px;
         line-height:30px;
         width:30px;
+        margin:5px 0 0 5px;
+        text-align:center;
+    }
+    .shareList2__item__amazon {
+        height:30px;
+        line-height:30px;
+        width: 240px;
         margin:5px 0 0 5px;
         text-align:center;
     }
@@ -424,6 +447,23 @@ _output = Dense(units=1)(_input)
         box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
     }
 
+    .shareList2__link__amazon {
+        display:block;
+        color:#ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .shareList2__link__amazon::before{
+        font-size:16px;
+        display:block;
+        transition: ease-in-out .2s;
+        border-radius: 5px;
+    }
+    .shareList2__link__amazon:hover::before{
+        background:#ffffff;
+        box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
+    }
+
     .shareList2__link.icon-twitter{background:#55acee;}
     .shareList2__link.icon-twitter:hover::before{color:#55acee;}
 
@@ -438,38 +478,250 @@ _output = Dense(units=1)(_input)
 
     .shareList2__link.icon-line{background:#1dcd00;}
     .shareList2__link.icon-line:hover::before{color:#1dcd00;}
+
+    .shareList2__link__amazon.amazon-icon{background:#ff9900;}
+    .shareList2__link__amazon.amazon-icon:hover::before{color:#ff9900;}
 </style>
 
 <ul class="shareList2" style="margin-top: 5px;">
     <li class="shareList2__item"><a class="shareList2__link icon-twitter" href="https://twitter.com/intent/tweet?text=%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep%20Learning%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E5%AD%A6%E3%81%B6%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF(%E3%83%91%E3%83%BC%E3%82%BB%E3%83%97%E3%83%88%E3%83%AD%E3%83%B3%E7%B7%A8)+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP&amp;url=http%3A%2F%2Flocalhost%3A4000%2FDL-Intro-1%2F" target="_blank" title="Twitter"></a></li>
     <li class="shareList2__item"><a class="shareList2__link icon-facebook" href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FDL-Intro-1%2F" target="_blank" title="Facebook"></a></li>
     <li class="shareList2__item"><a class="shareList2__link icon-hatebu" href="https://b.hatena.ne.jp/add?mode=confirm&amp;url=http%3A%2F%2Flocalhost%3A4000%2FDL-Intro-1%2F" target="_blank" title="はてなブックマーク"></a></li>
-    <li class="shareList2__item"><a class="shareList2__link icon-pocket" href="//getpocket.com/edit?url=http%3A%2F%2Flocalhost%3A4000&title=%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep%20Learning%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E5%AD%A6%E3%81%B6%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF(%E3%83%91%E3%83%BC%E3%82%BB%E3%83%97%E3%83%88%E3%83%AD%E3%83%B3%E7%B7%A8)+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP" target="_blank" title="Pocket"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-pocket" href="//getpocket.com/edit?url=http%3A%2F%2Flocalhost%3A4000%2FDL-Intro-1%2F&title=%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep%20Learning%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E5%AD%A6%E3%81%B6%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF(%E3%83%91%E3%83%BC%E3%82%BB%E3%83%97%E3%83%88%E3%83%AD%E3%83%B3%E7%B7%A8)+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP" target="_blank" title="Pocket"></a></li>
     <li class="shareList2__item"><a class="shareList2__link icon-line" href="http://line.me/R/msg/text/?%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep%20Learning%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E5%AD%A6%E3%81%B6%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF(%E3%83%91%E3%83%BC%E3%82%BB%E3%83%97%E3%83%88%E3%83%AD%E3%83%B3%E7%B7%A8)+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP%0Ahttp%3A%2F%2Flocalhost%3A4000%2FDL-Intro-1%2F" target="_blank" title="LINE"></a></li>
+    <li class="shareList2__item__amazon"><a class="shareList2__link__amazon amazon-icon" href="//af.moshimo.com/af/c/click?a_id=1430714&p_id=170&pc_id=185&pl_id=4062&url=https%3A%2F%2Fwww.amazon.co.jp%2F" target="_blank" rel="nofollow"></a>
+        <img src="//i.moshimo.com/af/i/impression?a_id=1430714&p_id=170&pc_id=185&pl_id=4062" width="1" height="1" style="border:none;"></li>
 </ul>
 
   <br />
 
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <!-- フッター1 -->
-  <ins class="adsbygoogle"
-      style="display:block"
-      data-ad-client="ca-pub-1838422896597988"
-      data-ad-slot="4583840862"
-      data-ad-format="auto"
-      data-full-width-responsive="true"></ins>
-  <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+  <div class="footer_ads">
+    <div class="left_ad">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- フッター1 -->
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-1838422896597988"
+            data-ad-slot="4583840862"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <div class="right_ad">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- フッター2 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1838422896597988"
+             data-ad-slot="3446169345"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+  </div>
+  <br />
+
+  <!-- 前後のページへのリンク-->
+  <div class="pager">
+    
+      <div class="next">
+        <p><i class="fas fa-arrow-circle-left" style="margin: 0 0.5em 0 0;"></i>次の記事</p>
+        <p>
+          <a href="/DL-Intro-2/">ゼロから作るDeep Learningとともに学ぶフレームワーク（3層ニューラルネットワーク ＆ 手書き数字認識編）</a>
+        </p>
+      </div>
+    
+
+    
+      <div class="prev">
+        <p>前の記事<i class="fas fa-arrow-circle-right" style="margin: 0 0 0 0.5em;"></i></p>
+        <p>
+            <a href="/Note-ELMo/">論文メモ：Deep contextualized word representations</a>
+        </p>
+      </div>
+    
+  </div>
 
   
   
 </article>
 
+      </main>
+
+      <aside class="sidebar" role="complementary">
+        <div class="side-ad">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- サイドバー -->
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-1838422896597988"
+      data-ad-slot="3641305571"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+
+<div class="profile">
+  <div style="text-align: center;">
+    <a href="/about/">
+      <img style="width: 100px; border-radius: 50px;" src="/resources/logo/profile.jpg" />
+    </a>
+    <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1;"><strong>Gucci</strong></p>
+  </div>
+  <p style="margin-top: 0.5em; margin-bottom: 0; font-size: 0.8em; text-align: center;">
+    自然言語処理や機械学習に関連する情報を発信しています。
+    留学系の話題も<a href="https://note.mu/_gucciiiii">note</a>に書いています。
+  </p>
+  <hr />
+  <div class="profile_icon">
+    
+<a href="/contact/"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/gucci-j"><i class="svg-icon github"></i></a>
+
+
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/_gucciiiii"><i class="svg-icon twitter"></i></a>
+
+
+
+  </div>
+</div>
+
+<div class="amazon-button">
+  <p style="margin-top: 0; margin-bottom: 0.5em; font-size: 0.8em; text-align: center;">
+    <strong>Amazon.co.jpで買って応援！</strong>
+  </p>
+  <div style="text-align: center;">
+    <a href="//af.moshimo.com/af/c/click?a_id=1430714&p_id=170&pc_id=185&pl_id=10340&guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0068/000000010340.gif" width="300" height="50" style="border:none; padding-bottom: 0;"></a>
+    <img src="//i.moshimo.com/af/i/impression?a_id=1430714&p_id=170&pc_id=185&pl_id=10340" width="0" height="0" style="display: none; border:none;">
+  </div>
+</div>
+
+<div class="search">
+  <script>
+    (function() {
+      var cx = 'partner-pub-1838422896597988:8655986192';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+    })();
+  </script>
+  <gcse:searchbox-only></gcse:searchbox-only>
+</div>
+
+
+<div class="recent-posts">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>最近の記事</strong>
+  </p>
+  <hr />
+  <ul style="padding-right: 5px; padding-left: 1.5em;">
+    
+      <li>
+        <a href="/Note-Decoupling/">
+          論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues
+        </a>
+      </li>
+    
+      <li>
+        <a href="/memo-svm/">
+          サポートベクターマシンのお話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/cv-with-torchtext/">
+          torchtextでk-分割交差検証をする話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/Note-Transformer/">
+          論文メモ：Attention Is All You Need
+        </a>
+      </li>
+    
+      <li>
+        <a href="/DL-Intro-5/">
+          ゼロから作るDeep Learningとともに学ぶフレームワーク（畳み込みニューラルネットワーク編）
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="side-category">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>タグ一覧</strong>
+  </p>
+  <hr />
+  <ul style="padding: 0 10px 0 10px;">
+    
+      <li>
+        <a href="/sitemap#PyTorch">
+          PyTorch
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#Tips">
+          Tips
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#「ゼロからKeras」シリーズ">
+          「ゼロからKeras」シリーズ
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#ブログ全般">
+          ブログ全般
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#機械学習全般">
+          機械学習全般
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#論文メモ">
+          論文メモ
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+      </aside>
     </div>
 
     <div class="wrapper-footer">
-      <div class="container">
+      <div class="footer_container">
         <footer class="footer">
           
 <a href="/contact/"><i class="svg-icon email"></i></a>
@@ -484,10 +736,11 @@ _output = Dense(units=1)(_input)
 
 
 <br />
-          <a href="/">Home</a> 
-          | <a href="/sitemap">Sitemap</a> 
-          | <a href="/privacy">Privacy Policy</a><br />
-          <div style="font-size: 8pt">© 2019 Atsuki Yamaguchi.</div>
+          <a href="/">Home</a>
+          | <a href="/Introduction/">About This Blog</a>  
+          | <a href="/sitemap/">Sitemap</a> 
+          | <a href="/privacy/">Privacy</a><br />
+          <div style="font-size: 8pt;">© 2019 Atsuki Yamaguchi.</div>
         </footer>
       </div>
     </div>

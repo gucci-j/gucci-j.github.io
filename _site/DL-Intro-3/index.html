@@ -28,13 +28,18 @@
     <![endif]-->
 
     <link rel="stylesheet" type="text/css" href="/style.css" />
+    
+      
+        <link rel="stylesheet" type="text/css" href="/css/post.css">
+      
+    
     <link rel="alternate" type="application/rss+xml" title="きままにNLP - A Technical Blog about NLP and ML" href="/feed.xml" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     
     <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
 
     <!-- Favicon head tag -->
-    <link rel="icon" href="/resources/logo/logo.jpg" type="image/x-icon">
+    <link rel="icon" href="/resources/logo/kimamani_simple.png" type="image/x-icon">
 
     <!-- Begin Jekyll SEO tag v2.6.0 -->
 <title>ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編） | きままにNLP</title>
@@ -52,7 +57,7 @@
 <meta property="twitter:title" content="ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）" />
 <meta name="twitter:site" content="@_gucciiiii" />
 <script type="application/ld+json">
-{"description":"「ゼロから作るDeep Learning」とともに深層学習フレームワークを学ぶプロジェクト第三弾として、Kerasで2層ニューラルネットワークを実装し、データセットを活用したモデルの学習と分類実験を行います。","@type":"BlogPosting","url":"http://localhost:4000/DL-Intro-3/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/logo.jpg"}},"headline":"ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）","dateModified":"2019-04-26T00:00:00+09:00","datePublished":"2019-04-26T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/DL-Intro-3/"},"@context":"https://schema.org"}</script>
+{"description":"「ゼロから作るDeep Learning」とともに深層学習フレームワークを学ぶプロジェクト第三弾として、Kerasで2層ニューラルネットワークを実装し、データセットを活用したモデルの学習と分類実験を行います。","@type":"BlogPosting","url":"http://localhost:4000/DL-Intro-3/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/kimamani.png"}},"headline":"ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）","dateModified":"2019-04-26T00:00:00+09:00","datePublished":"2019-04-26T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/DL-Intro-3/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <!-- Google Adsense-->
@@ -71,11 +76,10 @@
     <div class="wrapper-masthead">
       <div class="head_container">
         <header class="masthead clearfix">
-          <a href="/" class="site-avatar"><img src="/resources/logo/logo.jpg" /></a>
+          <a href="/" class="site-avatar"><img src="/resources/logo/kimamani.png" /></a>
 
           <div class="site-info">
-            <h1 class="site-name"><a href="/">きままにNLP</a></h1>
-            <p class="site-description">A Technical Blog about NLP and ML</p>
+            <h1 class="site-name"><a href="/"><img src="/resources/logo/kimamani_moji.png" /></a></h1>
           </div>
 
           <nav>
@@ -86,8 +90,16 @@
       </div>
     </div>
 
-    <div id="main" role="main" class="container">
-      <article class="post">
+    <div class="container">
+      <main class="main_contents" role="main">
+        <article class="post">
+  <div class="date_front">
+    <i class="far fa-calendar-alt" style="padding: 0 2px 0 0;"></i>
+    2019-04-26
+
+    
+
+  </div>
   <h1>ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）</h1>
 
   <div class="post-tag">
@@ -158,13 +170,6 @@
     <p>第五弾：<i class="fas fa-link" style="padding: 0 2px 0 0;"></i><a href="https://gucci-j.github.io/DL-Intro-5/">畳み込みニューラルネットワーク編</a></p>
 </div>
 
-<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-<p><ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1838422896597988" data-ad-slot="7676908062"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script></p>
-
 <h2 id="1-プロジェクトの作成">1. プロジェクトの作成</h2>
 
 <p>はじめに、２層ニューラルネットワーク用のプロジェクトを作成してください。</p>
@@ -201,21 +206,21 @@
   </li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">from</span> <span class="n">keras</span> <span class="n">import</span> <span class="k">Model</span>
-<span class="k">from</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span> <span class="n">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Dense</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">keras</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Dense</span>
 
-<span class="p">#</span> <span class="err">パラメータ</span>
-<span class="n">img_shape</span> <span class="p">=</span> <span class="p">(</span><span class="m">28</span> <span class="p">*</span> <span class="m">28</span><span class="p">,</span> <span class="p">)</span>
-<span class="n">hidden_dim</span> <span class="p">=</span> <span class="m">100</span>
-<span class="n">output_dim</span> <span class="p">=</span> <span class="m">10</span>
+<span class="c1"># パラメータ
+</span><span class="n">img_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">28</span> <span class="o">*</span> <span class="mi">28</span><span class="p">,</span> <span class="p">)</span>
+<span class="n">hidden_dim</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">output_dim</span> <span class="o">=</span> <span class="mi">10</span>
 
-<span class="p">#</span> <span class="err">モデルを定義する</span>
-<span class="n">_input</span> <span class="p">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="p">=</span><span class="n">img_shape</span><span class="p">)</span>
-<span class="n">_hidden</span> <span class="p">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">activation</span><span class="p">=</span><span class="s1">'sigmoid'</span><span class="p">)(</span><span class="n">_input</span><span class="p">)</span>
-<span class="n">_output</span> <span class="p">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">output_dim</span><span class="p">,</span> <span class="n">activation</span><span class="p">=</span><span class="s1">'softmax'</span><span class="p">)(</span><span class="n">_hidden</span><span class="p">)</span>
+<span class="c1"># モデルを定義する
+</span><span class="n">_input</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">img_shape</span><span class="p">)</span>
+<span class="n">_hidden</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'sigmoid'</span><span class="p">)(</span><span class="n">_input</span><span class="p">)</span>
+<span class="n">_output</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">output_dim</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'softmax'</span><span class="p">)(</span><span class="n">_hidden</span><span class="p">)</span>
 
-<span class="k">model</span> <span class="p">=</span> <span class="k">Model</span><span class="p">(</span><span class="n">inputs</span><span class="p">=</span><span class="n">_input</span><span class="p">,</span> <span class="n">outputs</span><span class="p">=</span><span class="n">_output</span><span class="p">)</span>
-<span class="k">model</span><span class="p">.</span><span class="n">summary</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">_input</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">_output</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>Output:</p>
@@ -248,22 +253,22 @@ _________________________________________________________________
   </li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># データを読み込む
-from keras.datasets import mnist
-from keras.utils import to_categorical
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># データを読み込む
+</span><span class="kn">from</span> <span class="nn">keras.datasets</span> <span class="kn">import</span> <span class="n">mnist</span>
+<span class="kn">from</span> <span class="nn">keras.utils</span> <span class="kn">import</span> <span class="n">to_categorical</span>
 
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
+<span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
 
-x_train = x_train.reshape(60000, 784)
-x_test = x_test.reshape(10000, 784)
-x_train = x_train.astype('float') / 255.
-x_test = x_test.astype('float') / 255.
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">60000</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">'float'</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">'float'</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.</span>
 
-print(f'Before: {y_train.shape}')
-y_train = to_categorical(y_train, num_classes=output_dim)
-print(f'After: {y_train.shape}')
-print(f'y_train[0]: {y_train[0]}')
-y_test = to_categorical(y_test, num_classes=output_dim)
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Before: {y_train.shape}'</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">to_categorical</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="n">output_dim</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'After: {y_train.shape}'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'y_train[0]: {y_train[0]}'</span><span class="p">)</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">to_categorical</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="n">output_dim</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Output:</p>
@@ -296,8 +301,8 @@ y_train[0]: [0. 0. 0. 0. 0. 1. 0. 0. 0. 0.]
 ゼロから〜のP121では、認識精度を評価関数としているので、<code class="highlighter-rouge">compile</code>メソッドの引数: <code class="highlighter-rouge">metrics</code>に<code class="highlighter-rouge">['accuracy']</code>を指定します。</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from keras.optimizers import SGD
-model.compile(optimizer=SGD(lr=0.1), loss='categorical_crossentropy', metrics=['accuracy'])
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">keras.optimizers</span> <span class="kn">import</span> <span class="n">SGD</span>
+<span class="n">model</span><span class="o">.</span><span class="nb">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">SGD</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span> <span class="n">loss</span><span class="o">=</span><span class="s">'categorical_crossentropy'</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s">'accuracy'</span><span class="p">])</span>
 </code></pre></div></div>
 <blockquote>
   <p><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://keras.io/ja/losses/">（Kerasで利用可能な損失関数について）</a><br />
@@ -307,6 +312,15 @@ model.compile(optimizer=SGD(lr=0.1), loss='categorical_crossentropy', metrics=['
 
 <p>(<strong>注意</strong>) Kerasをはじめとする深層学習フレームワークでは、ユーザが順伝播の計算グラフを構築すると、フレームワークが自動的に逆伝播用の処理をブラックボックス的に行ってくれます。
 したがって、ゼロから〜の5章の部分は、フレームワーク使用時には実装する必要がありません。（自分でレイヤーを設計することがない限り。）</p>
+
+<div class="inner_ads">
+    <div class="left_ad_in">
+        <a href="//af.moshimo.com/af/c/click?a_id=1502939&amp;p_id=1555&amp;pc_id=2816&amp;pl_id=22749&amp;guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0866/000000022749.jpg" width="300" height="250" style="border:none;" /></a><img src="//i.moshimo.com/af/i/impression?a_id=1502939&amp;p_id=1555&amp;pc_id=2816&amp;pl_id=22749" width="1" height="1" style="border:none;" />
+    </div> 
+    <div class="right_ad_in">
+        <a href="//af.moshimo.com/af/c/click?a_id=1502939&amp;p_id=1555&amp;pc_id=2816&amp;pl_id=22750&amp;guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0866/000000022750.jpg" width="300" height="250" style="border:none;" /></a><img src="//i.moshimo.com/af/i/impression?a_id=1502939&amp;p_id=1555&amp;pc_id=2816&amp;pl_id=22750" width="1" height="1" style="border:none;" />
+    </div>
+</div>
 
 <h2 id="3-モデルの学習">3. モデルの学習</h2>
 
@@ -365,8 +379,8 @@ model.compile(optimizer=SGD(lr=0.1), loss='categorical_crossentropy', metrics=['
   <p><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://keras.io/ja/models/model/#fit">（Kerasのfitメソッドにおける引数と戻り値の説明）</a></p>
 </blockquote>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>epochs = 17
-_results = model.fit(x=x_train, y=y_train, batch_size=100, epochs=epochs, verbose=1, validation_data=(x_test, y_test))
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">epochs</span> <span class="o">=</span> <span class="mi">17</span>
+<span class="n">_results</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>Output:</p>
@@ -379,14 +393,6 @@ Epoch 2/17
 Epoch 17/17
 60000/60000 [==============================] - 2s 27us/step - loss: 0.1771 - acc: 0.9497
 </code></pre></div></div>
-
-<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-<!-- 記事内広告2 -->
-<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1838422896597988" data-ad-slot="1400355899" data-ad-format="auto" data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script></p>
 
 <h2 id="4-学習結果の表示">4. 学習結果の表示</h2>
 
@@ -413,7 +419,7 @@ Epoch 17/17
 <p><code class="highlighter-rouge">fit</code>メソッドの戻り値は、<code class="highlighter-rouge">History</code>オブジェクトであると前章で紹介しました。<br />
 実験結果を可視化するためにも、<code class="highlighter-rouge">History</code>オブジェクトの中身を確認しておきましょう。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print(f'Keys: {_results.history.keys()}')
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Keys: {_results.history.keys()}'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Output:</p>
@@ -429,19 +435,19 @@ Epoch 17/17
 <p>一連のソースコードを下記に示します。<br />
 なお、Matplotlibの詳しい使い方については、<a href="https://matplotlib.org/tutorials/index.html">公式チュートリアル</a>をご覧ください。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import matplotlib.pyplot as plt
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 
-loss = _results.history['loss']
-val_loss = _results.history['val_loss']
+<span class="n">loss</span> <span class="o">=</span> <span class="n">_results</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s">'loss'</span><span class="p">]</span>
+<span class="n">val_loss</span> <span class="o">=</span> <span class="n">_results</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s">'val_loss'</span><span class="p">]</span>
 
-plt.figure()
-plt.plot(range(1, epochs+1), loss, marker='.', label='train')
-plt.plot(range(1, epochs+1), val_loss, marker='.', label='test')
-plt.legend(loc='best', fontsize=10)
-plt.grid()
-plt.xlabel('Epochs')
-plt.ylabel('Loss')
-plt.savefig('loss.png')
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">epochs</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">loss</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s">'.'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'train'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">epochs</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">val_loss</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s">'.'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'test'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">'best'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'Epochs'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Loss'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">'loss.png'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Output:</p>
@@ -458,18 +464,18 @@ plt.savefig('loss.png')
 <p>プロットの流れは、損失関数の時とほとんど同一のため、説明は割愛します。<br />
 以下にソースコードを貼るので、各自試してみてください。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plt.clf()
-acc = _results.history['acc']
-val_acc = _results.history['val_acc']
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">_results</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s">'acc'</span><span class="p">]</span>
+<span class="n">val_acc</span> <span class="o">=</span> <span class="n">_results</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s">'val_acc'</span><span class="p">]</span>
 
-plt.plot(range(1, epochs+1), acc, marker='.', label='train')
-plt.plot(range(1, epochs+1), val_acc, marker='.', label='test')
-plt.legend(loc='best', fontsize=10)
-plt.grid()
-plt.xlabel('Epochs')
-plt.ylabel('Accuracy')
-plt.savefig('acc.png')
-plt.close()
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">epochs</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">acc</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s">'.'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'train'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">epochs</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">val_acc</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s">'.'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'test'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">'best'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'Epochs'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Accuracy'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">'acc.png'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>Output:</p>
@@ -497,9 +503,11 @@ plt.close()
 
   </div>
 
+  <!--
   <div class="date">
     Written on April 26, 2019
   </div>
+  -->
 
   <style type="text/css">
     @font-face {
@@ -534,6 +542,8 @@ plt.close()
     .icon-facebook:before    {content: "\ea90";}
     .icon-hatebu:before      {content: "\e903";}
 
+    .amazon-icon::before     {content: "Amazon.co.jpで買って応援！";}
+
     /*ソーシャルリストデザイン2*/
     .shareList2 {
         list-style:none;
@@ -547,6 +557,13 @@ plt.close()
         height:30px;
         line-height:30px;
         width:30px;
+        margin:5px 0 0 5px;
+        text-align:center;
+    }
+    .shareList2__item__amazon {
+        height:30px;
+        line-height:30px;
+        width: 240px;
         margin:5px 0 0 5px;
         text-align:center;
     }
@@ -568,6 +585,23 @@ plt.close()
         box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
     }
 
+    .shareList2__link__amazon {
+        display:block;
+        color:#ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .shareList2__link__amazon::before{
+        font-size:16px;
+        display:block;
+        transition: ease-in-out .2s;
+        border-radius: 5px;
+    }
+    .shareList2__link__amazon:hover::before{
+        background:#ffffff;
+        box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
+    }
+
     .shareList2__link.icon-twitter{background:#55acee;}
     .shareList2__link.icon-twitter:hover::before{color:#55acee;}
 
@@ -582,38 +616,250 @@ plt.close()
 
     .shareList2__link.icon-line{background:#1dcd00;}
     .shareList2__link.icon-line:hover::before{color:#1dcd00;}
+
+    .shareList2__link__amazon.amazon-icon{background:#ff9900;}
+    .shareList2__link__amazon.amazon-icon:hover::before{color:#ff9900;}
 </style>
 
 <ul class="shareList2" style="margin-top: 5px;">
     <li class="shareList2__item"><a class="shareList2__link icon-twitter" href="https://twitter.com/intent/tweet?text=%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep%20Learning%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E5%AD%A6%E3%81%B6%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF(%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%A9%E3%83%AB%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%AE%E5%AD%A6%E7%BF%92%E7%B7%A8)+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP&amp;url=http%3A%2F%2Flocalhost%3A4000%2FDL-Intro-3%2F" target="_blank" title="Twitter"></a></li>
     <li class="shareList2__item"><a class="shareList2__link icon-facebook" href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FDL-Intro-3%2F" target="_blank" title="Facebook"></a></li>
     <li class="shareList2__item"><a class="shareList2__link icon-hatebu" href="https://b.hatena.ne.jp/add?mode=confirm&amp;url=http%3A%2F%2Flocalhost%3A4000%2FDL-Intro-3%2F" target="_blank" title="はてなブックマーク"></a></li>
-    <li class="shareList2__item"><a class="shareList2__link icon-pocket" href="//getpocket.com/edit?url=http%3A%2F%2Flocalhost%3A4000&title=%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep%20Learning%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E5%AD%A6%E3%81%B6%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF(%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%A9%E3%83%AB%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%AE%E5%AD%A6%E7%BF%92%E7%B7%A8)+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP" target="_blank" title="Pocket"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-pocket" href="//getpocket.com/edit?url=http%3A%2F%2Flocalhost%3A4000%2FDL-Intro-3%2F&title=%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep%20Learning%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E5%AD%A6%E3%81%B6%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF(%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%A9%E3%83%AB%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%AE%E5%AD%A6%E7%BF%92%E7%B7%A8)+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP" target="_blank" title="Pocket"></a></li>
     <li class="shareList2__item"><a class="shareList2__link icon-line" href="http://line.me/R/msg/text/?%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep%20Learning%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E5%AD%A6%E3%81%B6%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF(%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%A9%E3%83%AB%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E3%81%AE%E5%AD%A6%E7%BF%92%E7%B7%A8)+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP%0Ahttp%3A%2F%2Flocalhost%3A4000%2FDL-Intro-3%2F" target="_blank" title="LINE"></a></li>
+    <li class="shareList2__item__amazon"><a class="shareList2__link__amazon amazon-icon" href="//af.moshimo.com/af/c/click?a_id=1430714&p_id=170&pc_id=185&pl_id=4062&url=https%3A%2F%2Fwww.amazon.co.jp%2F" target="_blank" rel="nofollow"></a>
+        <img src="//i.moshimo.com/af/i/impression?a_id=1430714&p_id=170&pc_id=185&pl_id=4062" width="1" height="1" style="border:none;"></li>
 </ul>
 
   <br />
 
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <!-- フッター1 -->
-  <ins class="adsbygoogle"
-      style="display:block"
-      data-ad-client="ca-pub-1838422896597988"
-      data-ad-slot="4583840862"
-      data-ad-format="auto"
-      data-full-width-responsive="true"></ins>
-  <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+  <div class="footer_ads">
+    <div class="left_ad">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- フッター1 -->
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-1838422896597988"
+            data-ad-slot="4583840862"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <div class="right_ad">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- フッター2 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1838422896597988"
+             data-ad-slot="3446169345"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+  </div>
+  <br />
+
+  <!-- 前後のページへのリンク-->
+  <div class="pager">
+    
+      <div class="next">
+        <p><i class="fas fa-arrow-circle-left" style="margin: 0 0.5em 0 0;"></i>次の記事</p>
+        <p>
+          <a href="/DL-Intro-4/">ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編）</a>
+        </p>
+      </div>
+    
+
+    
+      <div class="prev">
+        <p>前の記事<i class="fas fa-arrow-circle-right" style="margin: 0 0 0 0.5em;"></i></p>
+        <p>
+            <a href="/DL-Intro-2/">ゼロから作るDeep Learningとともに学ぶフレームワーク（3層ニューラルネットワーク ＆ 手書き数字認識編）</a>
+        </p>
+      </div>
+    
+  </div>
 
   
   
 </article>
 
+      </main>
+
+      <aside class="sidebar" role="complementary">
+        <div class="side-ad">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- サイドバー -->
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-1838422896597988"
+      data-ad-slot="3641305571"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+
+<div class="profile">
+  <div style="text-align: center;">
+    <a href="/about/">
+      <img style="width: 100px; border-radius: 50px;" src="/resources/logo/profile.jpg" />
+    </a>
+    <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1;"><strong>Gucci</strong></p>
+  </div>
+  <p style="margin-top: 0.5em; margin-bottom: 0; font-size: 0.8em; text-align: center;">
+    自然言語処理や機械学習に関連する情報を発信しています。
+    留学系の話題も<a href="https://note.mu/_gucciiiii">note</a>に書いています。
+  </p>
+  <hr />
+  <div class="profile_icon">
+    
+<a href="/contact/"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/gucci-j"><i class="svg-icon github"></i></a>
+
+
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/_gucciiiii"><i class="svg-icon twitter"></i></a>
+
+
+
+  </div>
+</div>
+
+<div class="amazon-button">
+  <p style="margin-top: 0; margin-bottom: 0.5em; font-size: 0.8em; text-align: center;">
+    <strong>Amazon.co.jpで買って応援！</strong>
+  </p>
+  <div style="text-align: center;">
+    <a href="//af.moshimo.com/af/c/click?a_id=1430714&p_id=170&pc_id=185&pl_id=10340&guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0068/000000010340.gif" width="300" height="50" style="border:none; padding-bottom: 0;"></a>
+    <img src="//i.moshimo.com/af/i/impression?a_id=1430714&p_id=170&pc_id=185&pl_id=10340" width="0" height="0" style="display: none; border:none;">
+  </div>
+</div>
+
+<div class="search">
+  <script>
+    (function() {
+      var cx = 'partner-pub-1838422896597988:8655986192';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+    })();
+  </script>
+  <gcse:searchbox-only></gcse:searchbox-only>
+</div>
+
+
+<div class="recent-posts">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>最近の記事</strong>
+  </p>
+  <hr />
+  <ul style="padding-right: 5px; padding-left: 1.5em;">
+    
+      <li>
+        <a href="/Note-Decoupling/">
+          論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues
+        </a>
+      </li>
+    
+      <li>
+        <a href="/memo-svm/">
+          サポートベクターマシンのお話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/cv-with-torchtext/">
+          torchtextでk-分割交差検証をする話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/Note-Transformer/">
+          論文メモ：Attention Is All You Need
+        </a>
+      </li>
+    
+      <li>
+        <a href="/DL-Intro-5/">
+          ゼロから作るDeep Learningとともに学ぶフレームワーク（畳み込みニューラルネットワーク編）
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="side-category">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>タグ一覧</strong>
+  </p>
+  <hr />
+  <ul style="padding: 0 10px 0 10px;">
+    
+      <li>
+        <a href="/sitemap#PyTorch">
+          PyTorch
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#Tips">
+          Tips
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#「ゼロからKeras」シリーズ">
+          「ゼロからKeras」シリーズ
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#ブログ全般">
+          ブログ全般
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#機械学習全般">
+          機械学習全般
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#論文メモ">
+          論文メモ
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+      </aside>
     </div>
 
     <div class="wrapper-footer">
-      <div class="container">
+      <div class="footer_container">
         <footer class="footer">
           
 <a href="/contact/"><i class="svg-icon email"></i></a>
@@ -628,10 +874,11 @@ plt.close()
 
 
 <br />
-          <a href="/">Home</a> 
-          | <a href="/sitemap">Sitemap</a> 
-          | <a href="/privacy">Privacy Policy</a><br />
-          <div style="font-size: 8pt">© 2019 Atsuki Yamaguchi.</div>
+          <a href="/">Home</a>
+          | <a href="/Introduction/">About This Blog</a>  
+          | <a href="/sitemap/">Sitemap</a> 
+          | <a href="/privacy/">Privacy</a><br />
+          <div style="font-size: 8pt;">© 2019 Atsuki Yamaguchi.</div>
         </footer>
       </div>
     </div>

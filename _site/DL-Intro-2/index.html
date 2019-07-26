@@ -28,13 +28,18 @@
     <![endif]-->
 
     <link rel="stylesheet" type="text/css" href="/style.css" />
+    
+      
+        <link rel="stylesheet" type="text/css" href="/css/post.css">
+      
+    
     <link rel="alternate" type="application/rss+xml" title="きままにNLP - A Technical Blog about NLP and ML" href="/feed.xml" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     
     <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
 
     <!-- Favicon head tag -->
-    <link rel="icon" href="/resources/logo/logo.jpg" type="image/x-icon">
+    <link rel="icon" href="/resources/logo/kimamani_simple.png" type="image/x-icon">
 
     <!-- Begin Jekyll SEO tag v2.6.0 -->
 <title>ゼロから作るDeep Learningとともに学ぶフレームワーク（3層ニューラルネットワーク ＆ 手書き数字認識編） | きままにNLP</title>
@@ -52,7 +57,7 @@
 <meta property="twitter:title" content="ゼロから作るDeep Learningとともに学ぶフレームワーク（3層ニューラルネットワーク ＆ 手書き数字認識編）" />
 <meta name="twitter:site" content="@_gucciiiii" />
 <script type="application/ld+json">
-{"description":"「ゼロから作るDeep Learning」とともに深層学習フレームワークを学ぶプロジェクト第二弾として、Kerasで3層ニューラルネットワークの実装と手書き数字認識に取り組みます。","@type":"BlogPosting","url":"http://localhost:4000/DL-Intro-2/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/logo.jpg"}},"headline":"ゼロから作るDeep Learningとともに学ぶフレームワーク（3層ニューラルネットワーク ＆ 手書き数字認識編）","dateModified":"2019-04-19T00:00:00+09:00","datePublished":"2019-04-19T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/DL-Intro-2/"},"@context":"https://schema.org"}</script>
+{"description":"「ゼロから作るDeep Learning」とともに深層学習フレームワークを学ぶプロジェクト第二弾として、Kerasで3層ニューラルネットワークの実装と手書き数字認識に取り組みます。","@type":"BlogPosting","url":"http://localhost:4000/DL-Intro-2/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/kimamani.png"}},"headline":"ゼロから作るDeep Learningとともに学ぶフレームワーク（3層ニューラルネットワーク ＆ 手書き数字認識編）","dateModified":"2019-04-19T00:00:00+09:00","datePublished":"2019-04-19T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/DL-Intro-2/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <!-- Google Adsense-->
@@ -71,11 +76,10 @@
     <div class="wrapper-masthead">
       <div class="head_container">
         <header class="masthead clearfix">
-          <a href="/" class="site-avatar"><img src="/resources/logo/logo.jpg" /></a>
+          <a href="/" class="site-avatar"><img src="/resources/logo/kimamani.png" /></a>
 
           <div class="site-info">
-            <h1 class="site-name"><a href="/">きままにNLP</a></h1>
-            <p class="site-description">A Technical Blog about NLP and ML</p>
+            <h1 class="site-name"><a href="/"><img src="/resources/logo/kimamani_moji.png" /></a></h1>
           </div>
 
           <nav>
@@ -86,8 +90,16 @@
       </div>
     </div>
 
-    <div id="main" role="main" class="container">
-      <article class="post">
+    <div class="container">
+      <main class="main_contents" role="main">
+        <article class="post">
+  <div class="date_front">
+    <i class="far fa-calendar-alt" style="padding: 0 2px 0 0;"></i>
+    2019-04-19
+
+    
+
+  </div>
   <h1>ゼロから作るDeep Learningとともに学ぶフレームワーク（3層ニューラルネットワーク ＆ 手書き数字認識編）</h1>
 
   <div class="post-tag">
@@ -164,13 +176,6 @@
     <p>第五弾：<i class="fas fa-link" style="padding: 0 2px 0 0;"></i><a href="https://gucci-j.github.io/DL-Intro-5/">畳み込みニューラルネットワーク編</a></p>
 </div>
 
-<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-<p><ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1838422896597988" data-ad-slot="7676908062"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script></p>
-
 <h2 id="1-3層ニューラルネットワークの実装">1. 3層ニューラルネットワークの実装</h2>
 
 <h3 id="11-プロジェクトの作成">1.1 プロジェクトの作成</h3>
@@ -197,10 +202,10 @@ Sequentialモデルによる実装は行いませんので、あらかじめご�
 
 <p>まず、前回と同じように、実装に必要なレイヤーとNumPyを読み込みます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from keras import Model
-from keras.layers import Input, Dense
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">keras</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Dense</span>
 
-import numpy as np
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 </code></pre></div></div>
 
 <h4 id="122-各種レイヤーを定義する">1.2.2 各種レイヤーを定義する</h4>
@@ -222,21 +227,21 @@ import numpy as np
 
 <div style="text-align: center">＜活性化関数を入れ子式に定義する例＞</div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_input = Input(shape=(2, ))
-_layer1 = Dense(units=3, activation='sigmoid')(_input)
-_layer2 = Dense(units=2, activation='sigmoid')(_layer1)
-_output = Dense(units=2)(_layer2)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_input</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">))</span>
+<span class="n">_layer1</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'sigmoid'</span><span class="p">)(</span><span class="n">_input</span><span class="p">)</span>
+<span class="n">_layer2</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'sigmoid'</span><span class="p">)(</span><span class="n">_layer1</span><span class="p">)</span>
+<span class="n">_output</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">2</span><span class="p">)(</span><span class="n">_layer2</span><span class="p">)</span>
 </code></pre></div></div>
 
 <div style="text-align: center">＜活性化関数をインスタンスとして定義する例＞</div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from keras.layers import Activation
-_input = Input(shape=(2, ))
-_layer1 = Dense(units=3)(_input)
-_activ1 = Activation('sigmoid')(_layer1)
-_layer2 = Dense(units=2)(_activ1)
-_activ2 = Activation('sigmoid')(_layer2)
-_output = Dense(units=2)(_activ2)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Activation</span>
+<span class="n">_input</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">))</span>
+<span class="n">_layer1</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">3</span><span class="p">)(</span><span class="n">_input</span><span class="p">)</span>
+<span class="n">_activ1</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s">'sigmoid'</span><span class="p">)(</span><span class="n">_layer1</span><span class="p">)</span>
+<span class="n">_layer2</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">2</span><span class="p">)(</span><span class="n">_activ1</span><span class="p">)</span>
+<span class="n">_activ2</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s">'sigmoid'</span><span class="p">)(</span><span class="n">_layer2</span><span class="p">)</span>
+<span class="n">_output</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">2</span><span class="p">)(</span><span class="n">_activ2</span><span class="p">)</span>
 </code></pre></div></div>
 <blockquote>
   <p><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考: <a href="https://keras.io/ja/activations/">https://keras.io/ja/activations/</a></p>
@@ -253,9 +258,9 @@ _output = Dense(units=2)(_activ2)
   </li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">model</span> <span class="p">=</span> <span class="k">Model</span><span class="p">(</span><span class="n">inputs</span><span class="p">=</span><span class="n">_input</span><span class="p">,</span> <span class="n">outputs</span><span class="p">=</span><span class="n">_output</span><span class="p">)</span>
-<span class="k">model</span><span class="p">.</span><span class="n">summary</span><span class="p">()</span> <span class="p">#</span> <span class="err">モデルの状態をみる</span>
-</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">_input</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">_output</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span> <span class="c1"># モデルの状態をみる
+</span></code></pre></div></div>
 
 <p>Output:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_________________________________________________________________
@@ -291,16 +296,16 @@ _________________________________________________________________
   </li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>w1 = np.array([[0.1, 0.3, 0.5], [0.2, 0.4, 0.6]])
-b1 = np.array([0.1, 0.2, 0.3])
-w2 = np.array([[0.1, 0.4], [0.2, 0.5], [0.3, 0.6]])
-b2 = np.array([0.1, 0.2])
-w3 = np.array([[0.1, 0.3], [0.2, 0.4]])
-b3 = np.array([0.1, 0.2])
-weight_array = [w1, b1, w2, b2, w3, b3]
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">w1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">]])</span>
+<span class="n">b1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">])</span>
+<span class="n">w2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">]])</span>
+<span class="n">b2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
+<span class="n">w3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">]])</span>
+<span class="n">b3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
+<span class="n">weight_array</span> <span class="o">=</span> <span class="p">[</span><span class="n">w1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">b2</span><span class="p">,</span> <span class="n">w3</span><span class="p">,</span> <span class="n">b3</span><span class="p">]</span>
 
-model.set_weights(weight_array)
-print(model.get_weights())
+<span class="n">model</span><span class="o">.</span><span class="n">set_weights</span><span class="p">(</span><span class="n">weight_array</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">get_weights</span><span class="p">())</span>
 </code></pre></div></div>
 <blockquote>
   <p><i class="fas fa-book-open" style="padding: 0 2px 0 0;"></i>参照: ゼロから〜 P65</p>
@@ -320,10 +325,10 @@ print(model.get_weights())
 作成したモデルのテストには、前回と同様に、<code class="highlighter-rouge">model.predict()</code>を使用します。</p>
 
 <p>テストデータは、ゼロから〜 P65に示されているものと同一のものを使用します。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>X = np.array([[1.0, 0.5]])
-Y = model.predict(X)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]])</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 
-print(Y)
+<span class="k">print</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Output:</p>
@@ -332,13 +337,14 @@ print(Y)
 
 <p>見事、ゼロから〜 P65に示されている出力値と同一の値を得ることができました！</p>
 
-<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-<!-- 記事内広告2 -->
-<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1838422896597988" data-ad-slot="1400355899" data-ad-format="auto" data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script></p>
+<div class="inner_ads">
+    <div class="left_ad_in">
+        <a href="//af.moshimo.com/af/c/click?a_id=1502939&amp;p_id=1555&amp;pc_id=2816&amp;pl_id=22749&amp;guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0866/000000022749.jpg" width="300" height="250" style="border:none;" /></a><img src="//i.moshimo.com/af/i/impression?a_id=1502939&amp;p_id=1555&amp;pc_id=2816&amp;pl_id=22749" width="1" height="1" style="border:none;" />
+    </div> 
+    <div class="right_ad_in">
+        <a href="//af.moshimo.com/af/c/click?a_id=1502939&amp;p_id=1555&amp;pc_id=2816&amp;pl_id=22750&amp;guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0866/000000022750.jpg" width="300" height="250" style="border:none;" /></a><img src="//i.moshimo.com/af/i/impression?a_id=1502939&amp;p_id=1555&amp;pc_id=2816&amp;pl_id=22750" width="1" height="1" style="border:none;" />
+    </div>
+</div>
 
 <h2 id="2-手書き数字認識mnist">2. 手書き数字認識（MNIST）</h2>
 
@@ -353,11 +359,11 @@ print(Y)
 
 <p><code class="highlighter-rouge">mnist_nn.py</code>を作成して、以下を入力し動作させてみてください。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from keras.datasets import mnist
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">keras.datasets</span> <span class="kn">import</span> <span class="n">mnist</span>
+<span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
 
-print(x_train.shape)
-print(y_train.shape)
+<span class="k">print</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </code></pre></div></div>
 <blockquote>
   <p><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://keras.io/ja/datasets/#mnist">https://keras.io/ja/datasets/#mnist</a></p>
@@ -386,17 +392,17 @@ print(y_train.shape)
   </li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 一次元配列にする
-x_train = x_train.reshape(60000, 784)
-x_test = x_test.reshape(10000, 784)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 一次元配列にする
+</span><span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">60000</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
 
-# 正規化処理
-x_train = x_train.astype('float')
-x_test = x_test.astype('float')
-x_train /= 255.
-x_test /= 255.
+<span class="c1"># 正規化処理
+</span><span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">'float'</span><span class="p">)</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">'float'</span><span class="p">)</span>
+<span class="n">x_train</span> <span class="o">/=</span> <span class="mf">255.</span>
+<span class="n">x_test</span> <span class="o">/=</span> <span class="mf">255.</span>
 
-print(x_train.shape)
+<span class="k">print</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Output:</p>
@@ -418,19 +424,19 @@ print(x_train.shape)
   </li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">from</span> <span class="n">keras</span> <span class="n">import</span> <span class="k">Model</span>
-<span class="k">from</span> <span class="n">keras</span><span class="p">.</span><span class="n">layers</span> <span class="n">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Activation</span>
-<span class="n">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">keras</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Activation</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 
-<span class="n">_input</span> <span class="p">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="p">=(</span><span class="m">784</span><span class="p">,</span> <span class="p">))</span>
-<span class="n">_hidden</span> <span class="p">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="p">=</span><span class="m">50</span><span class="p">,</span> <span class="n">activation</span><span class="p">=</span><span class="s1">'sigmoid'</span><span class="p">)(</span><span class="n">_input</span><span class="p">)</span>
-<span class="n">_hidden</span> <span class="p">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="p">=</span><span class="m">100</span><span class="p">,</span> <span class="n">activation</span><span class="p">=</span><span class="s1">'sigmoid'</span><span class="p">)(</span><span class="n">_hidden</span><span class="p">)</span>
-<span class="n">_hidden</span> <span class="p">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="p">=</span><span class="m">10</span><span class="p">)(</span><span class="n">_hidden</span><span class="p">)</span>
-<span class="n">_output</span> <span class="p">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s1">'softmax'</span><span class="p">)(</span><span class="n">_hidden</span><span class="p">)</span>
+<span class="n">_input</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">784</span><span class="p">,</span> <span class="p">))</span>
+<span class="n">_hidden</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'sigmoid'</span><span class="p">)(</span><span class="n">_input</span><span class="p">)</span>
+<span class="n">_hidden</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'sigmoid'</span><span class="p">)(</span><span class="n">_hidden</span><span class="p">)</span>
+<span class="n">_hidden</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">10</span><span class="p">)(</span><span class="n">_hidden</span><span class="p">)</span>
+<span class="n">_output</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s">'softmax'</span><span class="p">)(</span><span class="n">_hidden</span><span class="p">)</span>
 
-<span class="k">model</span> <span class="p">=</span> <span class="k">Model</span><span class="p">(</span><span class="n">inputs</span><span class="p">=</span><span class="n">_input</span><span class="p">,</span> <span class="n">outputs</span><span class="p">=</span><span class="n">_output</span><span class="p">)</span>
-<span class="k">model</span><span class="p">.</span><span class="n">summary</span><span class="p">()</span> <span class="p">#</span> <span class="err">モデルの状態をみる</span>
-</code></pre></div></div>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">_input</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">_output</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span> <span class="c1"># モデルの状態をみる
+</span></code></pre></div></div>
 
 <p>Output:</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_________________________________________________________________
@@ -474,17 +480,17 @@ Non-trainable params: 0
   </li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import pickle
-def load_weight():
-    with open('sample_weight.pkl', 'rb') as f:
-        weights = pickle.load(f)
-        weight_array = [weights['W1'], weights['b1'], 
-                        weights['W2'], weights['b2'],
-                        weights['W3'], weights['b3']]
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="k">def</span> <span class="nf">load_weight</span><span class="p">():</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'sample_weight.pkl'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">weight_array</span> <span class="o">=</span> <span class="p">[</span><span class="n">weights</span><span class="p">[</span><span class="s">'W1'</span><span class="p">],</span> <span class="n">weights</span><span class="p">[</span><span class="s">'b1'</span><span class="p">],</span> 
+                        <span class="n">weights</span><span class="p">[</span><span class="s">'W2'</span><span class="p">],</span> <span class="n">weights</span><span class="p">[</span><span class="s">'b2'</span><span class="p">],</span>
+                        <span class="n">weights</span><span class="p">[</span><span class="s">'W3'</span><span class="p">],</span> <span class="n">weights</span><span class="p">[</span><span class="s">'b3'</span><span class="p">]]</span>
         
-        return weight_array
+        <span class="k">return</span> <span class="n">weight_array</span>
 
-model.set_weights(load_weight())
+<span class="n">model</span><span class="o">.</span><span class="n">set_weights</span><span class="p">(</span><span class="n">load_weight</span><span class="p">())</span>
 </code></pre></div></div>
 
 <blockquote>
@@ -499,10 +505,10 @@ model.set_weights(load_weight())
 軸指定の詳細については、<a href="https://deepage.net/features/numpy-axis.html">このページ</a>を参照するとわかりやすいです。</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_y_test = model.predict(x_test)
-_y_test = np.argmax(_y_test, axis=1)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_y_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+<span class="n">_y_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">_y_test</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-print(f'Accuracy: {np.sum(y_test == _y_test) / len(y_test)}')
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Accuracy: {np.sum(y_test == _y_test) / len(y_test)}'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Output:</p>
@@ -524,9 +530,11 @@ print(f'Accuracy: {np.sum(y_test == _y_test) / len(y_test)}')
 
   </div>
 
+  <!--
   <div class="date">
     Written on April 19, 2019
   </div>
+  -->
 
   <style type="text/css">
     @font-face {
@@ -561,6 +569,8 @@ print(f'Accuracy: {np.sum(y_test == _y_test) / len(y_test)}')
     .icon-facebook:before    {content: "\ea90";}
     .icon-hatebu:before      {content: "\e903";}
 
+    .amazon-icon::before     {content: "Amazon.co.jpで買って応援！";}
+
     /*ソーシャルリストデザイン2*/
     .shareList2 {
         list-style:none;
@@ -574,6 +584,13 @@ print(f'Accuracy: {np.sum(y_test == _y_test) / len(y_test)}')
         height:30px;
         line-height:30px;
         width:30px;
+        margin:5px 0 0 5px;
+        text-align:center;
+    }
+    .shareList2__item__amazon {
+        height:30px;
+        line-height:30px;
+        width: 240px;
         margin:5px 0 0 5px;
         text-align:center;
     }
@@ -595,6 +612,23 @@ print(f'Accuracy: {np.sum(y_test == _y_test) / len(y_test)}')
         box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
     }
 
+    .shareList2__link__amazon {
+        display:block;
+        color:#ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .shareList2__link__amazon::before{
+        font-size:16px;
+        display:block;
+        transition: ease-in-out .2s;
+        border-radius: 5px;
+    }
+    .shareList2__link__amazon:hover::before{
+        background:#ffffff;
+        box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
+    }
+
     .shareList2__link.icon-twitter{background:#55acee;}
     .shareList2__link.icon-twitter:hover::before{color:#55acee;}
 
@@ -609,38 +643,250 @@ print(f'Accuracy: {np.sum(y_test == _y_test) / len(y_test)}')
 
     .shareList2__link.icon-line{background:#1dcd00;}
     .shareList2__link.icon-line:hover::before{color:#1dcd00;}
+
+    .shareList2__link__amazon.amazon-icon{background:#ff9900;}
+    .shareList2__link__amazon.amazon-icon:hover::before{color:#ff9900;}
 </style>
 
 <ul class="shareList2" style="margin-top: 5px;">
     <li class="shareList2__item"><a class="shareList2__link icon-twitter" href="https://twitter.com/intent/tweet?text=%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep%20Learning%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E5%AD%A6%E3%81%B6%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF(3%E5%B1%A4%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%A9%E3%83%AB%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%20&%20%E6%89%8B%E6%9B%B8%E3%81%8D%E6%95%B0%E5%AD%97%E8%AA%8D%E8%AD%98%E7%B7%A8)+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP&amp;url=http%3A%2F%2Flocalhost%3A4000%2FDL-Intro-2%2F" target="_blank" title="Twitter"></a></li>
     <li class="shareList2__item"><a class="shareList2__link icon-facebook" href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FDL-Intro-2%2F" target="_blank" title="Facebook"></a></li>
     <li class="shareList2__item"><a class="shareList2__link icon-hatebu" href="https://b.hatena.ne.jp/add?mode=confirm&amp;url=http%3A%2F%2Flocalhost%3A4000%2FDL-Intro-2%2F" target="_blank" title="はてなブックマーク"></a></li>
-    <li class="shareList2__item"><a class="shareList2__link icon-pocket" href="//getpocket.com/edit?url=http%3A%2F%2Flocalhost%3A4000&title=%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep%20Learning%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E5%AD%A6%E3%81%B6%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF(3%E5%B1%A4%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%A9%E3%83%AB%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%20&%20%E6%89%8B%E6%9B%B8%E3%81%8D%E6%95%B0%E5%AD%97%E8%AA%8D%E8%AD%98%E7%B7%A8)+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP" target="_blank" title="Pocket"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-pocket" href="//getpocket.com/edit?url=http%3A%2F%2Flocalhost%3A4000%2FDL-Intro-2%2F&title=%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep%20Learning%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E5%AD%A6%E3%81%B6%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF(3%E5%B1%A4%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%A9%E3%83%AB%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%20&%20%E6%89%8B%E6%9B%B8%E3%81%8D%E6%95%B0%E5%AD%97%E8%AA%8D%E8%AD%98%E7%B7%A8)+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP" target="_blank" title="Pocket"></a></li>
     <li class="shareList2__item"><a class="shareList2__link icon-line" href="http://line.me/R/msg/text/?%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep%20Learning%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E5%AD%A6%E3%81%B6%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF(3%E5%B1%A4%E3%83%8B%E3%83%A5%E3%83%BC%E3%83%A9%E3%83%AB%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%20&%20%E6%89%8B%E6%9B%B8%E3%81%8D%E6%95%B0%E5%AD%97%E8%AA%8D%E8%AD%98%E7%B7%A8)+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP%0Ahttp%3A%2F%2Flocalhost%3A4000%2FDL-Intro-2%2F" target="_blank" title="LINE"></a></li>
+    <li class="shareList2__item__amazon"><a class="shareList2__link__amazon amazon-icon" href="//af.moshimo.com/af/c/click?a_id=1430714&p_id=170&pc_id=185&pl_id=4062&url=https%3A%2F%2Fwww.amazon.co.jp%2F" target="_blank" rel="nofollow"></a>
+        <img src="//i.moshimo.com/af/i/impression?a_id=1430714&p_id=170&pc_id=185&pl_id=4062" width="1" height="1" style="border:none;"></li>
 </ul>
 
   <br />
 
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <!-- フッター1 -->
-  <ins class="adsbygoogle"
-      style="display:block"
-      data-ad-client="ca-pub-1838422896597988"
-      data-ad-slot="4583840862"
-      data-ad-format="auto"
-      data-full-width-responsive="true"></ins>
-  <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+  <div class="footer_ads">
+    <div class="left_ad">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- フッター1 -->
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-1838422896597988"
+            data-ad-slot="4583840862"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <div class="right_ad">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- フッター2 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1838422896597988"
+             data-ad-slot="3446169345"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+  </div>
+  <br />
+
+  <!-- 前後のページへのリンク-->
+  <div class="pager">
+    
+      <div class="next">
+        <p><i class="fas fa-arrow-circle-left" style="margin: 0 0.5em 0 0;"></i>次の記事</p>
+        <p>
+          <a href="/DL-Intro-3/">ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）</a>
+        </p>
+      </div>
+    
+
+    
+      <div class="prev">
+        <p>前の記事<i class="fas fa-arrow-circle-right" style="margin: 0 0 0 0.5em;"></i></p>
+        <p>
+            <a href="/DL-Intro-1/">ゼロから作るDeep Learningとともに学ぶフレームワーク（パーセプトロン編）</a>
+        </p>
+      </div>
+    
+  </div>
 
   
   
 </article>
 
+      </main>
+
+      <aside class="sidebar" role="complementary">
+        <div class="side-ad">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- サイドバー -->
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-1838422896597988"
+      data-ad-slot="3641305571"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+
+<div class="profile">
+  <div style="text-align: center;">
+    <a href="/about/">
+      <img style="width: 100px; border-radius: 50px;" src="/resources/logo/profile.jpg" />
+    </a>
+    <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1;"><strong>Gucci</strong></p>
+  </div>
+  <p style="margin-top: 0.5em; margin-bottom: 0; font-size: 0.8em; text-align: center;">
+    自然言語処理や機械学習に関連する情報を発信しています。
+    留学系の話題も<a href="https://note.mu/_gucciiiii">note</a>に書いています。
+  </p>
+  <hr />
+  <div class="profile_icon">
+    
+<a href="/contact/"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/gucci-j"><i class="svg-icon github"></i></a>
+
+
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/_gucciiiii"><i class="svg-icon twitter"></i></a>
+
+
+
+  </div>
+</div>
+
+<div class="amazon-button">
+  <p style="margin-top: 0; margin-bottom: 0.5em; font-size: 0.8em; text-align: center;">
+    <strong>Amazon.co.jpで買って応援！</strong>
+  </p>
+  <div style="text-align: center;">
+    <a href="//af.moshimo.com/af/c/click?a_id=1430714&p_id=170&pc_id=185&pl_id=10340&guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0068/000000010340.gif" width="300" height="50" style="border:none; padding-bottom: 0;"></a>
+    <img src="//i.moshimo.com/af/i/impression?a_id=1430714&p_id=170&pc_id=185&pl_id=10340" width="0" height="0" style="display: none; border:none;">
+  </div>
+</div>
+
+<div class="search">
+  <script>
+    (function() {
+      var cx = 'partner-pub-1838422896597988:8655986192';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+    })();
+  </script>
+  <gcse:searchbox-only></gcse:searchbox-only>
+</div>
+
+
+<div class="recent-posts">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>最近の記事</strong>
+  </p>
+  <hr />
+  <ul style="padding-right: 5px; padding-left: 1.5em;">
+    
+      <li>
+        <a href="/Note-Decoupling/">
+          論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues
+        </a>
+      </li>
+    
+      <li>
+        <a href="/memo-svm/">
+          サポートベクターマシンのお話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/cv-with-torchtext/">
+          torchtextでk-分割交差検証をする話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/Note-Transformer/">
+          論文メモ：Attention Is All You Need
+        </a>
+      </li>
+    
+      <li>
+        <a href="/DL-Intro-5/">
+          ゼロから作るDeep Learningとともに学ぶフレームワーク（畳み込みニューラルネットワーク編）
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="side-category">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>タグ一覧</strong>
+  </p>
+  <hr />
+  <ul style="padding: 0 10px 0 10px;">
+    
+      <li>
+        <a href="/sitemap#PyTorch">
+          PyTorch
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#Tips">
+          Tips
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#「ゼロからKeras」シリーズ">
+          「ゼロからKeras」シリーズ
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#ブログ全般">
+          ブログ全般
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#機械学習全般">
+          機械学習全般
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#論文メモ">
+          論文メモ
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+      </aside>
     </div>
 
     <div class="wrapper-footer">
-      <div class="container">
+      <div class="footer_container">
         <footer class="footer">
           
 <a href="/contact/"><i class="svg-icon email"></i></a>
@@ -655,10 +901,11 @@ print(f'Accuracy: {np.sum(y_test == _y_test) / len(y_test)}')
 
 
 <br />
-          <a href="/">Home</a> 
-          | <a href="/sitemap">Sitemap</a> 
-          | <a href="/privacy">Privacy Policy</a><br />
-          <div style="font-size: 8pt">© 2019 Atsuki Yamaguchi.</div>
+          <a href="/">Home</a>
+          | <a href="/Introduction/">About This Blog</a>  
+          | <a href="/sitemap/">Sitemap</a> 
+          | <a href="/privacy/">Privacy</a><br />
+          <div style="font-size: 8pt;">© 2019 Atsuki Yamaguchi.</div>
         </footer>
       </div>
     </div>

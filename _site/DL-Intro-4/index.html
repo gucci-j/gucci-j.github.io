@@ -28,13 +28,18 @@
     <![endif]-->
 
     <link rel="stylesheet" type="text/css" href="/style.css" />
+    
+      
+        <link rel="stylesheet" type="text/css" href="/css/post.css">
+      
+    
     <link rel="alternate" type="application/rss+xml" title="きままにNLP - A Technical Blog about NLP and ML" href="/feed.xml" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     
     <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
 
     <!-- Favicon head tag -->
-    <link rel="icon" href="/resources/logo/logo.jpg" type="image/x-icon">
+    <link rel="icon" href="/resources/logo/kimamani_simple.png" type="image/x-icon">
 
     <!-- Begin Jekyll SEO tag v2.6.0 -->
 <title>ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編） | きままにNLP</title>
@@ -52,7 +57,7 @@
 <meta property="twitter:title" content="ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編）" />
 <meta name="twitter:site" content="@_gucciiiii" />
 <script type="application/ld+json">
-{"description":"「ゼロから作るDeep Learning」とともに深層学習フレームワークを学ぶプロジェクト第四弾として、深層学習において重要な学習テクニックをKerasで実際に使ってみることで、それらの効果を体験します。","@type":"BlogPosting","url":"http://localhost:4000/DL-Intro-4/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/logo.jpg"}},"headline":"ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編）","dateModified":"2019-05-03T00:00:00+09:00","datePublished":"2019-05-03T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/DL-Intro-4/"},"@context":"https://schema.org"}</script>
+{"description":"「ゼロから作るDeep Learning」とともに深層学習フレームワークを学ぶプロジェクト第四弾として、深層学習において重要な学習テクニックをKerasで実際に使ってみることで、それらの効果を体験します。","@type":"BlogPosting","url":"http://localhost:4000/DL-Intro-4/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/kimamani.png"}},"headline":"ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編）","dateModified":"2019-05-03T00:00:00+09:00","datePublished":"2019-05-03T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/DL-Intro-4/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <!-- Google Adsense-->
@@ -71,11 +76,10 @@
     <div class="wrapper-masthead">
       <div class="head_container">
         <header class="masthead clearfix">
-          <a href="/" class="site-avatar"><img src="/resources/logo/logo.jpg" /></a>
+          <a href="/" class="site-avatar"><img src="/resources/logo/kimamani.png" /></a>
 
           <div class="site-info">
-            <h1 class="site-name"><a href="/">きままにNLP</a></h1>
-            <p class="site-description">A Technical Blog about NLP and ML</p>
+            <h1 class="site-name"><a href="/"><img src="/resources/logo/kimamani_moji.png" /></a></h1>
           </div>
 
           <nav>
@@ -86,8 +90,16 @@
       </div>
     </div>
 
-    <div id="main" role="main" class="container">
-      <article class="post">
+    <div class="container">
+      <main class="main_contents" role="main">
+        <article class="post">
+  <div class="date_front">
+    <i class="far fa-calendar-alt" style="padding: 0 2px 0 0;"></i>
+    2019-05-03
+
+    
+
+  </div>
   <h1>ゼロから作るDeep Learningとともに学ぶフレームワーク（学習テクニック編）</h1>
 
   <div class="post-tag">
@@ -183,13 +195,6 @@
     <p>第五弾：<i class="fas fa-link" style="padding: 0 2px 0 0;"></i><a href="https://gucci-j.github.io/DL-Intro-5/">畳み込みニューラルネットワーク編</a></p>
 </div>
 
-<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-<p><ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-1838422896597988" data-ad-slot="7676908062"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script></p>
-
 <h2 id="1-最適化アルゴリズム">1. 最適化アルゴリズム</h2>
 
 <p>ゼロから〜で紹介があったように、ニューラルネットワークに対して適用される最適化アルゴリズムはたくさん存在し、モデルに応じて使い分けることが、その性能を引き出すために非常に重要となります。</p>
@@ -203,14 +208,14 @@
 
 <p>試しに1枚データセットの画像を表示させてみましょう。下記のソースコードを動作させてみてください。画像の表示は、<code class="highlighter-rouge">imshow</code>メソッドを使えば簡単にできます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from keras.datasets import fashion_mnist
-import matplotlib.pyplot as plt
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">keras.datasets</span> <span class="kn">import</span> <span class="n">fashion_mnist</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 
-(x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
+<span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">fashion_mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
 
-plt.figure()
-plt.imshow(x_train[0], cmap='gray')
-plt.show()
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x_train</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'gray'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>Output:</p>
@@ -286,14 +291,6 @@ plt.show()
 <i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6">（GitHub: compare_initializer.py）</a></p>
 </blockquote>
 
-<script async="" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-<!-- 記事内広告2 -->
-<p><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1838422896597988" data-ad-slot="1400355899" data-ad-format="auto" data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script></p>
-
 <h2 id="3-正規化正則化">3. 正規化・正則化</h2>
 
 <p>以下、4章と5章では、それぞれ正規化と正則化について扱います。その前に、巷で誤用しがちな、機械学習における正規化と正則化の意味について確認しておきましょう。</p>
@@ -310,6 +307,15 @@ plt.show()
   <p><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考: <a href="https://keras.io/ja/regularizers/">（Kerasにおける正則化の利用方法について）</a></p>
 </blockquote>
 
+<div class="inner_ads">
+    <div class="left_ad_in">
+        <a href="//af.moshimo.com/af/c/click?a_id=1502939&amp;p_id=1555&amp;pc_id=2816&amp;pl_id=22749&amp;guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0866/000000022749.jpg" width="300" height="250" style="border:none;" /></a><img src="//i.moshimo.com/af/i/impression?a_id=1502939&amp;p_id=1555&amp;pc_id=2816&amp;pl_id=22749" width="1" height="1" style="border:none;" />
+    </div> 
+    <div class="right_ad_in">
+        <a href="//af.moshimo.com/af/c/click?a_id=1502939&amp;p_id=1555&amp;pc_id=2816&amp;pl_id=22750&amp;guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0866/000000022750.jpg" width="300" height="250" style="border:none;" /></a><img src="//i.moshimo.com/af/i/impression?a_id=1502939&amp;p_id=1555&amp;pc_id=2816&amp;pl_id=22750" width="1" height="1" style="border:none;" />
+    </div>
+</div>
+
 <h2 id="4-バッチ正規化">4. バッチ正規化</h2>
 
 <p>バッチ正規化は、入力データを平均値が0で分散が1となる分布に変換する手法のことを指します。バッチ正規化を適用することで、モデルの収束を高速化できるほか、重みの初期化手法に対してかなり頑健になります。</p>
@@ -324,9 +330,9 @@ plt.show()
 <p>なお、2章で確認したように、この重み初期化では通常学習は全く進行しません。つまり、バッチ正規化を適用することで、どの程度初期化手法に対して頑健になるかを見てみます。</p>
 
 <p>Kerasにおけるバッチ正規化の適用例は以下のようになります。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_hidden = Dense(hidden_dim, kernel_initializer=_init)(_hidden)
-_hidden = BatchNormalization()(_hidden)
-_hidden = Activation('relu')(_hidden)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_hidden</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="n">_init</span><span class="p">)(</span><span class="n">_hidden</span><span class="p">)</span>
+<span class="n">_hidden</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">_hidden</span><span class="p">)</span>
+<span class="n">_hidden</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">_hidden</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>ソースコードは、<a href="https://github.com/gucci-j/intro-deep-learning-keras/">GitHub</a>より入手できます。</p>
@@ -362,10 +368,10 @@ _hidden = Activation('relu')(_hidden)
 <p>ここでは、4章で実装したバッチ正規化ありのモデルにweight decayを適用することで、過学習が軽減するか検証していきます。</p>
 
 <p>Weight decayの簡単な適用例は以下のようになります。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from keras import regularizers
-_wd = regularizers.l2(0.1)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">keras</span> <span class="kn">import</span> <span class="n">regularizers</span>
+<span class="n">_wd</span> <span class="o">=</span> <span class="n">regularizers</span><span class="o">.</span><span class="n">l2</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
 
-_hidden = Dense(hidden_dim, kernel_initializer=_init, kernel_regularizer=_wd)(_hidden)
+<span class="n">_hidden</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">kernel_initializer</span><span class="o">=</span><span class="n">_init</span><span class="p">,</span> <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">_wd</span><span class="p">)(</span><span class="n">_hidden</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>ソースコードは、<a href="https://github.com/gucci-j/intro-deep-learning-keras/tree/master/chapter6">GitHub</a>にある、<code class="highlighter-rouge">compare_weight_decay.py</code>となります。</p>
@@ -400,8 +406,8 @@ _hidden = Dense(hidden_dim, kernel_initializer=_init, kernel_regularizer=_wd)(_h
 
 <p>ドロップアウトの適用例は以下のようになります。<br />
 下記の例では、ドロップアウト率（入力のユニットを消去する割合）を、引数: <code class="highlighter-rouge">rate</code>に渡しています。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_hidden = Dense(hidden_dim, activation='relu')(_hidden)
-_hidden = Dropout(rate=dpout_rate)(_hidden)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_hidden</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">)(</span><span class="n">_hidden</span><span class="p">)</span>
+<span class="n">_hidden</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">rate</span><span class="o">=</span><span class="n">dpout_rate</span><span class="p">)(</span><span class="n">_hidden</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>5層ニューラルネットワークでドロップアウトの効果を検証したソースコードは、<code class="highlighter-rouge">compare_dropout.py</code>として、GitHubに置いてあります。では、この実験結果について次項で見ていきます。</p>
@@ -460,9 +466,9 @@ _hidden = Dropout(rate=dpout_rate)(_hidden)
 </table>
 
 <p>Early Stoppingの簡単な適用例は以下のようになります。この例では、2エポックの間、テストデータに対する損失関数の値に改善が見られないと、学習が停止するように設定されています。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>early_stopping = EarlyStopping(patience=2, verbose=1)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">early_stopping</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span><span class="n">patience</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-model.fit(x=x_train, y=y_train, batch_size=batch_size, epochs=epochs, verbose=1, validation_data=(x_test, y_test), callbacks=[early_stopping])
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">),</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">early_stopping</span><span class="p">])</span>
 </code></pre></div></div>
 
 <blockquote>
@@ -507,9 +513,11 @@ model.fit(x=x_train, y=y_train, batch_size=batch_size, epochs=epochs, verbose=1,
 
   </div>
 
+  <!--
   <div class="date">
     Written on May  3, 2019
   </div>
+  -->
 
   <style type="text/css">
     @font-face {
@@ -544,6 +552,8 @@ model.fit(x=x_train, y=y_train, batch_size=batch_size, epochs=epochs, verbose=1,
     .icon-facebook:before    {content: "\ea90";}
     .icon-hatebu:before      {content: "\e903";}
 
+    .amazon-icon::before     {content: "Amazon.co.jpで買って応援！";}
+
     /*ソーシャルリストデザイン2*/
     .shareList2 {
         list-style:none;
@@ -557,6 +567,13 @@ model.fit(x=x_train, y=y_train, batch_size=batch_size, epochs=epochs, verbose=1,
         height:30px;
         line-height:30px;
         width:30px;
+        margin:5px 0 0 5px;
+        text-align:center;
+    }
+    .shareList2__item__amazon {
+        height:30px;
+        line-height:30px;
+        width: 240px;
         margin:5px 0 0 5px;
         text-align:center;
     }
@@ -578,6 +595,23 @@ model.fit(x=x_train, y=y_train, batch_size=batch_size, epochs=epochs, verbose=1,
         box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
     }
 
+    .shareList2__link__amazon {
+        display:block;
+        color:#ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .shareList2__link__amazon::before{
+        font-size:16px;
+        display:block;
+        transition: ease-in-out .2s;
+        border-radius: 5px;
+    }
+    .shareList2__link__amazon:hover::before{
+        background:#ffffff;
+        box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
+    }
+
     .shareList2__link.icon-twitter{background:#55acee;}
     .shareList2__link.icon-twitter:hover::before{color:#55acee;}
 
@@ -592,38 +626,250 @@ model.fit(x=x_train, y=y_train, batch_size=batch_size, epochs=epochs, verbose=1,
 
     .shareList2__link.icon-line{background:#1dcd00;}
     .shareList2__link.icon-line:hover::before{color:#1dcd00;}
+
+    .shareList2__link__amazon.amazon-icon{background:#ff9900;}
+    .shareList2__link__amazon.amazon-icon:hover::before{color:#ff9900;}
 </style>
 
 <ul class="shareList2" style="margin-top: 5px;">
     <li class="shareList2__item"><a class="shareList2__link icon-twitter" href="https://twitter.com/intent/tweet?text=%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep%20Learning%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E5%AD%A6%E3%81%B6%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF(%E5%AD%A6%E7%BF%92%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF%E7%B7%A8)+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP&amp;url=http%3A%2F%2Flocalhost%3A4000%2FDL-Intro-4%2F" target="_blank" title="Twitter"></a></li>
     <li class="shareList2__item"><a class="shareList2__link icon-facebook" href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FDL-Intro-4%2F" target="_blank" title="Facebook"></a></li>
     <li class="shareList2__item"><a class="shareList2__link icon-hatebu" href="https://b.hatena.ne.jp/add?mode=confirm&amp;url=http%3A%2F%2Flocalhost%3A4000%2FDL-Intro-4%2F" target="_blank" title="はてなブックマーク"></a></li>
-    <li class="shareList2__item"><a class="shareList2__link icon-pocket" href="//getpocket.com/edit?url=http%3A%2F%2Flocalhost%3A4000&title=%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep%20Learning%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E5%AD%A6%E3%81%B6%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF(%E5%AD%A6%E7%BF%92%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF%E7%B7%A8)+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP" target="_blank" title="Pocket"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-pocket" href="//getpocket.com/edit?url=http%3A%2F%2Flocalhost%3A4000%2FDL-Intro-4%2F&title=%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep%20Learning%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E5%AD%A6%E3%81%B6%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF(%E5%AD%A6%E7%BF%92%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF%E7%B7%A8)+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP" target="_blank" title="Pocket"></a></li>
     <li class="shareList2__item"><a class="shareList2__link icon-line" href="http://line.me/R/msg/text/?%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep%20Learning%E3%81%A8%E3%81%A8%E3%82%82%E3%81%AB%E5%AD%A6%E3%81%B6%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF(%E5%AD%A6%E7%BF%92%E3%83%86%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF%E7%B7%A8)+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP%0Ahttp%3A%2F%2Flocalhost%3A4000%2FDL-Intro-4%2F" target="_blank" title="LINE"></a></li>
+    <li class="shareList2__item__amazon"><a class="shareList2__link__amazon amazon-icon" href="//af.moshimo.com/af/c/click?a_id=1430714&p_id=170&pc_id=185&pl_id=4062&url=https%3A%2F%2Fwww.amazon.co.jp%2F" target="_blank" rel="nofollow"></a>
+        <img src="//i.moshimo.com/af/i/impression?a_id=1430714&p_id=170&pc_id=185&pl_id=4062" width="1" height="1" style="border:none;"></li>
 </ul>
 
   <br />
 
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <!-- フッター1 -->
-  <ins class="adsbygoogle"
-      style="display:block"
-      data-ad-client="ca-pub-1838422896597988"
-      data-ad-slot="4583840862"
-      data-ad-format="auto"
-      data-full-width-responsive="true"></ins>
-  <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+  <div class="footer_ads">
+    <div class="left_ad">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- フッター1 -->
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-1838422896597988"
+            data-ad-slot="4583840862"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <div class="right_ad">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- フッター2 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1838422896597988"
+             data-ad-slot="3446169345"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+  </div>
+  <br />
+
+  <!-- 前後のページへのリンク-->
+  <div class="pager">
+    
+      <div class="next">
+        <p><i class="fas fa-arrow-circle-left" style="margin: 0 0.5em 0 0;"></i>次の記事</p>
+        <p>
+          <a href="/DL-Intro-5/">ゼロから作るDeep Learningとともに学ぶフレームワーク（畳み込みニューラルネットワーク編）</a>
+        </p>
+      </div>
+    
+
+    
+      <div class="prev">
+        <p>前の記事<i class="fas fa-arrow-circle-right" style="margin: 0 0 0 0.5em;"></i></p>
+        <p>
+            <a href="/DL-Intro-3/">ゼロから作るDeep Learningとともに学ぶフレームワーク（ニューラルネットワークの学習編）</a>
+        </p>
+      </div>
+    
+  </div>
 
   
   
 </article>
 
+      </main>
+
+      <aside class="sidebar" role="complementary">
+        <div class="side-ad">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- サイドバー -->
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-1838422896597988"
+      data-ad-slot="3641305571"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+
+<div class="profile">
+  <div style="text-align: center;">
+    <a href="/about/">
+      <img style="width: 100px; border-radius: 50px;" src="/resources/logo/profile.jpg" />
+    </a>
+    <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1;"><strong>Gucci</strong></p>
+  </div>
+  <p style="margin-top: 0.5em; margin-bottom: 0; font-size: 0.8em; text-align: center;">
+    自然言語処理や機械学習に関連する情報を発信しています。
+    留学系の話題も<a href="https://note.mu/_gucciiiii">note</a>に書いています。
+  </p>
+  <hr />
+  <div class="profile_icon">
+    
+<a href="/contact/"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/gucci-j"><i class="svg-icon github"></i></a>
+
+
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/_gucciiiii"><i class="svg-icon twitter"></i></a>
+
+
+
+  </div>
+</div>
+
+<div class="amazon-button">
+  <p style="margin-top: 0; margin-bottom: 0.5em; font-size: 0.8em; text-align: center;">
+    <strong>Amazon.co.jpで買って応援！</strong>
+  </p>
+  <div style="text-align: center;">
+    <a href="//af.moshimo.com/af/c/click?a_id=1430714&p_id=170&pc_id=185&pl_id=10340&guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0068/000000010340.gif" width="300" height="50" style="border:none; padding-bottom: 0;"></a>
+    <img src="//i.moshimo.com/af/i/impression?a_id=1430714&p_id=170&pc_id=185&pl_id=10340" width="0" height="0" style="display: none; border:none;">
+  </div>
+</div>
+
+<div class="search">
+  <script>
+    (function() {
+      var cx = 'partner-pub-1838422896597988:8655986192';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+    })();
+  </script>
+  <gcse:searchbox-only></gcse:searchbox-only>
+</div>
+
+
+<div class="recent-posts">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>最近の記事</strong>
+  </p>
+  <hr />
+  <ul style="padding-right: 5px; padding-left: 1.5em;">
+    
+      <li>
+        <a href="/Note-Decoupling/">
+          論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues
+        </a>
+      </li>
+    
+      <li>
+        <a href="/memo-svm/">
+          サポートベクターマシンのお話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/cv-with-torchtext/">
+          torchtextでk-分割交差検証をする話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/Note-Transformer/">
+          論文メモ：Attention Is All You Need
+        </a>
+      </li>
+    
+      <li>
+        <a href="/DL-Intro-5/">
+          ゼロから作るDeep Learningとともに学ぶフレームワーク（畳み込みニューラルネットワーク編）
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="side-category">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>タグ一覧</strong>
+  </p>
+  <hr />
+  <ul style="padding: 0 10px 0 10px;">
+    
+      <li>
+        <a href="/sitemap#PyTorch">
+          PyTorch
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#Tips">
+          Tips
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#「ゼロからKeras」シリーズ">
+          「ゼロからKeras」シリーズ
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#ブログ全般">
+          ブログ全般
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#機械学習全般">
+          機械学習全般
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#論文メモ">
+          論文メモ
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+      </aside>
     </div>
 
     <div class="wrapper-footer">
-      <div class="container">
+      <div class="footer_container">
         <footer class="footer">
           
 <a href="/contact/"><i class="svg-icon email"></i></a>
@@ -638,10 +884,11 @@ model.fit(x=x_train, y=y_train, batch_size=batch_size, epochs=epochs, verbose=1,
 
 
 <br />
-          <a href="/">Home</a> 
-          | <a href="/sitemap">Sitemap</a> 
-          | <a href="/privacy">Privacy Policy</a><br />
-          <div style="font-size: 8pt">© 2019 Atsuki Yamaguchi.</div>
+          <a href="/">Home</a>
+          | <a href="/Introduction/">About This Blog</a>  
+          | <a href="/sitemap/">Sitemap</a> 
+          | <a href="/privacy/">Privacy</a><br />
+          <div style="font-size: 8pt;">© 2019 Atsuki Yamaguchi.</div>
         </footer>
       </div>
     </div>

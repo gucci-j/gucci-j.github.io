@@ -1,0 +1,36 @@
+@charset "UTF-8";
+.page_en h2, .page_ja h2 {
+  background-color: #f6f6f6;
+  border-left: 6px solid #222;
+  padding: 4px 16px;
+}
+.page_en h3, .page_ja h3 {
+  border-bottom: 1px solid #ddd;
+}
+.page_en img, .page_ja img {
+  /* 画像の縁取り */
+  border: 1px #eee solid;
+  padding: 4px;
+}
+.page_en table, .page_ja table {
+  /* 表のスタイル */
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+.page_en table tr, .page_ja table tr {
+  border-bottom: solid 1px #eee;
+}
+.page_en table th, .page_en table td, .page_ja table th, .page_ja table td {
+  text-align: center;
+  width: auto;
+  padding: 5px 5px;
+  border: 1px #222 solid;
+}
+.page_en table tr:nth-child(even), .page_ja table tr:nth-child(even) {
+  background-color: #f8f8f8;
+}
+
+.page_en {
+  font-family: Helvetica, Arial, "Noto Sans Japanese", "游ゴシック", "Yu Gothic", YuGothic, sans-serif;
+}

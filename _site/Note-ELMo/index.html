@@ -12,13 +12,13 @@
     <meta name="description" content="文献情報
 著者: M. Peters et al.
 所属: Allen Institute for Artificial Intelligence / Paul G. Allen School of Computer Science &amp; Engineering, University of Washington
-出典: NAACL 2018 (https://aclweb.org/anthology/papers/N/N18/N18-1202/)
+出典: NAACL 2018
 
 " />
     <meta property="og:description" content="文献情報
 著者: M. Peters et al.
 所属: Allen Institute for Artificial Intelligence / Paul G. Allen School of Computer Science &amp; Engineering, University of Washington
-出典: NAACL 2018 (https://aclweb.org/anthology/papers/N/N18/N18-1202/)
+出典: NAACL 2018
 
 " />
     
@@ -34,13 +34,18 @@
     <![endif]-->
 
     <link rel="stylesheet" type="text/css" href="/style.css" />
+    
+      
+        <link rel="stylesheet" type="text/css" href="/css/post.css">
+      
+    
     <link rel="alternate" type="application/rss+xml" title="きままにNLP - A Technical Blog about NLP and ML" href="/feed.xml" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     
     <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
 
     <!-- Favicon head tag -->
-    <link rel="icon" href="/resources/logo/logo.jpg" type="image/x-icon">
+    <link rel="icon" href="/resources/logo/kimamani_simple.png" type="image/x-icon">
 
     <!-- Begin Jekyll SEO tag v2.6.0 -->
 <title>論文メモ：Deep contextualized word representations | きままにNLP</title>
@@ -58,7 +63,7 @@
 <meta property="twitter:title" content="論文メモ：Deep contextualized word representations" />
 <meta name="twitter:site" content="@_gucciiiii" />
 <script type="application/ld+json">
-{"description":"NAACL 2018でベストペーパーアワードに輝いた，Deep contextualized word representations（通称ELMo）の論文メモ書きを共有・紹介します．","@type":"BlogPosting","url":"http://localhost:4000/Note-ELMo/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/logo.jpg"}},"headline":"論文メモ：Deep contextualized word representations","dateModified":"2019-04-06T00:00:00+09:00","datePublished":"2019-04-06T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/Note-ELMo/"},"@context":"https://schema.org"}</script>
+{"description":"NAACL 2018でベストペーパーアワードに輝いた，Deep contextualized word representations（通称ELMo）の論文メモ書きを共有・紹介します．","@type":"BlogPosting","url":"http://localhost:4000/Note-ELMo/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/kimamani.png"}},"headline":"論文メモ：Deep contextualized word representations","dateModified":"2019-04-06T00:00:00+09:00","datePublished":"2019-04-06T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/Note-ELMo/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <!-- Google Adsense-->
@@ -77,11 +82,10 @@
     <div class="wrapper-masthead">
       <div class="head_container">
         <header class="masthead clearfix">
-          <a href="/" class="site-avatar"><img src="/resources/logo/logo.jpg" /></a>
+          <a href="/" class="site-avatar"><img src="/resources/logo/kimamani.png" /></a>
 
           <div class="site-info">
-            <h1 class="site-name"><a href="/">きままにNLP</a></h1>
-            <p class="site-description">A Technical Blog about NLP and ML</p>
+            <h1 class="site-name"><a href="/"><img src="/resources/logo/kimamani_moji.png" /></a></h1>
           </div>
 
           <nav>
@@ -92,8 +96,16 @@
       </div>
     </div>
 
-    <div id="main" role="main" class="container">
-      <article class="post">
+    <div class="container">
+      <main class="main_contents" role="main">
+        <article class="post">
+  <div class="date_front">
+    <i class="far fa-calendar-alt" style="padding: 0 2px 0 0;"></i>
+    2019-04-06
+
+    
+
+  </div>
   <h1>論文メモ：Deep contextualized word representations</h1>
 
   <div class="post-tag">
@@ -142,7 +154,7 @@
     <h2 id="文献情報">文献情報</h2>
 <p>著者: M. Peters et al.<br />
 所属: Allen Institute for Artificial Intelligence / Paul G. Allen School of Computer Science &amp; Engineering, University of Washington<br />
-出典: NAACL 2018 <a href="https://aclweb.org/anthology/papers/N/N18/N18-1202/">(https://aclweb.org/anthology/papers/N/N18/N18-1202/)</a></p>
+出典: <a href="https://aclweb.org/anthology/papers/N/N18/N18-1202/">NAACL 2018</a></p>
 
 <h2 id="どんな論文か">どんな論文か？</h2>
 <p>ELMo = Embeddings from Language Modelsの略であり，言語モデルを活用した文脈に応じた単語分散表現: ELMoを提唱した論文．</p>
@@ -170,7 +182,9 @@
 <h3 id="1-順方向言語モデル">1. 順方向言語モデル</h3>
 <p>トークン数: $N$の単語列: $(t_1, t_2, \dots, t_N)$が与えられたとき，順方向の言語モデルは，単語: $t_k$と単語列: $(t_1, \dots, t_{k-1})$の条件付き確率をモデリングすることで，次のように表される.順方向の言語モデルでは，次の単語: $t_{k+1}$を予測することを目的とする．</p>
 
-<script type="math/tex; mode=display">p(t_1, t_2, ..., t_N) = \prod_{k=1}^N p(t_k | t_1, t_2, \dots, t_{k-1})</script>
+<div class="mathjax-scroll">
+$$p(t_1, t_2, ..., t_N) = \prod_{k=1}^N p(t_k | t_1, t_2, \dots, t_{k-1})$$
+</div>
 
 <ul>
   <li>
@@ -187,7 +201,9 @@
 <h3 id="2-逆方向言語モデル">2. 逆方向言語モデル</h3>
 <p>逆方向言語モデルは順方向言語モデルと類似しているが，単語列を逆に処理していく点で異なる．なお，逆方向の言語モデルでは，未来の単語列から一つ前の単語: $t_{k-1}$を予測することを目的とする．つまり，逆方向の言語モデルは次のように定義される．</p>
 
-<script type="math/tex; mode=display">p(t_1, t_2, ..., t_N) = \prod_{k=1}^N p(t_k | t_{k+1}, t_{k+2}, \dots, t_N)</script>
+<div class="mathjax-scroll">
+$$p(t_1, t_2, ..., t_N) = \prod_{k=1}^N p(t_k | t_{k+1}, t_{k+2}, \dots, t_N)$$
+</div>
 
 <ul>
   <li>最終的には，<script type="math/tex">\overleftarrow{\mathbf{h}}_{k, L}^{LM}</script> を求めることで，$t_{k-1}$ をsoftmax層で予測する．</li>
@@ -206,7 +222,11 @@
   </li>
 </ul>
 
-<script type="math/tex; mode=display">\sum_{k=1}^{N}(\log p(t_k | t_1, t_2, \dots, t_{k-1}; \Theta_x, \overrightarrow{\Theta}_{LSTM}, \Theta_s) \\+ \log p(t_k | t_{k+1}, t_{k+2}, \dots, t_N; \Theta_x, \overleftarrow{\Theta}_{LSTM}, \Theta_s))</script>
+<div class="mathjax-scroll">
+$$
+\sum_{k=1}^{N}(\log p(t_k | t_1, t_2, \dots, t_{k-1}; \Theta_x, \overrightarrow{\Theta}_{LSTM}, \Theta_s) \\+ \log p(t_k | t_{k+1}, t_{k+2}, \dots, t_N; \Theta_x, \overleftarrow{\Theta}_{LSTM}, \Theta_s))
+$$
+</div>
 
 <h3 id="4-elmoのパラメータ算出">4. ELMoのパラメータ算出</h3>
 <ul>
@@ -215,20 +235,27 @@
 → 文脈依存のする順方向と逆方向のLSTM: 2L個</li>
 </ul>
 
-<script type="math/tex; mode=display">% <![CDATA[
+<div class="mathjax-scroll">
+$$
 \begin{equation*}
 \begin{split}
-R_k &= \{x_k^{LM}, \overrightarrow{\mathbf{h}}_{k, j}^{LM}, \overleftarrow{\mathbf{h}}_{k, j}^{LM} | j = 1, \dots, L \}\\
-    &= \{\mathbf{h}_{k, j}^{LM} | j=0, \dots, L \}
+R_k &amp;= \{x_k^{LM}, \overrightarrow{\mathbf{h}}_{k, j}^{LM}, \overleftarrow{\mathbf{h}}_{k, j}^{LM} | j = 1, \dots, L \}\\
+    &amp;= \{\mathbf{h}_{k, j}^{LM} | j=0, \dots, L \}
 \end{split}
-\end{equation*} %]]></script>
+\end{equation*}
+$$
+</div>
 
 <ul>
   <li>ELMoを他のタスクに応用するには，Rのすべての要素を一つのベクトル表現に変換する．<br />
 → 簡単な例だと，一番上の層だけを取ってくるものがある．CoVeやTagLMはこれを採用している．</li>
 </ul>
 
-<script type="math/tex; mode=display">\mathbf{ELMo}_k^{task} = E(R_k; \Theta_e) = \mathbf{h}_{k, L}^{LM}</script>
+<div class="mathjax-scroll">
+$$
+\mathbf{ELMo}_k^{task} = E(R_k; \Theta_e) = \mathbf{h}_{k, L}^{LM}
+$$
+</div>
 
 <div style="text-align: center">ただし，$\mathbf{h}_{k, L}^{LM} = \left[\overrightarrow{\mathbf{h}}_{k, j}^{LM}; \overleftarrow{\mathbf{h}}_{k, j}^{LM}\right]$</div>
 
@@ -238,7 +265,11 @@ R_k &= \{x_k^{LM}, \overrightarrow{\mathbf{h}}_{k, j}^{LM}, \overleftarrow{\math
 → $\gamma^{task}$はELMoのベクトル全体をスケーリングするため．チューニングの最適化の観点から必要．</li>
 </ul>
 
-<script type="math/tex; mode=display">\mathbf{ELMo}_k^{task} = \gamma^{task} \sum_{j=0}^L s_j^{task}\mathbf{h}_{k, j}^{LM}</script>
+<div class="mathjax-scroll">
+$$
+\mathbf{ELMo}_k^{task} = \gamma^{task} \sum_{j=0}^L s_j^{task}\mathbf{h}_{k, j}^{LM}
+$$
+</div>
 
 <h3 id="5-elmoモデルのnlpタスクへの適用">5. ELMoモデルのNLPタスクへの適用</h3>
 <p>単に$\mathbf{ELMo}_k^{task}$を入力の埋め込みベクトルとconcatすれば良い．</p>
@@ -249,14 +280,16 @@ R_k &= \{x_k^{LM}, \overrightarrow{\mathbf{h}}_{k, j}^{LM}, \overleftarrow{\math
 
 <h2 id="実装">実装</h2>
 <p>試しにKerasでELMo + BiLSTMを使ってIMDBの分類を行ったので，GitHubにあげました．<br />
-→ <a href="https://github.com/gucci-j/elmo-imdb">https://github.com/gucci-j/elmo-imdb</a></p>
+→ <a href="https://github.com/gucci-j/elmo-imdb">GitHub-ELMo</a></p>
 
 
   </div>
 
+  <!--
   <div class="date">
     Written on April  6, 2019
   </div>
+  -->
 
   <style type="text/css">
     @font-face {
@@ -291,6 +324,8 @@ R_k &= \{x_k^{LM}, \overrightarrow{\mathbf{h}}_{k, j}^{LM}, \overleftarrow{\math
     .icon-facebook:before    {content: "\ea90";}
     .icon-hatebu:before      {content: "\e903";}
 
+    .amazon-icon::before     {content: "Amazon.co.jpで買って応援！";}
+
     /*ソーシャルリストデザイン2*/
     .shareList2 {
         list-style:none;
@@ -304,6 +339,13 @@ R_k &= \{x_k^{LM}, \overrightarrow{\mathbf{h}}_{k, j}^{LM}, \overleftarrow{\math
         height:30px;
         line-height:30px;
         width:30px;
+        margin:5px 0 0 5px;
+        text-align:center;
+    }
+    .shareList2__item__amazon {
+        height:30px;
+        line-height:30px;
+        width: 240px;
         margin:5px 0 0 5px;
         text-align:center;
     }
@@ -325,6 +367,23 @@ R_k &= \{x_k^{LM}, \overrightarrow{\mathbf{h}}_{k, j}^{LM}, \overleftarrow{\math
         box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
     }
 
+    .shareList2__link__amazon {
+        display:block;
+        color:#ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .shareList2__link__amazon::before{
+        font-size:16px;
+        display:block;
+        transition: ease-in-out .2s;
+        border-radius: 5px;
+    }
+    .shareList2__link__amazon:hover::before{
+        background:#ffffff;
+        box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
+    }
+
     .shareList2__link.icon-twitter{background:#55acee;}
     .shareList2__link.icon-twitter:hover::before{color:#55acee;}
 
@@ -339,34 +398,86 @@ R_k &= \{x_k^{LM}, \overrightarrow{\mathbf{h}}_{k, j}^{LM}, \overleftarrow{\math
 
     .shareList2__link.icon-line{background:#1dcd00;}
     .shareList2__link.icon-line:hover::before{color:#1dcd00;}
+
+    .shareList2__link__amazon.amazon-icon{background:#ff9900;}
+    .shareList2__link__amazon.amazon-icon:hover::before{color:#ff9900;}
 </style>
 
 <ul class="shareList2" style="margin-top: 5px;">
     <li class="shareList2__item"><a class="shareList2__link icon-twitter" href="https://twitter.com/intent/tweet?text=%E8%AB%96%E6%96%87%E3%83%A1%E3%83%A2:Deep%20contextualized%20word%20representations+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP&amp;url=http%3A%2F%2Flocalhost%3A4000%2FNote-ELMo%2F" target="_blank" title="Twitter"></a></li>
     <li class="shareList2__item"><a class="shareList2__link icon-facebook" href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FNote-ELMo%2F" target="_blank" title="Facebook"></a></li>
     <li class="shareList2__item"><a class="shareList2__link icon-hatebu" href="https://b.hatena.ne.jp/add?mode=confirm&amp;url=http%3A%2F%2Flocalhost%3A4000%2FNote-ELMo%2F" target="_blank" title="はてなブックマーク"></a></li>
-    <li class="shareList2__item"><a class="shareList2__link icon-pocket" href="//getpocket.com/edit?url=http%3A%2F%2Flocalhost%3A4000&title=%E8%AB%96%E6%96%87%E3%83%A1%E3%83%A2:Deep%20contextualized%20word%20representations+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP" target="_blank" title="Pocket"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-pocket" href="//getpocket.com/edit?url=http%3A%2F%2Flocalhost%3A4000%2FNote-ELMo%2F&title=%E8%AB%96%E6%96%87%E3%83%A1%E3%83%A2:Deep%20contextualized%20word%20representations+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP" target="_blank" title="Pocket"></a></li>
     <li class="shareList2__item"><a class="shareList2__link icon-line" href="http://line.me/R/msg/text/?%E8%AB%96%E6%96%87%E3%83%A1%E3%83%A2:Deep%20contextualized%20word%20representations+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP%0Ahttp%3A%2F%2Flocalhost%3A4000%2FNote-ELMo%2F" target="_blank" title="LINE"></a></li>
+    <li class="shareList2__item__amazon"><a class="shareList2__link__amazon amazon-icon" href="//af.moshimo.com/af/c/click?a_id=1430714&p_id=170&pc_id=185&pl_id=4062&url=https%3A%2F%2Fwww.amazon.co.jp%2F" target="_blank" rel="nofollow"></a>
+        <img src="//i.moshimo.com/af/i/impression?a_id=1430714&p_id=170&pc_id=185&pl_id=4062" width="1" height="1" style="border:none;"></li>
 </ul>
 
   <br />
 
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <!-- フッター1 -->
-  <ins class="adsbygoogle"
-      style="display:block"
-      data-ad-client="ca-pub-1838422896597988"
-      data-ad-slot="4583840862"
-      data-ad-format="auto"
-      data-full-width-responsive="true"></ins>
-  <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+  <div class="footer_ads">
+    <div class="left_ad">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- フッター1 -->
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-1838422896597988"
+            data-ad-slot="4583840862"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <div class="right_ad">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- フッター2 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1838422896597988"
+             data-ad-slot="3446169345"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+  </div>
+  <br />
+
+  <!-- 前後のページへのリンク-->
+  <div class="pager">
+    
+      <div class="next">
+        <p><i class="fas fa-arrow-circle-left" style="margin: 0 0.5em 0 0;"></i>次の記事</p>
+        <p>
+          <a href="/DL-Intro-1/">ゼロから作るDeep Learningとともに学ぶフレームワーク（パーセプトロン編）</a>
+        </p>
+      </div>
+    
+
+    
+      <div class="prev">
+        <p>前の記事<i class="fas fa-arrow-circle-right" style="margin: 0 0 0 0.5em;"></i></p>
+        <p>
+            <a href="/SA-Visualization/">MatplotlibとseabornによるSelf Attentionの可視化</a>
+        </p>
+      </div>
+    
+  </div>
 
   
   
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
+    TeX: {
+      Macros: {
+               bm: ["\\boldsymbol{#1}", 1],
+               argmax: ["\\mathop{\\rm arg\\,max}\\limits"],
+               argmin: ["\\mathop{\\rm arg\\,min}\\limits"]},
+      extensions: ["AMSmath.js","AMSsymbols.js"]
+    },
     tex2jax: {
       inlineMath: [ ['$','$'], ["\\(","\\)"] ],
       processEscapes: true
@@ -376,22 +487,183 @@ R_k &= \{x_k^{LM}, \overrightarrow{\mathbf{h}}_{k, j}^{LM}, \overleftarrow{\math
 <script
   type="text/javascript"
   charset="utf-8"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
->
-</script>
-<script
-  type="text/javascript"
-  charset="utf-8"
-  src="https://vincenttam.github.io/javascripts/MathJaxLocal.js"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML"
 >
 </script>
 
 </article>
 
+      </main>
+
+      <aside class="sidebar" role="complementary">
+        <div class="side-ad">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- サイドバー -->
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-1838422896597988"
+      data-ad-slot="3641305571"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+
+<div class="profile">
+  <div style="text-align: center;">
+    <a href="/about/">
+      <img style="width: 100px; border-radius: 50px;" src="/resources/logo/profile.jpg" />
+    </a>
+    <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1;"><strong>Gucci</strong></p>
+  </div>
+  <p style="margin-top: 0.5em; margin-bottom: 0; font-size: 0.8em; text-align: center;">
+    自然言語処理や機械学習に関連する情報を発信しています。
+    留学系の話題も<a href="https://note.mu/_gucciiiii">note</a>に書いています。
+  </p>
+  <hr />
+  <div class="profile_icon">
+    
+<a href="/contact/"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/gucci-j"><i class="svg-icon github"></i></a>
+
+
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/_gucciiiii"><i class="svg-icon twitter"></i></a>
+
+
+
+  </div>
+</div>
+
+<div class="amazon-button">
+  <p style="margin-top: 0; margin-bottom: 0.5em; font-size: 0.8em; text-align: center;">
+    <strong>Amazon.co.jpで買って応援！</strong>
+  </p>
+  <div style="text-align: center;">
+    <a href="//af.moshimo.com/af/c/click?a_id=1430714&p_id=170&pc_id=185&pl_id=10340&guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0068/000000010340.gif" width="300" height="50" style="border:none; padding-bottom: 0;"></a>
+    <img src="//i.moshimo.com/af/i/impression?a_id=1430714&p_id=170&pc_id=185&pl_id=10340" width="0" height="0" style="display: none; border:none;">
+  </div>
+</div>
+
+<div class="search">
+  <script>
+    (function() {
+      var cx = 'partner-pub-1838422896597988:8655986192';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+    })();
+  </script>
+  <gcse:searchbox-only></gcse:searchbox-only>
+</div>
+
+
+<div class="recent-posts">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>最近の記事</strong>
+  </p>
+  <hr />
+  <ul style="padding-right: 5px; padding-left: 1.5em;">
+    
+      <li>
+        <a href="/Note-Decoupling/">
+          論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues
+        </a>
+      </li>
+    
+      <li>
+        <a href="/memo-svm/">
+          サポートベクターマシンのお話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/cv-with-torchtext/">
+          torchtextでk-分割交差検証をする話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/Note-Transformer/">
+          論文メモ：Attention Is All You Need
+        </a>
+      </li>
+    
+      <li>
+        <a href="/DL-Intro-5/">
+          ゼロから作るDeep Learningとともに学ぶフレームワーク（畳み込みニューラルネットワーク編）
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="side-category">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>タグ一覧</strong>
+  </p>
+  <hr />
+  <ul style="padding: 0 10px 0 10px;">
+    
+      <li>
+        <a href="/sitemap#PyTorch">
+          PyTorch
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#Tips">
+          Tips
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#「ゼロからKeras」シリーズ">
+          「ゼロからKeras」シリーズ
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#ブログ全般">
+          ブログ全般
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#機械学習全般">
+          機械学習全般
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#論文メモ">
+          論文メモ
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+      </aside>
     </div>
 
     <div class="wrapper-footer">
-      <div class="container">
+      <div class="footer_container">
         <footer class="footer">
           
 <a href="/contact/"><i class="svg-icon email"></i></a>
@@ -406,10 +678,11 @@ R_k &= \{x_k^{LM}, \overrightarrow{\mathbf{h}}_{k, j}^{LM}, \overleftarrow{\math
 
 
 <br />
-          <a href="/">Home</a> 
-          | <a href="/sitemap">Sitemap</a> 
-          | <a href="/privacy">Privacy Policy</a><br />
-          <div style="font-size: 8pt">© 2019 Atsuki Yamaguchi.</div>
+          <a href="/">Home</a>
+          | <a href="/Introduction/">About This Blog</a>  
+          | <a href="/sitemap/">Sitemap</a> 
+          | <a href="/privacy/">Privacy</a><br />
+          <div style="font-size: 8pt;">© 2019 Atsuki Yamaguchi.</div>
         </footer>
       </div>
     </div>

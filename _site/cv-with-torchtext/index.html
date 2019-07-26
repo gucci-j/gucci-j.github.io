@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>torchtextでk-分割交差検証をする話 – きままにNLP – A Technical Blog about NLP and ML</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="はじめに
+torchtextは，PyTorchで自然言語処理（NLP）系のデータを比較的簡単に読み込むことができるライブラリとして有名です．しかし，とっつきやすい性質を持つ分，細かいところで苦戦する場合があります．その一例として，交差検証をやりにくいという点が挙げられます．
+
+" />
+    <meta property="og:description" content="はじめに
+torchtextは，PyTorchで自然言語処理（NLP）系のデータを比較的簡単に読み込むことができるライブラリとして有名です．しかし，とっつきやすい性質を持つ分，細かいところで苦戦する場合があります．その一例として，交差検証をやりにくいという点が挙げられます．
+
+" />
+    
+    <meta name="author" content="きままにNLP" />
+
+    
+    <meta property="og:title" content="torchtextでk-分割交差検証をする話" />
+    <meta property="twitter:title" content="torchtextでk-分割交差検証をする話" />
+    
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    
+      
+        <link rel="stylesheet" type="text/css" href="/css/post.css">
+      
+    
+    <link rel="alternate" type="application/rss+xml" title="きままにNLP - A Technical Blog about NLP and ML" href="/feed.xml" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+    <!-- Favicon head tag -->
+    <link rel="icon" href="/resources/logo/kimamani_simple.png" type="image/x-icon">
+
+    <!-- Begin Jekyll SEO tag v2.6.0 -->
+<title>torchtextでk-分割交差検証をする話 | きままにNLP</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="torchtextでk-分割交差検証をする話" />
+<meta property="og:locale" content="ja_JP" />
+<meta name="description" content="PyTorchの自然言語処理（NLP）系データ処理ライブラリである，torchtextでどうしても交差検証をしたい人のためのTipsです．scikit-learnライクな，交差検証をしやすいライブラリとして有名である，skorchは使いません．" />
+<meta property="og:description" content="PyTorchの自然言語処理（NLP）系データ処理ライブラリである，torchtextでどうしても交差検証をしたい人のためのTipsです．scikit-learnライクな，交差検証をしやすいライブラリとして有名である，skorchは使いません．" />
+<link rel="canonical" href="http://localhost:4000/cv-with-torchtext/" />
+<meta property="og:url" content="http://localhost:4000/cv-with-torchtext/" />
+<meta property="og:site_name" content="きままにNLP" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-06-09T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="torchtextでk-分割交差検証をする話" />
+<meta name="twitter:site" content="@_gucciiiii" />
+<script type="application/ld+json">
+{"description":"PyTorchの自然言語処理（NLP）系データ処理ライブラリである，torchtextでどうしても交差検証をしたい人のためのTipsです．scikit-learnライクな，交差検証をしやすいライブラリとして有名である，skorchは使いません．","@type":"BlogPosting","url":"http://localhost:4000/cv-with-torchtext/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/kimamani.png"}},"headline":"torchtextでk-分割交差検証をする話","dateModified":"2019-06-09T00:00:00+09:00","datePublished":"2019-06-09T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/cv-with-torchtext/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- Google Adsense-->
+    <!--
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-1838422896597988",
+        enable_page_level_ads: true
+      });
+    </script>
+    -->
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="head_container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="/resources/logo/kimamani.png" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/"><img src="/resources/logo/kimamani_moji.png" /></a></h1>
+          </div>
+
+          <nav>
+            <a href="/">Blog</a>
+            <a href="/about">About</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div class="container">
+      <main class="main_contents" role="main">
+        <article class="post">
+  <div class="date_front">
+    <i class="far fa-calendar-alt" style="padding: 0 2px 0 0;"></i>
+    2019-06-09
+
+    
+
+  </div>
+  <h1>torchtextでk-分割交差検証をする話</h1>
+
+  <div class="post-tag">
+    
+
+
+
+
+<ul>
+  <i class="fas fa-tag" style="padding: 0 2px 0 0;"></i>
+  
+    <li>
+      <a href="/sitemap#Tips">
+        Tips
+      </a>
+    </li>
+  
+    <li>
+      <a href="/sitemap#PyTorch">
+        PyTorch
+      </a>
+    </li>
+  
+</ul>
+  </div>
+
+  <div class="toc">
+    <input type="checkbox" id="toc_lb" class="on-off" />
+    <label for="toc_lb">目次</label>
+    <ul>
+  <li><a href="#はじめに">はじめに</a></li>
+  <li><a href="#1-タスク設定">1. タスク設定</a></li>
+  <li><a href="#2-実装">2. 実装</a>
+    <ul>
+      <li><a href="#21-データローダ側">2.1 データローダ側</a>
+        <ul>
+          <li><a href="#211-初期設定--コンストラクタ">2.1.1 初期設定 ＆ コンストラクタ</a></li>
+          <li><a href="#212-学習データ読み込み">2.1.2 学習データ読み込み</a></li>
+          <li><a href="#213-テストデータ読み込み">2.1.3 テストデータ読み込み</a></li>
+        </ul>
+      </li>
+      <li><a href="#22-呼び出し側">2.2 呼び出し側</a></li>
+    </ul>
+  </li>
+  <li><a href="#まとめ">まとめ</a></li>
+  <li><a href="#ソースコード">ソースコード</a></li>
+</ul>
+  </div>
+
+  <div class="entry">
+    <h2 id="はじめに">はじめに</h2>
+<p><a href="https://github.com/pytorch/text">torchtext</a>は，PyTorchで自然言語処理（NLP）系のデータを比較的簡単に読み込むことができるライブラリとして有名です．しかし，とっつきやすい性質を持つ分，細かいところで苦戦する場合があります．その一例として，交差検証をやりにくいという点が挙げられます．</p>
+
+<p>正確には，torchtextで処理したデータを用いて交差検証をした例がネット上に少ないことに加え，torchtextのドキュメントにそれに関する記述がないことも災いしていると思われます．</p>
+
+<p>通常なら，torchtextで交差検証をするのは諦めて，<a href="https://github.com/skorch-dev/skorch">skorch</a>などの他のライブラリを使うと思いますが，ここではあえて「torchtext」と「sklearn」の <code class="highlighter-rouge">KFold</code> を使うことで交差検証を適用する方法を紹介したいと思います．</p>
+
+<blockquote>
+  <p><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考: <a href="https://towardsdatascience.com/use-torchtext-to-load-nlp-datasets-part-ii-f146c8b9a496">Use torchtext to Load NLP Datasets — Part II</a></p>
+</blockquote>
+
+<h2 id="1-タスク設定">1. タスク設定</h2>
+<p>映画レビュー文データセットである，IMDBデータセットを用いたネガティブ・ポジティブの2値分類タスクを解くモデルを，k分割交差検証にかけてみます．</p>
+
+<p>ベースにするモデルは，GRUとSelf-Attentionで構成されたモデルです．この実装は，<a href="https://github.com/gucci-j/imdb-classification-gru">GitHub</a>にて公開してあります．</p>
+
+<h2 id="2-実装">2. 実装</h2>
+<p>それでは，torchtextで読み込んだデータを交差検証にかけられるようにしていきましょう．</p>
+
+<h3 id="21-データローダ側">2.1 データローダ側</h3>
+<h4 id="211-初期設定--コンストラクタ">2.1.1 初期設定 ＆ コンストラクタ</h4>
+
+<p>コンストラクタ内では，通常のtorchtextの用法と同じく，<code class="highlighter-rouge">datasets.IMDB.splits()</code> でIMDBデータセットを呼び出すようにします．</p>
+
+<p>返り値は，self.train_data, self.test_data として保持しておきます．</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torchtext</span> <span class="kn">import</span> <span class="n">data</span><span class="p">,</span> <span class="n">datasets</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="k">class</span> <span class="nc">load_data</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">SEED</span><span class="o">=</span><span class="mi">1234</span><span class="p">):</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">deterministic</span> <span class="o">=</span> <span class="bp">True</span>
+
+        <span class="n">TEXT</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">tokenize</span><span class="o">=</span><span class="s">'spacy'</span><span class="p">)</span>
+        <span class="n">LABEL</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">LabelField</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="nb">float</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_data</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">IMDB</span><span class="o">.</span><span class="n">splits</span><span class="p">(</span><span class="n">TEXT</span><span class="p">,</span> <span class="n">LABEL</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SEED</span> <span class="o">=</span> <span class="n">SEED</span>
+</code></pre></div></div>
+
+<h4 id="212-学習データ読み込み">2.1.2 学習データ読み込み</h4>
+
+<p>学習データを読み込む際は，<code class="highlighter-rouge">get_fold_data()</code> を使うようにします．</p>
+
+<p>scikit-learnの <code class="highlighter-rouge">model_selection.KFold</code> クラスを使うことで，データセットを交差分割用に分割します．scikit-learnを普段から使っている人なら，おなじみかもしれません．</p>
+
+<p><code class="highlighter-rouge">KFold</code> のメソッドである，<code class="highlighter-rouge">split</code> は，引数にNumPy配列を渡す必要があるので，torchtextから生成されたデータセットでは型エラーとなってしまいます．そこで，データをNumPy配列に変換して渡してあげると型エラーにならずに動作してくれます．</p>
+
+<p>しかしながら，無理やりNumPy配列に変換したことによる弊害も生じます．というのも，そのまま，<code class="highlighter-rouge">torchtext.data.Iterator</code> にデータを渡すと，再び型エラーになってしまいます．学習をラクして回すためにイテレータは欲しいところです．</p>
+
+<p>そこで，<code class="highlighter-rouge">torchtext.data.Dataset</code> にNumPy配列に変換されてしまった学習データを渡して，イテレータを生成できる状態に戻してあげます．</p>
+
+<p>以上が，学習データの読み込み部分になります．</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_fold_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_folds</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+
+    <span class="n">TEXT</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">tokenize</span><span class="o">=</span><span class="s">'spacy'</span><span class="p">)</span>
+    <span class="n">LABEL</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">LabelField</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">fields</span> <span class="o">=</span> <span class="p">[(</span><span class="s">'text'</span><span class="p">,</span> <span class="n">TEXT</span><span class="p">),</span> <span class="p">(</span><span class="s">'label'</span><span class="p">,</span> <span class="n">LABEL</span><span class="p">)]</span>
+
+    <span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">num_folds</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">SEED</span><span class="p">)</span>
+    <span class="n">train_data_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">train_data</span><span class="o">.</span><span class="n">examples</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">val_index</span> <span class="ow">in</span> <span class="n">kf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">train_data_arr</span><span class="p">):</span>
+        <span class="k">yield</span><span class="p">(</span>
+            <span class="n">TEXT</span><span class="p">,</span>
+            <span class="n">LABEL</span><span class="p">,</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">train_data_arr</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">fields</span><span class="o">=</span><span class="n">fields</span><span class="p">),</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">train_data_arr</span><span class="p">[</span><span class="n">val_index</span><span class="p">],</span> <span class="n">fields</span><span class="o">=</span><span class="n">fields</span><span class="p">),</span>
+        <span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="213-テストデータ読み込み">2.1.3 テストデータ読み込み</h4>
+
+<p>テストデータの読み込みは，NumPy配列に変換する必要もないので，メソッドが呼び出されたら，そのままデータを渡してあげるだけで大丈夫です．</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_test_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_data</span>
+</code></pre></div></div>
+
+<h3 id="22-呼び出し側">2.2 呼び出し側</h3>
+
+<p>呼び出し側は基本的には，交差検証無しの<a href="https://github.com/gucci-j/imdb-classification-gru">ベースモデル</a>と同じです．</p>
+
+<p>追加されている点としては，<code class="highlighter-rouge">data.Iterator</code> でイテレータを生成する作業が追加されていることです．また，各foldでの結果を保存するために，リスト: <code class="highlighter-rouge">_history</code> を用意してあります．</p>
+
+<p>細かい点は，<a href="https://github.com/gucci-j/pytorch-imdb-cv">GitHub</a>にて実装を公開しているので，そちらを参照いただければと思います．</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">data_generator</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">()</span>
+    <span class="n">_history</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">criterion</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">for</span> <span class="n">TEXT</span><span class="p">,</span> <span class="n">LABEL</span><span class="p">,</span> <span class="n">train_data</span><span class="p">,</span> <span class="n">val_data</span> <span class="ow">in</span> <span class="n">data_generator</span><span class="o">.</span><span class="n">get_fold_data</span><span class="p">():</span>
+
+        <span class="n">TEXT</span><span class="o">.</span><span class="n">build_vocab</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">max_size</span><span class="o">=</span><span class="mi">25000</span><span class="p">,</span> <span class="n">vectors</span><span class="o">=</span><span class="s">"glove.6B.300d"</span><span class="p">)</span>
+        <span class="n">LABEL</span><span class="o">.</span><span class="n">build_vocab</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">TEXT</span><span class="o">.</span><span class="n">vocab</span><span class="p">),</span> <span class="n">args</span><span class="p">[</span><span class="s">'embedding_dim'</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="s">'hidden_dim'</span><span class="p">],</span>
+            <span class="n">args</span><span class="p">[</span><span class="s">'output_dim'</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="s">'num_layers'</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="s">'dropout'</span><span class="p">])</span>
+        
+        <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
+        <span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BCEWithLogitsLoss</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="s">'gpu'</span><span class="p">]</span> <span class="ow">is</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">args</span><span class="p">[</span><span class="s">'gpu_number'</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">set_device</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="s">'gpu_number'</span><span class="p">])</span>
+            <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s">'cuda'</span><span class="p">)</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">criterion</span> <span class="o">=</span> <span class="n">criterion</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s">'cpu'</span><span class="p">)</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+            <span class="n">criterion</span> <span class="o">=</span> <span class="n">criterion</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        
+        <span class="n">train_iterator</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Iterator</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">args</span><span class="p">[</span><span class="s">'batch_size'</span><span class="p">],</span> <span class="n">sort_key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">text</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">val_iterator</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Iterator</span><span class="p">(</span><span class="n">val_data</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">args</span><span class="p">[</span><span class="s">'batch_size'</span><span class="p">],</span> <span class="n">sort_key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">text</span><span class="p">),</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="s">'epochs'</span><span class="p">]):</span>
+            <span class="n">train_loss</span><span class="p">,</span> <span class="n">train_acc</span> <span class="o">=</span> <span class="n">train_run</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_iterator</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">criterion</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'| Epoch: {epoch+1:02} | Train Loss: {train_loss:.3f} | Train Acc: {train_acc*100:.2f}</span><span class="si">%</span><span class="s">'</span><span class="p">)</span>
+        <span class="n">val_loss</span><span class="p">,</span> <span class="n">val_acc</span> <span class="o">=</span> <span class="n">eval_run</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">val_iterator</span><span class="p">,</span> <span class="n">criterion</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'Val. Loss: {val_loss:.3f} | Val. Acc: {val_acc*100:.2f}</span><span class="si">% </span><span class="s">|'</span><span class="p">)</span>
+
+        <span class="n">_history</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">val_loss</span><span class="p">,</span> <span class="n">val_acc</span><span class="p">])</span>
+    
+    <span class="n">_history</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">_history</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">_history</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">acc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">_history</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+    
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">'LOSS: {loss}, ACC: {acc}'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="まとめ">まとめ</h2>
+
+<p>やや駆け足の解説となりましたが，一回NumPy配列に変換してあげることで交差検証が可能になるので，どうしてもtorchtextでデータセットを読み込みたい人には使えるテクニックだと思います．</p>
+
+<p>実際のところtorchtextのレポジトリを見ると，交差検証に関するissueが出ているので，この機能を設けて欲しい人はそれなりにいるみたいですね．（ですが，今の所はこの投稿のような形で無理やり対処するしかないでしょう…）</p>
+
+<h2 id="ソースコード">ソースコード</h2>
+
+<p>ソースコードは，<a href="https://github.com/gucci-j/pytorch-imdb-cv">GitHub</a>にて公開しています．</p>
+
+  </div>
+
+  <!--
+  <div class="date">
+    Written on June  9, 2019
+  </div>
+  -->
+
+  <style type="text/css">
+    @font-face {
+	font-family: 'icomoon';
+	src:url('/resources/fonts/icomoon.eot?ookgoz');
+	src:url('/resources/fonts/icomoon.eot?ookgoz#iefix') format('embedded-opentype'),
+		url('/resources/fonts/icomoon.ttf?ookgoz') format('truetype'),
+		url('/resources/fonts/icomoon.woff?ookgoz') format('woff'),
+		url('/resources/fonts/icomoon.svg?ookgoz#icomoon') format('svg');
+		font-weight: normal;
+		font-style: normal;
+    }
+
+    [class^="icon-"], [class*=" icon-"] {
+        /* use !important to prevent issues with browser extensions that change fonts */
+        font-family: 'icomoon' !important;
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: inherit;
+        
+        /* Better Font Rendering =========== */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .icon-line:before        {content: "\e90a";}
+    .icon-pocket:before      {content: "\e902";}
+    .icon-twitter:before     {content: "\ea96";}
+    .icon-facebook:before    {content: "\ea90";}
+    .icon-hatebu:before      {content: "\e903";}
+
+    .amazon-icon::before     {content: "Amazon.co.jpで買って応援！";}
+
+    /*ソーシャルリストデザイン2*/
+    .shareList2 {
+        list-style:none;
+        display: flex;
+        flex-wrap:wrap;
+        width:100%;
+        margin:-5px 0 0 -5px;
+        padding:0;
+    }
+    .shareList2__item {
+        height:30px;
+        line-height:30px;
+        width:30px;
+        margin:5px 0 0 5px;
+        text-align:center;
+    }
+    .shareList2__item__amazon {
+        height:30px;
+        line-height:30px;
+        width: 240px;
+        margin:5px 0 0 5px;
+        text-align:center;
+    }
+    .shareList2__link {
+        display:block;
+        color:#ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .shareList2__link::before{
+        font-size:16px;
+        display:block;
+        transition: ease-in-out .2s;
+        border-radius: 5px;
+    }
+    .shareList2__link:hover::before{
+        background:#ffffff;
+        transform: scale(1.2);
+        box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
+    }
+
+    .shareList2__link__amazon {
+        display:block;
+        color:#ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .shareList2__link__amazon::before{
+        font-size:16px;
+        display:block;
+        transition: ease-in-out .2s;
+        border-radius: 5px;
+    }
+    .shareList2__link__amazon:hover::before{
+        background:#ffffff;
+        box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
+    }
+
+    .shareList2__link.icon-twitter{background:#55acee;}
+    .shareList2__link.icon-twitter:hover::before{color:#55acee;}
+
+    .shareList2__link.icon-facebook{background:#3B5998;}
+    .shareList2__link.icon-facebook:hover::before{color:#3B5998;}
+
+    .shareList2__link.icon-hatebu{background:#008FDE;}
+    .shareList2__link.icon-hatebu:hover::before{color:#008FDE;}
+
+    .shareList2__link.icon-pocket{background:#EB4654;}
+    .shareList2__link.icon-pocket:hover::before{color:#EB4654;}
+
+    .shareList2__link.icon-line{background:#1dcd00;}
+    .shareList2__link.icon-line:hover::before{color:#1dcd00;}
+
+    .shareList2__link__amazon.amazon-icon{background:#ff9900;}
+    .shareList2__link__amazon.amazon-icon:hover::before{color:#ff9900;}
+</style>
+
+<ul class="shareList2" style="margin-top: 5px;">
+    <li class="shareList2__item"><a class="shareList2__link icon-twitter" href="https://twitter.com/intent/tweet?text=torchtext%E3%81%A7k-%E5%88%86%E5%89%B2%E4%BA%A4%E5%B7%AE%E6%A4%9C%E8%A8%BC%E3%82%92%E3%81%99%E3%82%8B%E8%A9%B1+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP&amp;url=http%3A%2F%2Flocalhost%3A4000%2Fcv-with-torchtext%2F" target="_blank" title="Twitter"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-facebook" href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fcv-with-torchtext%2F" target="_blank" title="Facebook"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-hatebu" href="https://b.hatena.ne.jp/add?mode=confirm&amp;url=http%3A%2F%2Flocalhost%3A4000%2Fcv-with-torchtext%2F" target="_blank" title="はてなブックマーク"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-pocket" href="//getpocket.com/edit?url=http%3A%2F%2Flocalhost%3A4000%2Fcv-with-torchtext%2F&title=torchtext%E3%81%A7k-%E5%88%86%E5%89%B2%E4%BA%A4%E5%B7%AE%E6%A4%9C%E8%A8%BC%E3%82%92%E3%81%99%E3%82%8B%E8%A9%B1+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP" target="_blank" title="Pocket"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-line" href="http://line.me/R/msg/text/?torchtext%E3%81%A7k-%E5%88%86%E5%89%B2%E4%BA%A4%E5%B7%AE%E6%A4%9C%E8%A8%BC%E3%82%92%E3%81%99%E3%82%8B%E8%A9%B1+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP%0Ahttp%3A%2F%2Flocalhost%3A4000%2Fcv-with-torchtext%2F" target="_blank" title="LINE"></a></li>
+    <li class="shareList2__item__amazon"><a class="shareList2__link__amazon amazon-icon" href="//af.moshimo.com/af/c/click?a_id=1430714&p_id=170&pc_id=185&pl_id=4062&url=https%3A%2F%2Fwww.amazon.co.jp%2F" target="_blank" rel="nofollow"></a>
+        <img src="//i.moshimo.com/af/i/impression?a_id=1430714&p_id=170&pc_id=185&pl_id=4062" width="1" height="1" style="border:none;"></li>
+</ul>
+
+  <br />
+
+  <div class="footer_ads">
+    <div class="left_ad">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- フッター1 -->
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-1838422896597988"
+            data-ad-slot="4583840862"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <div class="right_ad">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- フッター2 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1838422896597988"
+             data-ad-slot="3446169345"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+  </div>
+  <br />
+
+  <!-- 前後のページへのリンク-->
+  <div class="pager">
+    
+      <div class="next">
+        <p><i class="fas fa-arrow-circle-left" style="margin: 0 0.5em 0 0;"></i>次の記事</p>
+        <p>
+          <a href="/memo-svm/">サポートベクターマシンのお話</a>
+        </p>
+      </div>
+    
+
+    
+      <div class="prev">
+        <p>前の記事<i class="fas fa-arrow-circle-right" style="margin: 0 0 0 0.5em;"></i></p>
+        <p>
+            <a href="/Note-Transformer/">論文メモ：Attention Is All You Need</a>
+        </p>
+      </div>
+    
+  </div>
+
+  
+  
+</article>
+
+      </main>
+
+      <aside class="sidebar" role="complementary">
+        <div class="side-ad">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- サイドバー -->
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-1838422896597988"
+      data-ad-slot="3641305571"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+
+<div class="profile">
+  <div style="text-align: center;">
+    <a href="/about/">
+      <img style="width: 100px; border-radius: 50px;" src="/resources/logo/profile.jpg" />
+    </a>
+    <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1;"><strong>Gucci</strong></p>
+  </div>
+  <p style="margin-top: 0.5em; margin-bottom: 0; font-size: 0.8em; text-align: center;">
+    自然言語処理や機械学習に関連する情報を発信しています。
+    留学系の話題も<a href="https://note.mu/_gucciiiii">note</a>に書いています。
+  </p>
+  <hr />
+  <div class="profile_icon">
+    
+<a href="/contact/"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/gucci-j"><i class="svg-icon github"></i></a>
+
+
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/_gucciiiii"><i class="svg-icon twitter"></i></a>
+
+
+
+  </div>
+</div>
+
+<div class="amazon-button">
+  <p style="margin-top: 0; margin-bottom: 0.5em; font-size: 0.8em; text-align: center;">
+    <strong>Amazon.co.jpで買って応援！</strong>
+  </p>
+  <div style="text-align: center;">
+    <a href="//af.moshimo.com/af/c/click?a_id=1430714&p_id=170&pc_id=185&pl_id=10340&guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0068/000000010340.gif" width="300" height="50" style="border:none; padding-bottom: 0;"></a>
+    <img src="//i.moshimo.com/af/i/impression?a_id=1430714&p_id=170&pc_id=185&pl_id=10340" width="0" height="0" style="display: none; border:none;">
+  </div>
+</div>
+
+<div class="search">
+  <script>
+    (function() {
+      var cx = 'partner-pub-1838422896597988:8655986192';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+    })();
+  </script>
+  <gcse:searchbox-only></gcse:searchbox-only>
+</div>
+
+
+<div class="recent-posts">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>最近の記事</strong>
+  </p>
+  <hr />
+  <ul style="padding-right: 5px; padding-left: 1.5em;">
+    
+      <li>
+        <a href="/Note-Decoupling/">
+          論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues
+        </a>
+      </li>
+    
+      <li>
+        <a href="/memo-svm/">
+          サポートベクターマシンのお話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/cv-with-torchtext/">
+          torchtextでk-分割交差検証をする話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/Note-Transformer/">
+          論文メモ：Attention Is All You Need
+        </a>
+      </li>
+    
+      <li>
+        <a href="/DL-Intro-5/">
+          ゼロから作るDeep Learningとともに学ぶフレームワーク（畳み込みニューラルネットワーク編）
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="side-category">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>タグ一覧</strong>
+  </p>
+  <hr />
+  <ul style="padding: 0 10px 0 10px;">
+    
+      <li>
+        <a href="/sitemap#PyTorch">
+          PyTorch
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#Tips">
+          Tips
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#「ゼロからKeras」シリーズ">
+          「ゼロからKeras」シリーズ
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#ブログ全般">
+          ブログ全般
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#機械学習全般">
+          機械学習全般
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#論文メモ">
+          論文メモ
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+      </aside>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="footer_container">
+        <footer class="footer">
+          
+<a href="/contact/"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/gucci-j"><i class="svg-icon github"></i></a>
+
+
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/_gucciiiii"><i class="svg-icon twitter"></i></a>
+
+
+<br />
+          <a href="/">Home</a>
+          | <a href="/Introduction/">About This Blog</a>  
+          | <a href="/sitemap/">Sitemap</a> 
+          | <a href="/privacy/">Privacy</a><br />
+          <div style="font-size: 8pt;">© 2019 Atsuki Yamaguchi.</div>
+        </footer>
+      </div>
+    </div>
+
+    
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-137498199-1', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/cv-with-torchtext/',
+		  'title': 'torchtextでk-分割交差検証をする話'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  </body>
+</html>

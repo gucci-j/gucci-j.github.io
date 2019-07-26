@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>論文メモ：Attention Is All You Need – きままにNLP – A Technical Blog about NLP and ML</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="Googleが昨年発表した，BERT：Bidirectional Encoder Representation for Transformersは，様々なNLPタスクにおいて当時の最高スコアを記録し，世界中で瞬く間に注目を浴びることとなりました．結果として，BERTはNAACL 2019のBest Long Paper Awardにも輝いています．
+
+" />
+    <meta property="og:description" content="Googleが昨年発表した，BERT：Bidirectional Encoder Representation for Transformersは，様々なNLPタスクにおいて当時の最高スコアを記録し，世界中で瞬く間に注目を浴びることとなりました．結果として，BERTはNAACL 2019のBest Long Paper Awardにも輝いています．
+
+" />
+    
+    <meta name="author" content="きままにNLP" />
+
+    
+    <meta property="og:title" content="論文メモ：Attention Is All You Need" />
+    <meta property="twitter:title" content="論文メモ：Attention Is All You Need" />
+    
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    
+      
+        <link rel="stylesheet" type="text/css" href="/css/post.css">
+      
+    
+    <link rel="alternate" type="application/rss+xml" title="きままにNLP - A Technical Blog about NLP and ML" href="/feed.xml" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+    <!-- Favicon head tag -->
+    <link rel="icon" href="/resources/logo/kimamani_simple.png" type="image/x-icon">
+
+    <!-- Begin Jekyll SEO tag v2.6.0 -->
+<title>論文メモ：Attention Is All You Need | きままにNLP</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="論文メモ：Attention Is All You Need" />
+<meta property="og:locale" content="ja_JP" />
+<meta name="description" content="BERTの基本構成要素となっていることで，ますますの注目を集めている，Attention is All You Need（Transformer）の論文メモ書きを共有・紹介します．" />
+<meta property="og:description" content="BERTの基本構成要素となっていることで，ますますの注目を集めている，Attention is All You Need（Transformer）の論文メモ書きを共有・紹介します．" />
+<link rel="canonical" href="http://localhost:4000/Note-Transformer/" />
+<meta property="og:url" content="http://localhost:4000/Note-Transformer/" />
+<meta property="og:site_name" content="きままにNLP" />
+<meta property="og:image" content="http://localhost:4000/resources/2019-05-23/pe.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-05-23T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://localhost:4000/resources/2019-05-23/pe.png" />
+<meta property="twitter:title" content="論文メモ：Attention Is All You Need" />
+<meta name="twitter:site" content="@_gucciiiii" />
+<script type="application/ld+json">
+{"description":"BERTの基本構成要素となっていることで，ますますの注目を集めている，Attention is All You Need（Transformer）の論文メモ書きを共有・紹介します．","@type":"BlogPosting","url":"http://localhost:4000/Note-Transformer/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/kimamani.png"}},"image":"http://localhost:4000/resources/2019-05-23/pe.png","headline":"論文メモ：Attention Is All You Need","dateModified":"2019-05-30T15:00:00+09:00","datePublished":"2019-05-23T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/Note-Transformer/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- Google Adsense-->
+    <!--
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-1838422896597988",
+        enable_page_level_ads: true
+      });
+    </script>
+    -->
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="head_container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="/resources/logo/kimamani.png" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/"><img src="/resources/logo/kimamani_moji.png" /></a></h1>
+          </div>
+
+          <nav>
+            <a href="/">Blog</a>
+            <a href="/about">About</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div class="container">
+      <main class="main_contents" role="main">
+        <article class="post">
+  <div class="date_front">
+    <i class="far fa-calendar-alt" style="padding: 0 2px 0 0;"></i>
+    2019-05-23
+
+    
+      <i class="fas fa-redo-alt" style="padding: 0 2px 0 10px;"></i>
+      2019-05-30
+    
+
+  </div>
+  <h1>論文メモ：Attention Is All You Need</h1>
+
+  <div class="post-tag">
+    
+
+
+
+
+<ul>
+  <i class="fas fa-tag" style="padding: 0 2px 0 0;"></i>
+  
+    <li>
+      <a href="/sitemap#論文メモ">
+        論文メモ
+      </a>
+    </li>
+  
+</ul>
+  </div>
+
+  <div class="toc">
+    <input type="checkbox" id="toc_lb" class="on-off" />
+    <label for="toc_lb">目次</label>
+    <ul>
+  <li><a href="#文献情報">文献情報</a></li>
+  <li><a href="#どんなもの">どんなもの？</a></li>
+  <li><a href="#先行研究と比べてどこがすごい">先行研究と比べてどこがすごい？</a></li>
+  <li><a href="#技術や手法のキモはどこ">技術や手法のキモはどこ？</a></li>
+  <li><a href="#どうやって有効だと検証した">どうやって有効だと検証した？</a></li>
+  <li><a href="#論文の主張">論文の主張</a></li>
+  <li><a href="#従来手法">従来手法</a></li>
+  <li><a href="#提案手法の先行研究との違い">提案手法の先行研究との違い</a></li>
+  <li><a href="#attentionについて">Attentionについて</a></li>
+  <li><a href="#提案手法">提案手法</a>
+    <ul>
+      <li><a href="#1-エンコーダスタック">1. エンコーダスタック</a></li>
+      <li><a href="#2-デコーダスタック">2. デコーダスタック</a></li>
+      <li><a href="#3-attention">3. Attention</a>
+        <ul>
+          <li><a href="#31-スケール化内積注意">3.1 スケール化内積注意</a></li>
+          <li><a href="#32-multi-head-attention">3.2 Multi-head attention</a></li>
+          <li><a href="#33-transformerにおけるattention">3.3 TransformerにおけるAttention</a></li>
+        </ul>
+      </li>
+      <li><a href="#4-位置エンコーディング">4. 位置エンコーディング</a></li>
+    </ul>
+  </li>
+  <li><a href="#評価指標">評価指標</a>
+    <ul>
+      <li><a href="#bleu">BLEU</a></li>
+      <li><a href="#bpとは">BPとは？</a></li>
+      <li><a href="#修正nグラム精度とは">修正Nグラム精度とは?</a></li>
+    </ul>
+  </li>
+  <li><a href="#実験解析結果">実験・解析結果</a>
+    <ul>
+      <li><a href="#計算コスト比較">計算コスト比較</a>
+        <ul>
+          <li><a href="#complexity-per-layer">Complexity per layer</a></li>
+          <li><a href="#sequential-operations">Sequential Operations</a></li>
+          <li><a href="#maximum-path-length">Maximum Path Length</a></li>
+        </ul>
+      </li>
+      <li><a href="#翻訳性能比較">翻訳性能比較</a></li>
+    </ul>
+  </li>
+  <li><a href="#まとめスライド">まとめスライド</a></li>
+  <li><a href="#実装">実装</a></li>
+</ul>
+  </div>
+
+  <div class="entry">
+    <p>Googleが昨年発表した，BERT：Bidirectional Encoder Representation for Transformersは，様々なNLPタスクにおいて当時の最高スコアを記録し，世界中で瞬く間に注目を浴びることとなりました．結果として，BERTはNAACL 2019のBest Long Paper Awardにも輝いています．</p>
+
+<p>ここでは，そんなBERTの基本構成要素となっている，Transformerについての論文メモを共有します．</p>
+
+<p>なお，BERTを理解するためにTransformerを雰囲気でつかみたい方は，<a href="#まとめスライド">末尾のスライド</a>を参照すると参考になるかもしれません．</p>
+
+<h2 id="文献情報">文献情報</h2>
+<p>著者: A. Vaswani et al.<br />
+所属: Google Brain<br />
+出典: <a href="https://arxiv.org/abs/1706.03762">NeurIPS 2017</a></p>
+
+<h2 id="どんなもの">どんなもの？</h2>
+<p>Attentionをフルに活用した系列変換モデルを提案した．</p>
+
+<h2 id="先行研究と比べてどこがすごい">先行研究と比べてどこがすごい？</h2>
+<ul>
+  <li>再帰や畳み込みを用いない新しい系列変換（sequence transduction）モデルを提案した．<br />
+→ 並列処理が可能となり，計算コストを削減したことで，学習時間を大幅に減らすことができた．<br />
+→ 英独・英仏の翻訳テストで当時の最高スコア: BLEUを記録した．</li>
+</ul>
+
+<h2 id="技術や手法のキモはどこ">技術や手法のキモはどこ？</h2>
+<ul>
+  <li>
+    <p>ほぼAttention（注意機構）だけを用いて系列変換モデルを構築している点<br />
+→ Scaled Dot-Product Attention<br />
+→ Multi-Head Attention</p>
+  </li>
+  <li>
+    <p>時系列を考慮するために，位置エンコーディング（positional encoding）を導入している点</p>
+  </li>
+</ul>
+
+<h2 id="どうやって有効だと検証した">どうやって有効だと検証した？</h2>
+<ul>
+  <li>主にBLEUスコアとパープレキシティ</li>
+  <li>構文解析のスコア</li>
+</ul>
+
+<div class="inner_ads">
+    <div class="left_ad_in">
+        <a href="//af.moshimo.com/af/c/click?a_id=1502939&amp;p_id=1555&amp;pc_id=2816&amp;pl_id=22749&amp;guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0866/000000022749.jpg" width="300" height="250" style="border:none;" /></a><img src="//i.moshimo.com/af/i/impression?a_id=1502939&amp;p_id=1555&amp;pc_id=2816&amp;pl_id=22749" width="1" height="1" style="border:none;" />
+    </div> 
+    <div class="right_ad_in">
+        <a href="//af.moshimo.com/af/c/click?a_id=1502952&amp;p_id=1386&amp;pc_id=2364&amp;pl_id=20737&amp;guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0598/000000020737.png" width="300" height="250" style="border:none;" /></a><img src="//i.moshimo.com/af/i/impression?a_id=1502952&amp;p_id=1386&amp;pc_id=2364&amp;pl_id=20737" width="1" height="1" style="border:none;" />
+    </div>
+</div>
+
+<h2 id="論文の主張">論文の主張</h2>
+<p>近年の系列変換モデルは，再帰ニューラルネットや畳込みニューラルネットに大きく依存している．また，SoTAを達成するようなモデルであっても，注意機構を取り入れた再帰 or CNNのモデルに依存しており，モデルが複雑になっている．</p>
+
+<p>この論文では，<strong>Transformer</strong>と呼ばれる，注意機構にだけ基づくシンプルなモデルを提案している．Transformerは再帰ニューラルネットや畳み込みニューラルネットを必要としないモデルである．</p>
+
+<p>実験結果では，翻訳タスクについてstate-of-the-artを達成し，かつその並列演算能力の高さや，学習時間の低減というメリットが挙げられた．また，翻訳タスク以外のNLPタスクへの有用性も示唆された．</p>
+
+<h2 id="従来手法">従来手法</h2>
+<p>時系列モデリングにおける再帰ニューラルネット &amp; 畳み込みを用いたモデルは，これまで多く活用されてきた．</p>
+
+<ul>
+  <li>再帰を伴うモデルは実行時間にかなりの影響を及ぼす．<br />
+→ 再帰によって並列計算が妨げられるため．<br />
+→ factorization trickやconditional computationといった手法が考案されてきた．
+    <ul>
+      <li>こうした手法は直接的に時系列モデリングの問題を解決するものではない．<br />
+<br /></li>
+    </ul>
+  </li>
+  <li>畳み込みを伴うモデルは再帰よりも実行時間に影響は及ぼさない．
+    <ul>
+      <li>しかし，入出力の依存関係を計算する際に，その範囲が大きくなればなるほど，計算量が対数または，線形に増加してしまうというデメリットがある．<br />
+<br /></li>
+    </ul>
+  </li>
+  <li>注意機構は時系列モデリングにおいて広く用いられてきた．<br />
+→ 注意機構を用いることで，依存関係のモデリングが可能となる．</li>
+</ul>
+
+<h2 id="提案手法の先行研究との違い">提案手法の先行研究との違い</h2>
+<ul>
+  <li>新たに提唱するTransformerは，Attentionだけを活用し，再帰は一切伴わない．<br />
+→ Attentionが入力と出力間の大域的な依存関係を抽出できる．<br />
+→ 並列計算が可能となり，計算の高速化が図られる．<br />
+→ 翻訳の質の観点においても，SoTAを達成することができた．</li>
+</ul>
+
+<h2 id="attentionについて">Attentionについて</h2>
+<ul>
+  <li>Attentionの算出方法には次の二つが挙げられる．
+    <ul>
+      <li>
+        <p>Additive Attention: 加法注意機構
+  隠れ層が一つのフィードフォワードネットワークを用いてAttentionを計算する．</p>
+      </li>
+      <li>
+        <p>Dot-product Attention: 内積注意機構
+  論文中で使われているAttentionである．行列を用いてAttentionが計算できるため，高速性・省メモリ性に優れている．</p>
+      </li>
+    </ul>
+  </li>
+  <li>self-attention: 自己注意機構<br />
+単一のシーケンスに対してattentionを適用する手法のこと．Encoder-Decoderモデルで用いられるattentionとは異なる．<br />
+→ 入力文の特徴量を抽出するために使われる．<br />
+→ Transformerで使われるAttetionはSelf-attention．</li>
+</ul>
+
+<h2 id="提案手法">提案手法</h2>
+<ul>
+  <li>モデルは基本的な系列変換モデルの枠組みに基づく．<br />
+→ つまり，各時刻において，モデルは自己回帰を行う．
+    <ul>
+      <li>ここでの自己回帰は，次のトークンを生成するために，前に生成されたトークンを追加の入力として用いるということである．<br />
+<br /></li>
+    </ul>
+  </li>
+  <li>モデルは，スタック型自己注意と全結合層（point-wise）からなる．<br />
+→ 以下の図がモデルの概要図になっている．</li>
+</ul>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-05-23/model.png" alt="Transformerモデル図" style="width: 400px;" /><br />
+</div>
+
+<blockquote>
+  <p><i class="fas fa-image" style="padding: 0 2px 0 0;"></i> 図引用: <a href="https://arxiv.org/abs/1706.03762">https://arxiv.org/abs/1706.03762</a></p>
+</blockquote>
+
+<h3 id="1-エンコーダスタック">1. エンコーダスタック</h3>
+<ul>
+  <li>
+    <p>エンコーダネットワークはスタック型となっており，6個のブロックから構成される．<br />
+→ この6はハイパーパラメータ．</p>
+  </li>
+  <li>ブロック内での処理の流れ（順方向）
+    <ol>
+      <li>multi-head self-attentionを適用する．</li>
+      <li>残差接続のベクトル（つまり入力ベクトル）と1の出力ベクトルを足し合わせて，層正規化を行う．</li>
+      <li>位置ごとの全結合を適用する．</li>
+      <li>残差接続のベクトル（つまり2の出力ベクトル）と3の出力ベクトルを足し合わせて，層正規化を行う．<br />
+<br /></li>
+    </ol>
+  </li>
+  <li>各層の次元は512で統一されている．</li>
+  <li>残差接続は単に勾配消失を防いで学習をうまく進めるためと思われる．</li>
+  <li>層正規化は学習時間の軽減&amp;学習の安定化に寄与する．</li>
+  <li>BERTはこのエンコーダ部分を活用している．</li>
+</ul>
+
+<blockquote>
+  <p><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: <a href="https://arxiv.org/abs/1607.06450">（層正規化の論文）</a></p>
+</blockquote>
+
+<h3 id="2-デコーダスタック">2. デコーダスタック</h3>
+<ul>
+  <li>
+    <p>デコーダネットワークも6個の独立したスタックブロックから構成される．</p>
+  </li>
+  <li>
+    <p>エンコーダネットワークにある2層に加えて，エンコーダの出力を活用したmulti-head attentionを追加している．</p>
+  </li>
+  <li>
+    <p>Self-attentionに関しては，未来の入力を考慮することがないように，マスク付きに改良している．<br />
+→ 予測対象の単語の情報が事前に漏れるのを防ぐ目的</p>
+  </li>
+</ul>
+
+<h3 id="3-attention">3. Attention</h3>
+<ul>
+  <li>Attentionはクエリとキー&amp;バリューの組を出力ベクトルにマッピングするものと捉えることができる． <br />
+→ 出力ベクトルはバリューの重みつき線形和で表される．<br />
+→ 重みは，クエリとキーの変換関数から算出される.</li>
+</ul>
+
+<h4 id="31-スケール化内積注意">3.1 スケール化内積注意</h4>
+<ul>
+  <li>論文内で使用されるattentionは基本的に，スケール化内積注意（Scaled Dot-Product Attention）を用いている．</li>
+  <li>
+    <p>入力は次元: $d_k$のクエリとキー，次元: $d_v$のバリューからなる．</p>
+  </li>
+  <li>Attentionの計算手順は以下のようになる
+    <ol>
+      <li>あるクエリに対して，そのクエリと<strong>全て</strong>のキーの内積を求める．</li>
+      <li>$\sqrt{d_k}$で除算する．（スケール化）</li>
+      <li>ソフトマックスにかけることで，各バリューの重みを求める．</li>
+      <li>バリューと重みを掛け合わせる．<br />
+<br /></li>
+    </ol>
+  </li>
+  <li>実際には，複数のクエリを同時に処理するため，行列を用いて以下のように求められる．</li>
+</ul>
+
+<div class="mathjax-scroll">
+$$
+{\rm Attention}(Q, K, V) = {\rm softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+$$
+</div>
+
+<ul>
+  <li>$d_k$ が小さいときは内積注意も加法注意も実行時間に変わりはないが，$d_k$ が大きくなるにつれて，加法注意の方が高速になってしまう．<br />
+  → 内積が大きくなるので，勾配が極端に小さくなり，学習が進まなくなる．<br />
+  → これに対処するために，スケール化を行う．</li>
+</ul>
+
+<h4 id="32-multi-head-attention">3.2 Multi-head attention</h4>
+<ul>
+  <li>multi-head attentionは，attentionを複数に分割することを意味する．<br />
+→ モデルが異なる部分空間から異なる情報を抽出するのに長けている．<br />
+→ いろいろなnグラムを取る目的と一緒．<br />
+→ イメージとしてはCNNでチャンネル数を増やしてモデルの表現力を高めることと同じ？</li>
+</ul>
+
+<div class="mathjax-scroll">
+$$
+{\rm MultiHead}(Q, K, V) = {\rm Concat}({\rm head_1}, \dots, {\rm head_h})W^O \\
+{\rm head_i} = {\rm Attention}(QW_i^Q, KW_i^K, VW_i^V)
+$$
+</div>
+
+<p>ただし，$W_i^Q, W_i^K \in \mathbb{R}^{d_{model} \times d_k}$, $W_i^V \in \mathbb{R}^{d_{model} \times d_v}$, $W^O \in \mathbb{R}^{hd_v \times d_{model}}$ である．</p>
+
+<p>論文中では，$h = 8$, $d_k = d_v = d_{\rm model} / h = 64$ なので，各ヘッドの次元が小さくなるため，計算量的にはsingle-head attentionとあまり変わらなくなる．</p>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-05-23/attention_comparison.png" alt="Attentionの比較" style="width: 500px;" /><br />
+</div>
+
+<blockquote>
+  <p><i class="fas fa-image" style="padding: 0 2px 0 0;"></i> 図引用: <a href="https://arxiv.org/abs/1706.03762">https://arxiv.org/abs/1706.03762</a></p>
+</blockquote>
+
+<h4 id="33-transformerにおけるattention">3.3 TransformerにおけるAttention</h4>
+<ul>
+  <li>
+    <p>デコーダの「エンコーダ・デコーダ」Attention<br />
+→ クエリは前のデコーダの出力<br />
+→ キーとバリューはエンコーダの出力<br />
+つまり，普通の系列変換モデルでのattentionと同様である．</p>
+  </li>
+  <li>
+    <p>エンコーダのAttention<br />
+→ 単純な自己注意<br />
+→ クエリ，キー，バリューともに前のエンコーダの出力</p>
+  </li>
+  <li>
+    <p>デコーダのAttention<br />
+→ 自分のポジションまで参照できる自己注意<br />
+→ 自己回帰がきちんとできるようにするため<br />
+→ 図2中で，スケール化内積注意のsoftmax前に，未来の入力に対応する部分を，$-\infty$で置き換えることにより，実装した．<br />
+→ ${\rm softmax}(x_i)=\frac{\exp(x_i)}{\sum_j \exp (x_j)}$で，$x_i \to -\infty$なら，その項は0になるので，考慮されなくなるということ．</p>
+  </li>
+</ul>
+
+<h3 id="4-位置エンコーディング">4. 位置エンコーディング</h3>
+<ul>
+  <li>Transformerは畳み込みや再帰を伴わないので，それだけでは時系列を考慮することができない．<br />
+→ 時系列を考慮するために，入力の埋め込み表現に「位置情報」を埋め込む．</li>
+</ul>
+
+<div class="mathjax-scroll">
+$$
+PE_{(pos, 2i + 1)} = \cos\left(\frac{pos}{10000^{\frac{2i}{d_{model}}}}\right)
+$$
+</div>
+
+<div class="mathjax-scroll">
+$$
+PE_{(pos, 2i)} = \sin\left(\frac{pos}{10000^{\frac{2i}{d_{model}}}}\right)
+$$
+</div>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-05-23/pe.png" alt="Positional Encodingを可視化した図" style="width: 500px;" /><br />
+</div>
+
+<blockquote>
+  <p><i class="fas fa-image" style="padding: 0 2px 0 0;"></i> 図作成: <a href="https://github.com/gucci-j/pe-visualization">https://github.com/gucci-j/pe-visualization</a></p>
+</blockquote>
+
+<h2 id="評価指標">評価指標</h2>
+<h3 id="bleu">BLEU</h3>
+<p>Bilingual Evaluation Understudyの略．<br />
+ACL2002で発表された機械翻訳の自動評価指標である．</p>
+
+<p>BLEUスコアは高ければ高いほどよい指標となっている．</p>
+
+<div class="mathjax-scroll">
+$$
+{\rm BLEU} = {\rm BP} \exp{\left(\sum_{n=1}^N \frac{1}{N} \log P_n \right)}
+$$
+</div>
+
+<h3 id="bpとは">BPとは？</h3>
+<p>BPとは，brevity penaltyの略．brevityは英語で「簡潔さ・短さ」を意味する．<br />
+つまり，翻訳された結果が短文であると，その文だけペナルティを喰らうということである．</p>
+
+<p>修正Nグラムだけでは，翻訳文が短い文のときに$P_n$が高くなってしまうため，このBP項で低減させる．</p>
+
+<div class="mathjax-scroll">
+$$
+{\rm BP} = \begin{cases}
+    1 &amp; {\rm if}\  c &gt; r\\
+    \exp{(1-r/c)} &amp; {\rm if}\  c \leq r\\
+    \end{cases}
+$$
+</div>
+
+<p>ただし，$c$は翻訳された文の長さを意味し，$r$は正解コーパス中の対応する文の長さである．</p>
+
+<h3 id="修正nグラム精度とは">修正Nグラム精度とは?</h3>
+<ul>
+  <li>$\left(\sum_{n=1}^N \frac{1}{N} \log P_n \right)$において，
+    <ul>
+      <li>$N$はNグラムの最大長（英語だと4が多いらしい）</li>
+      <li>$P_n$はNグラム精度を表している．<br />
+<br /></li>
+    </ul>
+  </li>
+  <li>Nグラム精度は，翻訳文とコーパスの参照文がどれだけ一致するかを数値化したものである．</li>
+</ul>
+
+<p>詳しくは長ったらしくなるので，<a href="https://dl.acm.org/citation.cfm?id=1073135">論文本体</a>を参照．</p>
+
+<h2 id="実験解析結果">実験・解析結果</h2>
+<h3 id="計算コスト比較">計算コスト比較</h3>
+
+<p>通常，シーケンスの長さ $n$ は，モデルの次元 $d$ よりも小さいことが多いので， $n &lt; d$ で，Self-Attentionの計算量コストが最も小さくなる．</p>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-05-23/table1.png" alt="計算コスト比較表" style="width: 700px;" /><br />
+</div>
+
+<blockquote>
+  <p><i class="fas fa-image" style="padding: 0 2px 0 0;"></i> 図引用: <a href="https://arxiv.org/abs/1706.03762">https://arxiv.org/abs/1706.03762</a></p>
+</blockquote>
+
+<h4 id="complexity-per-layer">Complexity per layer</h4>
+<p>1層あたりの計算量を意味する．</p>
+
+<ul>
+  <li>
+    <p>Self-Attentionの場合<br />
+Self-Attentionの重み算出式は，${\rm softmax}(QK^{T}) V$ である．</p>
+
+    <p>分解して考えていくと，まず，$QK^{T}$ は，$(n \times d)$ と $(d \times n)$ の行列の積であるから，$O(n^2d)$ である．続いて，${\rm softmax}$ の計算量は，ひとつの要素を計算するのに，$O(n)$ かかるので，$n$ 個の要素を考えると $O(n) \times n$ で，$O(n^2)$ である．最後に，${\rm softmax}(QK^{T})$ と，$V$ の行列の積は，$QK^{T}$ と同じく $O(n^2d)$ となる．</p>
+
+    <p>したがって，これらを合計すると，$O(n^2d) + O(n^2) + O(n^2d)$ であり，$O(n^2d)$ とまとめることができる．ゆえに，Self-Attentionの層あたりの計算量は，$O(n^2d)$ となる．</p>
+  </li>
+  <li>
+    <p>Recurrentの場合<br />
+Recurrentの時刻 $t$ における隠れ層の重み算出式は，$\mathbf{h_t} = \tanh \left(\mathbf{h_{t-1}} W + \mathbf{x_t} U + \mathbf{b} \right)$ と表せる．なお，活性化関数は $\tanh$ に限らず，シグモイド関数のときもある．いずれにせよ，どちらの手法も定数時間で処理できるので，ここでは $\tanh$ を活性化関数として使う．</p>
+
+    <p>Self-Attentionと同様に，分解して考えていくと，まず，$\mathbf{h_{t-1}} W$ は，$(1 \times d)$ と $(d \times d)$ の行列積であるから，$O(d^2)$ である．続いて，$\mathbf{x_t} U$ は，$(1 \times d)$ と $(d \times d)$ の行列積であるので，$O(d^2)$ である．また，行列和については，サイズが $(1 \times d)$ 同士の和であるので，$O(d)$ である．最後に，$\tanh (x) = \frac{\exp(x) - \exp(-x)}{\exp(x) + \exp(-x)}$ の計算量は，$d$ 個の要素に対して適用するので，$O(d)$である．</p>
+
+    <p>したがって，時刻 $t$における計算量は，$O(d^2) + O(d^2) + O(d) + O(d)$ で，$O(d^2)$ とまとめられる．入力シーケンスの長さは，$n$ であるから，層あたりの計算量は $O(d^2) \times n$ で， $O(nd^2)$ となる．</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>Convolutionについてはどうやって算出したのか不明．何か情報があればご教示ください．</p>
+</blockquote>
+
+<h4 id="sequential-operations">Sequential Operations</h4>
+<p>逐次処理を最小限にする並列処理可能な計算量のこと．Recurrent層はシーケンスの長さだけコストがかかるのは直感的である．</p>
+
+<h4 id="maximum-path-length">Maximum Path Length</h4>
+<p>ネットワーク内の長距離依存関係間の経路長のこと．
+Self-Attentionは定数のコストで，入出力間の任意の組み合わせの経路を繋げることができる．一方で，再帰が$O(n)$であり，畳み込みが$O(\log n)$であることは，簡単にBackgroundで触れられていた気がする．</p>
+
+<h3 id="翻訳性能比較">翻訳性能比較</h3>
+<p>表から，Transformerは高い翻訳精度を出しつつ，かつ計算コストを削減できていることがわかる．</p>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-05-23/table2.png" alt="翻訳精度比較表" style="width: 700px;" /><br />
+</div>
+
+<blockquote>
+  <p><i class="fas fa-image" style="padding: 0 2px 0 0;"></i> 図引用: <a href="https://arxiv.org/abs/1706.03762">https://arxiv.org/abs/1706.03762</a></p>
+</blockquote>
+
+<h2 id="まとめスライド">まとめスライド</h2>
+<div style="text-align: center"><iframe src="//www.slideshare.net/slideshow/embed_code/key/3zlzCmoC9icWLd" width="510" height="420" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen=""> </iframe></div>
+<div style="margin-bottom:5px"></div>
+
+<h2 id="実装">実装</h2>
+<p>時系列を考慮するために提案された手法：Positional Encoding（位置エンコーディング）を可視化するスクリプトを書きました．<br />
+<a href="https://github.com/gucci-j/pe-visualization">GitHub</a> に置いてあります．ご自由にご利用ください．</p>
+
+  </div>
+
+  <!--
+  <div class="date">
+    Written on May 23, 2019
+  </div>
+  -->
+
+  <style type="text/css">
+    @font-face {
+	font-family: 'icomoon';
+	src:url('/resources/fonts/icomoon.eot?ookgoz');
+	src:url('/resources/fonts/icomoon.eot?ookgoz#iefix') format('embedded-opentype'),
+		url('/resources/fonts/icomoon.ttf?ookgoz') format('truetype'),
+		url('/resources/fonts/icomoon.woff?ookgoz') format('woff'),
+		url('/resources/fonts/icomoon.svg?ookgoz#icomoon') format('svg');
+		font-weight: normal;
+		font-style: normal;
+    }
+
+    [class^="icon-"], [class*=" icon-"] {
+        /* use !important to prevent issues with browser extensions that change fonts */
+        font-family: 'icomoon' !important;
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: inherit;
+        
+        /* Better Font Rendering =========== */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .icon-line:before        {content: "\e90a";}
+    .icon-pocket:before      {content: "\e902";}
+    .icon-twitter:before     {content: "\ea96";}
+    .icon-facebook:before    {content: "\ea90";}
+    .icon-hatebu:before      {content: "\e903";}
+
+    .amazon-icon::before     {content: "Amazon.co.jpで買って応援！";}
+
+    /*ソーシャルリストデザイン2*/
+    .shareList2 {
+        list-style:none;
+        display: flex;
+        flex-wrap:wrap;
+        width:100%;
+        margin:-5px 0 0 -5px;
+        padding:0;
+    }
+    .shareList2__item {
+        height:30px;
+        line-height:30px;
+        width:30px;
+        margin:5px 0 0 5px;
+        text-align:center;
+    }
+    .shareList2__item__amazon {
+        height:30px;
+        line-height:30px;
+        width: 240px;
+        margin:5px 0 0 5px;
+        text-align:center;
+    }
+    .shareList2__link {
+        display:block;
+        color:#ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .shareList2__link::before{
+        font-size:16px;
+        display:block;
+        transition: ease-in-out .2s;
+        border-radius: 5px;
+    }
+    .shareList2__link:hover::before{
+        background:#ffffff;
+        transform: scale(1.2);
+        box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
+    }
+
+    .shareList2__link__amazon {
+        display:block;
+        color:#ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .shareList2__link__amazon::before{
+        font-size:16px;
+        display:block;
+        transition: ease-in-out .2s;
+        border-radius: 5px;
+    }
+    .shareList2__link__amazon:hover::before{
+        background:#ffffff;
+        box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
+    }
+
+    .shareList2__link.icon-twitter{background:#55acee;}
+    .shareList2__link.icon-twitter:hover::before{color:#55acee;}
+
+    .shareList2__link.icon-facebook{background:#3B5998;}
+    .shareList2__link.icon-facebook:hover::before{color:#3B5998;}
+
+    .shareList2__link.icon-hatebu{background:#008FDE;}
+    .shareList2__link.icon-hatebu:hover::before{color:#008FDE;}
+
+    .shareList2__link.icon-pocket{background:#EB4654;}
+    .shareList2__link.icon-pocket:hover::before{color:#EB4654;}
+
+    .shareList2__link.icon-line{background:#1dcd00;}
+    .shareList2__link.icon-line:hover::before{color:#1dcd00;}
+
+    .shareList2__link__amazon.amazon-icon{background:#ff9900;}
+    .shareList2__link__amazon.amazon-icon:hover::before{color:#ff9900;}
+</style>
+
+<ul class="shareList2" style="margin-top: 5px;">
+    <li class="shareList2__item"><a class="shareList2__link icon-twitter" href="https://twitter.com/intent/tweet?text=%E8%AB%96%E6%96%87%E3%83%A1%E3%83%A2:Attention%20Is%20All%20You%20Need+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP&amp;url=http%3A%2F%2Flocalhost%3A4000%2FNote-Transformer%2F" target="_blank" title="Twitter"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-facebook" href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FNote-Transformer%2F" target="_blank" title="Facebook"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-hatebu" href="https://b.hatena.ne.jp/add?mode=confirm&amp;url=http%3A%2F%2Flocalhost%3A4000%2FNote-Transformer%2F" target="_blank" title="はてなブックマーク"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-pocket" href="//getpocket.com/edit?url=http%3A%2F%2Flocalhost%3A4000%2FNote-Transformer%2F&title=%E8%AB%96%E6%96%87%E3%83%A1%E3%83%A2:Attention%20Is%20All%20You%20Need+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP" target="_blank" title="Pocket"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-line" href="http://line.me/R/msg/text/?%E8%AB%96%E6%96%87%E3%83%A1%E3%83%A2:Attention%20Is%20All%20You%20Need+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP%0Ahttp%3A%2F%2Flocalhost%3A4000%2FNote-Transformer%2F" target="_blank" title="LINE"></a></li>
+    <li class="shareList2__item__amazon"><a class="shareList2__link__amazon amazon-icon" href="//af.moshimo.com/af/c/click?a_id=1430714&p_id=170&pc_id=185&pl_id=4062&url=https%3A%2F%2Fwww.amazon.co.jp%2F" target="_blank" rel="nofollow"></a>
+        <img src="//i.moshimo.com/af/i/impression?a_id=1430714&p_id=170&pc_id=185&pl_id=4062" width="1" height="1" style="border:none;"></li>
+</ul>
+
+  <br />
+
+  <div class="footer_ads">
+    <div class="left_ad">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- フッター1 -->
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-1838422896597988"
+            data-ad-slot="4583840862"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <div class="right_ad">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- フッター2 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1838422896597988"
+             data-ad-slot="3446169345"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+  </div>
+  <br />
+
+  <!-- 前後のページへのリンク-->
+  <div class="pager">
+    
+      <div class="next">
+        <p><i class="fas fa-arrow-circle-left" style="margin: 0 0.5em 0 0;"></i>次の記事</p>
+        <p>
+          <a href="/cv-with-torchtext/">torchtextでk-分割交差検証をする話</a>
+        </p>
+      </div>
+    
+
+    
+      <div class="prev">
+        <p>前の記事<i class="fas fa-arrow-circle-right" style="margin: 0 0 0 0.5em;"></i></p>
+        <p>
+            <a href="/DL-Intro-5/">ゼロから作るDeep Learningとともに学ぶフレームワーク（畳み込みニューラルネットワーク編）</a>
+        </p>
+      </div>
+    
+  </div>
+
+  
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      Macros: {
+               bm: ["\\boldsymbol{#1}", 1],
+               argmax: ["\\mathop{\\rm arg\\,max}\\limits"],
+               argmin: ["\\mathop{\\rm arg\\,min}\\limits"]},
+      extensions: ["AMSmath.js","AMSsymbols.js"]
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script
+  type="text/javascript"
+  charset="utf-8"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML"
+>
+</script>
+
+</article>
+
+      </main>
+
+      <aside class="sidebar" role="complementary">
+        <div class="side-ad">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- サイドバー -->
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-1838422896597988"
+      data-ad-slot="3641305571"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+
+<div class="profile">
+  <div style="text-align: center;">
+    <a href="/about/">
+      <img style="width: 100px; border-radius: 50px;" src="/resources/logo/profile.jpg" />
+    </a>
+    <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1;"><strong>Gucci</strong></p>
+  </div>
+  <p style="margin-top: 0.5em; margin-bottom: 0; font-size: 0.8em; text-align: center;">
+    自然言語処理や機械学習に関連する情報を発信しています。
+    留学系の話題も<a href="https://note.mu/_gucciiiii">note</a>に書いています。
+  </p>
+  <hr />
+  <div class="profile_icon">
+    
+<a href="/contact/"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/gucci-j"><i class="svg-icon github"></i></a>
+
+
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/_gucciiiii"><i class="svg-icon twitter"></i></a>
+
+
+
+  </div>
+</div>
+
+<div class="amazon-button">
+  <p style="margin-top: 0; margin-bottom: 0.5em; font-size: 0.8em; text-align: center;">
+    <strong>Amazon.co.jpで買って応援！</strong>
+  </p>
+  <div style="text-align: center;">
+    <a href="//af.moshimo.com/af/c/click?a_id=1430714&p_id=170&pc_id=185&pl_id=10340&guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0068/000000010340.gif" width="300" height="50" style="border:none; padding-bottom: 0;"></a>
+    <img src="//i.moshimo.com/af/i/impression?a_id=1430714&p_id=170&pc_id=185&pl_id=10340" width="0" height="0" style="display: none; border:none;">
+  </div>
+</div>
+
+<div class="search">
+  <script>
+    (function() {
+      var cx = 'partner-pub-1838422896597988:8655986192';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+    })();
+  </script>
+  <gcse:searchbox-only></gcse:searchbox-only>
+</div>
+
+
+<div class="recent-posts">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>最近の記事</strong>
+  </p>
+  <hr />
+  <ul style="padding-right: 5px; padding-left: 1.5em;">
+    
+      <li>
+        <a href="/Note-Decoupling/">
+          論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues
+        </a>
+      </li>
+    
+      <li>
+        <a href="/memo-svm/">
+          サポートベクターマシンのお話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/cv-with-torchtext/">
+          torchtextでk-分割交差検証をする話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/Note-Transformer/">
+          論文メモ：Attention Is All You Need
+        </a>
+      </li>
+    
+      <li>
+        <a href="/DL-Intro-5/">
+          ゼロから作るDeep Learningとともに学ぶフレームワーク（畳み込みニューラルネットワーク編）
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="side-category">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>タグ一覧</strong>
+  </p>
+  <hr />
+  <ul style="padding: 0 10px 0 10px;">
+    
+      <li>
+        <a href="/sitemap#PyTorch">
+          PyTorch
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#Tips">
+          Tips
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#「ゼロからKeras」シリーズ">
+          「ゼロからKeras」シリーズ
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#ブログ全般">
+          ブログ全般
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#機械学習全般">
+          機械学習全般
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#論文メモ">
+          論文メモ
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+      </aside>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="footer_container">
+        <footer class="footer">
+          
+<a href="/contact/"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/gucci-j"><i class="svg-icon github"></i></a>
+
+
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/_gucciiiii"><i class="svg-icon twitter"></i></a>
+
+
+<br />
+          <a href="/">Home</a>
+          | <a href="/Introduction/">About This Blog</a>  
+          | <a href="/sitemap/">Sitemap</a> 
+          | <a href="/privacy/">Privacy</a><br />
+          <div style="font-size: 8pt;">© 2019 Atsuki Yamaguchi.</div>
+        </footer>
+      </div>
+    </div>
+
+    
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-137498199-1', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/Note-Transformer/',
+		  'title': '論文メモ：Attention Is All You Need'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  </body>
+</html>

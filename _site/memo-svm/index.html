@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>サポートベクターマシンのお話 – きままにNLP – A Technical Blog about NLP and ML</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="サポートベクターマシン（SVM）は，深層学習によらない機械学習の手法の一つとして広く知られており，あるデータに関する事前知識が全く無いような場合に有効な手法と言われています．
+
+" />
+    <meta property="og:description" content="サポートベクターマシン（SVM）は，深層学習によらない機械学習の手法の一つとして広く知られており，あるデータに関する事前知識が全く無いような場合に有効な手法と言われています．
+
+" />
+    
+    <meta name="author" content="きままにNLP" />
+
+    
+    <meta property="og:title" content="サポートベクターマシンのお話" />
+    <meta property="twitter:title" content="サポートベクターマシンのお話" />
+    
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    
+      
+        <link rel="stylesheet" type="text/css" href="/css/post.css">
+      
+    
+    <link rel="alternate" type="application/rss+xml" title="きままにNLP - A Technical Blog about NLP and ML" href="/feed.xml" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+    <!-- Favicon head tag -->
+    <link rel="icon" href="/resources/logo/kimamani_simple.png" type="image/x-icon">
+
+    <!-- Begin Jekyll SEO tag v2.6.0 -->
+<title>サポートベクターマシンのお話 | きままにNLP</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="サポートベクターマシンのお話" />
+<meta property="og:locale" content="ja_JP" />
+<meta name="description" content="サポートベクターマシン（SVM）について詳しく調べる機会があったので，その記念にSVMの考え方・理論について簡単にまとめました．" />
+<meta property="og:description" content="サポートベクターマシン（SVM）について詳しく調べる機会があったので，その記念にSVMの考え方・理論について簡単にまとめました．" />
+<link rel="canonical" href="http://localhost:4000/memo-svm/" />
+<meta property="og:url" content="http://localhost:4000/memo-svm/" />
+<meta property="og:site_name" content="きままにNLP" />
+<meta property="og:image" content="http://localhost:4000/resources/2019-06-23/svm_example.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-06-23T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://localhost:4000/resources/2019-06-23/svm_example.png" />
+<meta property="twitter:title" content="サポートベクターマシンのお話" />
+<meta name="twitter:site" content="@_gucciiiii" />
+<script type="application/ld+json">
+{"description":"サポートベクターマシン（SVM）について詳しく調べる機会があったので，その記念にSVMの考え方・理論について簡単にまとめました．","@type":"BlogPosting","url":"http://localhost:4000/memo-svm/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/kimamani.png"}},"image":"http://localhost:4000/resources/2019-06-23/svm_example.png","headline":"サポートベクターマシンのお話","dateModified":"2019-06-23T00:00:00+09:00","datePublished":"2019-06-23T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/memo-svm/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- Google Adsense-->
+    <!--
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-1838422896597988",
+        enable_page_level_ads: true
+      });
+    </script>
+    -->
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="head_container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="/resources/logo/kimamani.png" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/"><img src="/resources/logo/kimamani_moji.png" /></a></h1>
+          </div>
+
+          <nav>
+            <a href="/">Blog</a>
+            <a href="/about">About</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div class="container">
+      <main class="main_contents" role="main">
+        <article class="post">
+  <div class="date_front">
+    <i class="far fa-calendar-alt" style="padding: 0 2px 0 0;"></i>
+    2019-06-23
+
+    
+
+  </div>
+  <h1>サポートベクターマシンのお話</h1>
+
+  <div class="post-tag">
+    
+
+
+
+
+<ul>
+  <i class="fas fa-tag" style="padding: 0 2px 0 0;"></i>
+  
+    <li>
+      <a href="/sitemap#機械学習全般">
+        機械学習全般
+      </a>
+    </li>
+  
+</ul>
+  </div>
+
+  <div class="toc">
+    <input type="checkbox" id="toc_lb" class="on-off" />
+    <label for="toc_lb">目次</label>
+    <ul>
+  <li><a href="#お膳立て">お膳立て</a>
+    <ul>
+      <li><a href="#用語の定義">用語の定義</a></li>
+      <li><a href="#用語の数式的定義">用語の数式的定義</a>
+        <ul>
+          <li><a href="#識別面の数式的表記">識別面の数式的表記</a></li>
+          <li><a href="#マージンの数式的表記">マージンの数式的表記</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#svmの学習方法">SVMの学習方法</a>
+    <ul>
+      <li><a href="#マージン最大化主問題">マージン最大化（主問題）</a>
+        <ul>
+          <li><a href="#マージン最大化の定式化">マージン最大化の定式化</a></li>
+          <li><a href="#マージン最大化の制約条件">マージン最大化の制約条件</a></li>
+        </ul>
+      </li>
+      <li><a href="#ラグランジュの未定乗数法による方法補問題">ラグランジュの未定乗数法による方法（補問題）</a></li>
+      <li><a href="#2手法の比較">2手法の比較</a></li>
+    </ul>
+  </li>
+  <li><a href="#線形分離不可能なときは">線形分離不可能なときは？</a>
+    <ul>
+      <li><a href="#種々のカーネル関数">種々のカーネル関数</a>
+        <ul>
+          <li><a href="#多項式カーネル">多項式カーネル</a></li>
+          <li><a href="#ガウスカーネル">ガウスカーネル</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#ソフトマージンとハードマージン">ソフトマージンとハードマージン</a></li>
+  <li><a href="#svmを実用する">SVMを実用する</a></li>
+</ul>
+  </div>
+
+  <div class="entry">
+    <p>サポートベクターマシン（SVM）は，深層学習によらない機械学習の手法の一つとして広く知られており，あるデータに関する事前知識が全く無いような場合に有効な手法と言われています．</p>
+
+<p>ここでは，個人的な備忘録として，SVMの考え方を少しずつ厳選して扱います．</p>
+
+<h2 id="お膳立て">お膳立て</h2>
+
+<p>今，図のような分布の「●と😀の二値分類」をしたいときに，パーセプトロン系のネットワークでモデルを構築した場合，その識別面（境界線）は次の図の点線になるかもしれない．</p>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-06-23/empirical_example.png" alt="いろんな境界線の比較" style="width: 400px;" /><br />
+</div>
+
+<p>パーセプトロンのようなネットワークでは，経験損失（empirical loss）の最小化によって学習が行われる．なので，境界線がスレスレであっても，訓練データに対して損失を最小化するように学習して引かれた正しい線である場合がある．しかしながら，境界線がスレスレだと，テストデータで分類した時に，「●と😀」が間違えて分類されてしまう可能性があり，あまり嬉しくない．</p>
+
+<p>SVMは，この問題に対処することで汎化性能をあげようとしているモデルである．SVMの学習は，汎化損失（generalization loss）の最小化により行われる．着想としては，テストデータは訓練データと同じ確率分布に従っているものと仮定して，境界面（separator；識別面）と観測データの距離がなるべく大きくなるような境界面を選ぶことで，汎化損失の最小化を目指すものである．</p>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-06-23/svm_example.png" alt="SVMの境界面の例と用語定義" style="width: 400px;" /><br />
+</div>
+
+<h3 id="用語の定義">用語の定義</h3>
+<ul>
+  <li>
+    <p><strong>サポートベクトル（support vector）</strong><br />
+境界面（separator；識別面）にもっとも近い点のことをサポートベクトルと呼ぶ．サポートと呼ばれる所以は，サポートベクトルが境界面を「支えている」ことから来ているらしい．</p>
+
+    <p>通常，サポートベクトルの数は本来のサンプルサイズよりも小さくなるので，SVMはパラメトリックなモデルよりも更新の計算量が少なく済む．（サポートベクトル以外のデータが変化しても，境界は変化しないため．）また，重要なベクトルだけを見ればよいので，汎化性能も向上すると考えられる．</p>
+  </li>
+  <li>
+    <p><strong>マージン（margin）</strong><br />
+図中で点線によって囲われた範囲をマージンと呼ぶ．マージンは境界面と境界面からもっとも近い点（観測データ）との距離の2倍となる．</p>
+
+    <p>SVMにおいて，「境界面と観測データの距離がなるべく大きくなるように学習する」ということは，「マージンをなるべく大きくするように学習する」ということを意味している．</p>
+  </li>
+</ul>
+
+<h3 id="用語の数式的定義">用語の数式的定義</h3>
+
+<p>以降，簡単にではあるが数式で説明を行うため，あまり書かれていない基本的な部分の計算手法について説明する．</p>
+
+<h4 id="識別面の数式的表記">識別面の数式的表記</h4>
+
+<p>識別面は，入力データが $\boldsymbol{x}$ と表されるとき，以下のように表される．</p>
+<div class="mathjax-scroll">
+$$
+\boldsymbol{w^Tx} + b = 0
+$$
+</div>
+<p>ここで，$\boldsymbol{w}$ は重みベクトルであり，$b$ はバイアスベクトルである．また，各サポートベクトルが作る直線（上図の点線に相当する）は，$\boldsymbol{w^Tx} + b = 1$ か $\boldsymbol{w^Tx} + b = -1$ で定義される．</p>
+
+<h4 id="マージンの数式的表記">マージンの数式的表記</h4>
+
+<p>さて，$\boldsymbol{w^Tx} + b = 1$ となるような，$\boldsymbol{x}$ のうちの一つを，$\boldsymbol{x}_1$ とする．また，$\boldsymbol{w^Tx} + b = -1$ となるような，$\boldsymbol{x}$ のうちの一つを，$\boldsymbol{x}_2$ とする．</p>
+
+<p>このとき，境界面と，サポートベクトル $\boldsymbol{x}_1$ の距離 $r_1$は，垂線の公式の拡張版を用いて，次のように表される．</p>
+<div class="mathjax-scroll">
+$$
+r_1 = \frac{\boldsymbol{w^Tx}_1 + b }{||\boldsymbol{w}||}
+$$
+</div>
+<blockquote>
+  <p>ここではイメージを掴むのが目的なので，垂線の公式については触れません．</p>
+</blockquote>
+
+<p>したがって，マージン: $m$は次のように表される．</p>
+<div class="mathjax-scroll">
+$$
+\begin{equation}
+\begin{split}
+m &amp;= \frac{\boldsymbol{w^Tx}_1 + b }{||\boldsymbol{w}||} - \frac{\boldsymbol{w^Tx}_2 + b }{||\boldsymbol{w}||}\\
+&amp;= \frac{\boldsymbol{w^T}(\boldsymbol{x}_1 - \boldsymbol{x}_2)}{||\boldsymbol{w}||}\\
+&amp;= \frac{2}{||\boldsymbol{w}||}
+\end{split}
+\end{equation}
+$$
+</div>
+<p>ただし，$\boldsymbol{w^Tx}_1 + b = 1$ と $\boldsymbol{w^Tx}_2 + b = -1$ から，$\boldsymbol{w^T}(\boldsymbol{x}_1 - \boldsymbol{x}_2) = 2$ となることを用いた．</p>
+
+<h2 id="svmの学習方法">SVMの学習方法</h2>
+
+<p>SVMの学習方法は2種類あり，直感的な解き方としては，マージンを最大化する問題を解くことであり，そこから派生した解法も存在する．そのため，以下で紹介する2手法は双対問題と言われる．双対問題とは，ある最適化問題の制約条件を用いて，より最適化しやすい問題に置き換えて解くような問題のことをいい，どちらかの解が両方の解になる性質を持つ．</p>
+
+<h3 id="マージン最大化主問題">マージン最大化（主問題）</h3>
+<h4 id="マージン最大化の定式化">マージン最大化の定式化</h4>
+<p>さて，マージンは，$\frac{2}{||\bm{w}||}$ で定義されることを先ほど示した．マージンを最大化することは，重みベクトルのノルムを最小化することに他ならない．したがって，式でマージン最大化を表すと，$\argmax_{\bm{w}} \frac{2}{||\bm{w}||}$ となる．これでは，最適化をする際に計算の都合上扱いにくいので，大半の説明では以下が等価であるとみなしている．</p>
+
+<div class="mathjax-scroll">
+$$
+\argmin_{\bm{w}} \frac{1}{2} ||w||^2
+$$
+</div>
+
+<h4 id="マージン最大化の制約条件">マージン最大化の制約条件</h4>
+<p>最適化のための制約条件について考える．入力データ $\{ \bm{x}_1, \bm{x}_2, \bm{x}_3, \dots, \bm{x}_n \}$ があったときに，それに対応する（正解）ラベルデータが，$\{ y_1, y_2, y_3, \dots, y_n \}$ であるとする．ただし，$y_i$ は，$1$か$-1$をとる．このとき，以下の制約条件が成り立つ．</p>
+
+<div class="mathjax-scroll">
+$$
+y_i (\bm{w}^T\bm{x}_i + b) \ge 1 \qquad{\rm for} \; i=1,\dots, n
+$$
+</div>
+
+<p>したがって，マージン最大化は上記の制約条件をもとに，条件を満たす重みベクトルを探す問題に帰着される．</p>
+
+<h3 id="ラグランジュの未定乗数法による方法補問題">ラグランジュの未定乗数法による方法（補問題）</h3>
+<p>一方で，別の解き方も存在して，ラグランジュの未定乗数法を使う解き方がある．ラグランジュアンを活用することで，上記のマージン最大化問題は次のように書き換えられる．</p>
+
+<div class="mathjax-scroll">
+$$
+\mathcal{L}(\bm{w}, b, \alpha) = \frac{1}{2}||\bm{w}||^2 + \sum_{i=1}^{n} \alpha_i (1 - y_i(\bm{w}^T\bm{x_i} + b))
+$$
+</div>
+
+<p>このとき，最適化条件を考慮すると，以下が得られる．</p>
+<div class="mathjax-scroll">
+$$
+\begin{equation}
+\begin{split}
+\frac{\partial}{\partial \bm{w}} \mathcal{L} &amp;= \bm{w} - \sum_{i=1}^{n} \alpha_i y_i \bm{x}_i = 0\\
+\frac{\partial}{\partial b} \mathcal{L} &amp;= - \sum_{i=1}^{n} \alpha_i y_i = 0
+\end{split}
+\end{equation}
+$$
+</div>
+
+<p>上記の最適化条件を，元のラグランジュアン $\mathcal{L}$ に代入して計算すると，以下が得られる．</p>
+<div class="mathjax-scroll">
+$$
+\mathcal{L}(\bm{w}, b, \alpha) = \sum_{i=1}^{n} \alpha_i - \frac{1}{2}\sum_{i=1}^{n} \sum_{j=1}^{n} \alpha_i \alpha_j y_i y_j (\bm{x}_i^T \bm{x}_j) \tag{1}
+$$
+</div>
+
+<p>また，双対問題時のKKT条件を考慮することにより，追加の制約条件: $\alpha_i \ge 0$ を得られる．以上から，マージン最大化の問題は，ラグランジュ関数を活用することで，$\alpha$ を最大化する問題に落としこむことができる．式で表すと下記のようになる．</p>
+
+<div class="mathjax-scroll">
+$$
+\argmax_\alpha \sum_{i=1}^{n} \alpha_i - \frac{1}{2}\sum_{i=1}^{n} \sum_{j=1}^{n} \alpha_i \alpha_j y_i y_j (\bm{x}_i^T \bm{x}_j)
+$$
+</div>
+
+<p>これは，二次計画問題であるため，ソルバーを使えば最適解を得ることができる．最適なベクトル $\alpha$ を見つけることができれば，最適化条件である，$\bm{w} = \sum_{i=1}^{n} \alpha_i y_i \bm{x}_i$ を用いて，重みベクトル $\bm{w}$ も芋づる式に求めることができる．また，バイアス $b$ についても，上述のマージン最大化の制約条件から算出することができる．これによって，識別関数を求めることができるので，ラグランジュの未定乗数法による方法で，SVMの学習ができることがわかった．</p>
+
+<blockquote>
+  <p><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考：<a href="https://qiita.com/AnchorBlues/items/8fe2483a3a72676eb96d">ベクトルの微分</a><br />
+<i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考：<a href="https://ja.wikipedia.org/wiki/%E3%82%AB%E3%83%AB%E3%83%BC%E3%82%B7%E3%83%A5%E3%83%BB%E3%82%AF%E3%83%BC%E3%83%B3%E3%83%BB%E3%82%BF%E3%83%83%E3%82%AB%E3%83%BC%E6%9D%A1%E4%BB%B6">KKT条件</a></p>
+</blockquote>
+
+<h3 id="2手法の比較">2手法の比較</h3>
+
+<p>ラグランジュの未定乗数法を用いる手法の方が種々の利点がある．</p>
+
+<ul>
+  <li>$\mathcal{L}$ は凸関数であるため，唯一の大域最適解を見つけやすい．</li>
+  <li>サポートベクトル以外の$\alpha_i$ は0となるため，計算が少なく済む．</li>
+</ul>
+
+<h2 id="線形分離不可能なときは">線形分離不可能なときは？</h2>
+
+<p>入力データが線形分離できない場合，非線形変換を施して高次元空間に写像してしまえば，分類可能となるときがある．例として，ある特徴空間 $F(\bm{x})$ が，次のように定義されるとする．</p>
+
+<div class="mathjax-scroll">
+$$
+F([x_1, x_2]) = (x_1^2, x_2^2, \sqrt{2} x_1 x_2)
+$$
+</div>
+
+<p>このとき，$F(\bm{x})$ でのラグランジュアン: 式(1)は次のように書き換えられる．</p>
+<div class="mathjax-scroll">
+$$
+\mathcal{L}(\bm{w}, b, \alpha) = \sum_{i=1}^{n} \alpha_i - \frac{1}{2}\sum_{i=1}^{n} \sum_{j=1}^{n} \alpha_i \alpha_j y_i y_j F(\bm{x}_i) F(\bm{x}_j) \tag{2}
+$$
+</div>
+
+<p>式(2)の値を求めるには，高次元空間 $F(\bm{x})$ での内積 $F(\bm{x}_i) \cdot F(\bm{x}_j)$の値を計算する必要がある．今回の例の場合，高次元空間における内積を計算してみると，以下のようになる．</p>
+
+<div class="mathjax-scroll">
+$$
+\begin{equation}
+\begin{split}
+F(\bm{x}_i) \cdot F(\bm{x}_j) &amp;= 
+\begin{bmatrix}
+x_{i_1}^2\\
+x_{i_2}^2\\
+\sqrt{2} x_{i_1}x_{i_2} 
+\end{bmatrix}
+\cdot 
+\begin{bmatrix}
+x_{j_1}^2\\
+x_{j_2}^2\\
+\sqrt{2} x_{j_1}x_{j_2} 
+\end{bmatrix}\\
+&amp;= x_{i_1}^2 x_{j_1}^2 + x_{i_2}^2 x_{j_2}^2 + 2x_{i_1}x_{i_2}x_{j_1}x_{j_2} 
+\end{split}
+\end{equation}
+$$
+</div>
+
+<p>高次元空間に変換してから内積を計算する手間がお分かりになったと思う．</p>
+
+<p>そんなところに朗報で，実は上記の内積は変換前における，$(\bm{x_i}\cdot\bm{x_j})^2$ の演算結果に一致する．この$(\bm{x_i}\cdot\bm{x_j})^2$ を，<strong>カーネル関数</strong>（kernel function）と呼ぶ．カーネル関数さえわかれば，元の空間でのベクトル演算だけで済むので，逐一各入力ベクトルの値を高次元空間に写像する処理は必要なく，少ない手間で線形分離できないデータに対応することができる．このことを<strong>カーネルトリック</strong>ともいう．</p>
+
+<h3 id="種々のカーネル関数">種々のカーネル関数</h3>
+
+<p>カーネル関数はいくつか種類があり，多項式カーネルとガウスカーネルが有名である．</p>
+
+<h4 id="多項式カーネル">多項式カーネル</h4>
+<p>多項式カーネルは次のように定義される．</p>
+<div class="mathjax-scroll">
+$$
+K(\bm{x}_i, \bm{x}_j) = (\bm{x}_i^T \bm{x}_j + 1)^d
+$$
+</div>
+
+<h4 id="ガウスカーネル">ガウスカーネル</h4>
+<p>ガウスカーネル（RBFカーネルと表記されていることが多い）は次のように定義される．</p>
+<div class="mathjax-scroll">
+$$
+K(\bm{x}_i, \bm{x}_j) = \exp(-\beta||\bm{x}_i - \bm{x}_j||^2)
+$$
+</div>
+<p>ただし，$\beta$は正の定数．なお，実際にSVMでデータ分類をする際には，ガウスカーネルを使う場合が多いようである．</p>
+
+<blockquote>
+  <p><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考：<a href="https://dev.classmethod.jp/machine-learning/svm-kernel/">SVMのカーネルについて</a></p>
+</blockquote>
+
+<h2 id="ソフトマージンとハードマージン">ソフトマージンとハードマージン</h2>
+
+<p>理想的な環境であればデータにノイズが入ることはない．しかし，現実にはそうはいかない．今まで説明してきたSVMの考え方を元に，ノイズの入ったデータを分類させると，ノイズにサポートベクトルが左右されてしまうため，分類がうまくいかなくなってしまう．そこで，ソフトマージンという考え方が一般に知られている．反対に，これまで説明してきたSVMのマージンの決め方は，ハードマージンと呼ばれる．</p>
+
+<h2 id="svmを実用する">SVMを実用する</h2>
+
+<p>今回は量が多くなってしまったので理論だけに留めておきますが，Pythonのライブラリである，scikit-learnにはSVMが実装されています．これを使えばひとまずは実データで分類ができるでしょう．</p>
+
+<blockquote>
+  <p><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照：<a href="https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html">scikit-learnにおけるSVMのドキュメント</a></p>
+</blockquote>
+
+  </div>
+
+  <!--
+  <div class="date">
+    Written on June 23, 2019
+  </div>
+  -->
+
+  <style type="text/css">
+    @font-face {
+	font-family: 'icomoon';
+	src:url('/resources/fonts/icomoon.eot?ookgoz');
+	src:url('/resources/fonts/icomoon.eot?ookgoz#iefix') format('embedded-opentype'),
+		url('/resources/fonts/icomoon.ttf?ookgoz') format('truetype'),
+		url('/resources/fonts/icomoon.woff?ookgoz') format('woff'),
+		url('/resources/fonts/icomoon.svg?ookgoz#icomoon') format('svg');
+		font-weight: normal;
+		font-style: normal;
+    }
+
+    [class^="icon-"], [class*=" icon-"] {
+        /* use !important to prevent issues with browser extensions that change fonts */
+        font-family: 'icomoon' !important;
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: inherit;
+        
+        /* Better Font Rendering =========== */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .icon-line:before        {content: "\e90a";}
+    .icon-pocket:before      {content: "\e902";}
+    .icon-twitter:before     {content: "\ea96";}
+    .icon-facebook:before    {content: "\ea90";}
+    .icon-hatebu:before      {content: "\e903";}
+
+    .amazon-icon::before     {content: "Amazon.co.jpで買って応援！";}
+
+    /*ソーシャルリストデザイン2*/
+    .shareList2 {
+        list-style:none;
+        display: flex;
+        flex-wrap:wrap;
+        width:100%;
+        margin:-5px 0 0 -5px;
+        padding:0;
+    }
+    .shareList2__item {
+        height:30px;
+        line-height:30px;
+        width:30px;
+        margin:5px 0 0 5px;
+        text-align:center;
+    }
+    .shareList2__item__amazon {
+        height:30px;
+        line-height:30px;
+        width: 240px;
+        margin:5px 0 0 5px;
+        text-align:center;
+    }
+    .shareList2__link {
+        display:block;
+        color:#ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .shareList2__link::before{
+        font-size:16px;
+        display:block;
+        transition: ease-in-out .2s;
+        border-radius: 5px;
+    }
+    .shareList2__link:hover::before{
+        background:#ffffff;
+        transform: scale(1.2);
+        box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
+    }
+
+    .shareList2__link__amazon {
+        display:block;
+        color:#ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .shareList2__link__amazon::before{
+        font-size:16px;
+        display:block;
+        transition: ease-in-out .2s;
+        border-radius: 5px;
+    }
+    .shareList2__link__amazon:hover::before{
+        background:#ffffff;
+        box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
+    }
+
+    .shareList2__link.icon-twitter{background:#55acee;}
+    .shareList2__link.icon-twitter:hover::before{color:#55acee;}
+
+    .shareList2__link.icon-facebook{background:#3B5998;}
+    .shareList2__link.icon-facebook:hover::before{color:#3B5998;}
+
+    .shareList2__link.icon-hatebu{background:#008FDE;}
+    .shareList2__link.icon-hatebu:hover::before{color:#008FDE;}
+
+    .shareList2__link.icon-pocket{background:#EB4654;}
+    .shareList2__link.icon-pocket:hover::before{color:#EB4654;}
+
+    .shareList2__link.icon-line{background:#1dcd00;}
+    .shareList2__link.icon-line:hover::before{color:#1dcd00;}
+
+    .shareList2__link__amazon.amazon-icon{background:#ff9900;}
+    .shareList2__link__amazon.amazon-icon:hover::before{color:#ff9900;}
+</style>
+
+<ul class="shareList2" style="margin-top: 5px;">
+    <li class="shareList2__item"><a class="shareList2__link icon-twitter" href="https://twitter.com/intent/tweet?text=%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%83%99%E3%82%AF%E3%82%BF%E3%83%BC%E3%83%9E%E3%82%B7%E3%83%B3%E3%81%AE%E3%81%8A%E8%A9%B1+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP&amp;url=http%3A%2F%2Flocalhost%3A4000%2Fmemo-svm%2F" target="_blank" title="Twitter"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-facebook" href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fmemo-svm%2F" target="_blank" title="Facebook"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-hatebu" href="https://b.hatena.ne.jp/add?mode=confirm&amp;url=http%3A%2F%2Flocalhost%3A4000%2Fmemo-svm%2F" target="_blank" title="はてなブックマーク"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-pocket" href="//getpocket.com/edit?url=http%3A%2F%2Flocalhost%3A4000%2Fmemo-svm%2F&title=%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%83%99%E3%82%AF%E3%82%BF%E3%83%BC%E3%83%9E%E3%82%B7%E3%83%B3%E3%81%AE%E3%81%8A%E8%A9%B1+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP" target="_blank" title="Pocket"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-line" href="http://line.me/R/msg/text/?%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%83%99%E3%82%AF%E3%82%BF%E3%83%BC%E3%83%9E%E3%82%B7%E3%83%B3%E3%81%AE%E3%81%8A%E8%A9%B1+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP%0Ahttp%3A%2F%2Flocalhost%3A4000%2Fmemo-svm%2F" target="_blank" title="LINE"></a></li>
+    <li class="shareList2__item__amazon"><a class="shareList2__link__amazon amazon-icon" href="//af.moshimo.com/af/c/click?a_id=1430714&p_id=170&pc_id=185&pl_id=4062&url=https%3A%2F%2Fwww.amazon.co.jp%2F" target="_blank" rel="nofollow"></a>
+        <img src="//i.moshimo.com/af/i/impression?a_id=1430714&p_id=170&pc_id=185&pl_id=4062" width="1" height="1" style="border:none;"></li>
+</ul>
+
+  <br />
+
+  <div class="footer_ads">
+    <div class="left_ad">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- フッター1 -->
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-1838422896597988"
+            data-ad-slot="4583840862"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <div class="right_ad">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- フッター2 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1838422896597988"
+             data-ad-slot="3446169345"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+  </div>
+  <br />
+
+  <!-- 前後のページへのリンク-->
+  <div class="pager">
+    
+      <div class="next">
+        <p><i class="fas fa-arrow-circle-left" style="margin: 0 0.5em 0 0;"></i>次の記事</p>
+        <p>
+          <a href="/Note-Decoupling/">論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues</a>
+        </p>
+      </div>
+    
+
+    
+      <div class="prev">
+        <p>前の記事<i class="fas fa-arrow-circle-right" style="margin: 0 0 0 0.5em;"></i></p>
+        <p>
+            <a href="/cv-with-torchtext/">torchtextでk-分割交差検証をする話</a>
+        </p>
+      </div>
+    
+  </div>
+
+  
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      Macros: {
+               bm: ["\\boldsymbol{#1}", 1],
+               argmax: ["\\mathop{\\rm arg\\,max}\\limits"],
+               argmin: ["\\mathop{\\rm arg\\,min}\\limits"]},
+      extensions: ["AMSmath.js","AMSsymbols.js"]
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script
+  type="text/javascript"
+  charset="utf-8"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML"
+>
+</script>
+
+</article>
+
+      </main>
+
+      <aside class="sidebar" role="complementary">
+        <div class="side-ad">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- サイドバー -->
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-1838422896597988"
+      data-ad-slot="3641305571"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+
+<div class="profile">
+  <div style="text-align: center;">
+    <a href="/about/">
+      <img style="width: 100px; border-radius: 50px;" src="/resources/logo/profile.jpg" />
+    </a>
+    <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1;"><strong>Gucci</strong></p>
+  </div>
+  <p style="margin-top: 0.5em; margin-bottom: 0; font-size: 0.8em; text-align: center;">
+    自然言語処理や機械学習に関連する情報を発信しています。
+    留学系の話題も<a href="https://note.mu/_gucciiiii">note</a>に書いています。
+  </p>
+  <hr />
+  <div class="profile_icon">
+    
+<a href="/contact/"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/gucci-j"><i class="svg-icon github"></i></a>
+
+
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/_gucciiiii"><i class="svg-icon twitter"></i></a>
+
+
+
+  </div>
+</div>
+
+<div class="amazon-button">
+  <p style="margin-top: 0; margin-bottom: 0.5em; font-size: 0.8em; text-align: center;">
+    <strong>Amazon.co.jpで買って応援！</strong>
+  </p>
+  <div style="text-align: center;">
+    <a href="//af.moshimo.com/af/c/click?a_id=1430714&p_id=170&pc_id=185&pl_id=10340&guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0068/000000010340.gif" width="300" height="50" style="border:none; padding-bottom: 0;"></a>
+    <img src="//i.moshimo.com/af/i/impression?a_id=1430714&p_id=170&pc_id=185&pl_id=10340" width="0" height="0" style="display: none; border:none;">
+  </div>
+</div>
+
+<div class="search">
+  <script>
+    (function() {
+      var cx = 'partner-pub-1838422896597988:8655986192';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+    })();
+  </script>
+  <gcse:searchbox-only></gcse:searchbox-only>
+</div>
+
+
+<div class="recent-posts">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>最近の記事</strong>
+  </p>
+  <hr />
+  <ul style="padding-right: 5px; padding-left: 1.5em;">
+    
+      <li>
+        <a href="/Note-Decoupling/">
+          論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues
+        </a>
+      </li>
+    
+      <li>
+        <a href="/memo-svm/">
+          サポートベクターマシンのお話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/cv-with-torchtext/">
+          torchtextでk-分割交差検証をする話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/Note-Transformer/">
+          論文メモ：Attention Is All You Need
+        </a>
+      </li>
+    
+      <li>
+        <a href="/DL-Intro-5/">
+          ゼロから作るDeep Learningとともに学ぶフレームワーク（畳み込みニューラルネットワーク編）
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="side-category">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>タグ一覧</strong>
+  </p>
+  <hr />
+  <ul style="padding: 0 10px 0 10px;">
+    
+      <li>
+        <a href="/sitemap#PyTorch">
+          PyTorch
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#Tips">
+          Tips
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#「ゼロからKeras」シリーズ">
+          「ゼロからKeras」シリーズ
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#ブログ全般">
+          ブログ全般
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#機械学習全般">
+          機械学習全般
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#論文メモ">
+          論文メモ
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+      </aside>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="footer_container">
+        <footer class="footer">
+          
+<a href="/contact/"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/gucci-j"><i class="svg-icon github"></i></a>
+
+
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/_gucciiiii"><i class="svg-icon twitter"></i></a>
+
+
+<br />
+          <a href="/">Home</a>
+          | <a href="/Introduction/">About This Blog</a>  
+          | <a href="/sitemap/">Sitemap</a> 
+          | <a href="/privacy/">Privacy</a><br />
+          <div style="font-size: 8pt;">© 2019 Atsuki Yamaguchi.</div>
+        </footer>
+      </div>
+    </div>
+
+    
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-137498199-1', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/memo-svm/',
+		  'title': 'サポートベクターマシンのお話'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  </body>
+</html>

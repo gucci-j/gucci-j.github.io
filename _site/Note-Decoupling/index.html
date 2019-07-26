@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues – きままにNLP – A Technical Blog about NLP and ML</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="本稿では，EMNLP 2018に採択された，自然言語で売り物の価格交渉をするエージェントを提案した論文：「Decoupling Strategy and Generation in Negotiation Dialogues」の論文のメモ書きを共有・紹介します．
+
+" />
+    <meta property="og:description" content="本稿では，EMNLP 2018に採択された，自然言語で売り物の価格交渉をするエージェントを提案した論文：「Decoupling Strategy and Generation in Negotiation Dialogues」の論文のメモ書きを共有・紹介します．
+
+" />
+    
+    <meta name="author" content="きままにNLP" />
+
+    
+    <meta property="og:title" content="論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues" />
+    <meta property="twitter:title" content="論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues" />
+    
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    
+      
+        <link rel="stylesheet" type="text/css" href="/css/post.css">
+      
+    
+    <link rel="alternate" type="application/rss+xml" title="きままにNLP - A Technical Blog about NLP and ML" href="/feed.xml" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+
+    <!-- Favicon head tag -->
+    <link rel="icon" href="/resources/logo/kimamani_simple.png" type="image/x-icon">
+
+    <!-- Begin Jekyll SEO tag v2.6.0 -->
+<title>論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues | きままにNLP</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues" />
+<meta property="og:locale" content="ja_JP" />
+<meta name="description" content="EMNLP 2018に採択された，自然言語で売り物の価格交渉をするエージェントを提案した論文：「Decoupling Strategy and Generation in Negotiation Dialogues」の論文のメモ書きを共有・紹介します．" />
+<meta property="og:description" content="EMNLP 2018に採択された，自然言語で売り物の価格交渉をするエージェントを提案した論文：「Decoupling Strategy and Generation in Negotiation Dialogues」の論文のメモ書きを共有・紹介します．" />
+<link rel="canonical" href="http://localhost:4000/Note-Decoupling/" />
+<meta property="og:url" content="http://localhost:4000/Note-Decoupling/" />
+<meta property="og:site_name" content="きままにNLP" />
+<meta property="og:image" content="http://localhost:4000/resources/2019-07-01/model_diagram.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-07-01T00:00:00+09:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://localhost:4000/resources/2019-07-01/model_diagram.png" />
+<meta property="twitter:title" content="論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues" />
+<meta name="twitter:site" content="@_gucciiiii" />
+<script type="application/ld+json">
+{"description":"EMNLP 2018に採択された，自然言語で売り物の価格交渉をするエージェントを提案した論文：「Decoupling Strategy and Generation in Negotiation Dialogues」の論文のメモ書きを共有・紹介します．","@type":"BlogPosting","url":"http://localhost:4000/Note-Decoupling/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/kimamani.png"}},"image":"http://localhost:4000/resources/2019-07-01/model_diagram.png","headline":"論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues","dateModified":"2019-07-14T11:20:00+09:00","datePublished":"2019-07-01T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/Note-Decoupling/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- Google Adsense-->
+    <!--
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-1838422896597988",
+        enable_page_level_ads: true
+      });
+    </script>
+    -->
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="head_container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="/resources/logo/kimamani.png" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/"><img src="/resources/logo/kimamani_moji.png" /></a></h1>
+          </div>
+
+          <nav>
+            <a href="/">Blog</a>
+            <a href="/about">About</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div class="container">
+      <main class="main_contents" role="main">
+        <article class="post">
+  <div class="date_front">
+    <i class="far fa-calendar-alt" style="padding: 0 2px 0 0;"></i>
+    2019-07-01
+
+    
+      <i class="fas fa-redo-alt" style="padding: 0 2px 0 10px;"></i>
+      2019-07-14
+    
+
+  </div>
+  <h1>論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues</h1>
+
+  <div class="post-tag">
+    
+
+
+
+
+<ul>
+  <i class="fas fa-tag" style="padding: 0 2px 0 0;"></i>
+  
+    <li>
+      <a href="/sitemap#論文メモ">
+        論文メモ
+      </a>
+    </li>
+  
+</ul>
+  </div>
+
+  <div class="toc">
+    <input type="checkbox" id="toc_lb" class="on-off" />
+    <label for="toc_lb">目次</label>
+    <ul>
+  <li><a href="#文献情報">文献情報</a></li>
+  <li><a href="#どんなもの">どんなもの？</a></li>
+  <li><a href="#先行研究と比べてどこがすごい">先行研究と比べてどこがすごい？</a></li>
+  <li><a href="#技術や手法のキモはどこ">技術や手法のキモはどこ？</a></li>
+  <li><a href="#どうやって有効だと検証した">どうやって有効だと検証した？</a>
+    <ul>
+      <li><a href="#データセット">データセット</a></li>
+      <li><a href="#実験">実験</a></li>
+    </ul>
+  </li>
+  <li><a href="#議論はある">議論はある？</a></li>
+  <li><a href="#1-はじめに">1. はじめに</a>
+    <ul>
+      <li><a href="#11-提案手法の概要">1.1 提案手法の概要</a></li>
+      <li><a href="#12-データセットについて">1.2 データセットについて</a></li>
+      <li><a href="#13-評価指標について">1.3 評価指標について</a></li>
+    </ul>
+  </li>
+  <li><a href="#2-データセット">2. データセット</a></li>
+  <li><a href="#3-approach">3. Approach</a>
+    <ul>
+      <li><a href="#31-overview">3.1 Overview</a>
+        <ul>
+          <li><a href="#モジュール型モデルの各定義">モジュール型モデルの各定義</a></li>
+        </ul>
+      </li>
+      <li><a href="#32-parser">3.2 Parser</a></li>
+      <li><a href="#33-manager">3.3 Manager</a>
+        <ul>
+          <li><a href="#331-教師あり学習">3.3.1 教師あり学習</a></li>
+          <li><a href="#332-強化学習">3.3.2 強化学習</a></li>
+          <li><a href="#333-hybrid-policy">3.3.3 Hybrid Policy</a></li>
+        </ul>
+      </li>
+      <li><a href="#34-generator">3.4 Generator</a></li>
+    </ul>
+  </li>
+  <li><a href="#4-experiments">4. Experiments</a>
+    <ul>
+      <li><a href="#41-models">4.1 Models</a></li>
+      <li><a href="#42-実験設定">4.2 実験設定</a></li>
+      <li><a href="#43-人間による評価">4.3 人間による評価</a>
+        <ul>
+          <li><a href="#表7の意味するところ">表7の意味するところ</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#スライド">スライド</a></li>
+</ul>
+  </div>
+
+  <div class="entry">
+    <p>本稿では，EMNLP 2018に採択された，自然言語で売り物の価格交渉をするエージェントを提案した論文：「Decoupling Strategy and Generation in Negotiation Dialogues」の論文のメモ書きを共有・紹介します．</p>
+
+<h2 id="文献情報">文献情報</h2>
+<p>著者: H. He et al.<br />
+所属: Computer Science Department, Stanford University<br />
+出典: <a href="https://www.aclweb.org/anthology/D18-1256">EMNLP 2018</a></p>
+
+<h2 id="どんなもの">どんなもの？</h2>
+
+<p>自然言語で交渉可能なエージェントを作成する際に，交渉戦略とその実行部（発話機構）を切り分けて考えることで，従来手法よりもタスクの合意成功率を向上させ，発話に見られる人間らしさを向上させることに成功した．</p>
+
+<h2 id="先行研究と比べてどこがすごい">先行研究と比べてどこがすごい？</h2>
+
+<p>単にend-to-endでモデルを学習させるのではなく，「Parser・Manager・Generator」の三つにモデルを分割して捉えた点．（従来手法は，seq2seqに基づいて単に学習させるだけだった．）</p>
+
+<p>戦略を制御する部分は，従来の単語ベースではなく，coarse-dialogue acts：粗い（要約）対話情報に依存しているため，戦略の制御がしやすいというメリットがある．</p>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-07-01/model_diagram.png" alt="3モジュール型のモデル図" style="width: 500px;" /><br />
+</div>
+
+<blockquote>
+  <p><i class="fas fa-image" style="padding: 0 2px 0 0;"></i> 図引用: <a href="https://aclweb.org/anthology/papers/D/D18/D18-1256/">Decoupling Strategy and Generation in Negotiation Dialogues</a></p>
+</blockquote>
+
+<h2 id="技術や手法のキモはどこ">技術や手法のキモはどこ？</h2>
+
+<p>モジュール型のモデルを提案．戦略と生成を切り離して学習させることで，戦略の制御しやすさを維持しながらも，発話の人間らしさが低下しないようにできている．</p>
+
+<h2 id="どうやって有効だと検証した">どうやって有効だと検証した？</h2>
+<h3 id="データセット">データセット</h3>
+<p>クラウドソーシングサービスである，Amazon Mechanical Turk (AMT)を活用．クレイグスリストから交渉シナリオをスクレイピングして，AMTでそのシナリオに基づいた二者間の価格交渉を行わせることで，品物売買データセットを構築．</p>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-07-01/table1.png" alt="交渉ログの例" style="width: 550px;" /><br />
+</div>
+
+<h3 id="実験">実験</h3>
+<p>Deal or no deal データセットと，著者らが作成した，Craigslist Bargain データセットにより実験を行なっている．人間らしさを5点満点でAMT上で評価．また，task-specificな値（効用，合意率，公平さ，対話の長さ）も計算．</p>
+
+<h2 id="議論はある">議論はある？</h2>
+
+<p>教師あり学習時は，著者の提案するモジュール型のモデルを使うとよいことが示されている．また，強化学習時も，wordベースではなくdialogue actベースにすると，報酬を最適化しつつ，発話の自然さも維持できることが示されている．</p>
+
+<h2 id="1-はじめに">1. はじめに</h2>
+<p>交渉エージェントは以下の二つの点をうまく実行できる必要がある．</p>
+
+<ul>
+  <li>交渉戦略の立案</li>
+  <li>交渉戦略を実行するための自然言語の生成</li>
+</ul>
+
+<p>先行研究は「戦略」に着目したものが多かった．また，近年では，end-to-endに交渉戦略と言語生成の両方を同時に，人間同士の交渉を扱ったコーパスからニューラルネットワークベースのモデルにより学習を行う研究がでてきている (<a href="https://aclweb.org/anthology/papers/D/D17/D17-1259/">Lewis 2017</a>, <a href="https://aclweb.org/anthology/papers/P/P17/P17-1162/">He 2017</a>)．</p>
+
+<p>end-to-endに学習を行うモデルの問題点として，以下が挙げられる．</p>
+
+<ul>
+  <li>交渉戦略の解釈 ＆ 制御の難しさ</li>
+  <li>強化学習で交渉エージェントを学習させると，発話が不自然になる（例：文法に則っていない）</li>
+</ul>
+
+<p>そこで，著者らは戦略と生成を分離する手法の提案を行なっている．これにより，同じ生成器を用いていても，戦略を変更することができる．（例：効用を最大化する・公平な合意案を導く．）</p>
+
+<h3 id="11-提案手法の概要">1.1 提案手法の概要</h3>
+<p>提案手法のフレームワークは三つのモジュールからなる．</p>
+
+<ol>
+  <li>
+    <p><strong>Parser</strong><br />
+交渉相手の発言の意図やその変数：（価格）を解析</p>
+  </li>
+  <li>
+    <p><strong>Manager</strong><br />
+交渉エージェントの次の戦略（行動）を生成</p>
+  </li>
+  <li>
+    <p><strong>Generator</strong><br />
+戦略と発話履歴を基に返答文を生成</p>
+  </li>
+</ol>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-07-01/model_diagram.png" alt="3モジュール型のモデル図" style="width: 500px;" /><br />
+</div>
+
+<blockquote>
+  <p><i class="fas fa-image" style="padding: 0 2px 0 0;"></i> 図引用: <a href="https://aclweb.org/anthology/papers/D/D18/D18-1256/">Decoupling Strategy and Generation in Negotiation Dialogues</a></p>
+</blockquote>
+
+<h3 id="12-データセットについて">1.2 データセットについて</h3>
+<p>先行研究で用いられているデータセットは，クローズドなドメイン：物の山分け交渉のみを扱っている．こうした設定は，実社会（real world）とは程遠い．そのため，craigslistと呼ばれる，クラシファイドコミュニティサイトから，物の売り買いに関するポスティングを抽出して，交渉シナリオを作成した．この交渉シナリオを基に，Amazon Mechanical Turk（AMT）を活用して，二者間での物の価格交渉を実施した．この交渉ログが本論文で用いられている，Craigslist Bargain データセットである．</p>
+
+<h3 id="13-評価指標について">1.3 評価指標について</h3>
+<p>獲得効用 ＆ 人間らしさで評価．<br />
+→ AMTを活用して，A/Bテストを行なって評価．</p>
+
+<h2 id="2-データセット">2. データセット</h2>
+<p>Settlers of catan データセットや，Deal or no deal データセットは，ゲーム形式の交渉対話データセットになっている．このため，対話が直接的（オファー内容をそのまま伝えてしまう）であった．本来の実社会の交渉では，「説得」や「情報収集」が入るので，先行研究のデータセットはあまり現実的でない．</p>
+
+<p>クレイグスリストデータセットでは，売り手と買い手になりきって，商品の売買を行う．より自然な状況設定なので，より現実的になるという主張．</p>
+
+<p>交渉シナリオの生成は，クレイグスリストの6カテゴリを選択した．（housing，furniture，cars，bikes，phones，electronics）．買い手の目標価格は，リスティング価格の0.5，0.7，0.9倍で設定されている．</p>
+
+<p>交渉ログの例とデータセットの統計は以下の表の通り．</p>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-07-01/table1.png" alt="交渉ログの例" style="width: 550px;" /><br />
+</div>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-07-01/table2.png" alt="データセットの統計" style="width: 400px;" /><br />
+</div>
+
+<blockquote>
+  <p><i class="fas fa-image" style="padding: 0 2px 0 0;"></i> 図引用: <a href="https://aclweb.org/anthology/papers/D/D18/D18-1256/">Decoupling Strategy and Generation in Negotiation Dialogues</a></p>
+</blockquote>
+
+<p>先行研究とのデータセットの比較結果は次の通り．多ジャンルのデータセットなので，語彙数が多くなっている．さらに，発話あたりの単語数も多い．</p>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-07-01/table3.png" alt="データセットの比較" style="width: 400px;" /><br />
+</div>
+
+<blockquote>
+  <p><i class="fas fa-image" style="padding: 0 2px 0 0;"></i> 図引用: <a href="https://aclweb.org/anthology/papers/D/D18/D18-1256/">Decoupling Strategy and Generation in Negotiation Dialogues</a></p>
+</blockquote>
+
+<h2 id="3-approach">3. Approach</h2>
+
+<ul>
+  <li>seq2seqベースのモデルは，戦略と生成の両方を同時に学習することは困難．（発話がかなり不自然になる．）<br />
+→ 戦略と生成を切り分けて考える</li>
+</ul>
+
+<h3 id="31-overview">3.1 Overview</h3>
+<ul>
+  <li>
+    <p><strong>dialogue agentの役割</strong>：<br />
+入力：発話履歴 $x_1, x_2, \dots, x_{t-1}$ と交渉シナリオ $c$<br />
+出力：返答 $x_t$ の確率分布</p>
+  </li>
+  <li>
+    <p><strong>coarse dialogue act</strong>：<br />
+$x_t$に対して，coarse dialogue act $z_t$ が設けられている．<br />
+例：$x_t$→ “I am willing to pay ＄15.” $z_t$→ “propose(price=15)”</p>
+  </li>
+</ul>
+
+<h4 id="モジュール型モデルの各定義">モジュール型モデルの各定義</h4>
+<ol>
+  <li>
+    <p><strong>parser</strong><br />
+入力: $x_{t-1}$, 対話履歴 $x_{&lt;t}$, $z_{&lt;t}$, 交渉シナリオ $c$<br />
+出力: $z_{t-1}$</p>
+  </li>
+  <li><strong>manager</strong><br />
+入力: $z_{&lt;t}$，$c$<br />
+出力: $z_t$
+    <blockquote>
+      <p>$x_{&lt;t}$ はcoarse dialogue actの決定には影響しない</p>
+    </blockquote>
+  </li>
+  <li><strong>generator</strong><br />
+入力: $z_t$, $x_{&lt;t}$<br />
+出力: $x_t$</li>
+</ol>
+
+<h3 id="32-parser">3.2 Parser</h3>
+<p>ルールベースのマッチングで，価格や物品に関する情報を抽出する．具体的には，正規表現とif文でマッチングをしているらしい．</p>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-07-01/table5.png" alt="ルールベースの抽出法の一覧" style="width: 350px;" /><br />
+</div>
+
+<blockquote>
+  <p><i class="fas fa-image" style="padding: 0 2px 0 0;"></i> 図引用: <a href="https://aclweb.org/anthology/papers/D/D18/D18-1256/">Decoupling Strategy and Generation in Negotiation Dialogues</a></p>
+</blockquote>
+
+<h3 id="33-manager">3.3 Manager</h3>
+<p>dialogue managerは，各タイムステップ $t$ において，過去のcoarse dialogue acts 履歴 $z_{&lt;t}$ と，交渉シナリオ $c$ から，次に取る行動 $z_t$ を策定する．</p>
+
+<p>Managerの学習手法は，教師あり学習，強化学習，ハイブリッド方式の三つが用いられている．</p>
+
+<h4 id="331-教師あり学習">3.3.1 教師あり学習</h4>
+<p>人間の振る舞いをモデリングするのに最適な学習手法．</p>
+
+<p><strong>入力</strong>: 各学習データは，各対話のcoarse dialogue acts $z_1, \dots. z_T$ からなる．<br />
+<strong>出力</strong>: $p_\theta (z_t | z_{&lt;t}, c)$</p>
+
+<p>学習は学習データの尤度を最大化することで行う．
+モデルは，通常のseq2seqモデルに注意機構を付加したものである．各dialogue actは，通常のトークンとして入力される．例：offer 150．この場合，語彙数はかなり少なくなる．</p>
+
+<h4 id="332-強化学習">3.3.2 強化学習</h4>
+<p>報酬 $R(z_{1:T})$ をcoarse dialogue actsのひとまとまりに対して適用．3つの報酬関数により実験を行う．</p>
+
+<ol>
+  <li>
+    <p><strong>Utility</strong><br />
+クレイグスリストデータセットでは，ゼロサムゲームとして与える．それ以外のFBのような二者間山分け交渉の場合は，総和となる．</p>
+
+    <p>クレイグスリストでは，目標価格で購入 or 販売できたときにのみ，効用として，1を獲得でき，それ以外の場合には，0を獲得する</p>
+  </li>
+  <li>
+    <p><strong>Fairness</strong> <br />
+二者間の効用になるべく差がなくなるようにする．平等重視．計算方法としては，二者間の効用の差で表される．</p>
+  </li>
+  <li>
+    <p><strong>Length</strong><br />
+長く会話させるための指標．</p>
+  </li>
+</ol>
+
+<p>合意が形成されなかった場合，報酬は一律に$-1$  である．
+最適化には，policy gradient（方策勾配法）を用いる．パラメータは以下の式(1)に基づいて更新される．</p>
+
+<div class="mathjax-scroll">
+$$
+\theta \leftarrow \theta - \eta \sum_{i} \nabla_\theta \log p_\theta (a_i | a_{&lt; i}, c)(r - b) \tag{1}
+$$
+</div>
+
+<p>ただし，$\eta$ は学習率，$b$ は出力の平均から推定されるベースライン．$a_i$ は生成されたトークン（policyが取る行動）を意味しており，$z_{1:T}$に対応している．</p>
+
+<blockquote>
+  <ul>
+    <li>方策勾配法について<br />
+方策勾配法は価値関数 $Q^{\pi_\theta}(s, a)$ を実際に得られた報酬の合計で近似するもの．<br />
+ベースラインを設けるのは，期待値の分散を減らすため（variance reduction)． これによって，モデルの学習を成功させやすくなるらしい．</li>
+  </ul>
+</blockquote>
+
+<h4 id="333-hybrid-policy">3.3.3 Hybrid Policy</h4>
+<p>coarse dialogue actsが与えられたとき，ドメインに関する知識があれば，ルールベースのmanagerを作成できる．</p>
+
+<p>例：$z_{t-1} = {\rm greet}$ のとき，$z_{t}$ も $\rm greet$ とする．</p>
+
+<p>実用的には，学習済みのmanagerを用いて，意図（行動）を決定させて，それに関する変数は，ルールベースで決定するものである．</p>
+
+<h3 id="34-generator">3.4 Generator</h3>
+<p>generatorは，coarse dialogue actと対話履歴の両方に基づいて，検索ベースにより発話内容を決定する．</p>
+
+<p>検索対象の候補はタプルとして保存されている：$(d(x_{t-1}), z_{t-1}, d(x_t), z_t)$<br />
+$d$はテンプレート抽出器：”How about ＄150?”という文があったら，”How about [price]?”と置き換えられる．[price] 部分は生成時に穴埋めされる．</p>
+
+<p>テスト時には，$z_t$ が与えられたら，まず，$z_t$ と $z_{t-1}$ と同じ意図を持つ候補を検索する．候補はテンプレートと現在の対話のコンテキストの類似度で評価される．具体的には，テンプレート $d(x_{t-1})$ はTF-IDFで重み付けされた，BoWベクトルであり，類似度は二つのコンテキストベクトル間の内積で得られる．</p>
+
+<h2 id="4-experiments">4. Experiments</h2>
+<h3 id="41-models">4.1 Models</h3>
+<p>まず，教師あり学習によってモデルを学習させる．このとき，2種類のモデルを比較する．</p>
+<ol>
+  <li>
+    <p><strong>SL(word)</strong>:  seq2seq + attention<br />
+ベクトルはCBoWで埋め込み．</p>
+  </li>
+  <li>
+    <p><strong>SL(act)</strong>: モジュール型のモデル<br />
+ルールベースのパーサー，学習済みのmanager，検索ベースのgeneratorからなる．</p>
+  </li>
+</ol>
+
+<p>クレイグスリストデータセットには様々な価格帯があるので，値段を正規化して扱う．（target priceが1，bottomline priceが0．）売り手のbottomlineは，listing priceの0.7倍．買い手のbottomlineはlisting price．</p>
+
+<p>教師あり学習で学習させたモデルを用いて，強化学習でfine-tuneする．モデルの詳細は以下の表6の通り．</p>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-07-01/table6.png" alt="実験モデルの一覧" style="width: 350px;" /><br />
+</div>
+
+<blockquote>
+  <p><i class="fas fa-image" style="padding: 0 2px 0 0;"></i> 図引用: <a href="https://aclweb.org/anthology/papers/D/D18/D18-1256/">Decoupling Strategy and Generation in Negotiation Dialogues</a></p>
+</blockquote>
+
+<h3 id="42-実験設定">4.2 実験設定</h3>
+
+<ul>
+  <li>
+    <p><strong>SL(word)</strong><br />
+3個前までの発言をattentionの対象にする．交渉シナリオは，CBoWで埋め込み．</p>
+  </li>
+  <li>
+    <p><strong>SL(word) / SL(act)の両方</strong><br />
+GloVe埋め込み：300次元<br />
+2層のLSTM：300次元<br />
+パラメータは-0.1から0.1の一様分布で初期化<br />
+AdaGrad：（学習率：0.01，バッチサイズ：128）<br />
+20エポック学習</p>
+  </li>
+  <li>
+    <p><strong>RL</strong><br />
+学習率：0.001<br />
+5000エピソード学習</p>
+  </li>
+</ul>
+
+<h3 id="43-人間による評価">4.3 人間による評価</h3>
+<p>二つの指標により評価．</p>
+<ol>
+  <li>
+    <p><strong>task specificなスコア</strong><br />
+効用・合意案の公平性・発話の長さ・合意率</p>
+  </li>
+  <li>
+    <p><strong>human-likeness</strong><br />
+1〜5の5段階評価．高ければ高いほど良い．スコアはAMTのworkerによりつけられた．</p>
+  </li>
+</ol>
+
+<h4 id="表7の意味するところ">表7の意味するところ</h4>
+<ol>
+  <li>
+    <p>教師あり学習をつけると人間らしさが向上．ただし，actベースの方がスコアが良い．</p>
+  </li>
+  <li>
+    <p>強化学習をつけると，wordベースのときは人間らしさが低下する．一方で，actベースのときは報酬を最適化しながらも，人間らしさを維持している．</p>
+  </li>
+</ol>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-07-01/table7.png" alt="ルールベースの抽出法の一覧" style="width: 500px;" /><br />
+</div>
+
+<div style="text-align: center;">
+    <img src="/resources/2019-07-01/table8.png" alt="対話履歴の比較" style="width: 500px;" /><br />
+</div>
+
+<blockquote>
+  <p><i class="fas fa-image" style="padding: 0 2px 0 0;"></i> 図引用: <a href="https://aclweb.org/anthology/papers/D/D18/D18-1256/">Decoupling Strategy and Generation in Negotiation Dialogues</a></p>
+</blockquote>
+
+<h2 id="スライド">スライド</h2>
+<p>(<strong>追加</strong>: 2019/07/14)</p>
+<div style="text-align: center"><iframe src="//www.slideshare.net/slideshow/embed_code/key/3L3ugPvxSRAt6o" width="510" height="420" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen=""></iframe></div>
+
+  </div>
+
+  <!--
+  <div class="date">
+    Written on July  1, 2019
+  </div>
+  -->
+
+  <style type="text/css">
+    @font-face {
+	font-family: 'icomoon';
+	src:url('/resources/fonts/icomoon.eot?ookgoz');
+	src:url('/resources/fonts/icomoon.eot?ookgoz#iefix') format('embedded-opentype'),
+		url('/resources/fonts/icomoon.ttf?ookgoz') format('truetype'),
+		url('/resources/fonts/icomoon.woff?ookgoz') format('woff'),
+		url('/resources/fonts/icomoon.svg?ookgoz#icomoon') format('svg');
+		font-weight: normal;
+		font-style: normal;
+    }
+
+    [class^="icon-"], [class*=" icon-"] {
+        /* use !important to prevent issues with browser extensions that change fonts */
+        font-family: 'icomoon' !important;
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: inherit;
+        
+        /* Better Font Rendering =========== */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .icon-line:before        {content: "\e90a";}
+    .icon-pocket:before      {content: "\e902";}
+    .icon-twitter:before     {content: "\ea96";}
+    .icon-facebook:before    {content: "\ea90";}
+    .icon-hatebu:before      {content: "\e903";}
+
+    .amazon-icon::before     {content: "Amazon.co.jpで買って応援！";}
+
+    /*ソーシャルリストデザイン2*/
+    .shareList2 {
+        list-style:none;
+        display: flex;
+        flex-wrap:wrap;
+        width:100%;
+        margin:-5px 0 0 -5px;
+        padding:0;
+    }
+    .shareList2__item {
+        height:30px;
+        line-height:30px;
+        width:30px;
+        margin:5px 0 0 5px;
+        text-align:center;
+    }
+    .shareList2__item__amazon {
+        height:30px;
+        line-height:30px;
+        width: 240px;
+        margin:5px 0 0 5px;
+        text-align:center;
+    }
+    .shareList2__link {
+        display:block;
+        color:#ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .shareList2__link::before{
+        font-size:16px;
+        display:block;
+        transition: ease-in-out .2s;
+        border-radius: 5px;
+    }
+    .shareList2__link:hover::before{
+        background:#ffffff;
+        transform: scale(1.2);
+        box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
+    }
+
+    .shareList2__link__amazon {
+        display:block;
+        color:#ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .shareList2__link__amazon::before{
+        font-size:16px;
+        display:block;
+        transition: ease-in-out .2s;
+        border-radius: 5px;
+    }
+    .shareList2__link__amazon:hover::before{
+        background:#ffffff;
+        box-shadow:1px 1px 4px 0px rgba(0,0,0,0.15);
+    }
+
+    .shareList2__link.icon-twitter{background:#55acee;}
+    .shareList2__link.icon-twitter:hover::before{color:#55acee;}
+
+    .shareList2__link.icon-facebook{background:#3B5998;}
+    .shareList2__link.icon-facebook:hover::before{color:#3B5998;}
+
+    .shareList2__link.icon-hatebu{background:#008FDE;}
+    .shareList2__link.icon-hatebu:hover::before{color:#008FDE;}
+
+    .shareList2__link.icon-pocket{background:#EB4654;}
+    .shareList2__link.icon-pocket:hover::before{color:#EB4654;}
+
+    .shareList2__link.icon-line{background:#1dcd00;}
+    .shareList2__link.icon-line:hover::before{color:#1dcd00;}
+
+    .shareList2__link__amazon.amazon-icon{background:#ff9900;}
+    .shareList2__link__amazon.amazon-icon:hover::before{color:#ff9900;}
+</style>
+
+<ul class="shareList2" style="margin-top: 5px;">
+    <li class="shareList2__item"><a class="shareList2__link icon-twitter" href="https://twitter.com/intent/tweet?text=%E8%AB%96%E6%96%87%E3%83%A1%E3%83%A2:Decoupling%20Strategy%20and%20Generation%20in%20Negotiation%20Dialogues+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP&amp;url=http%3A%2F%2Flocalhost%3A4000%2FNote-Decoupling%2F" target="_blank" title="Twitter"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-facebook" href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FNote-Decoupling%2F" target="_blank" title="Facebook"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-hatebu" href="https://b.hatena.ne.jp/add?mode=confirm&amp;url=http%3A%2F%2Flocalhost%3A4000%2FNote-Decoupling%2F" target="_blank" title="はてなブックマーク"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-pocket" href="//getpocket.com/edit?url=http%3A%2F%2Flocalhost%3A4000%2FNote-Decoupling%2F&title=%E8%AB%96%E6%96%87%E3%83%A1%E3%83%A2:Decoupling%20Strategy%20and%20Generation%20in%20Negotiation%20Dialogues+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP" target="_blank" title="Pocket"></a></li>
+    <li class="shareList2__item"><a class="shareList2__link icon-line" href="http://line.me/R/msg/text/?%E8%AB%96%E6%96%87%E3%83%A1%E3%83%A2:Decoupling%20Strategy%20and%20Generation%20in%20Negotiation%20Dialogues+–+%E3%81%8D%E3%81%BE%E3%81%BE%E3%81%ABNLP%0Ahttp%3A%2F%2Flocalhost%3A4000%2FNote-Decoupling%2F" target="_blank" title="LINE"></a></li>
+    <li class="shareList2__item__amazon"><a class="shareList2__link__amazon amazon-icon" href="//af.moshimo.com/af/c/click?a_id=1430714&p_id=170&pc_id=185&pl_id=4062&url=https%3A%2F%2Fwww.amazon.co.jp%2F" target="_blank" rel="nofollow"></a>
+        <img src="//i.moshimo.com/af/i/impression?a_id=1430714&p_id=170&pc_id=185&pl_id=4062" width="1" height="1" style="border:none;"></li>
+</ul>
+
+  <br />
+
+  <div class="footer_ads">
+    <div class="left_ad">
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- フッター1 -->
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-1838422896597988"
+            data-ad-slot="4583840862"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <div class="right_ad">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- フッター2 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-1838422896597988"
+             data-ad-slot="3446169345"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+  </div>
+  <br />
+
+  <!-- 前後のページへのリンク-->
+  <div class="pager">
+    
+
+    
+      <div class="prev">
+        <p>前の記事<i class="fas fa-arrow-circle-right" style="margin: 0 0 0 0.5em;"></i></p>
+        <p>
+            <a href="/memo-svm/">サポートベクターマシンのお話</a>
+        </p>
+      </div>
+    
+  </div>
+
+  
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: {
+      Macros: {
+               bm: ["\\boldsymbol{#1}", 1],
+               argmax: ["\\mathop{\\rm arg\\,max}\\limits"],
+               argmin: ["\\mathop{\\rm arg\\,min}\\limits"]},
+      extensions: ["AMSmath.js","AMSsymbols.js"]
+    },
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script
+  type="text/javascript"
+  charset="utf-8"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML"
+>
+</script>
+
+</article>
+
+      </main>
+
+      <aside class="sidebar" role="complementary">
+        <div class="side-ad">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- サイドバー -->
+  <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-1838422896597988"
+      data-ad-slot="3641305571"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+
+<div class="profile">
+  <div style="text-align: center;">
+    <a href="/about/">
+      <img style="width: 100px; border-radius: 50px;" src="/resources/logo/profile.jpg" />
+    </a>
+    <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1;"><strong>Gucci</strong></p>
+  </div>
+  <p style="margin-top: 0.5em; margin-bottom: 0; font-size: 0.8em; text-align: center;">
+    自然言語処理や機械学習に関連する情報を発信しています。
+    留学系の話題も<a href="https://note.mu/_gucciiiii">note</a>に書いています。
+  </p>
+  <hr />
+  <div class="profile_icon">
+    
+<a href="/contact/"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/gucci-j"><i class="svg-icon github"></i></a>
+
+
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/_gucciiiii"><i class="svg-icon twitter"></i></a>
+
+
+
+  </div>
+</div>
+
+<div class="amazon-button">
+  <p style="margin-top: 0; margin-bottom: 0.5em; font-size: 0.8em; text-align: center;">
+    <strong>Amazon.co.jpで買って応援！</strong>
+  </p>
+  <div style="text-align: center;">
+    <a href="//af.moshimo.com/af/c/click?a_id=1430714&p_id=170&pc_id=185&pl_id=10340&guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0068/000000010340.gif" width="300" height="50" style="border:none; padding-bottom: 0;"></a>
+    <img src="//i.moshimo.com/af/i/impression?a_id=1430714&p_id=170&pc_id=185&pl_id=10340" width="0" height="0" style="display: none; border:none;">
+  </div>
+</div>
+
+<div class="search">
+  <script>
+    (function() {
+      var cx = 'partner-pub-1838422896597988:8655986192';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+    })();
+  </script>
+  <gcse:searchbox-only></gcse:searchbox-only>
+</div>
+
+
+<div class="recent-posts">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>最近の記事</strong>
+  </p>
+  <hr />
+  <ul style="padding-right: 5px; padding-left: 1.5em;">
+    
+      <li>
+        <a href="/Note-Decoupling/">
+          論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues
+        </a>
+      </li>
+    
+      <li>
+        <a href="/memo-svm/">
+          サポートベクターマシンのお話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/cv-with-torchtext/">
+          torchtextでk-分割交差検証をする話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/Note-Transformer/">
+          論文メモ：Attention Is All You Need
+        </a>
+      </li>
+    
+      <li>
+        <a href="/DL-Intro-5/">
+          ゼロから作るDeep Learningとともに学ぶフレームワーク（畳み込みニューラルネットワーク編）
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="side-category">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>タグ一覧</strong>
+  </p>
+  <hr />
+  <ul style="padding: 0 10px 0 10px;">
+    
+      <li>
+        <a href="/sitemap#PyTorch">
+          PyTorch
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#Tips">
+          Tips
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#「ゼロからKeras」シリーズ">
+          「ゼロからKeras」シリーズ
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#ブログ全般">
+          ブログ全般
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#機械学習全般">
+          機械学習全般
+        </a>
+      </li>
+    
+      <li>
+        <a href="/sitemap#論文メモ">
+          論文メモ
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+      </aside>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="footer_container">
+        <footer class="footer">
+          
+<a href="/contact/"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/gucci-j"><i class="svg-icon github"></i></a>
+
+
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/_gucciiiii"><i class="svg-icon twitter"></i></a>
+
+
+<br />
+          <a href="/">Home</a>
+          | <a href="/Introduction/">About This Blog</a>  
+          | <a href="/sitemap/">Sitemap</a> 
+          | <a href="/privacy/">Privacy</a><br />
+          <div style="font-size: 8pt;">© 2019 Atsuki Yamaguchi.</div>
+        </footer>
+      </div>
+    </div>
+
+    
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-137498199-1', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/Note-Decoupling/',
+		  'title': '論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  </body>
+</html>
