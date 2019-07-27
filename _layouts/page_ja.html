@@ -9,4 +9,8 @@ layout: default
   <div class="entry">
     {{ content }}
   </div>
+
+  <div class="date">
+    最終更新日： {{ page.last_modified_at | date: "%Y年%m月%d日" }}
+  </div>
 </article>

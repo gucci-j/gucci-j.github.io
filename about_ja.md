@@ -27,7 +27,7 @@ custom_css: page
 |2019年9月〜2020年9月|The University of Sheffield<br />MSc. Computer Science with Speech and Language Processing　進学予定|
 |2019年4月〜現在|東京農工大学大学院工学府情報工学専攻　在学中|
 |2015年4月〜2019年3月|東京農工大学工学部情報工学科　**首席卒業**  <br /> GPA: 3.63 / 4.00|
-|2017年8月〜2017年12月|De La Salle University　交換留学 <br /> GPA: 2.82 / 4.00|
+|2017年8月〜12月|De La Salle University　交換留学 <br /> GPA: 2.82 / 4.00|
 
 ### 職歴
 
