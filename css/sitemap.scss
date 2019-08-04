@@ -10,3 +10,11 @@
     padding: 4px 16px;
   }
 }
+
+.tag-cloud {
+  li:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: '\f02b';
+  }
+}

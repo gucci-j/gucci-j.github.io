@@ -268,7 +268,7 @@
     flex-wrap: wrap;
   }
 }
-.pager .prev {
+.pager .next {
   padding: 0.5em 1em;
   background: #eee;
   border-radius: 10px;
@@ -276,16 +276,16 @@
   margin-left: auto;
   width: 50%;
 }
-.pager .prev p {
+.pager .next p {
   margin: 0;
   padding: 0;
 }
 @media screen and (max-width: 767px) {
-  .pager .prev {
+  .pager .next {
     width: 100%;
   }
 }
-.pager .next {
+.pager .prev {
   padding: 0.5em 1em;
   margin: 0 1em 0 0;
   background: #eee;
@@ -293,12 +293,12 @@
   width: 50%;
 }
 @media screen and (max-width: 767px) {
-  .pager .next {
+  .pager .prev {
     margin: 0 0 0.5em 0;
     width: 100%;
   }
 }
-.pager .next p {
+.pager .prev p {
   margin: 0;
   padding: 0;
 }

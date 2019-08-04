@@ -1,4 +1,136 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-07-27T18:34:37+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog about NLP and ML</subtitle><entry xml:lang="ja_JP"><title type="html">論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues</title><link href="http://localhost:4000/Note-Decoupling/" rel="alternate" type="text/html" title="論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues" /><published>2019-07-01T00:00:00+09:00</published><updated>2019-07-14T11:20:00+09:00</updated><id>http://localhost:4000/Note-Decoupling</id><content type="html" xml:base="http://localhost:4000/Note-Decoupling/">&lt;p&gt;本稿では，EMNLP 2018に採択された，自然言語で売り物の価格交渉をするエージェントを提案した論文：「Decoupling Strategy and Generation in Negotiation Dialogues」の論文のメモ書きを共有・紹介します．&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-08-04T21:38:23+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog about NLP and ML</subtitle><entry xml:lang="ja_JP"><title type="html">実装とともに学ぶ交差検証のお話</title><link href="http://localhost:4000/cv-intro/" rel="alternate" type="text/html" title="実装とともに学ぶ交差検証のお話" /><published>2019-08-04T00:00:00+09:00</published><updated>2019-08-04T00:00:00+09:00</updated><id>http://localhost:4000/cv-intro</id><content type="html" xml:base="http://localhost:4000/cv-intro/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
+&lt;p&gt;機械学習を活用した研究に取り組んでいると，論文中に “k-fold CV” や “cross-validation”，「交差検証」 といった表記を見かけるときが多々あると思います．また，実際に機械学習モデルを構築してその性能を評価したいときに，より厳密に性能を測定するには，「交差検証」の適用は避けられません．&lt;/p&gt;
+
+&lt;p&gt;そこで，本稿では，&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-5/&quot;&gt;「ゼロから作るDeep Learningとともに学ぶフレームワーク」&lt;/a&gt;で用いられていたソースコードを基に，交差検証の基本的な考え方とその適用方法について紹介します．ソースコードとともに本稿の内容を理解することで，交差検証に関する基礎的な知識が身につくものと想定されます．&lt;/p&gt;
+
+&lt;p&gt;それでは，交差検証の解説から始めていきましょう．&lt;/p&gt;
+
+&lt;h2 id=&quot;1-交差検証とは&quot;&gt;1. 交差検証とは&lt;/h2&gt;
+&lt;p&gt;交差検証とはデータセットを細切れに分割して，異なる組合せで複数回機械学習モデルを学習させて，それらの平均をとることによりモデルの性能を測る手法のことを指します．&lt;/p&gt;
+
+&lt;p&gt;交差検証を使わない場合，データセットを学習用 (training set)・検証用 (validation set)・テスト用 (test set) の3つに分割して，モデルの性能を評価することが多いと思われます．しかしながら，テスト・検証用セットを設けることで，実際に学習に使えるデータ数が減少してしまうというデメリットがあります．また，最終的な評価結果も，データセットのサンプリング方法によって左右される恐れもあります．&lt;/p&gt;
+
+&lt;p&gt;交差検証を用いることで，検証用セットだけのためのデータを確保する必要がなくなるため，データセットを存分に活用することができ，異なる組合せで複数回学習させた結果の平均をとるので，より正確な性能評価が可能となります．&lt;/p&gt;
+
+&lt;p&gt;交差検証の主な種類としては，以下の二つが挙げられます．&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;K分割交差検証 (k-fold cross validation)&lt;/strong&gt;&lt;br /&gt;
+データセットを $k$ 個に分割をし，$k-1$ 個のデータのかたまりで機械学習モデルを学習させて，残りの$1$ 個のデータでモデルの検証を行います．この流れを異なる組合せで $k$ 回行い，最終的な結果はそれぞれの組合せでの実験結果の平均として得られます．&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Leave One Out 交差検証&lt;/strong&gt;&lt;br /&gt;
+Leave One Out 交差検証はその名の通りデータを一個だけ残して交差検証を行うことを指します．つまり，K分割交差検証で，$K = n$ ($n$ はデータ数)とすることを意味しています．しかし，この手法はかなり計算コストが高いので，深層学習を適用している研究分野で使われている例を見たことがありません…&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;念の為確認しておくと，機械学習モデルの学習・評価の流れとしては，まず，学習用セットでモデルを学習させて，検証用セットで学習したモデルを評価します．最後に，検証用セットで良好な結果を残したモデルについて，最終的な評価を下すために，テストセットを一度だけ適用します．&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;11-k分割交差検証&quot;&gt;1.1 K分割交差検証&lt;/h3&gt;
+&lt;p&gt;K分割交差検証の例として，データセットを3分割にしたときの，3分割交差検証の流れを見ていきましょう．&lt;/p&gt;
+
+&lt;p&gt;流れとしては，まずデータ①と②で学習させたモデルを，データ③で性能評価し，その後データ①と③で学習させたモデルを，データ②でテストし，最後にデータ②と③で学習させたモデルを，データ①で評価します．最終的な結果は，各性能評価の平均となります．&lt;/p&gt;
+
+&lt;div style=&quot;text-align: center;&quot;&gt;
+    &lt;img src=&quot;/resources/2019-08-04/k-fold_cv.png&quot; alt=&quot;K分割交差検証の例&quot; style=&quot;width: 550px;&quot; /&gt;&lt;br /&gt;
+    例：3分割交差検証のときの可視化図
+&lt;/div&gt;
+
+&lt;p&gt;より厳密にモデルの評価を行う場合は，あらかじめデータセットを2分割にして，うち片方をテストセットとしてキープしておきます．（ホールドアウトともいう．）最終的な性能評価は，テストセットで行います．&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ここまで厳密にやるのは，イメージ的にはコンペ系のタスクが多いのかなと感じます．&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div style=&quot;text-align: center;&quot;&gt;
+    &lt;img src=&quot;/resources/2019-08-04/k-fold_cv_strict.png&quot; alt=&quot;K分割交差検証の厳密な例&quot; style=&quot;width: 550px;&quot; /&gt;&lt;br /&gt;
+    例：3分割交差検証のときの可視化図（厳密なとき）
+&lt;/div&gt;
+
+&lt;h3 id=&quot;12-層化k分割交差検証&quot;&gt;1.2 層化K分割交差検証&lt;/h3&gt;
+&lt;p&gt;これまで見てきた交差検証の例は，データセットのクラスの偏りについて考慮していませんでした．分類問題に対して交差検証を適用する場合には，データセット中の各クラスの出現確率に注意を払う必要がでてきます．具体的には，データセットが不均衡となっている場合に，通常のK分割交差検証ではなく，「層化K分割交差検証」(stratified k-fold CV)を適用する必要があります．&lt;/p&gt;
+
+&lt;p&gt;層化K分割交差検証は，各fold（データのかたまり）での各クラスの出現確率が，分割前のデータでの出現確率とほぼ同一になるように，データを分割して，K分割交差検証を適用する手法です．これによって，あるfoldにデータが偏ったり，全く存在しないといった事象を防ぐことができ，より正確に精度の計測を行うことができます．&lt;/p&gt;
+
+&lt;h2 id=&quot;2-実装&quot;&gt;2. 実装&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-5/&quot;&gt;「ゼロから作るDeep Learningとともに学ぶフレームワーク」&lt;/a&gt;で紹介したCIFAR10の分類モデルのソースコードを，k分割交差検証を適用できるように改造していきましょう．&lt;/p&gt;
+
+&lt;p&gt;K分割交差検証の適用方法は簡単で，scikit-learnに含まれている，&lt;code class=&quot;highlighter-rouge&quot;&gt;model_selection.KFold&lt;/code&gt; クラスを使えば良いだけです．層化K分割交差検証の場合は，&lt;code class=&quot;highlighter-rouge&quot;&gt;model_selection.StratifiedKFold&lt;/code&gt; クラスになります．&lt;/p&gt;
+
+&lt;h3 id=&quot;21-適用方法&quot;&gt;2.1 適用方法&lt;/h3&gt;
+&lt;p&gt;まず，&lt;code class=&quot;highlighter-rouge&quot;&gt;KFold&lt;/code&gt; クラスのインスタンスを生成します．&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.model_selection&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KFold&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;kf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KFold&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_splits&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;random_state&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1234&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;KFold&lt;/code&gt; の引数は次の表のようになっています．&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;&lt;strong&gt;引数&lt;/strong&gt;&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;&lt;strong&gt;説明&lt;/strong&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;n_splits&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;データセットを何分割するかを指定します．&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;shuffle&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;データセットを分割前にシャッフルするかを指定します．&lt;br /&gt;デフォルトは &lt;code class=&quot;highlighter-rouge&quot;&gt;False&lt;/code&gt; になっています．&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;random_state&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;データをランダム選択する際のシード値を指定できます．&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;次に，&lt;code class=&quot;highlighter-rouge&quot;&gt;KFold&lt;/code&gt; クラスのメソッドである，&lt;code class=&quot;highlighter-rouge&quot;&gt;split&lt;/code&gt; を使ってデータのインデックスを受け取るだけです．擬似コードは以下のようになります．&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train_index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val_index&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;build_model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;optimizer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'adam'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;loss&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'categorical_crossentropy'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;metrics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'accuracy'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;train_index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;train_index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;batch_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;epochs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;_history&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;evaluate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;val_index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;val_index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;batch_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;split&lt;/code&gt; はジェネレータになっているので，各foldでデータのインデックスを提供してくれます．したがって，与えられたインデックスをそのままデータセットのNumPy配列に与えれば，自動的にデータが選別されます．&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html#sklearn.model_selection.KFold&quot;&gt;（scikit-learn KFoldのドキュメント）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;22-適用例&quot;&gt;2.2 適用例&lt;/h3&gt;
+&lt;p&gt;以上の一連の流れをまとめたソースコードは，cross-validationディレクトリ下に &lt;code class=&quot;highlighter-rouge&quot;&gt;run.py&lt;/code&gt; として置いてあります．基になっているソースコードは，ゼロから作るDeep Learningとともに学ぶフレームワークで実装した &lt;code class=&quot;highlighter-rouge&quot;&gt;cnn.py&lt;/code&gt; です．&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/cross-validation/&quot;&gt;（GitHub: run.py）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;run.py&lt;/code&gt; を用いた学習のさせ方は簡単で，&lt;code class=&quot;highlighter-rouge&quot;&gt;python run.py&lt;/code&gt; で実行できます．出力としては，コマンドライン上に学習の経過が表示されるようになっており，最後に全foldでの結果の平均と標準偏差を出力させるようになっています．出力例は下記の通りです．&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;loss: 1.0935191447734833 ± 0.05668393814738748
+acc: 0.6322800013422967 ± 0.012688641313732466
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;(&lt;strong&gt;注意&lt;/strong&gt;) 学習にはそれなりの時間を要するので，ノートパソコン等で動作させる際には，&lt;code class=&quot;highlighter-rouge&quot;&gt;n_splits&lt;/code&gt; を小さい値: 3などに設定してご利用ください．&lt;/p&gt;
+
+&lt;h3 id=&quot;23-注意点&quot;&gt;2.3 注意点&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;run.py&lt;/code&gt; で層化K分割交差検証を適用したい場合には，main関数の引数 &lt;code class=&quot;highlighter-rouge&quot;&gt;stratified&lt;/code&gt; に &lt;code class=&quot;highlighter-rouge&quot;&gt;True&lt;/code&gt; を与えれば適用可能となります．ただし，CIFAR10データセットは不均衡データセットではないため，実行結果への影響は軽微なものです．&lt;/p&gt;
+
+&lt;h2 id=&quot;まとめ&quot;&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;今回は交差検証について簡単に紹介しました．ゼロからKerasシリーズとの連携を想定して作成したので，GitHubの実装例もぜひ合わせて確認することをおすすめします．&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/&quot;&gt;（GitHub: ゼロからKerasシリーズ）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name></name></author><category term="Tips" /><category term="機械学習全般" /><category term="「ゼロからKeras」シリーズ" /><summary type="html">はじめに 機械学習を活用した研究に取り組んでいると，論文中に “k-fold CV” や “cross-validation”，「交差検証」 といった表記を見かけるときが多々あると思います．また，実際に機械学習モデルを構築してその性能を評価したいときに，より厳密に性能を測定するには，「交差検証」の適用は避けられません．</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/resources/2019-08-04/k-fold_cv.png" /></entry><entry xml:lang="ja_JP"><title type="html">論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues</title><link href="http://localhost:4000/Note-Decoupling/" rel="alternate" type="text/html" title="論文メモ：Decoupling Strategy and Generation in Negotiation Dialogues" /><published>2019-07-01T00:00:00+09:00</published><updated>2019-07-14T11:20:00+09:00</updated><id>http://localhost:4000/Note-Decoupling</id><content type="html" xml:base="http://localhost:4000/Note-Decoupling/">&lt;p&gt;本稿では，EMNLP 2018に採択された，自然言語で売り物の価格交渉をするエージェントを提案した論文：「Decoupling Strategy and Generation in Negotiation Dialogues」の論文のメモ書きを共有・紹介します．&lt;/p&gt;
 
 &lt;h2 id=&quot;文献情報&quot;&gt;文献情報&lt;/h2&gt;
 &lt;p&gt;著者: H. He et al.&lt;br /&gt;
@@ -2913,133 +3045,4 @@ Results: [[ True]
 
 &lt;h2 id=&quot;ソースコード&quot;&gt;ソースコード&lt;/h2&gt;
 
-&lt;p&gt;ソースコードは、&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras&quot;&gt;GitHub&lt;/a&gt;にて公開しています。&lt;/p&gt;</content><author><name></name></author><category term="「ゼロからKeras」シリーズ" /><summary type="html">はじめに</summary></entry><entry xml:lang="ja_JP"><title type="html">論文メモ：Deep contextualized word representations</title><link href="http://localhost:4000/Note-ELMo/" rel="alternate" type="text/html" title="論文メモ：Deep contextualized word representations" /><published>2019-04-06T00:00:00+09:00</published><updated>2019-04-06T00:00:00+09:00</updated><id>http://localhost:4000/Note-ELMo</id><content type="html" xml:base="http://localhost:4000/Note-ELMo/">&lt;h2 id=&quot;文献情報&quot;&gt;文献情報&lt;/h2&gt;
-&lt;p&gt;著者: M. Peters et al.&lt;br /&gt;
-所属: Allen Institute for Artificial Intelligence / Paul G. Allen School of Computer Science &amp;amp; Engineering, University of Washington&lt;br /&gt;
-出典: &lt;a href=&quot;https://aclweb.org/anthology/papers/N/N18/N18-1202/&quot;&gt;NAACL 2018&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;どんな論文か&quot;&gt;どんな論文か？&lt;/h2&gt;
-&lt;p&gt;ELMo = Embeddings from Language Modelsの略であり，言語モデルを活用した文脈に応じた単語分散表現: ELMoを提唱した論文．&lt;/p&gt;
-
-&lt;h2 id=&quot;先行研究と比べてどこが凄い&quot;&gt;先行研究と比べてどこが凄い？&lt;/h2&gt;
-&lt;p&gt;既存のNLPタスクのモデルの埋め込み層にELMoを追加するだけで，様々なタスクで当時のSoTAを達成した．&lt;/p&gt;
-
-&lt;h2 id=&quot;技術や手法のキモはどこ&quot;&gt;技術や手法のキモはどこ？&lt;/h2&gt;
-&lt;p&gt;双方向言語モデルを活用し，隠れ層の重みを重み付き線形和で圧縮する点．&lt;br /&gt;
-→ 従来手法では，単に双方向言語モデルの出力層だけを取ってきていた．&lt;/p&gt;
-
-&lt;h2 id=&quot;どうやって有効だと検証した&quot;&gt;どうやって有効だと検証した？&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;各種NLPタスクに適用して，そのスコアにより評価．&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;議論はある&quot;&gt;議論はある？&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;ELMoの中間層が捉えている特徴素について&lt;br /&gt;
-→ 著者らによると，ELMoの中間層は低層であればあるほど，&lt;strong&gt;文法的(syntactic)&lt;/strong&gt;な情報を含み，高層の方が，&lt;strong&gt;意味的(semantic)&lt;/strong&gt;な情報を含むとのこと．&lt;br /&gt;
-→ 基本的にどのタスクもsyntacticな情報を好む傾向にあるらしい．&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;論文の詳細メモ&quot;&gt;論文の詳細メモ&lt;/h2&gt;
-&lt;h3 id=&quot;1-順方向言語モデル&quot;&gt;1. 順方向言語モデル&lt;/h3&gt;
-&lt;p&gt;トークン数: $N$の単語列: $(t_1, t_2, \dots, t_N)$が与えられたとき，順方向の言語モデルは，単語: $t_k$と単語列: $(t_1, \dots, t_{k-1})$の条件付き確率をモデリングすることで，次のように表される.順方向の言語モデルでは，次の単語: $t_{k+1}$を予測することを目的とする．&lt;/p&gt;
-
-&lt;div class=&quot;mathjax-scroll&quot;&gt;
-$$p(t_1, t_2, ..., t_N) = \prod_{k=1}^N p(t_k | t_1, t_2, \dots, t_{k-1})$$
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;最近の言語モデルでは，文脈非依存な単語表現: $\mathbf{x}_k^{LM}$を単語埋め込みやcharacter-based CNNにより算出してから，L層のLSTMに入力することが多い．&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;単語列の位置: $k$において，各LSTM層は，文脈依存な単語表現: $\overrightarrow{\mathbf{h}}_{k, j}^{LM}$（ただし，$1 \leq j \leq L$）を出力する．&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;\overrightarrow{\mathbf{h}}_{k, L}^{LM}&lt;/script&gt;は，次の単語: $t_{k+1}$をsoftmax層で予測するのに用いられる．&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;2-逆方向言語モデル&quot;&gt;2. 逆方向言語モデル&lt;/h3&gt;
-&lt;p&gt;逆方向言語モデルは順方向言語モデルと類似しているが，単語列を逆に処理していく点で異なる．なお，逆方向の言語モデルでは，未来の単語列から一つ前の単語: $t_{k-1}$を予測することを目的とする．つまり，逆方向の言語モデルは次のように定義される．&lt;/p&gt;
-
-&lt;div class=&quot;mathjax-scroll&quot;&gt;
-$$p(t_1, t_2, ..., t_N) = \prod_{k=1}^N p(t_k | t_{k+1}, t_{k+2}, \dots, t_N)$$
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;最終的には，&lt;script type=&quot;math/tex&quot;&gt;\overleftarrow{\mathbf{h}}_{k, L}^{LM}&lt;/script&gt; を求めることで，$t_{k-1}$ をsoftmax層で予測する．&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;3-双方向言語モデル&quot;&gt;3. 双方向言語モデル&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;通常言語モデルは対数尤度を最大化することで最適化を行う．&lt;br /&gt;
-→ 文脈中で出現してほしい単語の確率を最大化するため．&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;ELMoで使われる双方向言語モデルは次の式の対数尤度を最大化することで学習する．&lt;br /&gt;
-→ 文脈非依存な単語表現とソフトマックス層のパラメータ: $\Theta_{x}, \Theta_s$は共有．LSTMのパラメータについてのみ独立．&lt;br /&gt;
-→ 従来手法ではパラメータはすべて独立&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;mathjax-scroll&quot;&gt;
-$$
-\sum_{k=1}^{N}(\log p(t_k | t_1, t_2, \dots, t_{k-1}; \Theta_x, \overrightarrow{\Theta}_{LSTM}, \Theta_s) \\+ \log p(t_k | t_{k+1}, t_{k+2}, \dots, t_N; \Theta_x, \overleftarrow{\Theta}_{LSTM}, \Theta_s))
-$$
-&lt;/div&gt;
-
-&lt;h3 id=&quot;4-elmoのパラメータ算出&quot;&gt;4. ELMoのパラメータ算出&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;全てのトークン: $t_k$はL層の双方向言語モデルに対し，2L+1個の特徴量を持つ．&lt;br /&gt;
-→ 文脈依存しない単語ベクトル: 1個&lt;br /&gt;
-→ 文脈依存のする順方向と逆方向のLSTM: 2L個&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;mathjax-scroll&quot;&gt;
-$$
-\begin{equation*}
-\begin{split}
-R_k &amp;amp;= \{x_k^{LM}, \overrightarrow{\mathbf{h}}_{k, j}^{LM}, \overleftarrow{\mathbf{h}}_{k, j}^{LM} | j = 1, \dots, L \}\\
-    &amp;amp;= \{\mathbf{h}_{k, j}^{LM} | j=0, \dots, L \}
-\end{split}
-\end{equation*}
-$$
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;ELMoを他のタスクに応用するには，Rのすべての要素を一つのベクトル表現に変換する．&lt;br /&gt;
-→ 簡単な例だと，一番上の層だけを取ってくるものがある．CoVeやTagLMはこれを採用している．&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;mathjax-scroll&quot;&gt;
-$$
-\mathbf{ELMo}_k^{task} = E(R_k; \Theta_e) = \mathbf{h}_{k, L}^{LM}
-$$
-&lt;/div&gt;
-
-&lt;div style=&quot;text-align: center&quot;&gt;ただし，$\mathbf{h}_{k, L}^{LM} = \left[\overrightarrow{\mathbf{h}}_{k, j}^{LM}; \overleftarrow{\mathbf{h}}_{k, j}^{LM}\right]$&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;ELMoではより便宜をはかり，重み付き線形和の形で変換する．&lt;br /&gt;
-→ $s_j^{task}$はsoftmaxで正規化された重み&lt;br /&gt;
-→ $\gamma^{task}$はELMoのベクトル全体をスケーリングするため．チューニングの最適化の観点から必要．&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;mathjax-scroll&quot;&gt;
-$$
-\mathbf{ELMo}_k^{task} = \gamma^{task} \sum_{j=0}^L s_j^{task}\mathbf{h}_{k, j}^{LM}
-$$
-&lt;/div&gt;
-
-&lt;h3 id=&quot;5-elmoモデルのnlpタスクへの適用&quot;&gt;5. ELMoモデルのNLPタスクへの適用&lt;/h3&gt;
-&lt;p&gt;単に$\mathbf{ELMo}_k^{task}$を入力の埋め込みベクトルとconcatすれば良い．&lt;/p&gt;
-
-&lt;h2 id=&quot;まとめスライド&quot;&gt;まとめスライド&lt;/h2&gt;
-&lt;div style=&quot;text-align: center&quot;&gt;&lt;iframe src=&quot;//www.slideshare.net/slideshow/embed_code/key/hvw0gfJhsc8aWL&quot; width=&quot;510&quot; height=&quot;420&quot; frameborder=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; style=&quot;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&quot; allowfullscreen=&quot;&quot;&gt; &lt;/iframe&gt;&lt;/div&gt;
-&lt;div style=&quot;margin-bottom:5px&quot;&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;実装&quot;&gt;実装&lt;/h2&gt;
-&lt;p&gt;試しにKerasでELMo + BiLSTMを使ってIMDBの分類を行ったので，GitHubにあげました．&lt;br /&gt;
-→ &lt;a href=&quot;https://github.com/gucci-j/elmo-imdb&quot;&gt;GitHub-ELMo&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="論文メモ" /><summary type="html">文献情報 著者: M. Peters et al. 所属: Allen Institute for Artificial Intelligence / Paul G. Allen School of Computer Science &amp;amp; Engineering, University of Washington 出典: NAACL 2018</summary></entry></feed>
+&lt;p&gt;ソースコードは、&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras&quot;&gt;GitHub&lt;/a&gt;にて公開しています。&lt;/p&gt;</content><author><name></name></author><category term="「ゼロからKeras」シリーズ" /><summary type="html">はじめに</summary></entry></feed>

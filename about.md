@@ -42,4 +42,4 @@ This research aims at simulating lava flow by utilizing generative models.
 
 ## Contact
 
-You can send messages for me via [this contact form]({{ site.baseurl }}/contact/).
+You can send me messages via [this contact form]({{ site.baseurl }}/contact/).

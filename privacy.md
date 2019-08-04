@@ -3,6 +3,7 @@ layout: page_ja
 title: プライバシーポリシー
 permalink: /privacy/
 custom_css: page
+last_modified_at: 2019-08-03 22:00:00 +0900
 ---
 
 ## アクセス解析ツールについて

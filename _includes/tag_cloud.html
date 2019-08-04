@@ -21,7 +21,7 @@
   {% assign tag_names = tag_names | sort %}
 {% endif %}
 
-<ul class="tag-cloud">
+<ul class="tag-cloud" style="list-style: none; padding: 0 10px 0 10px;">
   {% for tag_name in tag_names %}
     <li>
       <a href="{{ baseurl }}/sitemap#{{ tag_name | slugize }}">
