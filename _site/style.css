@@ -541,13 +541,13 @@ footer {
 }
 
 pre.highlight {
-  padding: 1em;
+  padding: 0.7em 1em;
   color: #333;
   background-color: #f0f0f0;
   border: 1px solid #ddd;
   border-radius: 3px;
   overflow-x: auto;
-  margin: 10px 0 10px 0;
+  margin: 5px 0 5px 0;
 }
 
 code {

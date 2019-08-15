@@ -1,7 +1,5 @@
 ---
 layout: null
 ---
-User-agent: *
-Disallow: /resources/about/a_yamaguchi_cv.pdf
 
 Sitemap: {{ site.url }}{{ site.baseurl }}/sitemap.xml

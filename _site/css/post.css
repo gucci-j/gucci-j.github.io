@@ -1,4 +1,8 @@
 @charset "UTF-8";
+.post {
+  /* 本文オーバーフロー対策 */
+  overflow-wrap: break-word;
+}
 .post img {
   /* 画像の縁取り */
   border: 1px #eee solid;
@@ -36,9 +40,6 @@
   width: auto;
   padding: 5px 5px;
   border: 1px #222 solid;
-}
-.post table td {
-  overflow-wrap: break-word;
 }
 .post table tr:nth-child(even) {
   background-color: #f8f8f8;
