@@ -594,7 +594,7 @@ code {
 
 /* Literal */
 .highlight .n {
-  color: #93A1A1;
+  color: #333333;
 }
 
 /* Name */
@@ -609,7 +609,7 @@ code {
 
 /* Other */
 .highlight .p {
-  color: #93A1A1;
+  color: #333333;
 }
 
 /* Punctuation */
@@ -696,7 +696,7 @@ code {
 
 /* Keyword.Declaration */
 .highlight .kn {
-  color: #859900;
+  color: #C586C0;
 }
 
 /* Keyword.Namespace */
@@ -726,7 +726,7 @@ code {
 
 /* Literal.Number */
 .highlight .s {
-  color: #2AA198;
+  color: #CE9178;
 }
 
 /* Literal.String */
@@ -736,7 +736,7 @@ code {
 
 /* Name.Attribute */
 .highlight .nb {
-  color: #B58900;
+  color: #333333;
 }
 
 /* Name.Builtin */
@@ -776,7 +776,7 @@ code {
 
 /* Name.Label */
 .highlight .nn {
-  color: #93A1A1;
+  color: #333333;
 }
 
 /* Name.Namespace */

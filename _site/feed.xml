@@ -1,4 +1,227 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-08-04T21:38:23+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog about NLP and ML</subtitle><entry xml:lang="ja_JP"><title type="html">実装とともに学ぶ交差検証のお話</title><link href="http://localhost:4000/cv-intro/" rel="alternate" type="text/html" title="実装とともに学ぶ交差検証のお話" /><published>2019-08-04T00:00:00+09:00</published><updated>2019-08-04T00:00:00+09:00</updated><id>http://localhost:4000/cv-intro</id><content type="html" xml:base="http://localhost:4000/cv-intro/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-08-15T16:13:00+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog about NLP and ML</subtitle><entry xml:lang="ja_JP"><title type="html">実装とともに学ぶハイパーパラメータチューニングのお話</title><link href="http://localhost:4000/tuning-intro/" rel="alternate" type="text/html" title="実装とともに学ぶハイパーパラメータチューニングのお話" /><published>2019-08-15T00:00:00+09:00</published><updated>2019-08-15T00:00:00+09:00</updated><id>http://localhost:4000/tuning-intro</id><content type="html" xml:base="http://localhost:4000/tuning-intro/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://gucci-j.github.io/cv-intro/&quot;&gt;前回&lt;/a&gt;は交差検証について紹介をしました。今回は、ゼロからKerasシリーズの総まとめとして、ハイパーパラメータチューニングについて紹介します。実装例としては、&lt;a href=&quot;https://github.com/keras-team/keras-tuner&quot;&gt;Keras Tuner&lt;/a&gt; と呼ばれる、Keras用のハイパーパラメータ自動最適化ツールを活用した実装を紹介します。&lt;/p&gt;
+
+&lt;h2 id=&quot;1-ハイパーパラメータとは&quot;&gt;1. ハイパーパラメータとは&lt;/h2&gt;
+&lt;p&gt;ハイパーパラメータとは、最適化アルゴリズムによって最適化できないパラメータのことを指します。例えば、学習エポック数やバッチサイズ・隠れ層の次元数、学習率などがあたります。&lt;/p&gt;
+
+&lt;p&gt;最適化アルゴリズムでは最適化できないハイパーパラメータを最適化するには、人手ではなく、専用のツールを使うのが便利です。専用のツールはたくさん種類があるので、フレームワーク等の状況に応じたものを取捨選択すると良いです。&lt;/p&gt;
+
+&lt;h2 id=&quot;2-実装&quot;&gt;2. 実装&lt;/h2&gt;
+&lt;p&gt;例によって、画像データセット: CIFAR10 の分類実験を題材にハイパーパラメータチューニングを実施してみます。基にするソースコードは前回の交差検証で用いた、&lt;code class=&quot;highlighter-rouge&quot;&gt;cnn.py&lt;/code&gt; とします。冒頭で述べたように、Keras Tuner を活用して実装を行います。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/tree/master/cross-validation/src&quot;&gt;（GitHub: cnn.py）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;21-keras-tunerについて&quot;&gt;2.1 Keras Tunerについて&lt;/h3&gt;
+&lt;p&gt;Keras Tuner は、その名の通り Keras 用に開発中のハイパーパラメータ最適化ツールです。現時点で対応している最適化手法は、「ランダムサーチ」と &lt;code class=&quot;highlighter-rouge&quot;&gt;Hyperband&lt;/code&gt; になります。今回はランダムサーチを適用してチューニングを行います。ランダムサーチは決められた範囲内からパラメータをランダムに選択し、試していく手法です。&lt;/p&gt;
+
+&lt;p&gt;なお、Keras Tuner は、TensorFlow 2.0 以降のTensorFlowに統合されたKeras (&lt;code class=&quot;highlighter-rouge&quot;&gt;tf.keras&lt;/code&gt;) に対応していることが明記されているので、これまで本ブログで扱ってきたいわゆる無印Keras とは少し異なります。そのため、本記事では、無印Kerasユーザの方でも、&lt;code class=&quot;highlighter-rouge&quot;&gt;tf.keras&lt;/code&gt; を使って最低限動かせるような構成にしてあります。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://github.com/keras-team/keras-tuner&quot;&gt;（GitHub: Keras Tuner）&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;22-keras-tunerのインストール&quot;&gt;2.2 Keras Tunerのインストール&lt;/h3&gt;
+&lt;p&gt;まずは、Keras Tunerをインストールします。Python 3.6〜 と TensorFlow 2.0 が Requirementsとして指定されています。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/keras-team/keras-tuner.git
+cd keras-tuner
+pip install .
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;23-cnnモデルの実装&quot;&gt;2.3 CNNモデルの実装&lt;/h3&gt;
+&lt;p&gt;これまで活用してきた、&lt;code class=&quot;highlighter-rouge&quot;&gt;cnn.py&lt;/code&gt; は &lt;code class=&quot;highlighter-rouge&quot;&gt;tf.keras&lt;/code&gt; に互換性がないので、&lt;code class=&quot;highlighter-rouge&quot;&gt;tf.keras&lt;/code&gt; 向けに書き換えます。&lt;/p&gt;
+
+&lt;h4 id=&quot;231-ライブラリ読み出し&quot;&gt;2.3.1 ライブラリ読み出し&lt;/h4&gt;
+&lt;p&gt;ライブラリ読み出し部分は至って簡単に移植できます。今までのソースコードに、&lt;code class=&quot;highlighter-rouge&quot;&gt;tensorflow.&lt;/code&gt; を追加するだけです。&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tensorflow.keras&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Model&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tensorflow.keras.layers&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flatten&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tensorflow.keras.layers&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Conv2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MaxPooling2D&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tensorflow.keras.optimizers&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Adam&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tensorflow.keras.datasets&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cifar10&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;tensorflow.keras.utils&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to_categorical&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Keras Tuner のライブラリも読み込ませます。&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;kerastuner.tuners&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RandomSearch&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;232-モデルの定義&quot;&gt;2.3.2 モデルの定義&lt;/h4&gt;
+&lt;p&gt;モデルの定義部分は、Keras Tuner 向けに書き換える必要が出てきます。具体的には、次の2点について改造を施します。&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;引数に &lt;code class=&quot;highlighter-rouge&quot;&gt;hp&lt;/code&gt; : ハイパーパラメータ を取らせる&lt;/li&gt;
+  &lt;li&gt;チューニングしたいハイパーパラメータの部分を、&lt;code class=&quot;highlighter-rouge&quot;&gt;hp.Range&lt;/code&gt; に置き換える。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;hp.Range&lt;/code&gt; の使い方は次の表の通りです。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;&lt;strong&gt;引数&lt;/strong&gt;&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;&lt;strong&gt;説明&lt;/strong&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;min_value&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;チューニングしたいパラメータの最小値を指定します。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;max_value&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;チューニングしたいパラメータの最大値を指定します。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;step&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;インクリメントしていく値(幅)を指定します。&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;以下が、Keras Tunerに対応させたソースコードとなります。&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;build_model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# モデル定義
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Conv2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'filters'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min_value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+                    &lt;span class=&quot;n&quot;&gt;max_value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;40&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;step&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; 
+                    &lt;span class=&quot;n&quot;&gt;kernel_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'kernel_size'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min_value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;max_value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;step&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; 
+                    &lt;span class=&quot;n&quot;&gt;strides&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'valid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'relu'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MaxPooling2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pool_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flatten&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;units&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'units'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min_value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;max_value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;step&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; 
+                    &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'relu'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;_output&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'softmax'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;optimizer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Adam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Choice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'learning_rate'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1e-2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1e-3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1e-4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])),&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;loss&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'categorical_crossentropy'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;metrics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'accuracy'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;233-データの読み込み&quot;&gt;2.3.3 データの読み込み&lt;/h4&gt;
+&lt;p&gt;データセットの読み込み部は一切変更する必要はありません。無印のKeras用に実装したソースコードをそのまま活用できます。&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cifar10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;load_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;x_train&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_train&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;astype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'float'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;255.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;x_test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;astype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'float'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;255.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;y_train&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to_categorical&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num_classes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;y_test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;to_categorical&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num_classes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;234-randomsearchクラスのインスタンス生成&quot;&gt;2.3.4 RandomSearchクラスのインスタンス生成&lt;/h4&gt;
+&lt;p&gt;ここからが本題になります。まずは、ランダムサーチを行うためのインスタンス &lt;code class=&quot;highlighter-rouge&quot;&gt;tuner&lt;/code&gt; を生成します。&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;tuner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RandomSearch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build_model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;objective&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'val_accuracy'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;max_trials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;executions_per_trial&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;directory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'tuning'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;project_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'log'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;RandomSearch クラスの主な引数は次の表の通りです。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;&lt;strong&gt;引数&lt;/strong&gt;&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;&lt;strong&gt;説明&lt;/strong&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;hypermodel&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;HyperModel&lt;/code&gt; クラスのインスタンスか、ハイパーパラメータを引数にとる、&lt;code class=&quot;highlighter-rouge&quot;&gt;Model&lt;/code&gt; インスタンスを返す関数を与えます。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;objective&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;何を基準に最適化を行うかを指定します。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;max_trials&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;最大何回探索を行うかを指定します。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;executions_per_trial&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;一回の探索で何回学習を繰り返すかを指定できます。&lt;br /&gt;複数回指定すると、結果を安定させる効果があります。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;directory&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;ログの保存先ディレクトリを指定します。&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;project_name&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;ログの保存先ディレクトリ2を指定します。&lt;br /&gt;つまり、&lt;code class=&quot;highlighter-rouge&quot;&gt;directory&lt;/code&gt;/&lt;code class=&quot;highlighter-rouge&quot;&gt;project_name&lt;/code&gt;下にログファイルが保存されます。&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&quot;234-ランダムサーチの実行&quot;&gt;2.3.4 ランダムサーチの実行&lt;/h4&gt;
+&lt;p&gt;RandomSearch クラスのインスタンスを生成したら、ランダムサーチを実行できます。その前に、&lt;code class=&quot;highlighter-rouge&quot;&gt;search_space_summary()&lt;/code&gt;メソッドを使って、探索候補を確認することができます。&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;tuner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;search_space_summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;実行結果：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[Search space summary]
+ |-Default search space size: 4
+ &amp;gt; filters (Range)
+ |-default: None
+ |-max_value: 40
+ |-min_value: 10
+ |-step: 10
+ &amp;gt; kernel_size (Range)
+ |-default: None
+ |-max_value: 5
+ |-min_value: 2
+ |-step: 1
+ &amp;gt; units (Range)
+ |-default: None
+ |-max_value: 200
+ |-min_value: 50
+ |-step: 50
+ &amp;gt; learning_rate (Choice)
+ |-default: 0.01
+ |-values: [0.01, 0.001, 0.0001]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;探索候補の範囲が定義した通りに表示されていますね。&lt;/p&gt;
+
+&lt;p&gt;では、本題の探索に移っていきましょう。探索は、&lt;code class=&quot;highlighter-rouge&quot;&gt;search()&lt;/code&gt; メソッドを使います。このメソッドは、&lt;code class=&quot;highlighter-rouge&quot;&gt;model.fit()&lt;/code&gt;に対応しています。&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;tuner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;epochs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;validation_data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;235-チューニング結果の確認&quot;&gt;2.3.5 チューニング結果の確認&lt;/h4&gt;
+&lt;p&gt;チューニングの結果は、&lt;code class=&quot;highlighter-rouge&quot;&gt;results_summary()&lt;/code&gt; で確認できます。&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;tuner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;results_summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;実行結果：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[Results summary]
+ |-Results in tuning/log
+ |-Ran 5 trials
+ |-Ran 5 executions (1 per trial)
+ |-Best val_accuracy: 0.6094
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;実行結果から、最高精度を記録したパラメータの設定は下記の設定のときでした。&lt;br /&gt;
+今回は5回しか探索をしていないので、最適なパラメータが得られたとは言い難いです。実データでパラメータチューニングを行う際は、探索空間の大きさに応じて探索回数を適度に増やすのが無難です。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&quot;values&quot;: {&quot;filters&quot;: 10, &quot;kernel_size&quot;: 3, &quot;units&quot;: 50, &quot;learning_rate&quot;: 0.001}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;今回は使いませんでしたが、&lt;code class=&quot;highlighter-rouge&quot;&gt;get_best_models()&lt;/code&gt; で最良の結果を残したモデルをピックアップできます。（このメソッドを使わなくても、重みファイルは自動で保存されます。）&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;まとめ&quot;&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;今回は、Keras Tunerを活用したハイパーパラメータチューニングの方法について紹介をしました。簡単に使えるので便利ですね。&lt;/p&gt;
+
+&lt;p&gt;他にも便利なチューニングツール（例: Optuna）が数多く公開されているので、確認してみると良いかもしれません。&lt;/p&gt;
+
+&lt;h2 id=&quot;ソースコード&quot;&gt;ソースコード&lt;/h2&gt;
+&lt;p&gt;ソースコードは、&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras/&quot;&gt;GitHub&lt;/a&gt;にて公開してあります。&lt;/p&gt;</content><author><name></name></author><category term="Tips" /><category term="機械学習全般" /><category term="「ゼロからKeras」シリーズ" /><summary type="html">はじめに 前回は交差検証について紹介をしました。今回は、ゼロからKerasシリーズの総まとめとして、ハイパーパラメータチューニングについて紹介します。実装例としては、Keras Tuner と呼ばれる、Keras用のハイパーパラメータ自動最適化ツールを活用した実装を紹介します。</summary></entry><entry xml:lang="ja_JP"><title type="html">実装とともに学ぶ交差検証のお話</title><link href="http://localhost:4000/cv-intro/" rel="alternate" type="text/html" title="実装とともに学ぶ交差検証のお話" /><published>2019-08-04T00:00:00+09:00</published><updated>2019-08-04T00:00:00+09:00</updated><id>http://localhost:4000/cv-intro</id><content type="html" xml:base="http://localhost:4000/cv-intro/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
 &lt;p&gt;機械学習を活用した研究に取り組んでいると，論文中に “k-fold CV” や “cross-validation”，「交差検証」 といった表記を見かけるときが多々あると思います．また，実際に機械学習モデルを構築してその性能を評価したいときに，より厳密に性能を測定するには，「交差検証」の適用は避けられません．&lt;/p&gt;
 
 &lt;p&gt;そこで，本稿では，&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-5/&quot;&gt;「ゼロから作るDeep Learningとともに学ぶフレームワーク」&lt;/a&gt;で用いられていたソースコードを基に，交差検証の基本的な考え方とその適用方法について紹介します．ソースコードとともに本稿の内容を理解することで，交差検証に関する基礎的な知識が身につくものと想定されます．&lt;/p&gt;
@@ -173,6 +396,15 @@ acc: 0.6322800013422967 ± 0.012688641313732466
 &lt;h2 id=&quot;議論はある&quot;&gt;議論はある？&lt;/h2&gt;
 
 &lt;p&gt;教師あり学習時は，著者の提案するモジュール型のモデルを使うとよいことが示されている．また，強化学習時も，wordベースではなくdialogue actベースにすると，報酬を最適化しつつ，発話の自然さも維持できることが示されている．&lt;/p&gt;
+
+&lt;div class=&quot;inner_ads&quot;&gt;
+    &lt;div class=&quot;left_ad_in&quot;&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0598/000000020737.png&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt; 
+    &lt;div class=&quot;right_ad_in&quot;&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0068/000000004157.gif&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
 
 &lt;h2 id=&quot;1-はじめに&quot;&gt;1. はじめに&lt;/h2&gt;
 &lt;p&gt;交渉エージェントは以下の二つの点をうまく実行できる必要がある．&lt;/p&gt;
@@ -884,10 +1116,10 @@ $$
 
 &lt;div class=&quot;inner_ads&quot;&gt;
     &lt;div class=&quot;left_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502939&amp;amp;p_id=1555&amp;amp;pc_id=2816&amp;amp;pl_id=22749&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0866/000000022749.jpg&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502939&amp;amp;p_id=1555&amp;amp;pc_id=2816&amp;amp;pl_id=22749&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0598/000000020737.png&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt; 
     &lt;div class=&quot;right_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0598/000000020737.png&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0068/000000004157.gif&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 
@@ -1510,10 +1742,10 @@ _________________________________________________________________
 
 &lt;div class=&quot;inner_ads&quot;&gt;
     &lt;div class=&quot;left_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502939&amp;amp;p_id=1555&amp;amp;pc_id=2816&amp;amp;pl_id=22749&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0866/000000022749.jpg&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502939&amp;amp;p_id=1555&amp;amp;pc_id=2816&amp;amp;pl_id=22749&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0598/000000020737.png&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt; 
     &lt;div class=&quot;right_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502939&amp;amp;p_id=1555&amp;amp;pc_id=2816&amp;amp;pl_id=22750&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0866/000000022750.jpg&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502939&amp;amp;p_id=1555&amp;amp;pc_id=2816&amp;amp;pl_id=22750&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0068/000000004157.gif&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 
@@ -1921,10 +2153,10 @@ _________________________________________________________________
 
 &lt;div class=&quot;inner_ads&quot;&gt;
     &lt;div class=&quot;left_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502939&amp;amp;p_id=1555&amp;amp;pc_id=2816&amp;amp;pl_id=22749&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0866/000000022749.jpg&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502939&amp;amp;p_id=1555&amp;amp;pc_id=2816&amp;amp;pl_id=22749&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0598/000000020737.png&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt; 
     &lt;div class=&quot;right_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502939&amp;amp;p_id=1555&amp;amp;pc_id=2816&amp;amp;pl_id=22750&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0866/000000022750.jpg&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502939&amp;amp;p_id=1555&amp;amp;pc_id=2816&amp;amp;pl_id=22750&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0068/000000004157.gif&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 
@@ -2283,10 +2515,10 @@ y_train[0]: [0. 0. 0. 0. 0. 1. 0. 0. 0. 0.]
 
 &lt;div class=&quot;inner_ads&quot;&gt;
     &lt;div class=&quot;left_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502939&amp;amp;p_id=1555&amp;amp;pc_id=2816&amp;amp;pl_id=22749&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0866/000000022749.jpg&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502939&amp;amp;p_id=1555&amp;amp;pc_id=2816&amp;amp;pl_id=22749&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0598/000000020737.png&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt; 
     &lt;div class=&quot;right_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502939&amp;amp;p_id=1555&amp;amp;pc_id=2816&amp;amp;pl_id=22750&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0866/000000022750.jpg&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502939&amp;amp;p_id=1555&amp;amp;pc_id=2816&amp;amp;pl_id=22750&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0068/000000004157.gif&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 
@@ -2652,10 +2884,10 @@ _________________________________________________________________
 
 &lt;div class=&quot;inner_ads&quot;&gt;
     &lt;div class=&quot;left_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502939&amp;amp;p_id=1555&amp;amp;pc_id=2816&amp;amp;pl_id=22749&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0866/000000022749.jpg&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502939&amp;amp;p_id=1555&amp;amp;pc_id=2816&amp;amp;pl_id=22749&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0598/000000020737.png&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt; 
     &lt;div class=&quot;right_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502939&amp;amp;p_id=1555&amp;amp;pc_id=2816&amp;amp;pl_id=22750&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0866/000000022750.jpg&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502939&amp;amp;p_id=1555&amp;amp;pc_id=2816&amp;amp;pl_id=22750&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0068/000000004157.gif&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 
@@ -2836,212 +3068,6 @@ Non-trainable params: 0
 深層学習フレームワークを活用することで、たった数行でゼロから〜にあるものと同一のモデルを実装できることを実感したと思います。&lt;/p&gt;
 
 &lt;p&gt;次回からはゼロから〜の4章以降に対応する、ニューラルネットワークの学習に入ります！&lt;/p&gt;
-
-&lt;h2 id=&quot;ソースコード&quot;&gt;ソースコード&lt;/h2&gt;
-
-&lt;p&gt;ソースコードは、&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras&quot;&gt;GitHub&lt;/a&gt;にて公開しています。&lt;/p&gt;</content><author><name></name></author><category term="「ゼロからKeras」シリーズ" /><summary type="html">はじめに</summary></entry><entry xml:lang="ja_JP"><title type="html">ゼロから作るDeep Learningとともに学ぶフレームワーク（パーセプトロン編）</title><link href="http://localhost:4000/DL-Intro-1/" rel="alternate" type="text/html" title="ゼロから作るDeep Learningとともに学ぶフレームワーク（パーセプトロン編）" /><published>2019-04-13T00:00:00+09:00</published><updated>2019-04-13T00:00:00+09:00</updated><id>http://localhost:4000/DL-Intro-1</id><content type="html" xml:base="http://localhost:4000/DL-Intro-1/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
-
-&lt;p&gt;「ゼロから作るディープラーニング」は深層学習を学ぶ入門書として非常に人気があり、様々な場所で用いられています。&lt;/p&gt;
-
-&lt;p&gt;しかしながら、「フレームワークを用いないで深層学習の基礎を学ぶ」という本の目的により、深層学習フレームワークに関する内容は触れられていません。&lt;/p&gt;
-
-&lt;p&gt;そのため、読者の中には実際のフレームワークを用いた機械学習の勉強へと繋げる機会や気力を失ってしまった人も少なからずいると思います。&lt;/p&gt;
-
-&lt;p&gt;このプロジェクトでは、「ゼロから作るDeep Learning」（以下、ゼロから〜）を学習しつつ、深層学習フレームワークの一つである、Kerasについて学んでいきます。&lt;br /&gt;
-これにより、深層学習の基礎を理解しつつ、フレームワークを活用した実装方法について学ぶことができます！&lt;/p&gt;
-
-&lt;p&gt;それでは、まずはKerasのインストールから始めていきましょう。&lt;/p&gt;
-
-&lt;div class=&quot;link_box&quot;&gt;
-    &lt;span class=&quot;box-title&quot;&gt;シリーズリンク&lt;/span&gt;
-    &lt;p&gt;第一弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-1/&quot;&gt;パーセプトロン編&lt;/a&gt;&lt;/p&gt;
-    &lt;p&gt;第二弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-2/&quot;&gt;3層ニューラルネットワーク &amp;amp; 手書き数字認識編&lt;/a&gt;&lt;/p&gt;  
-    &lt;p&gt;第三弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-3/&quot;&gt;ニューラルネットワークの学習編&lt;/a&gt;&lt;/p&gt;
-    &lt;p&gt;第四弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-4/&quot;&gt;学習テクニック編&lt;/a&gt;&lt;/p&gt;
-    &lt;p&gt;第五弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-5/&quot;&gt;畳み込みニューラルネットワーク編&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;!-- START MoshimoAffiliateEasyLink --&gt;
-&lt;script type=&quot;text/javascript&quot;&gt;
-(function(b,c,f,g,a,d,e){b.MoshimoAffiliateObject=a;
-b[a]=b[a]||function(){arguments.currentScript=c.currentScript
-||c.scripts[c.scripts.length-2];(b[a].q=b[a].q||[]).push(arguments)};
-c.getElementById(a)||(d=c.createElement(f),d.src=g,
-d.id=a,e=c.getElementsByTagName(&quot;body&quot;)[0],e.appendChild(d))})
-(window,document,&quot;script&quot;,&quot;//dn.msmstatic.com/site/cardlink/bundle.js&quot;,&quot;msmaflink&quot;);
-msmaflink({&quot;n&quot;:&quot;ゼロから作るDeep Learning ―Pythonで学ぶディープラーニングの理論と実装&quot;,&quot;b&quot;:&quot;&quot;,&quot;t&quot;:&quot;&quot;,&quot;d&quot;:&quot;https:\/\/images-fe.ssl-images-amazon.com&quot;,&quot;c_p&quot;:&quot;\/images\/I&quot;,&quot;p&quot;:[&quot;\/512ru2i5gyL.jpg&quot;,&quot;\/51Z7TzDuljL.jpg&quot;,&quot;\/51Dzt-P86rL.jpg&quot;,&quot;\/51VfxOvKEwL.jpg&quot;,&quot;\/51dNlTr6a7L.jpg&quot;,&quot;\/51RfBXWcDAL.jpg&quot;,&quot;\/415IXnDy3IL.jpg&quot;,&quot;\/415VCPaFk1L.jpg&quot;,&quot;\/410OtMHeqkL.jpg&quot;,&quot;\/41F7PYraodL.jpg&quot;,&quot;\/41TFOjFQtaL.jpg&quot;,&quot;\/51SRdr-iBHL.jpg&quot;,&quot;\/51yxT9nEC4L.jpg&quot;,&quot;\/51q0zWV9NnL.jpg&quot;,&quot;\/51MDmgZZ2cL.jpg&quot;,&quot;\/51n9f4IpDZL.jpg&quot;,&quot;\/51erDZNc9tL.jpg&quot;,&quot;\/41qOS5gPctL.jpg&quot;,&quot;\/51wDA5ZuAeL.jpg&quot;,&quot;\/51Fg67TMeCL.jpg&quot;,&quot;\/51KCmWaOqFL.jpg&quot;,&quot;\/51e5o3xlSTL.jpg&quot;,&quot;\/51RF7CQIW1L.jpg&quot;,&quot;\/514m0GkYReL.jpg&quot;,&quot;\/516bqTekHoL.jpg&quot;,&quot;\/41colcboiNL.jpg&quot;,&quot;\/51IRqvCxzAL.jpg&quot;,&quot;\/51mFjvDorhL.jpg&quot;,&quot;\/51BQcHSo5QL.jpg&quot;,&quot;\/51THHJTIaTL.jpg&quot;,&quot;\/51PzJ4B%2BhtL.jpg&quot;,&quot;\/51CRA6FoSLL.jpg&quot;,&quot;\/41M5Qzg1yXL.jpg&quot;,&quot;\/51iMy2fgPkL.jpg&quot;,&quot;\/41xe6JIHELL.jpg&quot;,&quot;\/41HYfr%2Bv%2BKL.jpg&quot;,&quot;\/41gRFTsmr%2BL.jpg&quot;,&quot;\/51fD5k24M8L.jpg&quot;,&quot;\/518%2B8E-OZeL.jpg&quot;,&quot;\/41iyTyjjgdL.jpg&quot;,&quot;\/51L6s8Uo8aL.jpg&quot;,&quot;\/41xHQHIOQ2L.jpg&quot;,&quot;\/51ZWyzq1L3L.jpg&quot;,&quot;\/51oDwhT1gcL.jpg&quot;,&quot;\/51Zu5NuGq2L.jpg&quot;,&quot;\/512VUPnG69L.jpg&quot;,&quot;\/41Ufnm15s9L.jpg&quot;,&quot;\/41nALw08xcL.jpg&quot;,&quot;\/51uZB7hP-xL.jpg&quot;,&quot;\/41Qi%2BzskZHL.jpg&quot;,&quot;\/51p3s1TTn4L.jpg&quot;,&quot;\/413xgCPJnzL.jpg&quot;,&quot;\/51mc1fX%2B7xL.jpg&quot;,&quot;\/51GLiuSVtbL.jpg&quot;,&quot;\/419bmxhHV9L.jpg&quot;,&quot;\/5100WGZVi6L.jpg&quot;],&quot;u&quot;:{&quot;u&quot;:&quot;https:\/\/www.amazon.co.jp\/%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E4%BD%9C%E3%82%8BDeep-Learning-%E2%80%95Python%E3%81%A7%E5%AD%A6%E3%81%B6%E3%83%87%E3%82%A3%E3%83%BC%E3%83%97%E3%83%A9%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0%E3%81%AE%E7%90%86%E8%AB%96%E3%81%A8%E5%AE%9F%E8%A3%85-%E6%96%8E%E8%97%A4-%E5%BA%B7%E6%AF%85\/dp\/4873117585&quot;,&quot;t&quot;:&quot;amazon&quot;,&quot;r_v&quot;:&quot;&quot;},&quot;aid&quot;:{&quot;amazon&quot;:&quot;1430714&quot;,&quot;rakuten&quot;:&quot;1430719&quot;,&quot;yahoo&quot;:&quot;1430721&quot;}});
-&lt;/script&gt;
-
-&lt;!-- MoshimoAffiliateEasyLink END --&gt;
-
-&lt;h2 id=&quot;1-kerasのインストール&quot;&gt;1. Kerasのインストール&lt;/h2&gt;
-&lt;p&gt;(&lt;strong&gt;注意&lt;/strong&gt;) 本プロジェクトでは、すでにPythonやNumPy等のインストールは終えているものとしてスタートします。&lt;br /&gt;
-環境整備がお済みでない方は、先にゼロから〜の一章を参考に済ませてください。&lt;/p&gt;
-
-&lt;p&gt;・コマンドライン上で、以下のコマンドを入力してKerasをインストールします。&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install keras
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://keras.io/ja/&quot;&gt;https://keras.io/ja/&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;2-プロジェクトの作成&quot;&gt;2. プロジェクトの作成&lt;/h2&gt;
-
-&lt;p&gt;お好きな環境でゼロから〜二章用のプロジェクトを作成してください。&lt;/p&gt;
-
-&lt;p&gt;ただし、ここでは、&lt;code class=&quot;highlighter-rouge&quot;&gt;sequential.py&lt;/code&gt;と&lt;code class=&quot;highlighter-rouge&quot;&gt;functional.py&lt;/code&gt;の二つのファイルを作成することとします。&lt;/p&gt;
-
-&lt;h2 id=&quot;3-モデルの作成--テスト&quot;&gt;3. モデルの作成 &amp;amp; テスト&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;KerasにはSepuentialモデルとFunctional APIの2種類のモデルの定義方法があります。
-    &lt;ul&gt;
-      &lt;li&gt;Sepuentialモデル：様々な層を積み木のように積み重ねていくイメージ。線形スタック。&lt;/li&gt;
-      &lt;li&gt;Functionalモデル：層をインスタンスとして扱う。複雑なモデルを定義するときに便利。&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;それぞれのモデルの定義方法の違いを以下で見ていきましょう。&lt;/p&gt;
-
-&lt;h3 id=&quot;31-sequential-モデル&quot;&gt;3.1 Sequential モデル&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;SequentialモデルでANDゲートのパーセプトロンを実装します。&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;sequential.py&lt;/code&gt;に以下のソースを順に書いていきましょう。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;311-レイヤー--numpyを読み込む&quot;&gt;3.1.1 レイヤー + NumPyを読み込む&lt;/h4&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;keras.models&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sequential&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;keras.layers&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;312-modelにsepuentialモデルを定義する&quot;&gt;3.1.2 &lt;code class=&quot;highlighter-rouge&quot;&gt;model&lt;/code&gt;にSepuentialモデルを定義する&lt;/h4&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sequential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;313-modelにdense層全結合層を追加する&quot;&gt;3.1.3 &lt;code class=&quot;highlighter-rouge&quot;&gt;model&lt;/code&gt;にDense層（全結合層）を追加する&lt;/h4&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input_dim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;units&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;全結合層という用語はゼロから〜の二章には登場していませんが、ここでは単純パーセプトロンと同じと思ってください。&lt;br /&gt;
-参考程度に、&lt;code class=&quot;highlighter-rouge&quot;&gt;input_dim=2, units=1&lt;/code&gt;のときのDense層の様子を概念図にしたものを以下に示します。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div style=&quot;text-align: center;&quot;&gt;
-    &lt;img src=&quot;/resources/2019-04-13/example_dense.png&quot; alt=&quot;Dense層の様子の概念図&quot; style=&quot;width: 450px;&quot; /&gt;
-&lt;/div&gt;
-
-&lt;h4 id=&quot;314-modelに重みを与える&quot;&gt;3.1.4 &lt;code class=&quot;highlighter-rouge&quot;&gt;model&lt;/code&gt;に重みを与える&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;ゼロから〜の二章では予め重みとバイアスが与えられているので、この実装でも与えます。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;重みとバイアスの初期設定には、&lt;code class=&quot;highlighter-rouge&quot;&gt;model.set_weights()&lt;/code&gt;を使用します。&lt;br /&gt;
-引数は重みの入ったリストです。&lt;/p&gt;
-    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set_weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])])&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-    &lt;blockquote&gt;
-      &lt;p&gt;&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: ゼロから〜のP27&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;315-テストする&quot;&gt;3.1.5 テストする&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;モデルのテストは&lt;code class=&quot;highlighter-rouge&quot;&gt;predict&lt;/code&gt;メソッドで行えます。&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;predict&lt;/code&gt;の返り値は、入力データの予測結果のリストになっています。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;Y_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Y_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;この結果は以下のようになるはずです。&lt;br /&gt;
-Output:
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[[-0.7       ]
- [-0.19999999]
- [-0.19999999]
- [ 0.3       ]]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;これではわかりにくいので、マイナスのものは&lt;code class=&quot;highlighter-rouge&quot;&gt;False&lt;/code&gt;で、プラスのものは&lt;code class=&quot;highlighter-rouge&quot;&gt;True&lt;/code&gt;に置き換えます。
-    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Y_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Y_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Y_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Y_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Y_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Results: {Y == Y_}'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;以下のような結果が得られたと思います。&lt;br /&gt;
-見事ANDゲートが実装できていることが確認できますね。&lt;br /&gt;
-Output:
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[[0.]
- [0.]
- [0.]
- [1.]]
-Results: [[ True]
- [ True]
- [ True]
- [ True]]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;32-fucntional-api&quot;&gt;3.2 Fucntional API&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Functional APIでANDゲートのパーセプトロンを実装します。&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;functional.py&lt;/code&gt;に以下のソースを順に書いていきましょう。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;321-レイヤー--numpyを読み込む&quot;&gt;3.2.1 レイヤー + NumPyを読み込む&lt;/h4&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;keras&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Model&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;keras.layers&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;322-各種レイヤーを定義する&quot;&gt;3.2.2 各種レイヤーを定義する&lt;/h4&gt;
-&lt;p&gt;Functional APIでは、入力層を追加で定義する必要があります。&lt;/p&gt;
-
-&lt;p&gt;Dense部分のイメージとしては、Denseレイヤーのインスタンスを生成し、その入力として、テンソル：_inputを与えるという感じです。出力のテンソルは_outputとなります。&lt;/p&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;_output&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;units&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;323-モデルを定義する&quot;&gt;3.2.3 モデルを定義する&lt;/h4&gt;
-&lt;p&gt;以下のように、Functional APIでは、モデルを定義する際に入力と出力のテンソルを別々に保持しておく必要があります！&lt;/p&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;outputs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://keras.io/ja/getting-started/functional-api-guide/&quot;&gt;https://keras.io/ja/getting-started/functional-api-guide/&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4 id=&quot;324-重みを与える--テストする&quot;&gt;3.2.4 重みを与える &amp;amp; テストする&lt;/h4&gt;
-&lt;p&gt;Sequentialモデルと同じなので割愛します。&lt;br /&gt;
-結果が同一になることを確認するとよいです。&lt;/p&gt;
-
-&lt;h2 id=&quot;まとめ&quot;&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;今回は、パーセプトロンによるANDゲートの実装をKerasにより行いました。&lt;/p&gt;
-
-&lt;p&gt;Kerasを用いることで、より「簡単に&amp;amp;抽象的に」パーセプトロンを実装することが確認できたと思います。&lt;/p&gt;
-
-&lt;p&gt;次回は、3層ニューラルネットワークの実装を行います。&lt;/p&gt;
-
-&lt;h2 id=&quot;発展課題&quot;&gt;発展課題&lt;/h2&gt;
-
-&lt;p&gt;NAND, ORゲートも実装してみると良いでしょう。&lt;br /&gt;
-重みとバイアスは、ゼロから〜のP27,28を参照してください。&lt;/p&gt;
 
 &lt;h2 id=&quot;ソースコード&quot;&gt;ソースコード&lt;/h2&gt;
 
