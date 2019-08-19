@@ -3,7 +3,7 @@ layout: page_ja
 title: 山口 篤季
 permalink: /about/ja/
 lang: ja_JP
-last_modified_at: 2019-07-26 17:45:00 +0900
+last_modified_at: 2019-08-19 21:30:00 +0900
 custom_css: page
 ---
 <div style="text-align: right;"><i class="fas fa-language" style="padding: 0 4px 0 0;"></i><a href="../">English</a> | 日本語</div>
@@ -42,6 +42,7 @@ custom_css: page
     * **山口篤季**・藤田桂英，条件付き変分オートエンコーダと単語分散表現による絵文字の生成，人工知能学会全国大会論文集　第33回全国大会(2019)，2019年6月．[\[paper\]](https://confit.atlas.jp/guide/event-img/jsai2019/2L4-J-9-04/public/pdf?type=in) [\[slide\]](https://www.slideshare.net/AtsukiYamaguchi1/jsai2019-148918796)  
 <br />
 * 国際会議
+    * **Atsuki Yamaguchi** and Katsuhide Fujita, "Breakdown Detection in Negotiation Dialogues," EurNLP 2019, London, United Kingdom, October 2019. (Acceptance rate: 31.8%; Non-archival)  
     * **Atsuki Yamaguchi** and Melvin Cabatuan, “Generative Model Based Frame Generation of Volcanic Flow Video,” IEEE HNICEM 2017, Manila, Philippines, December 2017. [\[paper\]](https://ieeexplore.ieee.org/document/8269503)
 
 
@@ -59,6 +60,7 @@ custom_css: page
 
 |年月|項目|
 |:-:|:-|
+|2019年9月|International Postgraduate Merit Scholarship <br /> (Sponsored by the University of Sheffield)|
 |2019年6月〜現在|カーリットホールディングス株式会社奨学金　受給|
 |2019年3月|東京農工大学学生表彰 <br />（学生表彰規定第2条第4号 学業成果部門）|
 |2017年3月〜2019年3月|一般財団法人東京農工大学教育振興財団奨学金　受給|
