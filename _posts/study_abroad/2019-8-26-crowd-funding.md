@@ -187,6 +187,9 @@ tags:
 プロジェクトの終了は、修士課程の修了日である2020年9月30日とします。
 
 ## さいごに
-ご支援は、[クラウドファンディングサイト: Polca](https://polca.jp/projects/I3kvZaRxh8R)にて受け付けています。
+<div style="text-align: center;">
+    <iframe frameborder="0" height="28" width="120" scrolling="no" src="https://polca.jp/projects/I3kvZaRxh8R/button?size=long"></iframe>
+</div>
 
+ご支援は、[クラウドファンディングサイト: Polca](https://polca.jp/projects/I3kvZaRxh8R)にて受け付けています。  
 ぜひ、ご支援のほどよろしくお願いいたします！
