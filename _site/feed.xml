@@ -1,4 +1,253 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-08-19T21:50:06+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog about NLP and ML</subtitle><entry xml:lang="ja_JP"><title type="html">実装とともに学ぶハイパーパラメータチューニングのお話</title><link href="http://localhost:4000/tuning-intro/" rel="alternate" type="text/html" title="実装とともに学ぶハイパーパラメータチューニングのお話" /><published>2019-08-15T00:00:00+09:00</published><updated>2019-08-15T00:00:00+09:00</updated><id>http://localhost:4000/tuning-intro</id><content type="html" xml:base="http://localhost:4000/tuning-intro/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-08-26T18:15:57+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog about NLP and ML</subtitle><entry xml:lang="ja_JP"><title type="html">クラウドファンディングのお願い</title><link href="http://localhost:4000/study-abroad/crowd-funding/" rel="alternate" type="text/html" title="クラウドファンディングのお願い" /><published>2019-08-26T00:00:00+09:00</published><updated>2019-08-26T00:00:00+09:00</updated><id>http://localhost:4000/study-abroad/crowd-funding</id><content type="html" xml:base="http://localhost:4000/study-abroad/crowd-funding/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
+&lt;p&gt;こんにちは！&lt;/p&gt;
+
+&lt;p&gt;今年の9月からイギリスにあるシェフィールド大学に留学を予定している、山口篤季です。&lt;/p&gt;
+
+&lt;p&gt;私は現在、理系国立大学院に在籍をしており、情報工学の中でも、自然言語処理と機械学習を専門に研究を進めています。いわゆる人工知能(AI)に分類される分野のうちの一つです。&lt;/p&gt;
+
+&lt;p&gt;今回、タイトルにあるように、大学院留学費用の一部をクラウドファンディングにより充てられないかと思い、この記事を書いています。&lt;/p&gt;
+
+&lt;div style=&quot;text-align: center;&quot;&gt;
+    &lt;img src=&quot;/resources/study_abroad/head_pic.png&quot; alt=&quot;学会発表での一コマ&quot; style=&quot;width: 400px;&quot; /&gt;&lt;br /&gt;
+    学会発表での一コマ
+&lt;/div&gt;
+
+&lt;h2 id=&quot;1-留学先大学について&quot;&gt;1. 留学先大学について&lt;/h2&gt;
+&lt;p&gt;留学先大学は、冒頭で述べたシェフィールド大学になります。地理的には、ロンドンから北にいった、マンチェスターにほど近いシェフィールドに位置する大学です。世界大学ランキングは、78位 (QS)・106位 (THE)となっています。&lt;/p&gt;
+
+&lt;p&gt;現地では、音声言語処理専攻の修士課程に在籍をし、自然言語処理や音声処理に関する授業を受けながら、これまで通り研究を進めていく予定です。&lt;/p&gt;
+
+&lt;p&gt;なお、私が進学を希望している音声言語処理専攻は、音声処理の研究ユニットと自然言語処理の研究ユニットの二つの研究ユニットが共同で運営している専攻となっています。音声言語処理に特化した修士のコースは、世界的に見ても珍しい方だと思います。（実際、これが一つの決め手となって、シェフィールド大学に出願をした次第です。）&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://www.sheffield.ac.uk/dcs/postgraduate-taught/slp&quot;&gt;シェフィールド大学の専攻ページ&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;2-どうして留学しようと思ったのか&quot;&gt;2. どうして留学しようと思ったのか？&lt;/h2&gt;
+&lt;p&gt;留学をしようと思った決め手に関しては、&lt;a href=&quot;https://note.mu/_gucciiiii/n/n85d7d2a3f248&quot;&gt;note&lt;/a&gt;にまとめて書いた記事があるので、そちらをご覧ください。したがって、ここでは決意するまでのに留めておきます。&lt;/p&gt;
+
+&lt;p&gt;まず、大学院留学を意識し始めたのは、学部1年の3月にオーストラリアへ交換留学をさせてもらった時からです。現地の学生が活き活きと勉強している姿を見て、単純に「留学って良いな」と思ったのが始まりです。&lt;/p&gt;
+
+&lt;p&gt;続いて、学部3年次後期には、フィリピンのデラサール大学で交換留学をし、専門科目の履修だけでなく研究活動まで経験をしました。現地の学生と一緒にプロジェクトをこなしていく中で、より具体的に自分が海外の大学院でやっていく姿を想像できるようになりました。&lt;/p&gt;
+
+&lt;p&gt;帰国後から、日本の大学院進学と海外の大学院進学を比較検討し、自分をより成長させるには、やはり海外の大学院に進学するのが適当なのではないかと決意し、今日に至ります。&lt;/p&gt;
+
+&lt;p&gt;また、具体的に留学の決め手となった理由として、以下の3点が主に挙げられます。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;研究分野のスケール感の違い&lt;/strong&gt;&lt;br /&gt;
+  研究室単位でなく、研究グループ単位での指導がなされているので、スケール感が全く異なります。そのため、同じような興味を持った人とより切磋琢磨できる競争的な環境が得られる可能性が高いです。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;講義スタイルの違い&lt;/strong&gt;&lt;br /&gt;
+  プロジェクトありきの授業が多いため、実践力・応用力がかなり鍛えられます。（その反面、ハードであることは間違いないですが。）講義の質も高いです。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;世界中の研究者・学生と日常的に交流ができる&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;私の将来の目標は、世界中の人を喜ばせることのできる仕事に就くことです。特に、幼少期から大好きなディズニーに関わることを目指しています。そのためにも、この留学を通して、自分の専門分野で胸を張れるくらいの研究力と技術力を身に付けたいと思っています。&lt;/p&gt;
+
+&lt;p&gt;以上が、簡単な留学しようと思った流れと、その理由になります。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://note.mu/_gucciiiii/n/n85d7d2a3f248&quot;&gt;理系大学院学位留学への挑戦〜決め手となったもの&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;3-クラウドファンディングを実施しようと決めた理由&quot;&gt;3. クラウドファンディングを実施しようと決めた理由&lt;/h2&gt;
+&lt;p&gt;もちろん、当初はクラウドファンディングありきで留学を考えていた訳ではありません。&lt;/p&gt;
+
+&lt;p&gt;昨年度の1年間は丸々奨学金獲得に奮闘しました。でも、どの財団 + 日本政府奨学金にも合格することができませんでした。&lt;/p&gt;
+
+&lt;p&gt;書類審査で落とされたものもあれば、面接審査で落とされたものもあります。それでも、結果としては奨学金に「全落ち」するという悲劇に直面しました。（この一連の話の詳細については、noteの&lt;a href=&quot;https://note.mu/_gucciiiii/n/n719fc658a21d&quot;&gt;奨学金に全落ちした話&lt;/a&gt;をご覧ください。）&lt;/p&gt;
+
+&lt;div style=&quot;text-align: center;&quot;&gt;
+    &lt;img src=&quot;/resources/study_abroad/zenochi_pic.png&quot; alt=&quot;留学用奨学金のお祈り通知&quot; style=&quot;width: 500px;&quot; /&gt;&lt;br /&gt;
+    留学用奨学金のお祈り通知の数々
+&lt;/div&gt;
+
+&lt;p&gt;留学するには資金の問題が足枷になってきます。これまで、学部の間に経験した交換留学は、奨学金制度のおかげで支弁することができましたが、今回は「ほぼ」支援がない状態です。また、ひとり親家庭のため、家計には到底頼れません。&lt;/p&gt;
+
+&lt;p&gt;「ほぼ」と書いたのには理由があります。今年の3月に奨学金に全落ちしたことが判明してから、全く何もしなかった訳ではありません。&lt;/p&gt;
+
+&lt;p&gt;3月〜5月の間に募集を行なっている財団や、留学先の大学が募集している奨学金にできるかぎり応募しました。その結果、シェフィールド大学の提供する&lt;a href=&quot;https://www.sheffield.ac.uk/international/enquiry/money/pgtmerit&quot;&gt;奨学金&lt;/a&gt;に合格し、授業料の一部 (5,650ポンド=約80万円相当)を負担していただけることになりました。これが、シェフィールド大学に進学を決めた一つの大きな要因でもあります。&lt;/p&gt;
+
+&lt;p&gt;しかし、後述のように、今回の留学には約500万円が必要になってきます。現在いただけることが確定している奨学金の額では足りていません。この大学院留学をお金の問題で諦めたくないと決心した私は、不足している額を貯金と借金にて補う予定ではありますが、この先の人生を考えると、借金をすることは不安でたまりません。&lt;/p&gt;
+
+&lt;p&gt;研究者としての道を歩むために、博士号を取得したい気持ちももちろんありますが、今回それなりの負債を抱えることになるため、この留学後一旦実務経験を積んで、借金を返済してから、再チャレンジしようと考えています。しかしながら、この計画も果たしてうまくいくのか到底予想もつきません。大学院修了後にきちんとした企業で働ける可能性はどこにも保証されていないからです。&lt;/p&gt;
+
+&lt;p&gt;このような状況下で、考えられうる手段に全て挑戦してみたいと思ったことから、クラウドファンディングを実施しようと思うに至りました。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://note.mu/_gucciiiii/n/n719fc658a21d&quot;&gt;留学奨学金に全落ちした話&lt;/a&gt;&lt;br /&gt;
+&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://www.sheffield.ac.uk/international/enquiry/money/pgtmerit&quot;&gt;合格した奨学金の概要&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;3-資金の使い道&quot;&gt;3. 資金の使い道&lt;/h2&gt;
+&lt;p&gt;留学にかかる費用は以下のようになっています。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;&lt;strong&gt;項目&lt;/strong&gt;&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;&lt;strong&gt;費用（現地通貨）&lt;/strong&gt;&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;&lt;strong&gt;費用（日本円: £1=¥140として）&lt;/strong&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;ビザ申請費用&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;£ 348&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;¥ 48,720&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;国民保険料&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;£ 450&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;¥ 63,000&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;渡航費用(片道)&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;-&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;¥ 56,110〜&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;授業料&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;£ 22,600&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;¥ 3,164,000&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;寮費*&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;£ 6643.83&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;¥ 930,136&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;食費・雑費・通信費*&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;£ 5536.17&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;¥ 775,064&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;合計&lt;/strong&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;-&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;¥ &lt;strong&gt;5,037,030&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;食費・雑費・通信費は予測です。&lt;br /&gt;
+シェフィールド大学によると、一年間に必要な生活費（寮費も含む）は、£ 12,180 とされています。そのため、食費・雑費・通信費は寮費との合計額が£ 12,180 になるように仮埋めしてあります。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;先ほど述べたように、シェフィールド大学から奨学金をいただけることになったため、正味の留学にかかる費用は、420万円程度になると推測されます。&lt;/p&gt;
+
+&lt;h2 id=&quot;4-リターンについて&quot;&gt;4. リターンについて&lt;/h2&gt;
+&lt;p&gt;寄付してくださった方全員に、毎月現地での活動をまとめたレポートをお送りいたします。&lt;/p&gt;
+
+&lt;p&gt;本プロジェクトでは、寄付してくださった方の全員のお名前を、当ブログの専用ページにクレジットさせていただきます。
+そのため、ブログ専用ページに掲載しても良いお名前を頂戴しておりますので、ご了承ください。（掲載非希望の場合は、その旨をご記入ください。）&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;専用ページは準備中です。準備ができ次第お知らせいたします。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;特別なリターン&quot;&gt;特別なリターン&lt;/h3&gt;
+&lt;p&gt;レポートだけでは物足りない方のために、いくつか特別なリターンをご紹介します。&lt;br /&gt;
+特別なリターンを希望の方は、申し込み区別のために、&lt;a href=&quot;https://forms.gle/r8dstQV33Ep3d55NA&quot;&gt;Googleフォーム&lt;/a&gt;への記入をお願いします。&lt;/p&gt;
+
+&lt;h4 id=&quot;メッセージ付きポストカードコース&quot;&gt;「メッセージ付きポストカード」コース&lt;/h4&gt;
+&lt;p&gt;レポートに加えて、軽く手書きメッセージを加えたポストカードを現地シェフィールドから送付いたします。念の為ポストカード投函時にご連絡いたします。&lt;/p&gt;
+
+&lt;p&gt;ポストカードは12月までにお送りする予定です。&lt;br /&gt;
+(&lt;strong&gt;注意&lt;/strong&gt;) 送付のために住所等の個人情報が必要になります。ご留意ください。 &lt;br /&gt;
+(&lt;strong&gt;価格&lt;/strong&gt;) ¥ 1500&lt;/p&gt;
+
+&lt;h4 id=&quot;留学相談コース&quot;&gt;「留学相談」コース&lt;/h4&gt;
+&lt;p&gt;英語の勉強法や、出願手続き、エッセイ・推薦書下書きの書き方など、大学院留学に必要な知識についての相談にのります。理系の学生で、イギリスの大学院留学を考えている方にはより有益なアドバイスができると思います。&lt;/p&gt;
+
+&lt;p&gt;相談形態としては、ビデオチャット（Googleハングアウト等）の利用を予定しています。相談は一回30分限りとしますが、それ以上の対応に関しては、希望のある場合のみ、費用等相談の上決めさせていただきます。&lt;/p&gt;
+
+&lt;p&gt;なお、添削や出願書類の提供等は行えませんのでご了承ください。あくまでも、相談事項に関するアドバイスを自身の経験から行うものになります。&lt;/p&gt;
+
+&lt;p&gt;(&lt;strong&gt;価格&lt;/strong&gt;) ¥ 1500&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://note.mu/_gucciiiii/m/m09f79ed8d2ca&quot;&gt;UCL ＆ エジンバラ大学 ＆シェフィールド大学に合格した出願書類&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;プログラミング相談コース&quot;&gt;「プログラミング相談」コース&lt;/h4&gt;
+&lt;p&gt;プログラミング（主にPython）に関する相談を受け付けます。また、ディープラーニングフレームワーク：PyTorchやKerasに関する相談・質問も受け付けます。&lt;/p&gt;
+
+&lt;p&gt;どんな質問にもお答えするよう努力しますが、内容があまりにも専門外であると、お答え出来かねます。相談形態・条件は、「留学相談コース」に準じます。&lt;/p&gt;
+
+&lt;p&gt;(&lt;strong&gt;価格&lt;/strong&gt;) ¥ 1500&lt;/p&gt;
+
+&lt;h4 id=&quot;技術ブログのスポンサー広告枠コース&quot;&gt;「技術ブログのスポンサー広告枠」コース&lt;/h4&gt;
+&lt;p&gt;このブログの全ての記事の冒頭部分（記事のイントロが終わったらすぐ）か、サイドバーに表示できる広告枠をお礼として提供します。&lt;/p&gt;
+
+&lt;p&gt;記事内冒頭部分に表示できる広告の規格は、300x250の横二枚並べ分のスペースです。 &lt;br /&gt;
+サイドバーに表示できる広告の規格は、300x250 です。&lt;/p&gt;
+
+&lt;p&gt;広告の掲載期間は、広告の準備が出来次第すぐ〜プロジェクトの終了日（2020年9月30日）までの約1年間となります。なお、公序良俗に反する内容はお断りさせていただきますので、あらかじめご了承ください。&lt;/p&gt;
+
+&lt;p&gt;ブログの更新頻度は月にもよりますが、今後も月1回程度は更新していく予定です。&lt;/p&gt;
+
+&lt;p&gt;(&lt;strong&gt;注意&lt;/strong&gt;) モバイル表示時は折り返し設定になります。サイドバーは記事の最後尾に回ります。寄付時にサイドバーか冒頭部分かの指定をご連絡ください。限定数2セットです。&lt;br /&gt;
+(&lt;strong&gt;価格&lt;/strong&gt;) ともに¥ 3,000&lt;/p&gt;
+
+&lt;h4 id=&quot;シェフィールドご案内コース&quot;&gt;「シェフィールドご案内」コース&lt;/h4&gt;
+&lt;p&gt;もしもシェフィールドを来訪する予定のある方がいらっしゃれば、半日程度随伴します。&lt;/p&gt;
+
+&lt;p&gt;シェフィールドは「地球の歩き方 (イギリス)」でも無視されている都市なので、少しでも現地に慣れている人がいるとより満喫できるのかなと思います。&lt;/p&gt;
+
+&lt;p&gt;実施予定は2020年9月までとなります。&lt;/p&gt;
+
+&lt;p&gt;(&lt;strong&gt;注意&lt;/strong&gt;) 限定数2セットです。&lt;br /&gt;
+(&lt;strong&gt;価格&lt;/strong&gt;) ¥ 5,000&lt;/p&gt;
+
+&lt;h2 id=&quot;5-プロジェクトの実施について&quot;&gt;5. プロジェクトの実施について&lt;/h2&gt;
+&lt;p&gt;主な留学スケジュールは以下の通りです。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;&lt;strong&gt;年月日&lt;/strong&gt;&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;&lt;strong&gt;項目&lt;/strong&gt;&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2019年9月16日&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;渡航&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2019年9月18日〜9月27日&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;入学前オリエンテーション&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2019年9月30日&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;1学期始&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2020年2月8日&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;1学期終&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2020年2月10日&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;2学期始&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2020年6月13日&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;2学期終&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2020年9月30日&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;修士課程修了&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;プロジェクトの開始は、即時とします。&lt;br /&gt;
+プロジェクトの終了は、修士課程の修了日である2020年9月30日とします。&lt;/p&gt;
+
+&lt;h2 id=&quot;さいごに&quot;&gt;さいごに&lt;/h2&gt;
+&lt;p&gt;ご支援は、&lt;a href=&quot;https://polca.jp/projects/I3kvZaRxh8R&quot;&gt;クラウドファンディングサイト: Polca&lt;/a&gt;にて受け付けています。&lt;/p&gt;
+
+&lt;p&gt;ぜひ、ご支援のほどよろしくお願いいたします！&lt;/p&gt;</content><author><name></name></author><category term="ブログ全般" /><summary type="html">はじめに こんにちは！</summary></entry><entry xml:lang="ja_JP"><title type="html">実装とともに学ぶハイパーパラメータチューニングのお話</title><link href="http://localhost:4000/tuning-intro/" rel="alternate" type="text/html" title="実装とともに学ぶハイパーパラメータチューニングのお話" /><published>2019-08-15T00:00:00+09:00</published><updated>2019-08-15T00:00:00+09:00</updated><id>http://localhost:4000/tuning-intro</id><content type="html" xml:base="http://localhost:4000/tuning-intro/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://gucci-j.github.io/cv-intro/&quot;&gt;前回&lt;/a&gt;は交差検証について紹介をしました。今回は、ゼロからKerasシリーズの総まとめとして、ハイパーパラメータチューニングについて紹介します。実装例としては、&lt;a href=&quot;https://github.com/keras-team/keras-tuner&quot;&gt;Keras Tuner&lt;/a&gt; と呼ばれる、Keras用のハイパーパラメータ自動最適化ツールを活用した実装を紹介します。&lt;/p&gt;
 
 &lt;h2 id=&quot;1-ハイパーパラメータとは&quot;&gt;1. ハイパーパラメータとは&lt;/h2&gt;
@@ -2696,378 +2945,6 @@ Epoch 17/17
 フレームワークを活用することで、誤差逆伝播が自動で実行されるため、順伝播の処理だけ記述すればよいという大きなメリットを体感できたと思います。&lt;/p&gt;
 
 &lt;p&gt;次回は、ゼロから〜の第6章に対応する、「学習に関するテクニック」をKerasを用いて実証していきたいと思います。&lt;/p&gt;
-
-&lt;h2 id=&quot;ソースコード&quot;&gt;ソースコード&lt;/h2&gt;
-
-&lt;p&gt;ソースコードは、&lt;a href=&quot;https://github.com/gucci-j/intro-deep-learning-keras&quot;&gt;GitHub&lt;/a&gt;にて公開しています。&lt;/p&gt;</content><author><name></name></author><category term="「ゼロからKeras」シリーズ" /><summary type="html">はじめに</summary></entry><entry xml:lang="ja_JP"><title type="html">ゼロから作るDeep Learningとともに学ぶフレームワーク（3層ニューラルネットワーク ＆ 手書き数字認識編）</title><link href="http://localhost:4000/DL-Intro-2/" rel="alternate" type="text/html" title="ゼロから作るDeep Learningとともに学ぶフレームワーク（3層ニューラルネットワーク ＆ 手書き数字認識編）" /><published>2019-04-19T00:00:00+09:00</published><updated>2019-04-19T00:00:00+09:00</updated><id>http://localhost:4000/DL-Intro-2</id><content type="html" xml:base="http://localhost:4000/DL-Intro-2/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
-
-&lt;p&gt;このシリーズでは、深層学習の入門書として有名な、「ゼロから作るDeep Learning」（以下、ゼロから〜）と同時並行で、フレームワークを学習し、その定着を目指します。&lt;/p&gt;
-
-&lt;p&gt;前回の&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-1/&quot;&gt;第一弾: パーセプトロン編&lt;/a&gt;に目を通していない方は、先に目を通しておくことをおすすめします。&lt;/p&gt;
-
-&lt;p&gt;それでは、今回は3層ニューラルネットワークをKerasで実装し、実際に手書き数字認識（MNISTデータセットの分類）をしていきましょう！&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;（3層ニューラルネットワーク）&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: ゼロから〜のP58〜65&lt;br /&gt;
-（MNIST）&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: ゼロから〜のP72〜81&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;div class=&quot;link_box&quot;&gt;
-    &lt;span class=&quot;box-title&quot;&gt;シリーズリンク&lt;/span&gt;
-    &lt;p&gt;第一弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-1/&quot;&gt;パーセプトロン編&lt;/a&gt;&lt;/p&gt;
-    &lt;p&gt;第二弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-2/&quot;&gt;3層ニューラルネットワーク &amp;amp; 手書き数字認識編&lt;/a&gt;&lt;/p&gt;  
-    &lt;p&gt;第三弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-3/&quot;&gt;ニューラルネットワークの学習編&lt;/a&gt;&lt;/p&gt;
-    &lt;p&gt;第四弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-4/&quot;&gt;学習テクニック編&lt;/a&gt;&lt;/p&gt;
-    &lt;p&gt;第五弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-5/&quot;&gt;畳み込みニューラルネットワーク編&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;1-3層ニューラルネットワークの実装&quot;&gt;1. 3層ニューラルネットワークの実装&lt;/h2&gt;
-
-&lt;h3 id=&quot;11-プロジェクトの作成&quot;&gt;1.1 プロジェクトの作成&lt;/h3&gt;
-&lt;p&gt;まず、3層ニューラルネットワーク実装用のプロジェクトを作成してください。&lt;br /&gt;
-以下本章では、&lt;code class=&quot;highlighter-rouge&quot;&gt;three_nn.py&lt;/code&gt;を作成するものとして進めていきます。&lt;/p&gt;
-
-&lt;h3 id=&quot;12-モデルの作成&quot;&gt;1.2 モデルの作成&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;今回の実装からは全てFunctional APIを用いたモデル実装を行います。&lt;br /&gt;
-Sequentialモデルによる実装は行いませんので、あらかじめご了承ください。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;これから実装する3層ニューラルネットワークの概念図を以下に示します。&lt;br /&gt;
-実装の際の参考にしてください。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div style=&quot;text-align: center;&quot;&gt;
-    &lt;img src=&quot;/resources/2019-04-19/three_layer_nn.png&quot; alt=&quot;3層ニューラルネットワークの概念図&quot; style=&quot;width: 500px;&quot; /&gt;
-&lt;/div&gt;
-
-&lt;h4 id=&quot;121-レイヤー--numpyを読み込む&quot;&gt;1.2.1 レイヤー &amp;amp; NumPyを読み込む&lt;/h4&gt;
-
-&lt;p&gt;まず、前回と同じように、実装に必要なレイヤーとNumPyを読み込みます。&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;keras&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Model&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;keras.layers&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;122-各種レイヤーを定義する&quot;&gt;1.2.2 各種レイヤーを定義する&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;3層のニューラルネットワークなので、それと同数の3つのDenseレイヤーのインスタンスを生成します。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;units&lt;/code&gt;は各層におけるニューロンの数を表しています。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;活性化関数については、ゼロから〜では&lt;code class=&quot;highlighter-rouge&quot;&gt;sigmoid&lt;/code&gt;関数が使用されているので、ここでも&lt;code class=&quot;highlighter-rouge&quot;&gt;sigmoid&lt;/code&gt;を活用します。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;下の例では、簡単のため入れ子式に活性化関数を定義しましたが、活性化関数をレイヤーインスタンスとして定義することもできます。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div style=&quot;text-align: center&quot;&gt;＜活性化関数を入れ子式に定義する例＞&lt;/div&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;_layer1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;units&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'sigmoid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;_layer2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;units&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'sigmoid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_layer1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;_output&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;units&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_layer2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div style=&quot;text-align: center&quot;&gt;＜活性化関数をインスタンスとして定義する例＞&lt;/div&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;keras.layers&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Activation&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;_layer1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;units&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;_activ1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'sigmoid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_layer1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;_layer2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;units&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_activ1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;_activ2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'sigmoid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_layer2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;_output&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;units&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_activ2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://keras.io/ja/activations/&quot;&gt;https://keras.io/ja/activations/&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4 id=&quot;123-モデルを定義する&quot;&gt;1.2.3 モデルを定義する&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;前回と同様に、入力のテンソルと出力のテンソルを&lt;code class=&quot;highlighter-rouge&quot;&gt;Model&lt;/code&gt;に渡すことで、モデルを定義します。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;model.summary()&lt;/code&gt;でモデルの状態を確認することができます。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;outputs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# モデルの状態をみる
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Output:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;_________________________________________________________________
-Layer (type)                 Output Shape              Param #
-=================================================================
-input_1 (InputLayer)         (None, 2)                 0
-_________________________________________________________________
-dense_1 (Dense)              (None, 3)                 9
-_________________________________________________________________
-dense_2 (Dense)              (None, 2)                 8
-_________________________________________________________________
-dense_3 (Dense)              (None, 2)                 6
-=================================================================
-Total params: 23
-Trainable params: 23
-Non-trainable params: 0
-_________________________________________________________________
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;124-重みを設定する&quot;&gt;1.2.4 重みを設定する&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;ゼロから〜では重みの初期化を定義しているので、本実装でも事前に重みを設定します。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Kerasでは、重みは入力層から順にNumPyの配列で保持されています。&lt;br /&gt;
-したがって、重みを設定する際には、順当に重みの配列をNumPy配列で定義して、そのリストを渡せばよいです。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;重みの設定には、&lt;code class=&quot;highlighter-rouge&quot;&gt;model.set_weights()&lt;/code&gt;を使用します。&lt;br /&gt;
-引数は重みの入ったリストです。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;w1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;b1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;w2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;b2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;w3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;b3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;weight_array&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;w1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set_weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weight_array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: ゼロから〜 P65&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Output:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[array([[0.1, 0.3, 0.5], [0.2, 0.4, 0.6]], dtype=float32), 
-    array([0.1, 0.2, 0.3], dtype=float32), 
-    array([[0.1, 0.4], [0.2, 0.5], [0.3, 0.6]], dtype=float32), 
-    array([0.1, 0.2], dtype=float32), 
-    array([[0.1, 0.3], [0.2, 0.4]], dtype=float32), 
-    array([0.1, 0.2], dtype=float32)]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;13-テストする&quot;&gt;1.3 テストする&lt;/h3&gt;
-&lt;p&gt;それでは、作成したモデルをテストしましょう。&lt;br /&gt;
-作成したモデルのテストには、前回と同様に、&lt;code class=&quot;highlighter-rouge&quot;&gt;model.predict()&lt;/code&gt;を使用します。&lt;/p&gt;
-
-&lt;p&gt;テストデータは、ゼロから〜 P65に示されているものと同一のものを使用します。&lt;/p&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Output:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[[0.3168271 0.6962791]]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;見事、ゼロから〜 P65に示されている出力値と同一の値を得ることができました！&lt;/p&gt;
-
-&lt;div class=&quot;inner_ads&quot;&gt;
-    &lt;div class=&quot;left_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0598/000000020737.png&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
-    &lt;/div&gt; 
-    &lt;div class=&quot;right_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0068/000000004157.gif&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;2-手書き数字認識mnist&quot;&gt;2. 手書き数字認識（MNIST）&lt;/h2&gt;
-
-&lt;p&gt;ここからは、今実装した3層ニューラルネットワークを活用して、手書き数字を実際に分類していきます。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;i class=&quot;fas fa-book-open&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: ゼロから〜のP72〜81&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;21-mnistデータセットの読み込み&quot;&gt;2.1 MNISTデータセットの読み込み&lt;/h2&gt;
-&lt;p&gt;Kerasでは、MNISTデータセットは簡単にダウンロード&amp;amp;呼び出しできるようになっています。&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mnist_nn.py&lt;/code&gt;を作成して、以下を入力し動作させてみてください。&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;keras.datasets&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mnist&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mnist&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;load_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_train&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y_train&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://keras.io/ja/datasets/#mnist&quot;&gt;https://keras.io/ja/datasets/#mnist&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Output:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(60000, 28, 28)
-(60000,)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;(&lt;strong&gt;注意&lt;/strong&gt;) Kerasの&lt;code class=&quot;highlighter-rouge&quot;&gt;mnist.load_data()&lt;/code&gt;は、「正規化されていない &amp;amp; 2次元配列」の状態のリストが返ってきます。ゼロから〜のP73の挙動とは異なるので、注意してください。&lt;/p&gt;
-
-&lt;p&gt;ここで、データセットが&lt;code class=&quot;highlighter-rouge&quot;&gt;train&lt;/code&gt;と&lt;code class=&quot;highlighter-rouge&quot;&gt;test&lt;/code&gt;の二つに分割されていることに気がつくと思います。これは、機械学習においてはモデルの汎化性能を測定するために、通常データセットを訓練データとテストデータの二つ（もしくはそれ以上）に分割するためです。詳しくは、ゼロから〜の第4章を見てください。&lt;/p&gt;
-
-&lt;h3 id=&quot;22-データセットの前処理&quot;&gt;2.2 データセットの前処理&lt;/h3&gt;
-&lt;p&gt;モデルの推論処理においてMNISTデータセットを活用するので、「正規化 &amp;amp; 一次元配列化」の処理を行っておきます。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;配列の形状変換は&lt;code class=&quot;highlighter-rouge&quot;&gt;.reshape&lt;/code&gt;メソッドで行えます。&lt;br /&gt;
-引数は変換後の配列形状です。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;正規化処理のために、リストをfloat型に変換します。&lt;br /&gt;
-型変換は、&lt;code class=&quot;highlighter-rouge&quot;&gt;.astype&lt;/code&gt;メソッドで行えます。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# 一次元配列にする
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_train&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_train&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;60000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;784&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;x_test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reshape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;784&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# 正規化処理
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_train&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_train&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;astype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'float'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;x_test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;astype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'float'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;x_train&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;255.&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;x_test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;255.&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_train&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Output:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(60000, 784)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;きちんと一次元配列に変換されていることが確認できました。&lt;br /&gt;
-正規化されているかどうかは、配列の要素のうち一つを表示させて確認してみてください。&lt;/p&gt;
-
-&lt;h3 id=&quot;22-モデルの改良&quot;&gt;2.2 モデルの改良&lt;/h3&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;three_nn.py&lt;/code&gt;でMNISTを分類できるように、以下の2点を改良します。 &lt;br /&gt;
-改良したものは、&lt;code class=&quot;highlighter-rouge&quot;&gt;mnist_nn.py&lt;/code&gt;に追記してください。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;ゼロから〜のP76と合わせて、一層目の全結合層のunit数を50、二層目を100とし、出力層は10とします。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;MNISTデータセットの分類は「&lt;strong&gt;分類問題&lt;/strong&gt;」であるため、出力層にsoftmax層を追加します。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;keras&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Model&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;keras.layers&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Activation&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;784&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;units&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'sigmoid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;units&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'sigmoid'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;units&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;_output&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'softmax'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inputs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;outputs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# モデルの状態をみる
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Output:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;_________________________________________________________________
-Layer (type)                 Output Shape              Param #
-=================================================================
-input_1 (InputLayer)         (None, 784)               0
-_________________________________________________________________
-dense_1 (Dense)              (None, 50)                39250
-_________________________________________________________________
-dense_2 (Dense)              (None, 100)               5100
-_________________________________________________________________
-dense_3 (Dense)              (None, 10)                1010
-_________________________________________________________________
-activation_1 (Activation)    (None, 10)                0
-=================================================================
-Total params: 45,360
-Trainable params: 45,360
-Non-trainable params: 0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;きちんと望みのモデルが実装されていることが確認できました。&lt;/p&gt;
-
-&lt;p&gt;ここで、中間層の定義方法について、&lt;code class=&quot;highlighter-rouge&quot;&gt;three_nn.py&lt;/code&gt;と書き方が変わっていると気づいた方もいるでしょう。&lt;/p&gt;
-
-&lt;p&gt;Functional APIを用いたモデル定義では、前回紹介したように、入力と出力のテンソルを個別に保持しておけば良いルールになっています。&lt;/p&gt;
-
-&lt;p&gt;したがって、中間のベクトルに関しては特段利用したいケースがない限りは、同一の変数を利用した方が、コードが煩雑にならないのでおすすめです。&lt;/p&gt;
-
-&lt;h3 id=&quot;23-重みファイルの読み込み&quot;&gt;2.3 重みファイルの読み込み&lt;/h3&gt;
-&lt;p&gt;重みファイルは、ゼロから〜のものと同一のファイルを使用します。&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;https://github.com/oreilly-japan/deep-learning-from-scratch/tree/master/ch03&quot;&gt;公式レポジトリ&lt;/a&gt;から、&lt;code class=&quot;highlighter-rouge&quot;&gt;sample_weight.pkl&lt;/code&gt;をダウンロードしてください。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mnist_nn.py&lt;/code&gt;と同一ディレクトリ内に&lt;code class=&quot;highlighter-rouge&quot;&gt;sample_weight.pkl&lt;/code&gt;を配置してください。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;以下が、重みファイルを読み込むためのスクリプトになります。&lt;br /&gt;
-なお、今回は「推論処理のみ行う &amp;amp; できる限りゼロから〜に即したものにする」ために、このスクリプトを使用しますが、このような手間のかかる初期化処理は通常行いません。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pickle&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;load_weight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'sample_weight.pkl'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'rb'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pickle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;weight_array&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'W1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'b1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; 
-                        &lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'W2'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'b2'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-                        &lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'W3'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'b3'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
-        
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;weight_array&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set_weights&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;load_weight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://keras.io/ja/getting-started/faq/#keras-model&quot;&gt;Kerasでモデルの保存/ロードを行う&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;24-テストする&quot;&gt;2.4 テストする&lt;/h3&gt;
-&lt;p&gt;それでは、ゼロから〜のP77と同様に実装したモデルをテストしていきましょう。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;np.argmax&lt;/code&gt;で軸(axis)指定をしていますが、これはリストが2次元配列以上のときに、「どの軸方向に対して演算を行うか」を指定するために活用します。&lt;br /&gt;
-軸指定の詳細については、&lt;a href=&quot;https://deepage.net/features/numpy-axis.html&quot;&gt;このページ&lt;/a&gt;を参照するとわかりやすいです。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;_y_test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;predict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;_y_test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argmax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_y_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;axis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Accuracy: {np.sum(y_test == _y_test) / len(y_test)}'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Output:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Accuracy: 0.9352
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;めでたく、ゼロから〜のP77に示されている分類精度: 0.9352を得ることができました！&lt;/p&gt;
-
-&lt;h2 id=&quot;まとめ&quot;&gt;まとめ&lt;/h2&gt;
-
-&lt;p&gt;今回はゼロから〜の3章に対応する部分である、3層ニューラルネットとMNISTデータセットの分類をKerasで実装しました。 
-深層学習フレームワークを活用することで、たった数行でゼロから〜にあるものと同一のモデルを実装できることを実感したと思います。&lt;/p&gt;
-
-&lt;p&gt;次回からはゼロから〜の4章以降に対応する、ニューラルネットワークの学習に入ります！&lt;/p&gt;
 
 &lt;h2 id=&quot;ソースコード&quot;&gt;ソースコード&lt;/h2&gt;
 
