@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-08-27T21:41:38+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog about NLP and ML</subtitle><entry xml:lang="ja_JP"><title type="html">クラウドファンディングのお願い</title><link href="http://localhost:4000/study-abroad/crowd-funding/" rel="alternate" type="text/html" title="クラウドファンディングのお願い" /><published>2019-08-26T00:00:00+09:00</published><updated>2019-08-27T21:00:00+09:00</updated><id>http://localhost:4000/study-abroad/crowd-funding</id><content type="html" xml:base="http://localhost:4000/study-abroad/crowd-funding/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-09-04T14:16:49+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog about NLP and ML</subtitle><entry xml:lang="ja_JP"><title type="html">クラウドファンディングのお願い</title><link href="http://localhost:4000/study-abroad/crowd-funding/" rel="alternate" type="text/html" title="クラウドファンディングのお願い" /><published>2019-08-26T00:00:00+09:00</published><updated>2019-09-04T14:00:00+09:00</updated><id>http://localhost:4000/study-abroad/crowd-funding</id><content type="html" xml:base="http://localhost:4000/study-abroad/crowd-funding/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
 &lt;p&gt;こんにちは！&lt;/p&gt;
 
 &lt;p&gt;今年の9月からイギリスにあるシェフィールド大学に留学を予定している、山口篤季です。&lt;/p&gt;
@@ -77,6 +77,7 @@
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://note.mu/_gucciiiii/n/n719fc658a21d&quot;&gt;留学奨学金に全落ちした話&lt;/a&gt;&lt;br /&gt;
+&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://note.mu/_gucciiiii/n/n19ebbb1b401d&quot;&gt;続・留学奨学金に全落ちした話&lt;/a&gt;&lt;br /&gt;
 &lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参照: &lt;a href=&quot;https://www.sheffield.ac.uk/international/enquiry/money/pgtmerit&quot;&gt;合格した奨学金の概要&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -158,6 +159,8 @@
 (&lt;strong&gt;注意&lt;/strong&gt;) 送付のために住所等の個人情報が必要になります。ご留意ください。 &lt;br /&gt;
 (&lt;strong&gt;価格&lt;/strong&gt;) ¥ 1,500&lt;/p&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
 &lt;h4 id=&quot;留学相談コース&quot;&gt;「留学相談」コース&lt;/h4&gt;
 &lt;p&gt;英語の勉強法や、出願手続き、エッセイ・推薦書下書きの書き方など、大学院留学に必要な知識についての相談にのります。理系の学生で、イギリスの大学院留学を考えている方にはより有益なアドバイスができると思います。&lt;/p&gt;
 
@@ -170,12 +173,16 @@
   &lt;p&gt;&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;参考: &lt;a href=&quot;https://note.mu/_gucciiiii/m/m09f79ed8d2ca&quot;&gt;UCL ＆ エジンバラ大学 ＆シェフィールド大学に合格した出願書類&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
 &lt;h4 id=&quot;プログラミング相談コース&quot;&gt;「プログラミング相談」コース&lt;/h4&gt;
 &lt;p&gt;プログラミング（主にPython）に関する相談を受け付けます。また、ディープラーニングフレームワーク：PyTorchやKerasに関する相談・質問も受け付けます。&lt;/p&gt;
 
 &lt;p&gt;どんな質問にもお答えするよう努力しますが、内容があまりにも専門外であると、お答え出来かねます。相談形態・条件は、「留学相談コース」に準じます。&lt;/p&gt;
 
 &lt;p&gt;(&lt;strong&gt;価格&lt;/strong&gt;) ¥ 1,500&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;技術ブログのスポンサー広告枠コース&quot;&gt;「技術ブログのスポンサー広告枠」コース&lt;/h4&gt;
 &lt;p&gt;このブログの全ての記事の冒頭部分（記事のイントロが終わったらすぐ）か、サイドバーに表示できる広告枠をお礼として提供します。&lt;/p&gt;
@@ -189,6 +196,11 @@
 
 &lt;p&gt;(&lt;strong&gt;注意&lt;/strong&gt;) モバイル表示時は折り返し設定になります。サイドバーは記事の最後尾に回ります。寄付時にサイドバーか冒頭部分かの指定をご連絡ください。限定数2セットです。&lt;br /&gt;
 (&lt;strong&gt;価格&lt;/strong&gt;) ともに¥ 3,000&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;(2019/09/04：追記) 記事のイントロ部分の広告枠は売り切れました。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;シェフィールドご案内コース&quot;&gt;「シェフィールドご案内」コース&lt;/h4&gt;
 &lt;p&gt;もしもシェフィールドを来訪する予定のある方がいらっしゃれば、半日程度随伴します。&lt;/p&gt;
@@ -199,6 +211,11 @@
 
 &lt;p&gt;(&lt;strong&gt;注意&lt;/strong&gt;) 限定数2セットです。&lt;br /&gt;
 (&lt;strong&gt;価格&lt;/strong&gt;) ¥ 5,000&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;(2019/09/04：追記) 残り1枠です。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;イギリスのお土産直送コース&quot;&gt;「イギリスのお土産直送」コース&lt;/h4&gt;
 &lt;p&gt;イギリスの簡単なお土産を現地から直送します！おそらく紅茶類+αになると思います。&lt;/p&gt;
@@ -258,7 +275,9 @@
 &lt;/div&gt;
 
 &lt;p&gt;ご支援は、&lt;a href=&quot;https://polca.jp/projects/I3kvZaRxh8R&quot;&gt;クラウドファンディングサイト: polca&lt;/a&gt; にて受け付けています。&lt;br /&gt;
-ぜひ、ご支援のほどよろしくお願いいたします！&lt;/p&gt;</content><author><name></name></author><category term="ブログ全般" /><summary type="html">はじめに こんにちは！</summary></entry><entry xml:lang="ja_JP"><title type="html">実装とともに学ぶハイパーパラメータチューニングのお話</title><link href="http://localhost:4000/tuning-intro/" rel="alternate" type="text/html" title="実装とともに学ぶハイパーパラメータチューニングのお話" /><published>2019-08-15T00:00:00+09:00</published><updated>2019-08-15T00:00:00+09:00</updated><id>http://localhost:4000/tuning-intro</id><content type="html" xml:base="http://localhost:4000/tuning-intro/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
+ぜひ、ご支援のほどよろしくお願いいたします！&lt;/p&gt;
+
+&lt;p&gt;(&lt;strong&gt;2019/09/04：追記&lt;/strong&gt;) polcaでは海外からの支援ができないとの連絡をいただいております。代替手段（PayPal.Me か Buy Me A Coffee）の準備を進めていますので、今しばらくお待ちいただければと存じます。&lt;/p&gt;</content><author><name></name></author><category term="ブログ全般" /><summary type="html">はじめに こんにちは！</summary></entry><entry xml:lang="ja_JP"><title type="html">実装とともに学ぶハイパーパラメータチューニングのお話</title><link href="http://localhost:4000/tuning-intro/" rel="alternate" type="text/html" title="実装とともに学ぶハイパーパラメータチューニングのお話" /><published>2019-08-15T00:00:00+09:00</published><updated>2019-08-15T00:00:00+09:00</updated><id>http://localhost:4000/tuning-intro</id><content type="html" xml:base="http://localhost:4000/tuning-intro/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://gucci-j.github.io/cv-intro/&quot;&gt;前回&lt;/a&gt;は交差検証について紹介をしました。今回は、ゼロからKerasシリーズの総まとめとして、ハイパーパラメータチューニングについて紹介します。実装例としては、&lt;a href=&quot;https://github.com/keras-team/keras-tuner&quot;&gt;Keras Tuner&lt;/a&gt; と呼ばれる、Keras用のハイパーパラメータ自動最適化ツールを活用した実装を紹介します。&lt;/p&gt;
 
 &lt;h2 id=&quot;1-ハイパーパラメータとは&quot;&gt;1. ハイパーパラメータとは&lt;/h2&gt;
