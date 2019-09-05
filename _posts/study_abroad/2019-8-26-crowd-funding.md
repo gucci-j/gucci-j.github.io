@@ -211,4 +211,14 @@ tags:
 ご支援は、[クラウドファンディングサイト: polca](https://polca.jp/projects/I3kvZaRxh8R) にて受け付けています。  
 ぜひ、ご支援のほどよろしくお願いいたします！  
 
+<hr style="border: none; border-top: 1px dashed;" />
 (**2019/09/04：追記**) polcaでは海外からの支援ができないとの連絡をいただいております。代替手段（PayPal.Me か Buy Me A Coffee）の準備を進めていますので、今しばらくお待ちいただければと存じます。お手数をおかけし、大変申し訳ありません。
+
+(**2019/09/05：追記**) polca以外の代替手段として、[PayPal.Me](https://paypal.me/ygucciiiii?locale.x=ja_JP) を用意しました。Buy Me A Coffee については、PayPalアカウントとの連携がうまくいかないため、今月中は見送らせていただきます。
+
+<div style="text-align: center;">
+    <img src="{{ site.baseurl }}/resources/study_abroad/paypalme.png" alt="PayPalMeのQRコード" style="width: 100px;"/><br />
+    PayPalMe QRコード
+</div>
+
+<br />
