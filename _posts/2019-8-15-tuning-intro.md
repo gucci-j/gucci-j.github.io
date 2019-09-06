@@ -13,6 +13,20 @@ tags:
 ## はじめに
 [前回](https://gucci-j.github.io/cv-intro/)は交差検証について紹介をしました。今回は、ゼロからKerasシリーズの総まとめとして、ハイパーパラメータチューニングについて紹介します。実装例としては、[Keras Tuner](https://github.com/keras-team/keras-tuner) と呼ばれる、Keras用のハイパーパラメータ自動最適化ツールを活用した実装を紹介します。
 
+<div class="crowdfunding_ad">
+    <div class="pc" style="text-align: center;">
+        <a href="https://anchor.fm/melancholy">
+            <img src="{{ site.baseurl }}/resources/ads/mefm_banner_large.png" alt="めらんこりーFM!"/>
+        </a>
+        <br />
+    </div>
+    <div class="sp" style="text-align: center;">
+        <a href="https://anchor.fm/melancholy">
+            <img src="{{ site.baseurl }}/resources/ads/mefm_banner_small.png" alt="めらんこりーFM!"/>
+        </a>
+        <br />
+    </div>
+</div>
 
 ## 1. ハイパーパラメータとは
 ハイパーパラメータとは、最適化アルゴリズムによって最適化できないパラメータのことを指します。例えば、学習エポック数やバッチサイズ・隠れ層の次元数、学習率などがあたります。

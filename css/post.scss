@@ -262,6 +262,29 @@
   }
 }
 
+.crowdfunding_ad {
+  img {
+    /* 画像の縁取り */
+    border: none;
+    padding: none;
+  }
+
+  .sp {
+    display: none;
+  }
+  .pc {
+    display: block;
+  }
+  @include mobile {
+    .sp {
+      display: block;
+    }
+    .pc {
+      display: none;
+    }
+  }
+}
+
 /* 記事のリンク */
 .pager {
   display: flex;

@@ -15,6 +15,21 @@ tags:
 所属: University College London  
 出典: ICLR 2017 [(https://arxiv.org/abs/1702.04521)](https://arxiv.org/abs/1702.04521)  
 
+<div class="crowdfunding_ad">
+    <div class="pc" style="text-align: center;">
+        <a href="https://anchor.fm/melancholy">
+            <img src="{{ site.baseurl }}/resources/ads/mefm_banner_large.png" alt="めらんこりーFM!"/>
+        </a>
+        <br />
+    </div>
+    <div class="sp" style="text-align: center;">
+        <a href="https://anchor.fm/melancholy">
+            <img src="{{ site.baseurl }}/resources/ads/mefm_banner_small.png" alt="めらんこりーFM!"/>
+        </a>
+        <br />
+    </div>
+</div>
+
 ## この論文の主張
 
 1. ニューラル言語モデルのためのkey-valueに基づくAttentionを提案

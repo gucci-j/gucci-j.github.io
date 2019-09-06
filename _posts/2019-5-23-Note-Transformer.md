@@ -17,6 +17,21 @@ Googleが昨年発表した，BERT：Bidirectional Encoder Representation for Tr
 
 なお，BERTを理解するためにTransformerを雰囲気でつかみたい方は，[末尾のスライド](#まとめスライド)を参照すると参考になるかもしれません．
 
+<div class="crowdfunding_ad">
+    <div class="pc" style="text-align: center;">
+        <a href="https://anchor.fm/melancholy">
+            <img src="{{ site.baseurl }}/resources/ads/mefm_banner_large.png" alt="めらんこりーFM!"/>
+        </a>
+        <br />
+    </div>
+    <div class="sp" style="text-align: center;">
+        <a href="https://anchor.fm/melancholy">
+            <img src="{{ site.baseurl }}/resources/ads/mefm_banner_small.png" alt="めらんこりーFM!"/>
+        </a>
+        <br />
+    </div>
+</div>
+
 ## 文献情報
 著者: A. Vaswani et al.  
 所属: Google Brain  

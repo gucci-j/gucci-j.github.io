@@ -19,6 +19,21 @@ tags:
 
 それでは，交差検証の解説から始めていきましょう．
 
+<div class="crowdfunding_ad">
+    <div class="pc" style="text-align: center;">
+        <a href="https://anchor.fm/melancholy">
+            <img src="{{ site.baseurl }}/resources/ads/mefm_banner_large.png" alt="めらんこりーFM!"/>
+        </a>
+        <br />
+    </div>
+    <div class="sp" style="text-align: center;">
+        <a href="https://anchor.fm/melancholy">
+            <img src="{{ site.baseurl }}/resources/ads/mefm_banner_small.png" alt="めらんこりーFM!"/>
+        </a>
+        <br />
+    </div>
+</div>
+
 ## 1. 交差検証とは
 交差検証とはデータセットを細切れに分割して，異なる組合せで複数回機械学習モデルを学習させて，それらの平均をとることによりモデルの性能を測る手法のことを指します．
 

@@ -20,6 +20,21 @@ Pythonの可視化ライブラリであるseabornとグラフ描画ライブラ�
 それでは、順を追って簡単に見ていきましょう。
 なお、深層学習のフレームワークにはPyTorchを使用し、テキストデータの前処理にはtorchtextを使用しています。
 
+<div class="crowdfunding_ad">
+    <div class="pc" style="text-align: center;">
+        <a href="https://anchor.fm/melancholy">
+            <img src="{{ site.baseurl }}/resources/ads/mefm_banner_large.png" alt="めらんこりーFM!"/>
+        </a>
+        <br />
+    </div>
+    <div class="sp" style="text-align: center;">
+        <a href="https://anchor.fm/melancholy">
+            <img src="{{ site.baseurl }}/resources/ads/mefm_banner_small.png" alt="めらんこりーFM!"/>
+        </a>
+        <br />
+    </div>
+</div>
+
 ## 1. ダウンロード & インストール
 Matplotlib、seabornをインストールしていない場合は、インストールしましょう。
 ```
