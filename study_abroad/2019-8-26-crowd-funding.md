@@ -6,7 +6,7 @@ description: 最高の環境で「人工知能」について学び、研究す�
 lang: ja_JP
 custom_css: post
 date: 2019-08-26 00:00:00 +0900
-last_modified_at: 2019-09-04 21:00:00 +0900
+last_modified_at: 2019-09-17 00:00:00 +0800
 tags:
 - ブログ全般
 ---
@@ -220,6 +220,6 @@ tags:
 <div style="text-align: center;">
     <img src="{{ site.baseurl }}/resources/study_abroad/paypalme.png" alt="PayPalMeのQRコード" style="width: 100px;"/><br />
     PayPalMe QRコード
-</div>
+</div>  
 
-<br />
+(**2019/09/17：追記**) PayPal経由でご支援くださった方は、お手数をお掛けしますが、[お問い合わせフォーム](https://gucci-j.github.io/contact/) より、連絡先情報の登録（当サイトにクレジットするお名前も含む）をお願いいたします。  
