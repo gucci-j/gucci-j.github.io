@@ -159,6 +159,40 @@ body {
   }
 }
 
+.study-abroad {
+  background: $white;
+  padding: 10px 10px 1px 10px;
+  border-radius: 10px;
+  margin-top: 0.5em;
+  font-size: 0.9em;
+
+  hr {
+    border: none;
+    border-top: 3px dashed $background;
+  }
+
+  a {
+    color: $darkGray;
+
+    @include mobile {
+      color: $blue;
+    }
+  }
+
+  ul {
+    list-style: none;
+  }
+  li:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: '\f072';
+  }
+
+  @include mobile {
+    border-radius: 0;
+  }
+}
+
 .recent-posts {
   background: $white;
   padding: 10px 10px 1px 10px;

@@ -45,7 +45,7 @@
 
     <!-- Begin Jekyll SEO tag v2.6.0 -->
 <title>実装とともに学ぶ交差検証のお話 | きままにNLP</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="実装とともに学ぶ交差検証のお話" />
 <meta property="og:locale" content="ja_JP" />
 <meta name="description" content="機械学習を活用する研究で避けては通れない，交差検証に関する基本的な事項を，Pythonによる実装とともに紹介します．" />
@@ -55,13 +55,13 @@
 <meta property="og:site_name" content="きままにNLP" />
 <meta property="og:image" content="http://localhost:4000/resources/2019-08-04/k-fold_cv.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-08-04T00:00:00+09:00" />
+<meta property="article:published_time" content="2019-08-04T00:00:00+01:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="http://localhost:4000/resources/2019-08-04/k-fold_cv.png" />
 <meta property="twitter:title" content="実装とともに学ぶ交差検証のお話" />
 <meta name="twitter:site" content="@_gucciiiii" />
 <script type="application/ld+json">
-{"description":"機械学習を活用する研究で避けては通れない，交差検証に関する基本的な事項を，Pythonによる実装とともに紹介します．","@type":"BlogPosting","url":"http://localhost:4000/cv-intro/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/kimamani.png"}},"image":"http://localhost:4000/resources/2019-08-04/k-fold_cv.png","headline":"実装とともに学ぶ交差検証のお話","dateModified":"2019-08-04T00:00:00+09:00","datePublished":"2019-08-04T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/cv-intro/"},"@context":"https://schema.org"}</script>
+{"description":"機械学習を活用する研究で避けては通れない，交差検証に関する基本的な事項を，Pythonによる実装とともに紹介します．","@type":"BlogPosting","url":"http://localhost:4000/cv-intro/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/kimamani.png"}},"image":"http://localhost:4000/resources/2019-08-04/k-fold_cv.png","headline":"実装とともに学ぶ交差検証のお話","dateModified":"2019-08-04T00:00:00+01:00","datePublished":"2019-08-04T00:00:00+01:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/cv-intro/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <!-- Google Adsense-->
@@ -165,6 +165,21 @@
 <p>そこで，本稿では，<a href="https://gucci-j.github.io/DL-Intro-5/">「ゼロから作るDeep Learningとともに学ぶフレームワーク」</a>で用いられていたソースコードを基に，交差検証の基本的な考え方とその適用方法について紹介します．ソースコードとともに本稿の内容を理解することで，交差検証に関する基礎的な知識が身につくものと想定されます．</p>
 
 <p>それでは，交差検証の解説から始めていきましょう．</p>
+
+<div class="crowdfunding_ad">
+    <div class="pc" style="text-align: center;">
+        <a href="https://anchor.fm/melancholy">
+            <img src="/resources/ads/mefm_banner_large.png" alt="めらんこりーFM!" />
+        </a>
+        <br />
+    </div>
+    <div class="sp" style="text-align: center;">
+        <a href="https://anchor.fm/melancholy">
+            <img src="/resources/ads/mefm_banner_small.png" alt="めらんこりーFM!" />
+        </a>
+        <br />
+    </div>
+</div>
 
 <h2 id="1-交差検証とは">1. 交差検証とは</h2>
 <p>交差検証とはデータセットを細切れに分割して，異なる組合せで複数回機械学習モデルを学習させて，それらの平均をとることによりモデルの性能を測る手法のことを指します．</p>
@@ -568,6 +583,20 @@ acc: 0.6322800013422967 ± 0.012688641313732466
   <gcse:searchbox-only></gcse:searchbox-only>
 </div>
 
+<div class="study-abroad">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>留学関連の記事</strong>
+  </p>
+  <hr />
+  <ul style="padding: 0 10px 0 10px;">
+    <li>
+      <a href="https://gucci-j.github.io/study-abroad/">大学院留学について</a>
+    </li>
+    <li>
+      <a href="https://gucci-j.github.io/study-abroad/crowd-funding">クラウドファンディングのお願い</a>
+    </li>
+  </ul>
+</div>
 
 <div class="recent-posts">
   <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
@@ -575,12 +604,6 @@ acc: 0.6322800013422967 ± 0.012688641313732466
   </p>
   <hr />
   <ul style="padding-right: 5px; padding-left: 1.5em;">
-    
-      <li>
-        <a href="/study-abroad/crowd-funding/">
-          クラウドファンディングのお願い
-        </a>
-      </li>
     
       <li>
         <a href="/tuning-intro/">
@@ -603,6 +626,12 @@ acc: 0.6322800013422967 ± 0.012688641313732466
       <li>
         <a href="/memo-svm/">
           サポートベクターマシンのお話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/cv-with-torchtext/">
+          torchtextでk-分割交差検証をする話
         </a>
       </li>
     

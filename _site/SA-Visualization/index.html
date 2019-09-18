@@ -43,7 +43,7 @@
 
     <!-- Begin Jekyll SEO tag v2.6.0 -->
 <title>MatplotlibとseabornによるSelf Attentionの可視化 | きままにNLP</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="MatplotlibとseabornによるSelf Attentionの可視化" />
 <meta property="og:locale" content="ja_JP" />
 <meta name="description" content="Self Attentionの重みを、Pythonのライブラリである「Matplotlibとseaborn」を活用して可視化する方法について紹介します。モデルの実装は、PyTorchに基づきます。" />
@@ -53,13 +53,13 @@
 <meta property="og:site_name" content="きままにNLP" />
 <meta property="og:image" content="http://localhost:4000/resources/2019-04-02/attention.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-04-02T00:00:00+09:00" />
+<meta property="article:published_time" content="2019-04-02T00:00:00+01:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="http://localhost:4000/resources/2019-04-02/attention.png" />
 <meta property="twitter:title" content="MatplotlibとseabornによるSelf Attentionの可視化" />
 <meta name="twitter:site" content="@_gucciiiii" />
 <script type="application/ld+json">
-{"description":"Self Attentionの重みを、Pythonのライブラリである「Matplotlibとseaborn」を活用して可視化する方法について紹介します。モデルの実装は、PyTorchに基づきます。","@type":"BlogPosting","url":"http://localhost:4000/SA-Visualization/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/kimamani.png"}},"image":"http://localhost:4000/resources/2019-04-02/attention.png","headline":"MatplotlibとseabornによるSelf Attentionの可視化","dateModified":"2019-06-09T12:00:00+09:00","datePublished":"2019-04-02T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/SA-Visualization/"},"@context":"https://schema.org"}</script>
+{"description":"Self Attentionの重みを、Pythonのライブラリである「Matplotlibとseaborn」を活用して可視化する方法について紹介します。モデルの実装は、PyTorchに基づきます。","@type":"BlogPosting","url":"http://localhost:4000/SA-Visualization/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/kimamani.png"}},"image":"http://localhost:4000/resources/2019-04-02/attention.png","headline":"MatplotlibとseabornによるSelf Attentionの可視化","dateModified":"2019-06-09T04:00:00+01:00","datePublished":"2019-04-02T00:00:00+01:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/SA-Visualization/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <!-- Google Adsense-->
@@ -152,6 +152,21 @@
 
 <p>それでは、順を追って簡単に見ていきましょう。
 なお、深層学習のフレームワークにはPyTorchを使用し、テキストデータの前処理にはtorchtextを使用しています。</p>
+
+<div class="crowdfunding_ad">
+    <div class="pc" style="text-align: center;">
+        <a href="https://anchor.fm/melancholy">
+            <img src="/resources/ads/mefm_banner_large.png" alt="めらんこりーFM!" />
+        </a>
+        <br />
+    </div>
+    <div class="sp" style="text-align: center;">
+        <a href="https://anchor.fm/melancholy">
+            <img src="/resources/ads/mefm_banner_small.png" alt="めらんこりーFM!" />
+        </a>
+        <br />
+    </div>
+</div>
 
 <h2 id="1-ダウンロード--インストール">1. ダウンロード &amp; インストール</h2>
 <p>Matplotlib、seabornをインストールしていない場合は、インストールしましょう。</p>
@@ -467,6 +482,20 @@ pip install seaborn
   <gcse:searchbox-only></gcse:searchbox-only>
 </div>
 
+<div class="study-abroad">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>留学関連の記事</strong>
+  </p>
+  <hr />
+  <ul style="padding: 0 10px 0 10px;">
+    <li>
+      <a href="https://gucci-j.github.io/study-abroad/">大学院留学について</a>
+    </li>
+    <li>
+      <a href="https://gucci-j.github.io/study-abroad/crowd-funding">クラウドファンディングのお願い</a>
+    </li>
+  </ul>
+</div>
 
 <div class="recent-posts">
   <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
@@ -474,12 +503,6 @@ pip install seaborn
   </p>
   <hr />
   <ul style="padding-right: 5px; padding-left: 1.5em;">
-    
-      <li>
-        <a href="/study-abroad/crowd-funding/">
-          クラウドファンディングのお願い
-        </a>
-      </li>
     
       <li>
         <a href="/tuning-intro/">
@@ -502,6 +525,12 @@ pip install seaborn
       <li>
         <a href="/memo-svm/">
           サポートベクターマシンのお話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/cv-with-torchtext/">
+          torchtextでk-分割交差検証をする話
         </a>
       </li>
     

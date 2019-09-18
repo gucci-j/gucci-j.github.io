@@ -196,6 +196,39 @@ body {
   }
 }
 
+.study-abroad {
+  background: #fff;
+  padding: 10px 10px 1px 10px;
+  border-radius: 10px;
+  margin-top: 0.5em;
+  font-size: 0.9em;
+}
+.study-abroad hr {
+  border: none;
+  border-top: 3px dashed #e0efff;
+}
+.study-abroad a {
+  color: #333;
+}
+@media screen and (max-width: 767px) {
+  .study-abroad a {
+    color: #4183C4;
+  }
+}
+.study-abroad ul {
+  list-style: none;
+}
+.study-abroad li:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: '\f072';
+}
+@media screen and (max-width: 767px) {
+  .study-abroad {
+    border-radius: 0;
+  }
+}
+
 .recent-posts {
   background: #fff;
   padding: 10px 10px 1px 10px;

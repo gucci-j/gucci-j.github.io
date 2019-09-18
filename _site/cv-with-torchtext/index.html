@@ -45,7 +45,7 @@ torchtextは，PyTorchで自然言語処理（NLP）系のデータを比較的�
 
     <!-- Begin Jekyll SEO tag v2.6.0 -->
 <title>torchtextでk-分割交差検証をする話 | きままにNLP</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.8.6" />
 <meta property="og:title" content="torchtextでk-分割交差検証をする話" />
 <meta property="og:locale" content="ja_JP" />
 <meta name="description" content="PyTorchの自然言語処理（NLP）系データ処理ライブラリである，torchtextでどうしても交差検証をしたい人のためのTipsです．scikit-learnライクな，交差検証をしやすいライブラリとして有名である，skorchは使いません．" />
@@ -54,12 +54,12 @@ torchtextは，PyTorchで自然言語処理（NLP）系のデータを比較的�
 <meta property="og:url" content="http://localhost:4000/cv-with-torchtext/" />
 <meta property="og:site_name" content="きままにNLP" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-06-09T00:00:00+09:00" />
+<meta property="article:published_time" content="2019-06-09T00:00:00+01:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="torchtextでk-分割交差検証をする話" />
 <meta name="twitter:site" content="@_gucciiiii" />
 <script type="application/ld+json">
-{"description":"PyTorchの自然言語処理（NLP）系データ処理ライブラリである，torchtextでどうしても交差検証をしたい人のためのTipsです．scikit-learnライクな，交差検証をしやすいライブラリとして有名である，skorchは使いません．","@type":"BlogPosting","url":"http://localhost:4000/cv-with-torchtext/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/kimamani.png"}},"headline":"torchtextでk-分割交差検証をする話","dateModified":"2019-06-09T00:00:00+09:00","datePublished":"2019-06-09T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/cv-with-torchtext/"},"@context":"https://schema.org"}</script>
+{"description":"PyTorchの自然言語処理（NLP）系データ処理ライブラリである，torchtextでどうしても交差検証をしたい人のためのTipsです．scikit-learnライクな，交差検証をしやすいライブラリとして有名である，skorchは使いません．","@type":"BlogPosting","url":"http://localhost:4000/cv-with-torchtext/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/resources/logo/kimamani.png"}},"headline":"torchtextでk-分割交差検証をする話","dateModified":"2019-06-09T00:00:00+01:00","datePublished":"2019-06-09T00:00:00+01:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/cv-with-torchtext/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <!-- Google Adsense-->
@@ -162,6 +162,21 @@ torchtextは，PyTorchで自然言語処理（NLP）系のデータを比較的�
 <blockquote>
   <p><i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考: <a href="https://towardsdatascience.com/use-torchtext-to-load-nlp-datasets-part-ii-f146c8b9a496">Use torchtext to Load NLP Datasets — Part II</a></p>
 </blockquote>
+
+<div class="crowdfunding_ad">
+    <div class="pc" style="text-align: center;">
+        <a href="https://anchor.fm/melancholy">
+            <img src="/resources/ads/mefm_banner_large.png" alt="めらんこりーFM!" />
+        </a>
+        <br />
+    </div>
+    <div class="sp" style="text-align: center;">
+        <a href="https://anchor.fm/melancholy">
+            <img src="/resources/ads/mefm_banner_small.png" alt="めらんこりーFM!" />
+        </a>
+        <br />
+    </div>
+</div>
 
 <h2 id="1-タスク設定">1. タスク設定</h2>
 <p>映画レビュー文データセットである，IMDBデータセットを用いたネガティブ・ポジティブの2値分類タスクを解くモデルを，k分割交差検証にかけてみます．</p>
@@ -554,6 +569,20 @@ torchtextは，PyTorchで自然言語処理（NLP）系のデータを比較的�
   <gcse:searchbox-only></gcse:searchbox-only>
 </div>
 
+<div class="study-abroad">
+  <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
+    <strong>留学関連の記事</strong>
+  </p>
+  <hr />
+  <ul style="padding: 0 10px 0 10px;">
+    <li>
+      <a href="https://gucci-j.github.io/study-abroad/">大学院留学について</a>
+    </li>
+    <li>
+      <a href="https://gucci-j.github.io/study-abroad/crowd-funding">クラウドファンディングのお願い</a>
+    </li>
+  </ul>
+</div>
 
 <div class="recent-posts">
   <p style="padding: 0; margin: 0.25em 0 0 0; line-height: 1; text-align: center;">
@@ -561,12 +590,6 @@ torchtextは，PyTorchで自然言語処理（NLP）系のデータを比較的�
   </p>
   <hr />
   <ul style="padding-right: 5px; padding-left: 1.5em;">
-    
-      <li>
-        <a href="/study-abroad/crowd-funding/">
-          クラウドファンディングのお願い
-        </a>
-      </li>
     
       <li>
         <a href="/tuning-intro/">
@@ -589,6 +612,12 @@ torchtextは，PyTorchで自然言語処理（NLP）系のデータを比較的�
       <li>
         <a href="/memo-svm/">
           サポートベクターマシンのお話
+        </a>
+      </li>
+    
+      <li>
+        <a href="/cv-with-torchtext/">
+          torchtextでk-分割交差検証をする話
         </a>
       </li>
     

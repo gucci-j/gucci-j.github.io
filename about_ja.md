@@ -3,15 +3,14 @@ layout: page_ja
 title: 山口 篤季
 permalink: /about/ja/
 lang: ja_JP
-last_modified_at: 2019-08-19 21:30:00 +0900
+last_modified_at: 2019-09-18 18:00:00 +0100
 custom_css: page
 ---
 <div style="text-align: right;"><i class="fas fa-language" style="padding: 0 4px 0 0;"></i><a href="../">English</a> | 日本語</div>
 
 ## はじめに
 
-2019年4月現在，[東京農工大学](https://www.tuat.ac.jp/)大学院工学府情報工学専攻に在籍をしています．  
-2019年9月より，[The University of Sheffield](https://www.sheffield.ac.uk/), MSc. Computer Science with Speech and Language Processing に進学します．
+2019年9月現在，[The University of Sheffield](https://www.sheffield.ac.uk/), MSc. Computer Science with Speech and Language Processing に在籍しています．  
 
 ご用のある方は，当ページ末尾の[連絡先](#連絡先)を参照してください．
 
@@ -24,8 +23,8 @@ custom_css: page
 
 |年月|学歴|
 |:-:|:-|
-|2019年9月〜2020年9月|The University of Sheffield<br />MSc. Computer Science with Speech and Language Processing　進学予定|
-|2019年4月〜現在|東京農工大学大学院工学府情報工学専攻　在学中|
+|2019年9月〜現在|The University of Sheffield<br />MSc. Computer Science with Speech and Language Processing　在学中|
+|2019年4月〜現在|東京農工大学大学院工学府情報工学専攻　休学中|
 |2015年4月〜2019年3月|東京農工大学工学部情報工学科　**首席卒業**  <br /> GPA: 3.63 / 4.00|
 |2017年8月〜12月|De La Salle University　交換留学 <br /> GPA: 2.82 / 4.00|
 
@@ -60,7 +59,7 @@ custom_css: page
 
 |年月|項目|
 |:-:|:-|
-|2019年9月|International Postgraduate Merit Scholarship <br /> (Sponsored by the University of Sheffield)|
+|2019年9月|International Postgraduate Taught Merit Scholarship <br /> (Sponsored by the University of Sheffield)|
 |2019年6月〜現在|カーリットホールディングス株式会社奨学金　受給|
 |2019年3月|東京農工大学学生表彰 <br />（学生表彰規定第2条第4号 学業成果部門）|
 |2017年3月〜2019年3月|一般財団法人東京農工大学教育振興財団奨学金　受給|

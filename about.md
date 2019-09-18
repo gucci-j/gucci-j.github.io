@@ -3,16 +3,14 @@ layout: page_en
 title: Atsuki Yamaguchi
 permalink: /about/
 lang: en_US
-last_modified_at: 2019-08-19 21:30:00 +0900
+last_modified_at: 2019-09-18 18:00:00 +0100
 custom_css: page
 ---
 <div style="text-align: right;"><i class="fas fa-language" style="padding: 0 4px 0 0;"></i>English | <a href="./ja/">日本語</a></div>
 
 ## Currently
 
-I'm a master student at [Tokyo University of Agriculture and Technology](https://www.tuat.ac.jp/en/), majoring in Computer and Information Sciences.   
-
-I will study at [The University of Sheffield](https://www.sheffield.ac.uk/) from September 2019 as a master student in Computer Science with Speech and Language Processing.
+I'm a master student at [The University of Sheffield](https://www.sheffield.ac.uk/) majoring in Computer Science with Speech and Language Processing.
 
 My curriculum vitae (CV) is available [here]({{ site.baseurl }}/resources/about/a_yamaguchi_cv.pdf).
 

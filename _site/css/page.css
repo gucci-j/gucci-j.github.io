@@ -30,6 +30,19 @@
 .page_en table tr:nth-child(even), .page_ja table tr:nth-child(even) {
   background-color: #f8f8f8;
 }
+.page_en blockquote, .page_ja blockquote {
+  /* 引用部　*/
+  border-left: 2px solid #666;
+  padding: 0 1em;
+  color: #666;
+  font-size: 15px;
+  font-style: italic;
+}
+@media screen and (max-width: 767px) {
+  .page_en blockquote, .page_ja blockquote {
+    font-size: 13px;
+  }
+}
 
 .page_en {
   font-family: Helvetica, Arial, "Noto Sans Japanese", "游ゴシック", "Yu Gothic", YuGothic, sans-serif;
