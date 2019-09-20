@@ -4,7 +4,7 @@ title: 大学院留学について
 description: 大学院留学に関する報告を行うためのページです。
 permalink: /study-abroad/
 lang: ja_JP
-last_modified_at: 2019-09-18 17:30:00 +0100
+last_modified_at: 2019-09-20 09:30:00 +0100
 custom_css: page  
 ---
 
@@ -27,9 +27,10 @@ custom_css: page
 * yamanoku  
 * nnihimura  
 * takaion  
+* nametaketakewo  
 * 非掲載希望者等 20名  
 
-以上、30名の方々に厚く御礼を申しあげます。  
+以上、31名の方々に厚く御礼を申しあげます。  
 
 (**おことわり**) 非掲載希望者には、[Googleフォーム](https://forms.gle/r8dstQV33Ep3d55NA) 未登録の方も含まれます。
 

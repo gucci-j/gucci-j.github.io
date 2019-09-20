@@ -40,6 +40,7 @@ custom_css: page
     * **山口篤季**・岩佐幸翠・藤田桂英，自然言語による交渉における論点の重みと交渉の成否自動推定，電子情報通信学会　人工知能と知識処理研究会，2019年7月．[\[paper\]](https://www.ieice.org/ken/paper/20190722c1oR/)
     * **山口篤季**・藤田桂英，条件付き変分オートエンコーダと単語分散表現による絵文字の生成，人工知能学会全国大会論文集　第33回全国大会(2019)，2019年6月．[\[paper\]](https://confit.atlas.jp/guide/event-img/jsai2019/2L4-J-9-04/public/pdf?type=in) [\[slide\]](https://www.slideshare.net/AtsukiYamaguchi1/jsai2019-148918796)  
 <br />
+
 * 国際会議
     * **Atsuki Yamaguchi** and Katsuhide Fujita, "Breakdown Detection in Negotiation Dialogues," EurNLP 2019, London, United Kingdom, October 2019. (Acceptance rate: 31.8%; Non-archival)  
     * **Atsuki Yamaguchi** and Melvin Cabatuan, “Generative Model Based Frame Generation of Volcanic Flow Video,” IEEE HNICEM 2017, Manila, Philippines, December 2017. [\[paper\]](https://ieeexplore.ieee.org/document/8269503)

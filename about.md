@@ -14,7 +14,6 @@ I'm a master student at [The University of Sheffield](https://www.sheffield.ac.u
 
 My curriculum vitae (CV) is available [here]({{ site.baseurl }}/resources/about/a_yamaguchi_cv.pdf).
 
-
 ## Research Interests
 
 Natural Language Processing, Generative Models, Machine Learning
