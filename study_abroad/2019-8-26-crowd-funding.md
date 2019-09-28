@@ -6,7 +6,7 @@ description: 最高の環境で「人工知能」について学び、研究す�
 lang: ja_JP
 custom_css: post
 date: 2019-08-26 00:00:00 +0900
-last_modified_at: 2019-09-17 00:00:00 +0800
+last_modified_at: 2019-09-28 22:20:00 +0100
 tags:
 - ブログ全般
 ---
@@ -204,21 +204,13 @@ tags:
 プロジェクトの終了は、修士課程の修了日である2020年9月30日とします。
 
 ## おわりに
-<div style="text-align: center;">
-    <iframe frameborder="0" height="28" width="120" scrolling="no" src="https://polca.jp/projects/I3kvZaRxh8R/button?size=long"></iframe>
-</div>
 
-ご支援は、[クラウドファンディングサイト: polca](https://polca.jp/projects/I3kvZaRxh8R) にて受け付けています。  
-ぜひ、ご支援のほどよろしくお願いいたします！  
+~~ご支援は、[クラウドファンディングサイト: polca](https://polca.jp/projects/I3kvZaRxh8R) にて受け付けています。~~  
 
 <hr style="border: none; border-top: 1px dashed;" />
-(**2019/09/04：追記**) polcaでは海外からの支援ができないとの連絡をいただいております。代替手段（PayPal.Me か Buy Me A Coffee）の準備を進めていますので、今しばらくお待ちいただければと存じます。お手数をおかけし、大変申し訳ありません。
-
-(**2019/09/05：追記**) polca以外の代替手段として、[PayPal.Me](https://paypal.me/ygucciiiii?locale.x=ja_JP) を用意しました。Buy Me A Coffee については、PayPalアカウントとの連携がうまくいかないため、今月中は見送らせていただきます。
+(**2019/09/28：追記**) polcaでのご支援の受け付けは終了しましたが、引き続き [PayPal.Me](https://paypal.me/ygucciiiii?locale.x=ja_JP) または [Buy Me A Coffee](https://www.buymeacoffee.com/78c0xNoYQ) にてご支援を受け付けています。ぜひ、ご支援のほどよろしくお願いいたします！  
 
 <div style="text-align: center;">
-    <img src="{{ site.baseurl }}/resources/study_abroad/paypalme.png" alt="PayPalMeのQRコード" style="width: 100px;"/><br />
-    PayPalMe QRコード
+    <style>.bmc-button img{width: 27px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{line-height: 36px !important;height:37px !important;text-decoration: none !important;display:inline-flex !important;color:#FFFFFF !important;background-color:#FF813F !important;border-radius: 3px !important;border: 1px solid transparent !important;padding: 1px 9px !important;font-size: 22px !important;letter-spacing:0.6px !important;box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;margin: 0 auto !important;font-family:'Cookie', cursive !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;-o-transition: 0.3s all linear !important;-webkit-transition: 0.3s all linear !important;-moz-transition: 0.3s all linear !important;-ms-transition: 0.3s all linear !important;transition: 0.3s all linear !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#FFFFFF !important;}</style><link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet"><a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/78c0xNoYQ"><img src="https://bmc-cdn.nyc3.digitaloceanspaces.com/BMC-button-images/BMC-btn-logo.svg" alt="Buy me a coffee"><span style="margin-left:5px">Buy me a coffee</span></a>
+    <br />
 </div>  
-
-(**2019/09/17：追記**) PayPal経由でご支援くださった方は、お手数をお掛けしますが、[お問い合わせフォーム](https://gucci-j.github.io/contact/) より、連絡先情報の登録（当サイトにクレジットするお名前も含む）をお願いいたします。  

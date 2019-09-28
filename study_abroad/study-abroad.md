@@ -4,7 +4,7 @@ title: 大学院留学について
 description: 大学院留学に関する報告を行うためのページです。
 permalink: /study-abroad/
 lang: ja_JP
-last_modified_at: 2019-09-20 09:30:00 +0100
+last_modified_at: 2019-09-28 21:30:00 +0100
 custom_css: page  
 ---
 
@@ -28,9 +28,10 @@ custom_css: page
 * nnihimura  
 * takaion  
 * nametaketakewo  
+* akkikiki
 * 非掲載希望者等 20名  
 
-以上、31名の方々に厚く御礼を申しあげます。  
+以上、32名の方々に厚く御礼を申しあげます。  
 
 (**おことわり**) 非掲載希望者には、[Googleフォーム](https://forms.gle/r8dstQV33Ep3d55NA) 未登録の方も含まれます。
 
@@ -41,8 +42,9 @@ Googleフォームに登録したにも関わらず、受け取れていない�
 
 また、Googleフォームに登録されていなくても、polcaに掲載したパスワードを入力していただければ、下記のリンクよりご覧いただけます。  
 
-* 2019年9月号   
-<i class="fas fa-link" style="padding: 0 2px 0 0;"></i> 9月末〜10月上旬公開予定    
+* [2019年9月号]({{ site.baseurl }}/resources/study_abroad/report/report_sep2019.pdf)  
+* 2019年10月号 （10月末公開予定）  
+
 
 (**お知らせ**) 日常的な生活の様子等は、[twitter](https://twitter.com/_gucciiiii) でもお伝えしていく予定です。
 
