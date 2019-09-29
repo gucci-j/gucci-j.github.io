@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-09-28T22:16:32+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog about NLP and ML</subtitle><entry xml:lang="ja_JP"><title type="html">実装とともに学ぶハイパーパラメータチューニングのお話</title><link href="http://localhost:4000/tuning-intro/" rel="alternate" type="text/html" title="実装とともに学ぶハイパーパラメータチューニングのお話" /><published>2019-08-15T00:00:00+01:00</published><updated>2019-08-15T00:00:00+01:00</updated><id>http://localhost:4000/tuning-intro</id><content type="html" xml:base="http://localhost:4000/tuning-intro/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-09-29T09:17:41+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">きままにNLP</title><subtitle>A Technical Blog about NLP and ML</subtitle><entry xml:lang="ja_JP"><title type="html">実装とともに学ぶハイパーパラメータチューニングのお話</title><link href="http://localhost:4000/tuning-intro/" rel="alternate" type="text/html" title="実装とともに学ぶハイパーパラメータチューニングのお話" /><published>2019-08-15T00:00:00+01:00</published><updated>2019-08-15T00:00:00+01:00</updated><id>http://localhost:4000/tuning-intro</id><content type="html" xml:base="http://localhost:4000/tuning-intro/">&lt;h2 id=&quot;はじめに&quot;&gt;はじめに&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://gucci-j.github.io/cv-intro/&quot;&gt;前回&lt;/a&gt;は交差検証について紹介をしました。今回は、ゼロからKerasシリーズの総まとめとして、ハイパーパラメータチューニングについて紹介します。実装例としては、&lt;a href=&quot;https://github.com/keras-team/keras-tuner&quot;&gt;Keras Tuner&lt;/a&gt; と呼ばれる、Keras用のハイパーパラメータ自動最適化ツールを活用した実装を紹介します。&lt;/p&gt;
 
 &lt;div class=&quot;crowdfunding_ad&quot;&gt;
@@ -444,10 +444,10 @@ acc: 0.6322800013422967 ± 0.012688641313732466
 
 &lt;div class=&quot;inner_ads&quot;&gt;
     &lt;div class=&quot;left_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0598/000000020737.png&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&amp;amp;guid=ON&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0598/000000020737.png&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt; 
     &lt;div class=&quot;right_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0068/000000004157.gif&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&amp;amp;guid=ON&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0068/000000004157.gif&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 
@@ -1206,10 +1206,10 @@ $$
 
 &lt;div class=&quot;inner_ads&quot;&gt;
     &lt;div class=&quot;left_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0598/000000020737.png&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&amp;amp;guid=ON&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0598/000000020737.png&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt; 
     &lt;div class=&quot;right_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0068/000000004157.gif&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&amp;amp;guid=ON&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0068/000000004157.gif&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 
@@ -1847,10 +1847,10 @@ _________________________________________________________________
 
 &lt;div class=&quot;inner_ads&quot;&gt;
     &lt;div class=&quot;left_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0598/000000020737.png&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&amp;amp;guid=ON&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0598/000000020737.png&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt; 
     &lt;div class=&quot;right_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0068/000000004157.gif&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&amp;amp;guid=ON&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0068/000000004157.gif&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 
@@ -2273,10 +2273,10 @@ _________________________________________________________________
 
 &lt;div class=&quot;inner_ads&quot;&gt;
     &lt;div class=&quot;left_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0598/000000020737.png&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&amp;amp;guid=ON&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0598/000000020737.png&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt; 
     &lt;div class=&quot;right_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0068/000000004157.gif&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&amp;amp;guid=ON&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0068/000000004157.gif&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 
@@ -2650,10 +2650,10 @@ y_train[0]: [0. 0. 0. 0. 0. 1. 0. 0. 0. 0.]
 
 &lt;div class=&quot;inner_ads&quot;&gt;
     &lt;div class=&quot;left_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0598/000000020737.png&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&amp;amp;guid=ON&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0598/000000020737.png&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt; 
     &lt;div class=&quot;right_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0068/000000004157.gif&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&amp;amp;guid=ON&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0068/000000004157.gif&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 
@@ -2856,6 +2856,21 @@ Epoch 17/17
     &lt;p&gt;第五弾：&lt;i class=&quot;fas fa-link&quot; style=&quot;padding: 0 2px 0 0;&quot;&gt;&lt;/i&gt;&lt;a href=&quot;https://gucci-j.github.io/DL-Intro-5/&quot;&gt;畳み込みニューラルネットワーク編&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 
+&lt;div class=&quot;crowdfunding_ad&quot;&gt;
+    &lt;div class=&quot;pc&quot; style=&quot;text-align: center;&quot;&gt;
+        &lt;a href=&quot;https://anchor.fm/melancholy&quot;&gt;
+            &lt;img src=&quot;/resources/ads/mefm_banner_large.png&quot; alt=&quot;めらんこりーFM!&quot; /&gt;
+        &lt;/a&gt;
+        &lt;br /&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;sp&quot; style=&quot;text-align: center;&quot;&gt;
+        &lt;a href=&quot;https://anchor.fm/melancholy&quot;&gt;
+            &lt;img src=&quot;/resources/ads/mefm_banner_small.png&quot; alt=&quot;めらんこりーFM!&quot; /&gt;
+        &lt;/a&gt;
+        &lt;br /&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
 &lt;h2 id=&quot;1-3層ニューラルネットワークの実装&quot;&gt;1. 3層ニューラルネットワークの実装&lt;/h2&gt;
 
 &lt;h3 id=&quot;11-プロジェクトの作成&quot;&gt;1.1 プロジェクトの作成&lt;/h3&gt;
@@ -3019,25 +3034,10 @@ _________________________________________________________________
 
 &lt;div class=&quot;inner_ads&quot;&gt;
     &lt;div class=&quot;left_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0598/000000020737.png&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&amp;amp;guid=ON&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0598/000000020737.png&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1502952&amp;amp;p_id=1386&amp;amp;pc_id=2364&amp;amp;pl_id=20737&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt; 
     &lt;div class=&quot;right_ad_in&quot;&gt;
-        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&amp;amp;guid=ON&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0068/000000004157.gif&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;crowdfunding_ad&quot;&gt;
-    &lt;div class=&quot;pc&quot; style=&quot;text-align: center;&quot;&gt;
-        &lt;a href=&quot;https://anchor.fm/melancholy&quot;&gt;
-            &lt;img src=&quot;/resources/ads/mefm_banner_large.png&quot; alt=&quot;めらんこりーFM!&quot; /&gt;
-        &lt;/a&gt;
-        &lt;br /&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;sp&quot; style=&quot;text-align: center;&quot;&gt;
-        &lt;a href=&quot;https://anchor.fm/melancholy&quot;&gt;
-            &lt;img src=&quot;/resources/ads/mefm_banner_small.png&quot; alt=&quot;めらんこりーFM!&quot; /&gt;
-        &lt;/a&gt;
-        &lt;br /&gt;
+        &lt;a href=&quot;//af.moshimo.com/af/c/click?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&amp;amp;guid=ON&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;//image.moshimo.com/af-img/0068/000000004157.gif&quot; width=&quot;300&quot; height=&quot;250&quot; style=&quot;border:none;&quot; /&gt;&lt;/a&gt;&lt;img src=&quot;//i.moshimo.com/af/i/impression?a_id=1430714&amp;amp;p_id=170&amp;amp;pc_id=185&amp;amp;pl_id=4157&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;border:none;&quot; /&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 

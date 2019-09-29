@@ -58,10 +58,10 @@ Attentionをフルに活用した系列変換モデルを提案した．
 
 <div class="inner_ads">
     <div class="left_ad_in">
-        <a href="//af.moshimo.com/af/c/click?a_id=1502952&p_id=1386&pc_id=2364&pl_id=20737&guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0598/000000020737.png" width="300" height="250" style="border:none;"></a><img src="//i.moshimo.com/af/i/impression?a_id=1502952&p_id=1386&pc_id=2364&pl_id=20737" width="1" height="1" style="border:none;">
+        <a href="//af.moshimo.com/af/c/click?a_id=1502952&p_id=1386&pc_id=2364&pl_id=20737&guid=ON" rel="nofollow"><img src="//image.moshimo.com/af-img/0598/000000020737.png" width="300" height="250" style="border:none;"></a><img src="//i.moshimo.com/af/i/impression?a_id=1502952&p_id=1386&pc_id=2364&pl_id=20737" width="1" height="1" style="border:none;">
     </div> 
     <div class="right_ad_in">
-        <a href="//af.moshimo.com/af/c/click?a_id=1430714&p_id=170&pc_id=185&pl_id=4157&guid=ON" target="_blank" rel="nofollow"><img src="//image.moshimo.com/af-img/0068/000000004157.gif" width="300" height="250" style="border:none;"></a><img src="//i.moshimo.com/af/i/impression?a_id=1430714&p_id=170&pc_id=185&pl_id=4157" width="1" height="1" style="border:none;">
+        <a href="//af.moshimo.com/af/c/click?a_id=1430714&p_id=170&pc_id=185&pl_id=4157&guid=ON" rel="nofollow"><img src="//image.moshimo.com/af-img/0068/000000004157.gif" width="300" height="250" style="border:none;"></a><img src="//i.moshimo.com/af/i/impression?a_id=1430714&p_id=170&pc_id=185&pl_id=4157" width="1" height="1" style="border:none;">
     </div>
 </div>
 
