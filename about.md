@@ -16,12 +16,12 @@ My curriculum vitae (CV) is available [here]({{ site.baseurl }}/resources/about/
 
 ## Research Interests
 
-Natural Language Processing, Generative Models, Machine Learning
+Natural Language Processing, Natural Language Understanding, Generative Models, Machine Learning
 
 
 ## Recent Work
 
-1. __An end-to-end learning solution for supporting human-human negotiations__  
+1. __An end-to-end learning approach for supporting human-human negotiations__  
 The aim of this research is to help negotiators form a better consensus.  
 
     <div style="text-align: center;">

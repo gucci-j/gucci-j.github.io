@@ -4,13 +4,13 @@ title: 大学院留学について
 description: 大学院留学に関する報告を行うためのページです。
 permalink: /study-abroad/
 lang: ja_JP
-last_modified_at: 2019-09-28 21:30:00 +0100
-image: /resources/study_abroad/back_image_sep.png
+last_modified_at: 2019-10-27 9:00:00 +0000
+image: /resources/study_abroad/back_image_oct.png
 custom_css: page  
 ---
 
 <div style="text-align: center;">
-    <img style="border: none; padding: none;" src="{{ site.baseurl }}/resources/study_abroad/back_image_sep.png" alt="シェフィールドの景色:9月" style="width: 700px;"/>
+    <img src="{{ site.baseurl }}/resources/study_abroad/back_image_oct.png" alt="シェフィールドの景色:10月" style="width: 700px; padding: none;"/>
 </div>
 
 このページでは、イギリス・シェフィールド大学での修士留学に関する報告を行います。  
@@ -44,7 +44,8 @@ Googleフォームに登録したにも関わらず、受け取れていない�
 また、Googleフォームに登録されていなくても、polcaに掲載したパスワードを入力していただければ、下記のリンクよりご覧いただけます。  
 
 * [2019年9月号]({{ site.baseurl }}/resources/study_abroad/report/report_sep2019.pdf)  
-* 2019年10月号 （10月末公開予定）  
+* [2019年10月号]({{ site.baseurl }}/resources/study_abroad/report/report_oct2019.pdf)  
+* 2019年11月号 （11月末公開予定）  
 
 
 (**お知らせ**) 日常的な生活の様子等は、[twitter](https://twitter.com/_gucciiiii) でもお伝えしていく予定です。
