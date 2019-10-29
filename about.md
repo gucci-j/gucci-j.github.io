@@ -3,7 +3,7 @@ layout: page_en
 title: Atsuki Yamaguchi
 permalink: /about/
 lang: en_US
-last_modified_at: 2019-09-18 18:00:00 +0100
+last_modified_at: 2019-10-29 10:00:00 +0000
 custom_css: page
 ---
 <div style="text-align: right;"><i class="fas fa-language" style="padding: 0 4px 0 0;"></i>English | <a href="./ja/">日本語</a></div>
