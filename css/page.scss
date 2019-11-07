@@ -54,9 +54,22 @@
         @include mobile {
           font-size: 13px;
         }
-      }
+    }
 }
   
 .page_en { 
-    font-family: $helvetica;
+    font-family: $arial;
+
+    blockquote {
+      /* 引用部　*/
+      border: none;
+      padding: 0.5em 0.5em 0.5em 0;
+      color: $gray;
+      font-size: 15px;
+      font-style: italic;
+  
+      @include mobile {
+        font-size: 13px;
+      }
+  }
 }
