@@ -6,7 +6,7 @@ mathjax: true
 lang: ja_JP
 custom_css: post
 image: /resources/2019-05-23/pe.png
-last_modified_at: 2019-05-30 15:00:00 +0900
+last_modified_at: 2019-11-23 22:20:00 +0000
 tags:
 - 論文メモ
 ---
@@ -299,7 +299,10 @@ Recurrentの時刻 $t$ における隠れ層の重み算出式は，$\mathbf{h_t
 
     したがって，時刻 $t$における計算量は，$O(d^2) + O(d^2) + O(d) + O(d)$ で，$O(d^2)$ とまとめられる．入力シーケンスの長さは，$n$ であるから，層あたりの計算量は $O(d^2) \times n$ で， $O(nd^2)$ となる．
 
-> Convolutionについてはどうやって算出したのか不明．何か情報があればご教示ください．
+* Convolutionの場合  
+Convolutionでの重みは，「カーネルサイズ * 入力のチャンネル数（特徴マップの数）* 出力のチャンネル数 + 出力チャンネルごとのバイアス」 で求まるので，図中の変数を代入して計算すると，$O(k \times d \times d)$ となる．バイアスは定数項とみなせるので無視できる．  
+
+    したがって，$n$ 個の要素について考えるので，$O(kd^2) \times O(n) = O(knd^2)$ となる．
 
 #### Sequential Operations  
 逐次処理を最小限にする並列処理可能な計算量のこと．Recurrent層はシーケンスの長さだけコストがかかるのは直感的である．

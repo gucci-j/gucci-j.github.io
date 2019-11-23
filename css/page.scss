@@ -12,6 +12,11 @@
   
     h3 {
       border-bottom: 1px solid #ddd;
+      padding: 2px 12px;
+
+      @include mobile {
+        padding: 2px 8px;
+      }
     }
 
     
