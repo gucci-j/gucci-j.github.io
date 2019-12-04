@@ -28,7 +28,7 @@ The aim of this research is to help negotiators form a better consensus.
         <img src="{{ site.baseurl }}/resources/about/images/predict_issue_weights.png" alt="visualization of predicting issue weights in an end-to-end manner" style="width: 500px;"/>
     </div>
 
-    > * **Atsuki Yamaguchi** and Katsuhide Fujita, "Breakdown Detection in Negotiation Dialogues," Thirty-Fourth AAAI Conference on Artificial Intelligence (AAAI-20), New York, USA, Feburary 2020. (Poster; To appear)  
+    > * **Atsuki Yamaguchi** and Katsuhide Fujita, "Breakdown Detection in Negotiation Dialogues," Thirty-Fourth AAAI Conference on Artificial Intelligence (AAAI-20), New York, USA, Feburary 2020. (Student Abstract; To appear)  
     > * **Atsuki Yamaguchi** and Katsuhide Fujita, "Breakdown Detection in Negotiation Dialogues," EurNLP 2019, London, United Kingdom, October 2019. (Acceptance rate: 30.5%; Non-archival)  
     > * **Atsuki Yamaguchi**, Kosui Iwasa and Katsuhide Fujita, "Predicting Issue Weights and Detecting Breakdowns in Negotiation Dialogue," IEICE SIG-AI, Hokkaido, Japan, July 2019. (Regional conference)
 
