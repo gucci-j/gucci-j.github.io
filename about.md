@@ -10,13 +10,13 @@ custom_css: page
 
 ## Currently
 
-I'm a master student at [The University of Sheffield](https://www.sheffield.ac.uk/) majoring in Computer Science with Speech and Language Processing.
+I am a master's student at [the University of Sheffield](https://www.sheffield.ac.uk/), studying for an MSc in Computer Science with Speech and Language Processing.
 
 My curriculum vitae (CV) is available [here]({{ site.baseurl }}/resources/about/a_yamaguchi_cv.pdf).
 
 ## Research Interests
 
-Natural Language Processing, Natural Language Understanding, Generative Models, Machine Learning
+Natural Language Understanding, Negotiation Dialogue, Natural Language Processing, Machine Learning
 
 
 ## Recent Work
