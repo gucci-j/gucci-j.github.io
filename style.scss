@@ -54,6 +54,10 @@ body {
   letter-spacing: 0.05em;
   // 行間の設定
   line-height: 1.6;
+
+  @include mobile {
+    line-height: 1.5;
+  }
 }
 
 .container {
@@ -275,7 +279,7 @@ h1, h2, h3, h4, h5, h6 {
   color: $darkerGray;
   font-weight: bold;
 
-  line-height: 1.7;
+  line-height: 1.6;
   margin: 1em 0 15px;
   padding: 0;
 
@@ -291,7 +295,7 @@ h1 {
   }
 
   @include mobile {
-    font-size: 22px;
+    font-size: 20px;
   }
 }
 
@@ -299,7 +303,7 @@ h2 {
   font-size: 22px;
 
   @include mobile {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 
@@ -307,7 +311,7 @@ h3 {
   font-size: 20px;
 
   @include mobile {
-    font-size: 18px;
+    font-size: 17px;
   }
 }
 
@@ -542,6 +546,37 @@ footer {
   padding: 20px 0;
   text-align: center;
   font-family: $helvetica;
+
+  @include mobile {
+    font-size: 0.9em;
+  }
+}
+
+.paginator {
+  text-align: center;
+  margin-top: 1.5em;
+  @include mobile{
+    margin-bottom: 1em;
+  }
+  
+  a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    transition: background-color .3s;
+
+    &:hover {
+      background-color: $backgroundBlue;
+    }
+  }
+
+  strong {
+    background-color: #ddd;
+    color: black;
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+  }
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS

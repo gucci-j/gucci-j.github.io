@@ -3,7 +3,7 @@ layout: default
 ---
 
 <div class="posts">
-  {% for post in site.posts %}
+  {% for post in paginator.posts %}
     <article class="post">
       <div class="date_front" style="margin-top: 10pt;">{{ post.date | date: "%F" }}</div>
       <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
@@ -11,7 +11,32 @@ layout: default
       <div class="entry">
         {{ post.description }}
       </div>
-      <!-- <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a> -->
     </article>
   {% endfor %}
 </div>
+
+<!-- Pagination links -->
+{% if paginator.total_pages > 1 %}
+<div class="paginator">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | relative_url }}">&laquo;</a>
+  {% endif %}
+
+  {% for page in (1..paginator.total_pages) %}
+    {% if page == paginator.page %}
+      <!--if selected page-->
+      <strong>{{ page }}</strong>
+    {% elsif page == 1 %}
+      <!--if top page-->
+      <a href="/">{{ page }}</a>
+    {% else %}
+      <!--if relative page-->
+      <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}">{{ page }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | relative_url }}">&raquo;</a>
+  {% endif %}
+</div>
+{% endif %}

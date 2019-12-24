@@ -309,6 +309,7 @@
     }
 
     @include mobile {
+      font-size: 0.9em;
       width: 100%
     }
   }
@@ -321,6 +322,7 @@
     width: 50%;
 
     @include mobile {
+      font-size: 0.9em;
       margin: 0 0 0.5em 0;
       width: 100%
     }

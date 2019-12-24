@@ -10,7 +10,7 @@ custom_css: page
 
 ## はじめに
 
-2019年9月現在，[The University of Sheffield](https://www.sheffield.ac.uk/), MSc. Computer Science with Speech and Language Processing に在籍しています．  
+2019年9月現在，[The University of Sheffield](https://www.sheffield.ac.uk/), MSc in Computer Science with Speech and Language Processing に在籍しています．  
 
 ご用のある方は，当ページ末尾の[連絡先](#連絡先)を参照してください．
 
@@ -23,7 +23,7 @@ custom_css: page
 
 |年月|学歴|
 |:-:|:-|
-|2019年9月〜現在|The University of Sheffield<br />MSc. Computer Science with Speech and Language Processing　在学中|
+|2019年9月〜現在|The University of Sheffield<br />MSc in Computer Science with Speech and Language Processing　在学中|
 |2019年4月〜現在|東京農工大学大学院工学府情報工学専攻　休学中|
 |2015年4月〜2019年3月|東京農工大学工学部情報工学科　首席卒業  <br /> GPA: 3.63 / 4.00|
 |2017年8月〜12月|De La Salle University　交換留学 <br /> GPA: 2.82 / 4.00|
