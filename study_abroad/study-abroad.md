@@ -4,13 +4,13 @@ title: 大学院留学について
 description: 大学院留学に関する報告を行うためのページです。
 permalink: /study-abroad/
 lang: ja_JP
-last_modified_at: 2019-12-04 13:50:00 +0000
-image: /resources/study_abroad/back_image_oct.png
+last_modified_at: 2019-12-27 21:30:00 +0000
+image: /resources/study_abroad/back_image_dec.png
 custom_css: page  
 ---
 
 <div style="text-align: center;">
-    <img src="{{ site.baseurl }}/resources/study_abroad/back_image_nov.png" alt="シェフィールドの景色:11月" style="width: 700px; padding: none;"/>
+    <img src="{{ site.baseurl }}/resources/study_abroad/back_image_dec.png" alt="シェフィールドの景色:12月" style="width: 700px; padding: none;"/>
 </div>
 
 このページでは、イギリス・シェフィールド大学での修士留学に関する報告を行います。  
@@ -46,7 +46,8 @@ Googleフォームに登録したにも関わらず、受け取れていない�
 * [2019年9月号]({{ site.baseurl }}/resources/study_abroad/report/report_sep2019.pdf)  
 * [2019年10月号]({{ site.baseurl }}/resources/study_abroad/report/report_oct2019.pdf)  
 * [2019年11月号]({{ site.baseurl }}/resources/study_abroad/report/report_nov2019.pdf)   
-* 2019年12月号　（12月末公開予定）  
+* [2019年12月号]({{ site.baseurl }}/resources/study_abroad/report/report_dec2019.pdf)  
+* 2020年1月号　（1月末公開予定）  
 
 
 (**お知らせ**) 日常的な生活の様子等は、[twitter](https://twitter.com/_gucciiiii) でもお伝えしていく予定です。
@@ -68,8 +69,13 @@ UCL、エジンバラ大、シェフィールド大に出願した書類一式�
 * [留学先に持っていったものリスト](https://note.mu/_gucciiiii/n/nd00780c1d3e7)  
 何を持っていけば良いか若干悩んだので、留学先に持っていったものを全てリスト化しました。これから留学する方の荷造りへの参考になると思います。
 
+### 今後投稿予定の記事  
+* シェフィールド大学での前期を振り返って  
+テスト期間を除いた前期が終了した今、留学前に抱いていた目標・目的をきちんと実行できているかを確認し、授業や学生の雰囲気など、学科としては10年以上ぶりとなる日本人の目線でお伝えします。
+
 
 ## リンク集
 * [クラウドファンディングのお願い](https://gucci-j.github.io/study-abroad/crowd-funding/)  
 * [twitter](https://twitter.com/_gucciiiii)  
 * [note](https://note.mu/_gucciiiii)
+* [これまでのカバー画像]({{ site.baseurl }}/study-abroad/cover-images/)
