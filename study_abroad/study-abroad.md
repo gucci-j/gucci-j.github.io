@@ -53,29 +53,28 @@ Googleフォームに登録したにも関わらず、受け取れていない�
 (**お知らせ**) 日常的な生活の様子等は、[twitter](https://twitter.com/_gucciiiii) でもお伝えしていく予定です。
 
 ## note  
-主に留学を考えている人の役に立ちそうな情報を、[note](https://note.mu/_gucciiiii) に書いて提供しています。  
+主に留学を考えている人の役に立ちそうな情報を、[note](https://note.com/_gucciiiii) に書いて提供しています。  
 
 
 ### ピックアップ記事  
-* [IELTS対策](https://note.mu/_gucciiiii/n/nc2a210affadf)  
+* [IELTS対策](https://note.com/_gucciiiii/n/nc2a210affadf)  
 英語資格試験の一つである、IELTS対策について自分なりにまとめました。全部自力でやってやるぞという方への参考になると思います。  
 
-* [留学奨学金に全部落ちた話](https://note.mu/_gucciiiii/n/n719fc658a21d)  
-いかにして留学用の奨学金に全部落ちてしまったかをまとめました。時系列順に紹介 + アドバイスも書いたので、修士以上の学位留学を考えている方への参考になると思います。全落ちしてからの流れを書いた[続編](https://note.mu/_gucciiiii/n/n19ebbb1b401d)もあります。
+* [留学奨学金に全部落ちた話](https://note.com/_gucciiiii/n/n719fc658a21d)  
+いかにして留学用の奨学金に全部落ちてしまったかをまとめました。時系列順に紹介 + アドバイスも書いたので、修士以上の学位留学を考えている方への参考になると思います。全落ちしてからの流れを書いた[続編](https://note.com/_gucciiiii/n/n19ebbb1b401d)もあります。
 
-* [大学院出願書類一式](https://note.mu/_gucciiiii/m/m09f79ed8d2ca)  
+* [大学院出願書類一式](https://note.com/_gucciiiii/m/m09f79ed8d2ca)  
 UCL、エジンバラ大、シェフィールド大に出願した書類一式を有料で公開しています。これまた、エージェントを一切使わないで、全部自力でやってやるぞという方への参考になると思います。
 
-* [留学先に持っていったものリスト](https://note.mu/_gucciiiii/n/nd00780c1d3e7)  
+* [留学先に持っていったものリスト](https://note.com/_gucciiiii/n/nd00780c1d3e7)  
 何を持っていけば良いか若干悩んだので、留学先に持っていったものを全てリスト化しました。これから留学する方の荷造りへの参考になると思います。
 
-### 今後投稿予定の記事  
-* シェフィールド大学での前期を振り返って  
-テスト期間を除いた前期が終了した今、留学前に抱いていた目標・目的をきちんと実行できているかを確認し、授業や学生の雰囲気など、学科としては10年以上ぶりとなる日本人の目線でお伝えします。
+* [シェフィールド大学での前期を振り返って](https://note.com/_gucciiiii/n/n8791b6fd0bea)  
+シェフィールド大学の授業や学生の雰囲気など、学科としては10年以上ぶりとなる日本人の目線でお伝えしたnoteです。
 
 
 ## リンク集
 * [クラウドファンディングのお願い](https://gucci-j.github.io/study-abroad/crowd-funding/)  
 * [twitter](https://twitter.com/_gucciiiii)  
-* [note](https://note.mu/_gucciiiii)
+* [note](https://note.com/_gucciiiii)
 * [これまでのカバー画像]({{ site.baseurl }}/study-abroad/cover-images/)
