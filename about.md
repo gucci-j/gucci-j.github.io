@@ -3,14 +3,14 @@ layout: page_en
 title: Atsuki Yamaguchi
 permalink: /about/
 lang: en_US
-last_modified_at: 2019-11-7 7:00:00 +0000
+last_modified_at: 2020-06-02 15:00:00 +0100
 custom_css: page
 ---
 <div style="text-align: right;"><i class="fas fa-language" style="padding: 0 4px 0 0;"></i>English | <a href="./ja/">日本語</a></div>
 
 ## Currently
 
-I am a master's student at [the University of Sheffield](https://www.sheffield.ac.uk/), studying for an MSc in Computer Science with Speech and Language Processing.
+I am a master's student at [the University of Sheffield](https://www.sheffield.ac.uk/), studying for an MSc. in Computer Science with Speech and Language Processing.
 
 My curriculum vitae (CV) is available [here]({{ site.baseurl }}/resources/about/a_yamaguchi_cv.pdf).
 
@@ -28,7 +28,7 @@ The aim of this research is to help negotiators form a better consensus.
         <img src="{{ site.baseurl }}/resources/about/images/predict_issue_weights.png" alt="visualization of predicting issue weights in an end-to-end manner" style="width: 500px;"/>
     </div>
 
-    > * **Atsuki Yamaguchi** and Katsuhide Fujita, "Breakdown Detection in Negotiation Dialogues," Thirty-Fourth AAAI Conference on Artificial Intelligence (AAAI-20), New York, USA, Feburary 2020. (Student Abstract; To appear)  
+    > * **Atsuki Yamaguchi** and Katsuhide Fujita, "Breakdown Detection in Negotiation Dialogues," Thirty-Fourth AAAI Conference on Artificial Intelligence (AAAI-20), New York, USA, Feburary 2020. (Student Abstract)  
     > * **Atsuki Yamaguchi** and Katsuhide Fujita, "Breakdown Detection in Negotiation Dialogues," EurNLP 2019, London, United Kingdom, October 2019. (Acceptance rate: 30.5%; Non-archival)  
     > * **Atsuki Yamaguchi**, Kosui Iwasa and Katsuhide Fujita, "Predicting Issue Weights and Detecting Breakdowns in Negotiation Dialogue," IEICE SIG-AI, Hokkaido, Japan, July 2019. (Regional conference)
 
