@@ -6,10 +6,12 @@ description: 最高の環境で「人工知能」について学び、研究す�
 lang: ja_JP
 custom_css: post
 date: 2019-08-26 00:00:00 +0900
-last_modified_at: 2019-09-28 22:20:00 +0100
+last_modified_at: 2020-08-15 12:00:00 +0100
 tags:
 - ブログ全般
 ---
+
+**本記事は記録のために残してあります。現在、クラウドファンディングの実施はしておりません。あらかじめご了承ください。**
 
 ## はじめに
 こんにちは！
@@ -19,12 +21,6 @@ tags:
 私は現在、理系国立大学院に在籍をしており、情報工学の中でも、自然言語処理と機械学習を専門に研究を進めています。いわゆる人工知能(AI)に分類される分野のうちの一つです。
 
 今回、タイトルにあるように、大学院留学費用の一部をクラウドファンディングにより充てられないかと思い、この記事を書いています。
-
-<div style="text-align: center;">
-    <img src="{{ site.baseurl }}/resources/study_abroad/head_pic.png" alt="学会発表での一コマ" style="width: 400px;"/><br />
-    学会発表での一コマ
-</div>
-
 
 ## 1. 留学先大学について
 留学先大学は、冒頭で述べたシェフィールド大学になります。地理的には、ロンドンから北にいった、マンチェスターにほど近いシェフィールドに位置する大学です。世界大学ランキングは、78位 (QS)・106位 (THE)となっています。
@@ -54,7 +50,7 @@ tags:
 * **世界中の研究者・学生と日常的に交流ができる**  
     一つ目と被る部分もありますが、様々な人と研究テーマについて議論ができるので、より着想を得られやすくなると思います。
 
-私の将来の目標は、世界中の人を喜ばせることのできる仕事に就くことです。特に、幼少期から大好きなディズニーに関わることを目指しています。そのためにも、この留学を通して、自分の専門分野で胸を張れるくらいの研究力と技術力を身に付けたいと思っています。
+私の将来の目標は、世界中の人を喜ばせることのできる仕事に就くことです。特に幼少期から大好きなディズニーに関わることを目指しています。そのためにも、この留学を通して自分の専門分野で胸を張れるくらいの研究力と技術力を身に付けたいと思っています。
 
 以上が、簡単な留学しようと思った流れと、その理由になります。
 
@@ -66,24 +62,24 @@ tags:
 
 昨年度の1年間は丸々奨学金獲得に奮闘しました。でも、どの財団 + 日本政府奨学金にも合格することができませんでした。
 
-書類審査で落とされたものもあれば、面接審査で落とされたものもあります。それでも、結果としては奨学金に「全落ち」するという悲劇に直面しました。（この一連の話の詳細については、noteの[奨学金に全落ちした話](https://note.mu/_gucciiiii/n/n719fc658a21d)をご覧ください。）
+書類審査で落とされたものもあれば、面接審査で落とされたものもあります。それでも結果としては奨学金に「全落ち」するという悲劇に直面しました。（この一連の話の詳細については、noteの[奨学金に全落ちした話](https://note.mu/_gucciiiii/n/n719fc658a21d)をご覧ください。）
 
 <div style="text-align: center;">
     <img src="{{ site.baseurl }}/resources/study_abroad/zenochi_pic.png" alt="留学用奨学金のお祈り通知" style="width: 500px;"/><br />
     留学用奨学金のお祈り通知の数々
 </div>
 
-留学するには資金の問題が足枷になってきます。これまで、学部の間に経験した交換留学は、奨学金制度のおかげで支弁することができましたが、今回は「ほぼ」支援がない状態です。また、ひとり親家庭のため、家計には到底頼れません。
+留学するには資金の問題が足枷になってきます。これまで学部の間に経験した交換留学は、奨学金制度のおかげで支弁することができましたが、今回は「ほぼ」支援がない状態です。またひとり親家庭のため、家計には到底頼れません。
 
 「ほぼ」と書いたのには理由があります。今年の3月に奨学金に全落ちしたことが判明してから、全く何もしなかった訳ではありません。
 
-3月〜5月の間に募集を行なっている財団や、留学先の大学が募集している奨学金にできるかぎり応募しました。その結果、シェフィールド大学の提供する[奨学金](https://www.sheffield.ac.uk/international/enquiry/money/pgtmerit)に合格し、授業料の一部 (5,650ポンド=約80万円相当)を負担していただけることになりました。これが、シェフィールド大学に進学を決めた一つの大きな要因でもあります。
+3月〜5月の間に募集を行なっている財団や、留学先の大学が募集している奨学金にできるかぎり応募しました。その結果、シェフィールド大学の提供する[奨学金](https://www.sheffield.ac.uk/international/enquiry/money/pgtmerit)に合格し、授業料の一部 (5,650ポンド=約80万円相当)を負担していただけることになりました。これがシェフィールド大学に進学を決めた一つの大きな要因でもあります。
 
-しかし、後述のように、今回の留学には約500万円が必要になってきます。現在いただけることが確定している奨学金の額では足りていません。この大学院留学をお金の問題で諦めたくないと決心した私は、不足している額を貯金と借金にて補う予定ではありますが、この先の人生を考えると、借金をすることは不安でたまりません。
+しかし、後述のように今回の留学には約500万円が必要になってきます。現在いただけることが確定している奨学金の額では足りていません。この大学院留学をお金の問題で諦めたくないと決心した私は、不足している額を貯金と借金にて補う予定ではありますが、この先の人生を考えると借金をすることは不安でたまりません。
 
 研究者としての道を歩むために、博士号を取得したい気持ちももちろんありますが、今回それなりの負債を抱えることになるため、この留学後一旦実務経験を積んで、借金を返済してから、再チャレンジしようと考えています。しかしながら、この計画も果たしてうまくいくのか到底予想もつきません。大学院修了後にきちんとした企業で働ける可能性はどこにも保証されていないからです。
 
-このような状況下で、考えられうる手段に全て挑戦してみたいと思ったことから、クラウドファンディングを実施しようと思うに至りました。
+このような状況下で考えられうる手段に全て挑戦してみたいと思ったことから、クラウドファンディングを実施しようと思うに至りました。
 
 
 > <i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参照: [留学奨学金に全落ちした話](https://note.mu/_gucciiiii/n/n719fc658a21d)  
@@ -133,9 +129,9 @@ tags:
 #### 「留学相談」コース  
 英語の勉強法や、出願手続き、エッセイ・推薦書下書きの書き方など、大学院留学に必要な知識についての相談にのります。理系の学生で、イギリスの大学院留学を考えている方にはより有益なアドバイスができると思います。
 
-相談形態としては、ビデオチャット（Googleハングアウト等）の利用を予定しています。相談は一回30分限りとしますが、それ以上の対応に関しては、希望のある場合のみ、費用等相談の上決めさせていただきます。
+相談形態としては、ビデオチャット（Googleハングアウト等）の利用を予定しています。相談は一回30分限りとしますが、それ以上の対応に関しては、希望のある場合のみ費用等相談の上決めさせていただきます。
 
-なお、添削や出願書類の提供等は行えませんのでご了承ください。あくまでも、相談事項に関するアドバイスを自身の経験から行うものになります。
+なお、添削や出願書類の提供等は行えませんのでご了承ください。あくまでも相談事項に関するアドバイスを自身の経験から行うものになります。
 
 (**価格**) ¥ 1,500   
 > <i class="fas fa-link" style="padding: 0 2px 0 0;"></i>参考: [UCL ＆ エジンバラ大学 ＆シェフィールド大学に合格した出願書類](https://note.mu/_gucciiiii/m/m09f79ed8d2ca)   
@@ -143,9 +139,9 @@ tags:
 <br />
 
 #### 「プログラミング相談」コース
-プログラミング（主にPython）に関する相談を受け付けます。また、ディープラーニングフレームワーク：PyTorchやKerasに関する相談・質問も受け付けます。
+プログラミング（主にPython）に関する相談を受け付けます。また、ディープラーニングフレームワーク：PyTorch や Keras に関する相談・質問も受け付けます。
 
-どんな質問にもお答えするよう努力しますが、内容があまりにも専門外であると、お答え出来かねます。相談形態・条件は、「留学相談コース」に準じます。
+どんな質問にもお答えするよう努力しますが、内容があまりにも専門外であるとお答え出来かねます。相談形態・条件は、「留学相談コース」に準じます。
 
 (**価格**) ¥ 1,500   
 
@@ -208,9 +204,5 @@ tags:
 ~~ご支援は、[クラウドファンディングサイト: polca](https://polca.jp/projects/I3kvZaRxh8R) にて受け付けています。~~  
 
 <hr style="border: none; border-top: 1px dashed;" />
-(**2019/09/28：追記**) polcaでのご支援の受け付けは終了しましたが、引き続き [PayPal.Me](https://paypal.me/ygucciiiii?locale.x=ja_JP) または [Buy Me A Coffee](https://www.buymeacoffee.com/78c0xNoYQ) にてご支援を受け付けています。ぜひ、ご支援のほどよろしくお願いいたします！  
-
-<div style="text-align: center;">
-    <style>.bmc-button img{width: 27px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{line-height: 36px !important;height:37px !important;text-decoration: none !important;display:inline-flex !important;color:#FFFFFF !important;background-color:#FF813F !important;border-radius: 3px !important;border: 1px solid transparent !important;padding: 1px 9px !important;font-size: 22px !important;letter-spacing:0.6px !important;box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;margin: 0 auto !important;font-family:'Cookie', cursive !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;-o-transition: 0.3s all linear !important;-webkit-transition: 0.3s all linear !important;-moz-transition: 0.3s all linear !important;-ms-transition: 0.3s all linear !important;transition: 0.3s all linear !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#FFFFFF !important;}</style><link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet"><a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/78c0xNoYQ"><img src="https://bmc-cdn.nyc3.digitaloceanspaces.com/BMC-button-images/BMC-btn-logo.svg" alt="Buy me a coffee"><span style="margin-left:5px">Buy me a coffee</span></a>
-    <br />
-</div>  
+(**2019/09/28：追記**) ~~polcaでのご支援の受け付けは終了しましたが、引き続き PayPal.Me または Buy Me A Coffee にてご支援を受け付けています。ぜひ、ご支援のほどよろしくお願いいたします！~~  
+(**2020/08/15：追記**) 本記事は記録のために残してあります。

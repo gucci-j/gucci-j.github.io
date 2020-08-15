@@ -4,13 +4,13 @@ title: 大学院留学について
 description: 大学院留学に関する報告を行うためのページです。
 permalink: /study-abroad/
 lang: ja_JP
-last_modified_at: 2020-07-05 23:55:00 +0100
-image: /resources/study_abroad/back_image_jun.png
+last_modified_at: 2020-08-15 12:00:00 +0100
+image: /resources/study_abroad/back_image_jul.png
 custom_css: page  
 ---
 
 <div style="text-align: center;">
-    <img src="{{ site.baseurl }}/resources/study_abroad/back_image_jun.png" alt="シェフィールドの景色:6月" style="width: 700px; padding: none;"/>
+    <img src="{{ site.baseurl }}/resources/study_abroad/back_image_jul.png" alt="エディンバラの景色:8月" style="width: 700px; padding: none;"/>
 </div>
 
 このページでは、イギリス・シェフィールド大学での修士留学に関する報告を行います。  
@@ -39,9 +39,9 @@ custom_css: page
 
 ## これまでの活動報告  
 [polca](https://polca.jp/projects/I3kvZaRxh8R) にてご寄付いただいた方には、毎月メールで活動報告レポートをお送りいたします。
-Googleフォームに登録したにも関わらず、受け取れていない場合には[お問い合わせフォーム](https://gucci-j.github.io/contact/) よりお知らせください。  
+Google フォームに登録したにも関わらず受け取れていない場合には、[お問い合わせフォーム](https://gucci-j.github.io/contact/) よりお知らせください。  
 
-また、Googleフォームに登録されていなくても、polcaに掲載したパスワードを入力していただければ、下記のリンクよりご覧いただけます。  
+またGoogleフォームに登録されていなくても、polca に掲載したパスワードを入力していただければ、下記のリンクよりご覧いただけます。  
 
 * [2019年9月号]({{ site.baseurl }}/resources/study_abroad/report/report_sep2019.pdf)  
 * [2019年10月号]({{ site.baseurl }}/resources/study_abroad/report/report_oct2019.pdf)  
@@ -51,8 +51,9 @@ Googleフォームに登録したにも関わらず、受け取れていない�
 * [2020年2月号]({{ site.baseurl }}/resources/study_abroad/report/report_feb2020.pdf)
 * [2020年3月号]({{ site.baseurl }}/resources/study_abroad/report/report_mar2020.pdf)
 * [2020年5月号]({{ site.baseurl }}/resources/study_abroad/report/report_may2020.pdf)
-* [2020年6月号]({{ site.baseurl }}/resources/study_abroad/report/report_june2020.pdf)
-* 2020年7月号　（7月末公開予定）  
+* [2020年6月号]({{ site.baseurl }}/resources/study_abroad/report/report_jun2020.pdf)
+* [2020年7月号]({{ site.baseurl }}/resources/study_abroad/report/report_jul2020.pdf)
+* 2020年8月号　（9月中旬公開予定）  
 
 
 (**お知らせ**) 日常的な生活の様子等は、[twitter](https://twitter.com/_gucciiiii) でもお伝えしていく予定です。
@@ -69,7 +70,7 @@ Googleフォームに登録したにも関わらず、受け取れていない�
 いかにして留学用の奨学金に全部落ちてしまったかをまとめました。時系列順に紹介 + アドバイスも書いたので、修士以上の学位留学を考えている方への参考になると思います。全落ちしてからの流れを書いた[続編](https://note.com/_gucciiiii/n/n19ebbb1b401d)もあります。
 
 * [大学院出願書類一式](https://note.com/_gucciiiii/m/m09f79ed8d2ca)  
-UCL、エジンバラ大、シェフィールド大に出願した書類一式を有料で公開しています。これまた、エージェントを一切使わないで、全部自力でやってやるぞという方への参考になると思います。
+UCL、エディンバラ大、シェフィールド大に出願した書類一式を有料で公開しています。これまた，「エージェントを一切使わないで全部自力でやってやるぞ」という方への参考になると思います。
 
 * [留学先に持っていったものリスト](https://note.com/_gucciiiii/n/nd00780c1d3e7)  
 何を持っていけば良いか若干悩んだので、留学先に持っていったものを全てリスト化しました。これから留学する方の荷造りへの参考になると思います。
