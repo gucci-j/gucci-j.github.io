@@ -4,13 +4,13 @@ title: 大学院留学について
 description: 大学院留学に関する報告を行うためのページです。
 permalink: /study-abroad/
 lang: ja_JP
-last_modified_at: 2020-08-15 12:00:00 +0100
-image: /resources/study_abroad/back_image_jul.png
+last_modified_at: 2020-09-22 11:30:00 +0100
+image: /resources/study_abroad/back_image_aug.png
 custom_css: page  
 ---
 
 <div style="text-align: center;">
-    <img src="{{ site.baseurl }}/resources/study_abroad/back_image_jul.png" alt="エディンバラの景色:8月" style="width: 700px; padding: none;"/>
+    <img src="{{ site.baseurl }}/resources/study_abroad/back_image_aug.png" alt="シェフィールドの景色:9月" style="width: 700px; padding: none;"/>
 </div>
 
 このページでは、イギリス・シェフィールド大学での修士留学に関する報告を行います。  
@@ -53,7 +53,8 @@ Google フォームに登録したにも関わらず受け取れていない場�
 * [2020年5月号]({{ site.baseurl }}/resources/study_abroad/report/report_may2020.pdf)
 * [2020年6月号]({{ site.baseurl }}/resources/study_abroad/report/report_jun2020.pdf)
 * [2020年7月号]({{ site.baseurl }}/resources/study_abroad/report/report_jul2020.pdf)
-* 2020年8月号　（9月中旬公開予定）  
+* [2020年8月号]({{ site.baseurl }}/resources/study_abroad/report/report_aug2020.pdf)
+* 2020年9月号　（10月中旬公開予定）  
 
 
 (**お知らせ**) 日常的な生活の様子等は、[twitter](https://twitter.com/_gucciiiii) でもお伝えしていく予定です。
