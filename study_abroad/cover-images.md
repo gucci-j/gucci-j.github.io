@@ -4,7 +4,7 @@ title: これまでのカバー画像一覧
 description: 「大学院留学に関する報告を行うためのページ」のカバー画像として使っていた画像を紹介するページです．
 permalink: /study-abroad/cover-images/
 lang: ja_JP
-last_modified_at: 2020-09-22 11:30:00 +0100
+last_modified_at: 2020-10-19 11:00:00 +0100
 image: /resources/study_abroad/back_image_aug.png
 custom_css: page  
 ---
@@ -93,4 +93,11 @@ custom_css: page
 
 <div style="text-align: center;">
     <img src="{{ site.baseurl }}/resources/study_abroad/back_image_aug.png" alt="シェフィールドの景色:9月" style="width: 700px; padding: none;"/>
+</div>  
+
+## 2020年9月〜10月  
+セブンシスターズにて撮影した風景です。
+
+<div style="text-align: center;">
+    <img src="{{ site.baseurl }}/resources/study_abroad/back_image_sep2020.png" alt="セブンシスターズ:9月" style="width: 700px; padding: none;"/>
 </div>  
