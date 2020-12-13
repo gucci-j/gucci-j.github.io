@@ -4,7 +4,7 @@ title: 大学院留学について
 description: 大学院留学に関する報告を行うためのページです。
 permalink: /study-abroad/
 lang: ja_JP
-last_modified_at: 2020-10-19 11:00:00 +0100
+last_modified_at: 2020-12-13 15:30:00 +0900
 image: /resources/study_abroad/back_image_sep2020.png
 custom_css: page  
 ---
@@ -55,7 +55,7 @@ Google フォームに登録したにも関わらず受け取れていない場�
 * [2020年7月号]({{ site.baseurl }}/resources/study_abroad/report/report_jul2020.pdf)
 * [2020年8月〜9月中旬号]({{ site.baseurl }}/resources/study_abroad/report/report_aug2020.pdf)
 * [2020年9月中旬〜10月中旬号]({{ site.baseurl }}/resources/study_abroad/report/report_sep_oct2020.pdf)
-* 2020年10月中旬〜帰国号　（11月下旬〜12月上旬公開予定）  
+* [2020年12月（帰国）号]({{ site.baseurl }}/resources/study_abroad/report/report_dec2020.pdf)
 
 
 (**お知らせ**) 日常的な生活の様子等は、[twitter](https://twitter.com/_gucciiiii) でもお伝えしていく予定です。

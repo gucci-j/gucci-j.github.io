@@ -16,7 +16,7 @@ My curriculum vitae (CV) is available [here]({{ site.baseurl }}/resources/about/
 
 ## Research Interests
 
-Natural Language Understanding, Negotiation Dialogue, Natural Language Processing, Machine Learning
+Natural Language Understanding, Natural Language Processing, Machine Learning
 
 
 ## Recent Work
@@ -40,15 +40,6 @@ This research aims at generating emojis based on input texts.
     </div>
 
     > * **Atsuki Yamaguchi** and Katsuhide Fujita, "Generating Emoji with Conditional Variational Autoencoders and Word Embedding," JSAI 2019, Niigata, Japan, June 2019. (Regional conference)
-
-3. __Generative model based frame generation of volcanic flow video__  
-This research aims at simulating lava flow by utilizing generative models.
-
-    <div style="text-align: center;">
-        <img src="{{ site.baseurl }}/resources/about/images/volcano.png" alt="lava flow simulation" style="width: 500px;"/><br />
-    </div>
-
-    > * **Atsuki Yamaguchi** and Melvin Cabatuan, “Generative Model Based Frame Generation of Volcanic Flow Video,” IEEE HNICEM 2017, Manila, Philippines, December 2017.
 
 ## Contact
 

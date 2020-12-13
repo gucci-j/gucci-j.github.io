@@ -3,16 +3,16 @@ layout: page_ja
 title: 山口 篤季
 permalink: /about/ja/
 lang: ja_JP
-last_modified_at: 2020-06-02 15:00:00 +0100
+last_modified_at: 2020-12-13 15:30:00 +0900
 custom_css: page
 ---
 <div style="text-align: right;"><i class="fas fa-language" style="padding: 0 4px 0 0;"></i><a href="../">English</a> | 日本語</div>
 
 ## はじめに
 
-2019年9月現在，[The University of Sheffield](https://www.sheffield.ac.uk/), MSc. in Computer Science with Speech and Language Processing に在籍しています．  
+2020年9月現在，[The University of Sheffield](https://www.sheffield.ac.uk/) で research intern をしています．  
 
-ご用のある方は，当ページ末尾の[連絡先](#連絡先)を参照してください．
+ご用のある方は当ページ末尾の[連絡先](#連絡先)を参照してください．
 
 ## 研究・興味分野
 
@@ -23,8 +23,7 @@ custom_css: page
 
 |年月|学歴|
 |:-:|:-|
-|2019年9月〜現在|The University of Sheffield<br />MSc. in Computer Science with Speech and Language Processing　在学中|
-|2019年4月〜現在|東京農工大学大学院工学府情報工学専攻　休学中|
+|2019年9月〜2020年9月|The University of Sheffield<br />MSc. in Computer Science with Speech and Language Processing (with Distinction)|
 |2015年4月〜2019年3月|東京農工大学工学部情報工学科　首席卒業  <br /> GPA: 3.63 / 4.00|
 |2017年8月〜12月|De La Salle University　交換留学 <br /> GPA: 2.82 / 4.00|
 
@@ -32,16 +31,17 @@ custom_css: page
 
 |年月|職歴|
 |:-:|:-|
-|2018年1月〜2月|JTEKT PHILIPPINES CORPORATION<br /> General Affairs (IT section)　インターンシップ（4週間）|
+|2020年9月〜現在|Research intern (supervised by Dr. Nikolaos Aletras)<br />The University of Sheffield|
+|2018年1月〜2月|Intern (general affairs - IT section)<br />JTEKT PHILIPPINES CORPORATION|
 
 ## 学会活動
 
 * 国内会議・研究会
-    * **山口篤季**・岩佐幸翠・藤田桂英，自然言語による交渉における論点の重みと交渉の成否自動推定，電子情報通信学会　人工知能と知識処理研究会，2019年7月．[\[paper\]](https://www.ieice.org/ken/paper/20190722c1oR/)
-    * **山口篤季**・藤田桂英，条件付き変分オートエンコーダと単語分散表現による絵文字の生成，人工知能学会全国大会論文集　第33回全国大会(2019)，2019年6月．[\[paper\]](https://confit.atlas.jp/guide/event-img/jsai2019/2L4-J-9-04/public/pdf?type=in) [\[slide\]](https://www.slideshare.net/AtsukiYamaguchi1/jsai2019-148918796)  
-<br />
+    * **山口篤季**・岩佐幸翠・藤田桂英，自然言語による交渉における論点の重みと交渉の成否自動推定，電子情報通信学会　人工知能と知識処理研究会，2019年7月  
+    * **山口篤季**・藤田桂英，条件付き変分オートエンコーダと単語分散表現による絵文字の生成，人工知能学会全国大会論文集　第33回全国大会(2019)，2019年6月  
+<br />  
 
-* 国際会議
+* 国際会議 (査読付き)
     * **Atsuki Yamaguchi** and Katsuhide Fujita, "Breakdown Detection in Negotiation Dialogues," Thirty-Fourth AAAI Conference on Artificial Intelligence (AAAI-20), New York, USA, Feburary 2020. (Student Abstract)
     * **Atsuki Yamaguchi** and Katsuhide Fujita, "Breakdown Detection in Negotiation Dialogues," EurNLP 2019, London, United Kingdom, October 2019. (Acceptance rate: 30.5%; Non-archival)  
     * **Atsuki Yamaguchi** and Melvin Cabatuan, “Generative Model Based Frame Generation of Volcanic Flow Video,” IEEE HNICEM 2017, Manila, Philippines, December 2017.
