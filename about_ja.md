@@ -3,20 +3,18 @@ layout: page_ja
 title: 山口 篤季
 permalink: /about/ja/
 lang: ja_JP
-last_modified_at: 2020-12-13 15:30:00 +0900
+last_modified_at: 2021-01-13 17:30:00 +0900
 custom_css: page
 ---
 <div style="text-align: right;"><i class="fas fa-language" style="padding: 0 4px 0 0;"></i><a href="../">English</a> | 日本語</div>
 
 ## はじめに
 
-2020年9月現在，[The University of Sheffield](https://www.sheffield.ac.uk/) で research intern をしています．  
-
 ご用のある方は当ページ末尾の[連絡先](#連絡先)を参照してください．
 
 ## 研究・興味分野
 
-自然言語処理，交渉対話，対話文生成・解析，生成モデル，機械学習全般
+言語モデル，交渉対話，自然言語処理，機械学習全般
 
 ## 経歴
 ### 学歴  
@@ -31,8 +29,8 @@ custom_css: page
 
 |年月|職歴|
 |:-:|:-|
-|2020年9月〜現在|Research intern (supervised by Dr. Nikolaos Aletras)<br />The University of Sheffield|
-|2018年1月〜2月|Intern (general affairs - IT section)<br />JTEKT PHILIPPINES CORPORATION|
+|2020年9月〜現在|Research intern (supervised by Dr. Nikolaos Aletras)<br />The University of Sheffield|  
+|2018年1月〜2月|Intern (general affairs - IT section)<br />JTEKT PHILIPPINES CORPORATION|  
 
 ## 学会活動
 
@@ -41,7 +39,8 @@ custom_css: page
     * **山口篤季**・藤田桂英，条件付き変分オートエンコーダと単語分散表現による絵文字の生成，人工知能学会全国大会論文集　第33回全国大会(2019)，2019年6月  
 <br />  
 
-* 国際会議 (査読付き)
+* 国際会議 (査読付き)  
+    * **Atsuki Yamaguchi**, Kosui Iwasa and Katsuhide Fujita, "Dialogue Act-based Breakdown Detection in Negotiation Dialogues," The 16th Conference of the European Chapter of the Association for Computational Linguistics (EACL 2021), Online, April 2021. (Long; To appear)   
     * **Atsuki Yamaguchi** and Katsuhide Fujita, "Breakdown Detection in Negotiation Dialogues," Thirty-Fourth AAAI Conference on Artificial Intelligence (AAAI-20), New York, USA, Feburary 2020. (Student Abstract)
     * **Atsuki Yamaguchi** and Katsuhide Fujita, "Breakdown Detection in Negotiation Dialogues," EurNLP 2019, London, United Kingdom, October 2019. (Acceptance rate: 30.5%; Non-archival)  
     * **Atsuki Yamaguchi** and Melvin Cabatuan, “Generative Model Based Frame Generation of Volcanic Flow Video,” IEEE HNICEM 2017, Manila, Philippines, December 2017.

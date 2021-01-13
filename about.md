@@ -3,14 +3,14 @@ layout: page_en
 title: Atsuki Yamaguchi
 permalink: /about/
 lang: en_US
-last_modified_at: 2020-06-02 15:00:00 +0100
+last_modified_at: 2021-01-13 17:30:00 +0900
 custom_css: page
 ---
 <div style="text-align: right;"><i class="fas fa-language" style="padding: 0 4px 0 0;"></i>English | <a href="./ja/">日本語</a></div>
 
 ## Currently
 
-I am a master's student at [the University of Sheffield](https://www.sheffield.ac.uk/), studying for an MSc. in Computer Science with Speech and Language Processing.
+I am an NLP researcher and works at a company in Japan. Formerly, I was a master's student at the University of Sheffield, where I obtained an MSc. in Computer Science with Speech and Language Processing (with Distinction).  
 
 My curriculum vitae (CV) is available [here]({{ site.baseurl }}/resources/about/a_yamaguchi_cv.pdf).
 
@@ -21,25 +21,16 @@ Natural Language Understanding, Natural Language Processing, Machine Learning
 
 ## Recent Work
 
-1. __An end-to-end learning approach for supporting human-human negotiations__  
+* __An end-to-end learning approach for supporting human-human negotiations__  
 The aim of this research is to help negotiators form a better consensus.  
 
     <div style="text-align: center;">
         <img src="{{ site.baseurl }}/resources/about/images/predict_issue_weights.png" alt="visualization of predicting issue weights in an end-to-end manner" style="width: 500px;"/>
     </div>
-
+    > * **Atsuki Yamaguchi**, Kosui Iwasa and Katsuhide Fujita, "Dialogue Act-based Breakdown Detection in Negotiation Dialogues," The 16th Conference of the European Chapter of the Association for Computational Linguistics (EACL 2021), Online, April 2021. (Long; To appear) 
     > * **Atsuki Yamaguchi** and Katsuhide Fujita, "Breakdown Detection in Negotiation Dialogues," Thirty-Fourth AAAI Conference on Artificial Intelligence (AAAI-20), New York, USA, Feburary 2020. (Student Abstract)  
     > * **Atsuki Yamaguchi** and Katsuhide Fujita, "Breakdown Detection in Negotiation Dialogues," EurNLP 2019, London, United Kingdom, October 2019. (Acceptance rate: 30.5%; Non-archival)  
     > * **Atsuki Yamaguchi**, Kosui Iwasa and Katsuhide Fujita, "Predicting Issue Weights and Detecting Breakdowns in Negotiation Dialogue," IEICE SIG-AI, Hokkaido, Japan, July 2019. (Regional conference)
-
-2. __Generating emojis with generative models and word embedding__  
-This research aims at generating emojis based on input texts. 
-
-    <div style="text-align: center;">
-        <img src="{{ site.baseurl }}/resources/about/images/emoji.png" alt="emoji_generated" style="width: 500px;"/><br />
-    </div>
-
-    > * **Atsuki Yamaguchi** and Katsuhide Fujita, "Generating Emoji with Conditional Variational Autoencoders and Word Embedding," JSAI 2019, Niigata, Japan, June 2019. (Regional conference)
 
 ## Contact
 
