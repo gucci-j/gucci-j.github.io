@@ -19,8 +19,10 @@ Icon
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
 
+_site
 .vscode
 .sass-cache
+.jekyll-cache
 
 # Directories potentially created on remote AFP share
 .AppleDB

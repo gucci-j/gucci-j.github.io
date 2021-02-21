@@ -14,20 +14,6 @@ tags:
 所属: Allen Institute for Artificial Intelligence / Paul G. Allen School of Computer Science & Engineering, University of Washington  
 出典: [NAACL 2018](https://aclweb.org/anthology/papers/N/N18/N18-1202/)
 
-<div class="crowdfunding_ad">
-    <div class="pc" style="text-align: center;">
-        <a href="https://anchor.fm/melancholy">
-            <img src="{{ site.baseurl }}/resources/ads/mefm_banner_large.png" alt="めらんこりーFM!"/>
-        </a>
-        <br />
-    </div>
-    <div class="sp" style="text-align: center;">
-        <a href="https://anchor.fm/melancholy">
-            <img src="{{ site.baseurl }}/resources/ads/mefm_banner_small.png" alt="めらんこりーFM!"/>
-        </a>
-        <br />
-    </div>
-</div>
 
 ## どんな論文か？
 ELMo = Embeddings from Language Modelsの略であり，言語モデルを活用した文脈に応じた単語分散表現: ELMoを提唱した論文．

@@ -13,20 +13,6 @@ tags:
 所属: IRIT Univ. Toulouse  
 出典: EMNLP 2013 ([https://www.aclweb.org/anthology/D13-1035/](https://www.aclweb.org/anthology/D13-1035/)  
 
-<div class="crowdfunding_ad">
-    <div class="pc" style="text-align: center;">
-        <a href="https://anchor.fm/melancholy">
-            <img src="{{ site.baseurl }}/resources/ads/mefm_banner_large.png" alt="めらんこりーFM!"/>
-        </a>
-        <br />
-    </div>
-    <div class="sp" style="text-align: center;">
-        <a href="https://anchor.fm/melancholy">
-            <img src="{{ site.baseurl }}/resources/ads/mefm_banner_small.png" alt="めらんこりーFM!"/>
-        </a>
-        <br />
-    </div>
-</div>
 
 ## どんなもの？  
 交渉ゲームにおいてプレイヤーの行動を予測する手法を提案した論文であり，「Settlers of Catan ゲーム」の交渉ログをアノテーションしたデータを構築して検証を行った．

@@ -13,20 +13,6 @@ tags:
 
 本稿では，EMNLP 2018に採択された，自然言語で売り物の価格交渉をするエージェントを提案した論文：「Decoupling Strategy and Generation in Negotiation Dialogues」の論文のメモ書きを共有・紹介します．
 
-<div class="crowdfunding_ad">
-    <div class="pc" style="text-align: center;">
-        <a href="https://anchor.fm/melancholy">
-            <img src="{{ site.baseurl }}/resources/ads/mefm_banner_large.png" alt="めらんこりーFM!"/>
-        </a>
-        <br />
-    </div>
-    <div class="sp" style="text-align: center;">
-        <a href="https://anchor.fm/melancholy">
-            <img src="{{ site.baseurl }}/resources/ads/mefm_banner_small.png" alt="めらんこりーFM!"/>
-        </a>
-        <br />
-    </div>
-</div>
 
 ## 文献情報
 著者: H. He et al.  
@@ -311,8 +297,3 @@ AdaGrad：（学習率：0.01，バッチサイズ：128）
 </div>
 
 > <i class="fas fa-image" style="padding: 0 2px 0 0;"></i> 図引用: [Decoupling Strategy and Generation in Negotiation Dialogues](https://aclweb.org/anthology/papers/D/D18/D18-1256/)
-
-
-## スライド  
-(**追加**: 2019/07/14) 
-<div style="text-align: center"><iframe src="//www.slideshare.net/slideshow/embed_code/key/3L3ugPvxSRAt6o" width="510" height="420" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen></iframe></div>

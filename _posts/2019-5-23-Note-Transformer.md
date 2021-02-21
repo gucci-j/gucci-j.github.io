@@ -15,22 +15,6 @@ Googleが昨年発表した，BERT：Bidirectional Encoder Representation for Tr
 
 ここでは，そんなBERTの基本構成要素となっている，Transformerについての論文メモを共有します．
 
-なお，BERTを理解するためにTransformerを雰囲気でつかみたい方は，[末尾のスライド](#まとめスライド)を参照すると参考になるかもしれません．
-
-<div class="crowdfunding_ad">
-    <div class="pc" style="text-align: center;">
-        <a href="https://anchor.fm/melancholy">
-            <img src="{{ site.baseurl }}/resources/ads/mefm_banner_large.png" alt="めらんこりーFM!"/>
-        </a>
-        <br />
-    </div>
-    <div class="sp" style="text-align: center;">
-        <a href="https://anchor.fm/melancholy">
-            <img src="{{ site.baseurl }}/resources/ads/mefm_banner_small.png" alt="めらんこりーFM!"/>
-        </a>
-        <br />
-    </div>
-</div>
 
 ## 文献情報
 著者: A. Vaswani et al.  
@@ -319,9 +303,6 @@ Self-Attentionは定数のコストで，入出力間の任意の組み合わせ
 </div>
 
 > <i class="fas fa-image" style="padding: 0 2px 0 0;"></i> 図引用: [https://arxiv.org/abs/1706.03762](https://arxiv.org/abs/1706.03762)
-
-## まとめスライド  
-<div style="text-align: center"><iframe src="//www.slideshare.net/slideshow/embed_code/key/3zlzCmoC9icWLd" width="510" height="420" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe></div><div style="margin-bottom:5px"></div>
 
 ## 実装
 時系列を考慮するために提案された手法：Positional Encoding（位置エンコーディング）を可視化するスクリプトを書きました．  

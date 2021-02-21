@@ -16,21 +16,6 @@ tags:
 
 不均衡データを用いて機械学習モデルを学習させること自体は，通常の均衡データを用いるときとほぼ変わりない手順で実行できると思います．問題は**「分析」**です．モデルの学習がうまくいっているか，学習させたモデルが検証用データ・テストデータに対して有効であるかどうか，この二つをどのように確認するかが不均衡データを扱うときの鍵になってきます．そこで本稿の前半部分では，よく論文等で目にするメジャーな評価手法を掻い摘んで紹介します．後半部分では，不均衡データを扱う分類問題に実際に取り組み，その結果を前半部分で扱う評価手法に基づいて評価・分析することで，各指標についての理解を深めることを目指します．
 
-<div class="crowdfunding_ad">
-    <div class="pc" style="text-align: center;">
-        <a href="https://anchor.fm/melancholy">
-            <img src="{{ site.baseurl }}/resources/ads/mefm_banner_large.png" alt="めらんこりーFM!"/>
-        </a>
-        <br />
-    </div>
-    <div class="sp" style="text-align: center;">
-        <a href="https://anchor.fm/melancholy">
-            <img src="{{ site.baseurl }}/resources/ads/mefm_banner_small.png" alt="めらんこりーFM!"/>
-        </a>
-        <br />
-    </div>
-</div>
-
 
 ## 1. 数値で評価
 定量的な数値で評価するパターンとしては，精度 (Accuracy)・適合率 (Precision)・再現率 (Recall)・F1値 が代表的なものとして挙げられます．それに付随して，混同行列 (Confusion matrix) が用いられる場合もあります．何度も目にするこれらの評価指標ですが，念のため以下で定義とともに抑えておきます．
@@ -241,4 +226,5 @@ ROC-AUC とは異なり，AP は Recall の大幅な悪化を見逃さず，き�
 
 
 ## まとめ
-本稿では種々の評価指標について一通り確認し，簡単な分類問題を通して各指標の振る舞いの違いを観察しました．実装は [GitHub](https://github.com/gucci-j/imbalanced-mnist-classification) にて公開してあります．お気軽にご利用ください．
+本稿では種々の評価指標について一通り確認し，簡単な分類問題を通して各指標の振る舞いの違いを観察しました．実装は [GitHub](https://github.com/gucci-j/imbalanced-mnist-classification) にて公開してあります．お気軽にご利用ください．  
+> チェックポイントのセーブは行わない仕様になっているので，研究等に活用する際はくれぐれもご注意ください．  
