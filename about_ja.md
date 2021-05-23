@@ -40,7 +40,7 @@ custom_css: page
 <br />  
 
 * 国際会議 (査読付き)  
-    * **Atsuki Yamaguchi**, Kosui Iwasa and Katsuhide Fujita, "Dialogue Act-based Breakdown Detection in Negotiation Dialogues," The 16th Conference of the European Chapter of the Association for Computational Linguistics (EACL 2021), Online, April 2021. (Long; To appear)   
+    * **Atsuki Yamaguchi**, Kosui Iwasa and Katsuhide Fujita, "Dialogue Act-based Breakdown Detection in Negotiation Dialogues," The 16th Conference of the European Chapter of the Association for Computational Linguistics (EACL 2021), Online, April 2021. (Long paper)   
     * **Atsuki Yamaguchi** and Katsuhide Fujita, "Breakdown Detection in Negotiation Dialogues," Thirty-Fourth AAAI Conference on Artificial Intelligence (AAAI-20), New York, USA, Feburary 2020. (Student Abstract)
     * **Atsuki Yamaguchi** and Katsuhide Fujita, "Breakdown Detection in Negotiation Dialogues," EurNLP 2019, London, United Kingdom, October 2019. (Acceptance rate: 30.5%; Non-archival)  
     * **Atsuki Yamaguchi** and Melvin Cabatuan, “Generative Model Based Frame Generation of Volcanic Flow Video,” IEEE HNICEM 2017, Manila, Philippines, December 2017.

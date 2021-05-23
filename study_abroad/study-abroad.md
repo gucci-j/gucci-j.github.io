@@ -34,11 +34,11 @@ custom_css: page
 
 以上、32名の方々に厚く御礼を申しあげます。  
 
-(**おことわり**) 非掲載希望者には、[Googleフォーム](https://forms.gle/r8dstQV33Ep3d55NA) 未登録の方も含まれます。
+(**おことわり**) 非掲載希望者には、Googleフォーム未登録の方も含まれます。
 
 
 ## これまでの活動報告  
-[polca](https://polca.jp/projects/I3kvZaRxh8R) にてご寄付いただいた方には、毎月メールで活動報告レポートをお送りいたします。
+polca にてご寄付いただいた方には、毎月メールで活動報告レポートをお送りいたします。
 Google フォームに登録したにも関わらず受け取れていない場合には、[お問い合わせフォーム](https://gucci-j.github.io/contact/) よりお知らせください。  
 
 またGoogleフォームに登録されていなくても、polca に掲載したパスワードを入力していただければ、下記のリンクよりご覧いただけます。  
@@ -82,7 +82,6 @@ UCL、エディンバラ大、シェフィールド大に出願(合格)した書
 
 
 ## リンク集
-* [クラウドファンディングのお願い](https://gucci-j.github.io/study-abroad/crowd-funding/)  
 * [twitter](https://twitter.com/_gucciiiii)  
 * [note](https://note.com/_gucciiiii)
 * [これまでのカバー画像]({{ site.baseurl }}/study-abroad/cover-images/)
