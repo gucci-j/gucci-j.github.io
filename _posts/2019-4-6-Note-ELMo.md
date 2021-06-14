@@ -110,9 +110,6 @@ $$
 ### 5. ELMoモデルのNLPタスクへの適用
 単に$\mathbf{ELMo}_k^{task}$を入力の埋め込みベクトルとconcatすれば良い．
 
-## まとめスライド
-<div style="text-align: center"><iframe src="//www.slideshare.net/slideshow/embed_code/key/hvw0gfJhsc8aWL" width="510" height="420" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe></div><div style="margin-bottom:5px"></div>
-
 ## 実装
 試しにKerasでELMo + BiLSTMを使ってIMDBの分類を行ったので，GitHubにあげました．  
 → [GitHub-ELMo](https://github.com/gucci-j/elmo-imdb)
